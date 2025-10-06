@@ -297,6 +297,7 @@ function buildAllMarkersOnce() {
 
         const reportBtn = `<div style="margin-top:10px;"><a href="${buildReportUrl(pharmacy.name, pharmacy.address, pharmacy.phone)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#ffc107;color:#222;padding:6px 10px;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fas fa-flag"></i> 신고하기</a></div>`;
 
+        const baseAddress = (pharmacy.address || '').split(',')[0];
         const popupContent = `
             <div class="popup-content">
                 <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.1rem;">
@@ -309,28 +310,34 @@ function buildAllMarkersOnce() {
                 <p style="margin: 5px 0; color: #666;"><i class="fas fa-map"></i> ${pharmacy.sido} ${pharmacy.sigungu}</p>
                 ${countsHtml}
                 <p style="margin: 5px 0;">
-                    <a href="#" data-navertarget="${pharmacy.id}" style="color:#03C75A; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+                    <a href="https://m.map.naver.com/search?query=${encodeURIComponent(`${pharmacy.name} ${baseAddress}`)}" target="_blank" rel="noopener" style="color:#03C75A; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
                         <i class="fas fa-arrow-up-right-from-square"></i> 네이버에서 보기
+                    </a>
+                </p>
+                <p style="margin: 5px 0;">
+                    <a href="#" data-kakaotarget="${pharmacy.id}" target="_blank" rel="noopener" style="color:#391B1B; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+                        <i class="fas fa-arrow-up-right-from-square"></i> 카카오에서 보기
                     </a>
                 </p>
                 ${reportBtn}
             </div>`;
         marker.bindPopup(popupContent);
+        // 팝업 오픈 시 카카오 place 링크 시도 → 실패 시 검색 링크
         marker.on('popupopen', async () => {
-            const linkEl = document.querySelector(`a[data-navertarget='${pharmacy.id}']`);
-            if (!linkEl) return;
-            const link = await fetchNaverLink(pharmacy.name, pharmacy.address);
-            if (link) {
-                linkEl.setAttribute('href', link);
-                linkEl.setAttribute('target', '_blank');
-                linkEl.setAttribute('rel', 'noopener');
-            } else {
-                // fallback to search page
-                const q = encodeURIComponent(`${pharmacy.name} ${pharmacy.address}`);
-                linkEl.setAttribute('href', `https://m.map.naver.com/search?query=${q}`);
-                linkEl.setAttribute('target', '_blank');
-                linkEl.setAttribute('rel', 'noopener');
-            }
+            const a = document.querySelector(`a[data-kakaotarget='${pharmacy.id}']`);
+            if (!a) return;
+            try {
+                const qs = new URLSearchParams({ name: pharmacy.name || '', address: pharmacy.address || '' }).toString();
+                const r = await fetch(`/api/kakao-local?${qs}`);
+                if (r.ok) {
+                    const j = await r.json();
+                    if (j && j.ok && j.placeUrl) {
+                        a.href = j.placeUrl;
+                        return;
+                    }
+                }
+            } catch(e) {}
+            a.href = `https://map.kakao.com/link/search/${encodeURIComponent(`${pharmacy.name} ${baseAddress}`)}`;
         });
         marker.pharmacyData = pharmacy;
         idToMarker.set(pharmacy.id, marker);
@@ -381,19 +388,7 @@ function buildReportUrl(name, address, phone) {
     return `${base}&${params.toString()}`;
 }
 
-// 네이버 지역 링크 가져오기 (프록시 경유)
-async function fetchNaverLink(name, address) {
-    try {
-        const qs = new URLSearchParams({ name: name || '', address: address || '' }).toString();
-        const r = await fetch(`/api/naver-local?${qs}`);
-        if (!r.ok) return null;
-        const j = await r.json();
-        if (j && j.ok && j.link) return j.link;
-        return null;
-    } catch (e) {
-        return null;
-    }
-}
+// (간소화) 네이버 링크는 m.map 검색 URL을 사용 (상호+주소)
 
 // 약국 검색
 function searchPharmacy(adjustView = false) {
