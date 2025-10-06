@@ -19,6 +19,8 @@ let renderMsAvg = 0;
 let pharmacistCountsById = {};
 // 교차고용(약사+한약사) 필터 상태
 let isCrossEmployFilterActive = false;
+// Kakao place 매핑(id -> placeUrl)
+let kakaoPlaceById = {};
 
 // 공용 한약사 아이콘 경로 (index.html에서 window.HERBAL_ICON_URL로 오버라이드 가능)
 const herbalIconUrl = (typeof window !== 'undefined' && window.HERBAL_ICON_URL) ? window.HERBAL_ICON_URL : 'herbal_pot_icon.svg';
@@ -108,6 +110,8 @@ async function loadPharmacyData() {
         await loadHerbalData();
         // 약사 인원 집계 로드
         await loadPharmacistCounts();
+        // 카카오 place 매핑 로드(있으면 우선 적용)
+        await loadKakaoMappings();
         // 모든 마커 캐시 1회 생성
         buildAllMarkersOnce();
         
@@ -117,6 +121,28 @@ async function loadPharmacyData() {
     } catch (error) {
         console.error('데이터 로드 중 오류 발생:', error);
         alert('약국 데이터를 불러오는 중 오류가 발생했습니다.');
+    }
+}
+// 카카오 place 매핑 로드
+async function loadKakaoMappings() {
+    try {
+        const res = await fetch('asset/kakao_place_mappings.json', { cache: 'no-cache' });
+        if (!res.ok) {
+            console.debug('[kakao-map] mapping fetch status', res.status);
+            kakaoPlaceById = {};
+            return;
+        }
+        const data = await res.json();
+        const arr = Array.isArray(data.mappings) ? data.mappings : [];
+        const map = {};
+        for (const m of arr) {
+            if (m && m.id && m.kakaoPlaceUrl) map[m.id] = m.kakaoPlaceUrl;
+        }
+        kakaoPlaceById = map;
+        console.debug('[kakao-map] mapping loaded', Object.keys(kakaoPlaceById).length);
+    } catch (e) {
+        console.debug('[kakao-map] mapping load failed');
+        kakaoPlaceById = {};
     }
 }
 
@@ -326,6 +352,13 @@ function buildAllMarkersOnce() {
         marker.on('popupopen', async () => {
             const a = document.querySelector(`a[data-kakaotarget='${pharmacy.id}']`);
             if (!a) return;
+            // 0) 매핑이 있으면 즉시 적용
+            const mapped = kakaoPlaceById[pharmacy.id];
+            if (mapped) {
+                console.debug('[kakao] mapped hit', { id: pharmacy.id, url: mapped });
+                a.href = mapped;
+                return;
+            }
             try {
                 const qs = new URLSearchParams({
                     name: pharmacy.name || '',
