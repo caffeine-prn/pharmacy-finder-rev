@@ -327,7 +327,7 @@ function buildAllMarkersOnce() {
             } else {
                 // fallback to search page
                 const q = encodeURIComponent(`${pharmacy.name} ${pharmacy.address}`);
-                linkEl.setAttribute('href', `https://m.search.naver.com/search.naver?query=${q}`);
+                linkEl.setAttribute('href', `https://m.map.naver.com/search?query=${q}`);
                 linkEl.setAttribute('target', '_blank');
                 linkEl.setAttribute('rel', 'noopener');
             }
