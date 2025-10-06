@@ -59,10 +59,45 @@ module.exports = async (req, res) => {
     }
     const data = await r.json();
     const first = Array.isArray(data.items) && data.items.length ? data.items[0] : null;
+    // 2단계: 모바일 지도 검색으로 placeId 조회 시도
+    let placeUrl = null;
+    try {
+      const mapApi = `https://m.map.naver.com/search2/search.naver?query=${encodeURIComponent(q)}&sm=shc&style=v5`;
+      const mr = await fetch(mapApi, {
+        headers: {
+          'Referer': 'https://m.map.naver.com/',
+          'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'
+        }
+      });
+      if (mr.ok) {
+        const mj = await mr.json();
+        const list = (((mj || {}).result || {}).place || {}).list || [];
+        // 간단 매칭: 이름/주소 일부 포함 또는 전화번호 일치 우선
+        const norm = (s) => (s || '').toString().replace(/<[^>]*>/g,'').trim();
+        const targetName = norm(first ? first.title : name);
+        const targetAddr = norm(first ? (first.roadAddress || first.address) : address);
+        const cand = list.find(it => {
+          const nm = norm(it.name);
+          const ad = norm(it.road_address || it.address);
+          const tel = (it.phone || '').replace(/[^0-9]/g,'');
+          const wantTel = (first && first.telephone ? first.telephone : '').replace(/[^0-9]/g,'');
+          const nameOk = targetName ? nm.includes(targetName) || targetName.includes(nm) : false;
+          const addrOk = targetAddr ? ad.includes(targetAddr) || targetAddr.includes(ad) : false;
+          const telOk = wantTel && tel ? tel === wantTel : false;
+          return telOk || (nameOk && addrOk) || nameOk || addrOk;
+        }) || list[0];
+        if (cand && cand.id) {
+          placeUrl = `https://m.place.naver.com/place/${cand.id}/home`;
+        }
+      }
+    } catch (_e) {
+      // ignore map search failure
+    }
+
     const result = first ? {
       ok: true,
       title: first.title,
-      link: first.link || null,
+      link: placeUrl || first.link || null,
       category: first.category || null,
       address: first.address || null,
       roadAddress: first.roadAddress || null,
