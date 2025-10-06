@@ -35,12 +35,44 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const r = await fetch(`https://dapi.kakao.com/v2/local/search/keyword.json?${params.toString()}`, {
-      headers: { Authorization: `KakaoAK ${key}` },
-    });
-    if (!r.ok) return res.status(r.status).json({ ok: false, error: `kakao ${r.status}` });
-    const data = await r.json();
-    const docs = Array.isArray(data.documents) ? data.documents : [];
+    // 1) PM9 카테고리(약국) 우선: 좌표 반경에서 거리순
+    async function catSearch(radius) {
+      const p = new URLSearchParams({
+        category_group_code: 'PM9',
+        x: `${x || ''}`,
+        y: `${y || ''}`,
+        radius: `${radius}`,
+        size: '15',
+        sort: 'distance'
+      });
+      const url = `https://dapi.kakao.com/v2/local/search/category.json?${p.toString()}`;
+      const rr = await fetch(url, { headers: { Authorization: `KakaoAK ${key}` } });
+      if (!rr.ok) return [];
+      const jd = await rr.json();
+      return Array.isArray(jd.documents) ? jd.documents : [];
+    }
+
+    // 2) 키워드 보완: x/y와 함께 좁은 반경 → 그 다음 이름+주소 → 마지막 넓힌 반경
+    async function kwSearch(q, rad) {
+      const p = new URLSearchParams({ query: q, size: '10' });
+      if (x && y && rad) { p.set('x', `${x}`); p.set('y', `${y}`); p.set('radius', `${rad}`); }
+      const url = `https://dapi.kakao.com/v2/local/search/keyword.json?${p.toString()}`;
+      const rr = await fetch(url, { headers: { Authorization: `KakaoAK ${key}` } });
+      if (!rr.ok) return [];
+      const jd = await rr.json();
+      return Array.isArray(jd.documents) ? jd.documents : [];
+    }
+
+    let docs = [];
+    if (x && y) {
+      docs = await catSearch(200);
+      if (!docs.length) docs = await catSearch(500);
+    }
+    if (!docs.length) {
+      // 상호명만 먼저 (잡음 감소) → 없으면 이름+주소 → 그래도 없으면 반경 확대
+      docs = await kwSearch(targetName || query, x && y ? 300 : undefined);
+      if (!docs.length) docs = await kwSearch(query, x && y ? 500 : undefined);
+    }
     if (!docs.length) return res.status(200).json({ ok: false });
     // Scoring: PM9 boost + name similarity (Dice on bigrams + contains) + address containment + distance
     const base = normalize(baseAddr);
