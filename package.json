@@ -1,0 +1,30 @@
+{
+  "name": "pharmacy-finder",
+  "version": "1.0.0",
+  "description": "전국 약국 찾기 서비스 - 25,000개 약국 위치와 한약사 정보를 제공하는 인터랙티브 지도 서비스",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build step required for static site'",
+    "start": "python -m http.server 8000"
+  },
+  "keywords": [
+    "pharmacy",
+    "map",
+    "leaflet",
+    "healthcare",
+    "korea",
+    "약국",
+    "지도",
+    "의료"
+  ],
+  "author": "Pharmacy Finder Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/pharmacy-finder.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 

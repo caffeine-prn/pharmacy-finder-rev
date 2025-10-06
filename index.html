@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전국 약국 찾기 서비스</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        html, body { height: 100%; overflow: hidden; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem; /* 상단바 축소 */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 1.4rem; /* 타이틀 크기 축소 */
+            font-weight: 600;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            margin-top: 0.25rem; /* 서브 텍스트 간격 축소 */
+        }
+        
+        .search-container {
+            background: white;
+            padding: 0.5rem 1rem; /* 검색바 높이 축소 */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .search-inputs {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .dropdown-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .cluster-control { display: inline-flex; align-items: center; gap: 6px; }
+        .cluster-control input[type="range"] { width: 160px; }
+        .cluster-control span { font-size: 0.85rem; color: #666; min-width: 28px; text-align: right; }
+        
+        .search-buttons {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 5.5rem 0.75rem 2.5rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .search-box .search-action {
+            position: absolute;
+            top: 50%;
+            right: 6px;
+            transform: translateY(-50%);
+            border: none;
+            background: #667eea;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .search-box .search-action:hover { opacity: 0.95; }
+        .search-box .clear-action {
+            position: absolute;
+            top: 50%;
+            right: 88px;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #999;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .search-box .clear-action:hover { background: #f0f0f0; color: #666; }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .dropdown-group select {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 25px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+        
+        .dropdown-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .dropdown-group select:hover {
+            border-color: #667eea;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn .label {
+            font-size: 0.9rem;
+        }
+        /* 툴팁 (데스크톱 hover / 포커스 / 터치 active 지원) */
+        .btn[data-tooltip] { position: relative; }
+        .btn[data-tooltip]:hover::after,
+        .btn[data-tooltip]:focus::after,
+        .btn[data-tooltip]:active::after { 
+            content: attr(data-tooltip);
+            position: absolute; 
+            bottom: calc(100% + 8px); 
+            left: 50%; 
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.85);
+            color: #fff;
+            font-size: 12px;
+            padding: 6px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .btn[data-tooltip]:hover::before,
+        .btn[data-tooltip]:focus::before,
+        .btn[data-tooltip]:active::before {
+            content: '';
+            position: absolute;
+            bottom: calc(100% + 4px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid rgba(0,0,0,0.85);
+            z-index: 1000;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #495057;
+            border: 2px solid #e1e5e9;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+        
+        .btn-secondary.active {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border-color: #28a745;
+        }
+        
+        .btn-secondary.active:hover {
+            background: linear-gradient(135deg, #218838 0%, #1bb394 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        /* 한약사 버튼 활성화 시 빨간색 (초록 기본 active를 오버라이드) */
+        #herbalFilterBtn.active {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: #fff;
+            border-color: #dc3545;
+        }
+        #herbalFilterBtn.active:hover {
+            background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+        /* 교차고용 버튼 활성화 시 보라색 하이라이트 */
+        #crossEmployBtn.active {
+            background: linear-gradient(135deg, #6f42c1 0%, #8a63d2 100%);
+            color: #fff;
+            border-color: #6f42c1;
+        }
+        
+        .main-container {
+            display: flex;
+            height: auto; /* 실제 높이는 스크립트로 동적 계산 */
+        }
+        
+        .sidebar {
+            width: 300px;
+            background: white;
+            border-right: 1px solid #e1e5e9;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .sidebar.show {
+            display: block;
+        }
+        
+        .stats {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        
+        .stats h3 {
+            color: #495057;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+        }
+        
+        .stat-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+        
+        #map {
+            flex: 1;
+            height: 100%;
+        }
+        
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        .loading-content {
+            text-align: center;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        /* 인앱 알림 */
+        .app-notice {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(220,53,69,0.95);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            z-index: 10000;
+            display: none;
+            max-width: 92vw;
+            font-size: 14px;
+        }
+        .app-notice.success { background: rgba(40,167,69,0.95); }
+        .app-notice .close-btn {
+            margin-left: 10px;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 2px 6px;
+            cursor: pointer;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .pharmacy-list {
+            padding: 1rem;
+        }
+        
+        .pharmacy-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e1e5e9;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .pharmacy-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .pharmacy-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pharmacy-address {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* 약국 마커 스타일 */
+        .pharmacy-marker {
+            background: #ffffff; /* 내부 흰색 */
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #28a745; /* 약국: 초록 테두리 */
+        }
+        
+        .herbal-marker {
+            background: #ffffff; /* 내부 흰색 */
+            border: 3px solid #dc3545; /* 한약국: 빨간 테두리 */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+        }
+        
+        /* 팝업 스타일 */
+        .leaflet-popup-content {
+            margin: 8px 12px;
+            line-height: 1.4;
+            font-size: 13px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .leaflet-popup-content h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+        
+        .leaflet-popup-content p {
+            margin: 8px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .leaflet-popup-content i {
+            width: 16px;
+            color: #667eea;
+        }
+        /* 신고하기 플로팅 버튼 */
+        .floating-report-btn {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            background: #ffc107;
+            color: #222;
+            padding: 10px 14px;
+            border-radius: 999px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+            z-index: 10001; /* 지도/클러스터보다 위 */
+        }
+        .floating-report-btn:hover {
+            filter: brightness(0.95);
+        }
+        
+        /* 클러스터 스타일 개선 */
+        .marker-cluster-small {
+            background-color: rgba(102, 126, 234, 0.6);
+        }
+        
+        .marker-cluster-small div {
+            background-color: rgba(102, 126, 234, 0.8);
+        }
+        
+        .marker-cluster-medium {
+            background-color: rgba(102, 126, 234, 0.7);
+        }
+        
+        .marker-cluster-medium div {
+            background-color: rgba(102, 126, 234, 0.9);
+        }
+        
+        .marker-cluster-large {
+            background-color: rgba(102, 126, 234, 0.8);
+        }
+        
+        .marker-cluster-large div {
+            background-color: rgba(102, 126, 234, 1);
+        }
+        
+        /* 스크롤바 스타일 */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .search-container {
+                padding: 0.75rem 1rem;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .search-inputs {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            
+            .search-box {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .dropdown-group {
+                width: 100%;
+            }
+            
+            .dropdown-group select {
+                flex: 1;
+                min-width: auto;
+            }
+            
+            .search-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
+                flex-direction: column; /* 모바일: 아이콘 위, 라벨 아래 */
+                gap: 0.25rem;
+            }
+            .btn .label {
+                display: block;
+                font-size: 0.75rem; /* 모바일 라벨 더 작게 */
+            }
+            
+            .btn i {
+                margin-right: 0.25rem;
+            }
+            
+            .main-container {
+                flex-direction: column;
+                height: auto; /* 동적 계산 유지 */
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 공용 한약사 아이콘 경로 설정 (루트 경로 기준)
+        window.HERBAL_ICON_URL = 'hanyakook_2.svg';
+        // 공용 약국 아이콘 경로 설정 (루트 경로 기준)
+        window.PHARMACY_ICON_URL = 'yakgook_1.svg';
+        
+        function applyHerbalIconToButton(){
+            if (!window.HERBAL_ICON_URL) return;
+            var btnIcon = document.getElementById('herbalToggleIcon');
+            if (btnIcon) btnIcon.src = window.HERBAL_ICON_URL;
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', applyHerbalIconToButton);
+        } else {
+            applyHerbalIconToButton();
+        }
+
+        // 뷰포트 높이에 맞게 메인 컨테이너/지도 높이 설정
+        function resizeMapToViewport() {
+            var header = document.querySelector('.header');
+            var search = document.querySelector('.search-container');
+            var main = document.querySelector('.main-container');
+            var mapEl = document.getElementById('map');
+            if (!main || !mapEl) return;
+            var headerH = header ? header.offsetHeight : 0;
+            var searchH = search ? search.offsetHeight : 0;
+            var vh = window.innerHeight;
+            var targetH = vh - headerH - searchH;
+            if (targetH < 300) targetH = 300; // 최소 높이 안전장치
+            main.style.height = targetH + 'px';
+            mapEl.style.height = '100%';
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', resizeMapToViewport);
+        } else {
+            resizeMapToViewport();
+        }
+        window.addEventListener('resize', resizeMapToViewport);
+
+        // 검색 입력 X 버튼 표시/동작
+        function bindSearchClear() {
+            var input = document.getElementById('searchInput');
+            var clearBtn = document.getElementById('searchClearBtn');
+            function syncClearBtn() {
+                if (!clearBtn) return;
+                clearBtn.style.display = input.value ? 'flex' : 'none';
+            }
+            if (input) {
+                input.addEventListener('input', syncClearBtn);
+                syncClearBtn();
+            }
+            if (clearBtn) {
+                clearBtn.addEventListener('click', function(){
+                    input.value = '';
+                    syncClearBtn();
+                    clearSearch();
+                });
+            }
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', bindSearchClear);
+        } else {
+            bindSearchClear();
+        }
+
+        // 인앱 알림 표시/숨김
+        window.showNotice = function(text, type) {
+            var box = document.getElementById('appNotice');
+            var t = document.getElementById('appNoticeText');
+            if (!box || !t) return;
+            box.classList.remove('success');
+            if (type === 'success') box.classList.add('success');
+            t.textContent = text;
+            box.style.display = 'inline-flex';
+            clearTimeout(window.__noticeTimer);
+            window.__noticeTimer = setTimeout(function(){
+                box.style.display = 'none';
+            }, 3500);
+        }
+        window.hideNotice = function() {
+            var box = document.getElementById('appNotice');
+            if (box) box.style.display = 'none';
+        }
+    </script>
+    <div class="loading" id="loading">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>약국 정보를 불러오는 중...</p>
+        </div>
+    </div>
+    <div class="app-notice" id="appNotice">
+        <span id="appNoticeText"></span>
+        <button class="close-btn" onclick="hideNotice()">닫기</button>
+    </div>
+
+    <header class="header">
+        <h1><i class="fas fa-pills"></i> 전국 약국 찾기</h1>
+        <p>전국 25,000여 개 약국의 위치와 정보를 한눈에 확인하세요</p>
+    </header>
+
+    <div class="search-container">
+        <div class="search-inputs">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="약국명 입력">
+                <button class="clear-action" id="searchClearBtn" aria-label="입력 지우기" title="입력 지우기"><i class="fas fa-times"></i></button>
+                <button class="search-action" onclick="searchPharmacy(true)">검색</button>
+            </div>
+            <div class="dropdown-group">
+                <select id="sidoSelect" onchange="onSidoChange()">
+                    <option value="">전체 시도</option>
+                </select>
+                <select id="sigunguSelect" onchange="searchPharmacy(true)">
+                    <option value="">전체 시군구</option>
+                </select>
+            </div>
+        </div>
+        <div class="search-buttons">
+            <button class="btn btn-secondary" onclick="toggleSidebar()" data-tooltip="약국 목록 보기/숨기기">
+                <i class="fas fa-list"></i><span class="label">목록</span>
+            </button>
+            <button class="btn btn-secondary" onclick="locateMe()" title="내 위치로 이동" data-tooltip="내 현재 위치로 이동">
+                <i class="fas fa-location-arrow"></i><span class="label">내 위치</span>
+            </button>
+            <button class="btn btn-secondary" onclick="toggleDenseView()" id="denseViewBtn" data-tooltip="클러스터를 거의 사용하지 않고 촘촘히 보기">
+                <i class="fas fa-border-all"></i><span class="label">촘촘히</span>
+            </button>
+            <button class="btn btn-secondary" onclick="toggleHerbalFilter()" id="herbalFilterBtn" data-tooltip="한약사 근무 약국만 보기">
+                <img id="herbalToggleIcon" src="herbal_pot_icon.svg" alt="herbal" width="24" height="24" style="vertical-align: middle;" />
+                <span class="label">한약사</span>
+            </button>
+            <button class="btn btn-secondary" onclick="toggleCrossEmployFilter()" id="crossEmployBtn" data-tooltip="약사와 한약사가 함께 근무하는 약국만 보기">
+                <i class="fas fa-people-group"></i><span class="label">교차고용</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar" id="sidebar">
+            <div class="stats">
+                <h3>검색 결과</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalCount">0</div>
+                        <div class="stat-label">전체 약국</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="filteredCount">0</div>
+                        <div class="stat-label">검색 결과</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="herbalCount">0</div>
+                        <div class="stat-label">한약사 약국</div>
+                    </div>
+                </div>
+            </div>
+            <div class="pharmacy-list" id="pharmacyList">
+                <!-- 약국 목록이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <!-- 우측 하단 신고하기 플로팅 버튼 (빈값 프리필) -->
+    <a class="floating-report-btn" target="_blank" rel="noopener"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSfHBe1ztCW35Go0H1SmCQ0DzedfopwhFPChwD9tx7sYPLVqqA/viewform?usp=pp_url&entry.1356240170=&entry.1318537606=&entry.1084600480=">
+        <i class="fas fa-flag"></i><span>신고하기</span>
+    </a>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    
+    <!-- Leaflet MarkerCluster JavaScript -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    
+    <script src="pharmacy-map.js"></script>
+</body>
+</html>

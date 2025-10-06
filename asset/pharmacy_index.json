@@ -1,0 +1,89 @@
+{
+  "index": [
+    {
+      "sido": "충남",
+      "count": 1003,
+      "file": "chunks/pharmacies.충남.json"
+    },
+    {
+      "sido": "경기",
+      "count": 5915,
+      "file": "chunks/pharmacies.경기.json"
+    },
+    {
+      "sido": "서울",
+      "count": 5747,
+      "file": "chunks/pharmacies.서울.json"
+    },
+    {
+      "sido": "인천",
+      "count": 1307,
+      "file": "chunks/pharmacies.인천.json"
+    },
+    {
+      "sido": "충북",
+      "count": 733,
+      "file": "chunks/pharmacies.충북.json"
+    },
+    {
+      "sido": "강원",
+      "count": 705,
+      "file": "chunks/pharmacies.강원.json"
+    },
+    {
+      "sido": "광주",
+      "count": 728,
+      "file": "chunks/pharmacies.광주.json"
+    },
+    {
+      "sido": "대전",
+      "count": 790,
+      "file": "chunks/pharmacies.대전.json"
+    },
+    {
+      "sido": "부산",
+      "count": 1718,
+      "file": "chunks/pharmacies.부산.json"
+    },
+    {
+      "sido": "세종시",
+      "count": 163,
+      "file": "chunks/pharmacies.세종시.json"
+    },
+    {
+      "sido": "경남",
+      "count": 1403,
+      "file": "chunks/pharmacies.경남.json"
+    },
+    {
+      "sido": "경북",
+      "count": 1129,
+      "file": "chunks/pharmacies.경북.json"
+    },
+    {
+      "sido": "울산",
+      "count": 443,
+      "file": "chunks/pharmacies.울산.json"
+    },
+    {
+      "sido": "대구",
+      "count": 1410,
+      "file": "chunks/pharmacies.대구.json"
+    },
+    {
+      "sido": "전북",
+      "count": 1001,
+      "file": "chunks/pharmacies.전북.json"
+    },
+    {
+      "sido": "전남",
+      "count": 843,
+      "file": "chunks/pharmacies.전남.json"
+    },
+    {
+      "sido": "제주",
+      "count": 326,
+      "file": "chunks/pharmacies.제주.json"
+    }
+  ]
+}

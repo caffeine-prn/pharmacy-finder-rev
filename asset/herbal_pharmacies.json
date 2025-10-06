@@ -1,0 +1,4174 @@
+{
+  "herbal_pharmacies": [
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ5MiQ0NjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "예담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQzIyQ4OSQzNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4OSQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "남포약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ5MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "경희소망한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ5OSQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "경희오름한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ3OSQ0NjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "푸른솔 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ4OSQ0NjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "신나는부부한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ4OSQzNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "푸른솔한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ4OSQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "동인당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ5OSQyNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "대추당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ5OSQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "자연담은부부한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ5OSQzNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "백약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQyIyQ1IyQwMCQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "보원당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQyIyQxIyQwMCQyNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "보람한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQ4MiQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "사계절한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQ5OSQzNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "동부산약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQwMyQyNjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "정담약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQzIyQ5MiQyNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "유일약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQyIyQ3IyQwMCQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "청미래한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ5MiQzNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "프리미엄아울렛약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ5OSQyNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "혜담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ2MiQyNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "동아약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ4OSQzNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "청광약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ5OSQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "공한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQxMyQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "부평깡통큰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ2MiQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "부전시장약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ4MiQzNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "서면메트로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ5MiQyNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "셀프케어약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ5MiQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "메타약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQwMyQ0NjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "경대정문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ2MiQyNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "청춘약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQxMyQzNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "리드팜백화점약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQyIyQ3IyQwMCQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "청년약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQ3OSQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "신평탑약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQ4MiQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "서문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQ5OSQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "청솔한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTAxMiM1MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ4OSQzNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "동부산오시리아수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkMCMkMDMkMzgxMTkxIzIxIyQxIyQxIyQ4MiQyNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "도원약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkMCMkMDMkNTgxOTYxIzIxIyQyIyQ5IyQwMCQzNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "새우주약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkMCMkMDMkNTgxOTYxIzMxIyQxIyQzIyQxMyQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "고일약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkMCMkMDMkNTgxOTYxIzUxIyQxIyQ1IyQ4OSQ0NjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "신통한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQ3MiQzNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "미인 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQ4MiQzNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "팜스토리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQxMyQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "중앙약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQxIyQzIyQ2MiQyNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "예담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQxIyQzIyQ2MiQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "원산한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQxIyQzIyQ4MiQzNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "소나무한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQyIyQ3IyQwMCQzNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "우성약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQyIyQzIyQwMCQ0NjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "봄한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQyIyQzIyQwMCQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "자연한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzMxIyQyIyQzIyQwMCQzNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "태양한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzQxIyQxIyQ3IyQ3OSQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "경희마루한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzQxIyQxIyQ3IyQ4MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "정심한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQ5MiQyNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "별빛약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQ5MiQzNjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "대포항 종로 약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkNCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQwMyQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "호수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxMzUxIzIxIyQyIyQxIyQwMCQzNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "기린수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzIxIyQxIyQ5IyQ3OSQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "튼튼한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzIxIyQxIyQ5IyQ4MiQzNjEyMjIjNDEjJDEjJDQjJDgz",
+      "name": "동인한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQ4OSQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "성지한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQ4OSQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "소망한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQ4OSQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "팜프라자약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQ5OSQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "민들레 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzMxIyQxIyQzIyQxMyQyNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "보리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzMxIyQxIyQzIyQxMyQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "광혜당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzMxIyQyIyQzIyQwMCQzNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzQxIyQxIyQ3IyQ2MiQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "바른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzQxIyQxIyQ3IyQ5MiQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "따뜻한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzQxIyQxIyQ3IyQ5MiQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "롯데마트열린약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzQxIyQxIyQ3IyQ5OSQzNjE4MzIjODEjJDEjJDIjJDgz",
+      "name": "마르첼로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzQxIyQyIyQ3IyQwMCQzNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "약초원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzUxIyQxIyQ1IyQ2MiQ0NjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "청주상당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzUxIyQxIyQ1IyQ3MiQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "청대정문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQ2MiQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "성심한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQ3MiQyNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "청주터미널약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQ3MiQzNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "유유약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQ4MiQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "공항약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQ5MiQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "오송역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQ5OSQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "경희참한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM1MSMkMSMkOCMkMDMkMzgxOTYxIzUxIyQxIyQxIyQ5OSQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzExIyQxIyQ3IyQ3MiQzNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "광제약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzExIyQxIyQ3IyQ4MiQyNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "광혜원 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3OSQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "들뫼풀한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ4OSQyNjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "혜민원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ4OSQzNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "건강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ4OSQzNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "대한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ5MiQyNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "역전약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ3OSQzNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "신흥약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ5MiQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQwMyQzNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "청담약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQxMyQyNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "누리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzMxIyQxIyQzIyQwMyQzNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "365용문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "홍주한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3MiQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "서산동인당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3MiQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "맘편한약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4MiQ0NjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "365변동매일약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4MiQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "중도한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4MiQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "명신 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4MiQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "자연닮기약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4MiQzNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "인삼당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4MiQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "선화한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4MiQzNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "노은한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4MiQzNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "대동한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ5MiQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "어진 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ5MiQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "가온비즈약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ5MiQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "드럭스토어동행약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ5MiQzNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "알뜰한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ5OSQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "도안종로한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQwMyQyNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "정산한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQwMyQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "비범한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQxMyQyNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "웅진한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQxMyQyNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "대전마더스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQxMyQzNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "한림원 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQxMyQzNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "청춘약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzQxIyQyIyQ3IyQwMCQzNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "신도삼대한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ3OSQyNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "익수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ3OSQyNjE4MzIjODEjJDEjJDIjJDgz",
+      "name": "예손약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ3OSQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "편안한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ4MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "경희윤한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQwMyQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "경희수신한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQwMyQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "진 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQxMyQzNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "홍약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ3OSQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "대전한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ3OSQyNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "경희당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ3OSQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ3OSQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "터미널약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ4OSQ0NjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "힐링한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ4OSQzNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "사랑채한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxNzAyIzUxIyQxIyQxIyQxMyQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "정담 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkMzgxOTYxIzIxIyQxIyQxIyQwMyQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "임문택약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzExIyQxIyQ3IyQ3MiQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "논산홈플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzExIyQxIyQzIyQ3MiQyNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "한남약국(한약국)",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzExIyQxIyQzIyQ3OSQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "365일바른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzExIyQxIyQzIyQ5OSQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "명문당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzExIyQxIyQzIyQ5OSQzNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "바다약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzExIyQyIyQzIyQwMCQzNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "메디팜우리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ3OSQzNjEyMjIjNDEjJDEjJDQjJDgz",
+      "name": "신진도약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ4OSQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "천안종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQwMyQyNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "대전역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ4MiQzNjE4MzIjODEjJDEjJDIjJDgz",
+      "name": "제일큰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ4OSQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "스마일약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ5OSQyNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "차와약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ5OSQyNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "성신약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQxMyQzNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "슬기로운한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ2MiQzNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "친절한마음약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ3OSQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "햇살가득한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ3OSQzNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "사직천안종합약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ4MiQzNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "예손약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ3MiQyNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "시민약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ4OSQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "사슴약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ5MiQyNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "백제당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQwMyQ0NjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "따뜻한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ3MiQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "행복플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ5MiQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "봄약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ5MiQzNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "알리오약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzMxIyQyIyQ3IyQwMCQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "참편한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzMxIyQyIyQ3IyQwMCQzNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "해변약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQ3MiQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "세종선약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQ4MiQzNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "대전가장큰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQ4OSQzNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "대전하나로 약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQ5OSQyNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "해오름약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQwMyQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "도룡365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzQxIyQyIyQ3IyQwMCQyNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "백일약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzUxIyQxIyQ1IyQ3OSQyNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "도안365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ2MiQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "경희 정원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ3MiQyNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "봉명심야약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ3MiQyNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "착한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ3OSQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkMiMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ4MiQzNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "청아한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQ3IyQ3MiQzNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "다정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQ3IyQ5MiQyNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "광혜당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQ3IyQ5OSQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "은하수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ2MiQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "삼례비비정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ3MiQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "평안한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ3MiQyNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "대학한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ3MiQyNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "노송한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ3MiQyNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "소망한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ3MiQzNjEyMjIjNDEjJDEjJDQjJDgz",
+      "name": "미르한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ4MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "옹기 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ4MiQyNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "동의보감한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ4OSQyNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "빛과소금약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ5MiQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "낙원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ5MiQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "어울림한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ5MiQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "비손한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQ5OSQzNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "개성한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQwMyQzNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "비움 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQxIyQzIyQxMyQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "예담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzExIyQyIyQ3IyQwMCQzNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "바른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ1IyQ3MiQ0NjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "남원사랑약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ1IyQ4OSQ0NjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "건강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ1IyQ5OSQyNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "빅약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ1IyQ5OSQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "샘골조은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ1IyQwMyQ0NjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "신시심야약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ1IyQxMyQzNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "군산휴게소약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ5IyQ3OSQyNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "365미장약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ5IyQ4MiQzNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "학산약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ5IyQ4OSQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "만성365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ5IyQwMyQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "청년약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQ5IyQxMyQyNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "운곡약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQxIyQ2MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "민트약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQxIyQ3OSQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "수하락한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQxIyQ4MiQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQxIyQ4MiQyNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "중앙 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQxIyQ4OSQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "맘편한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQxIyQ5MiQyNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "우리들약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQxIyQ5MiQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "365일박사약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQxIyQ5MiQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "오거리약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQxIyQxIyQwMyQyNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQyIyQ1IyQwMCQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "우리동네약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxMTkxIzIxIyQyIyQxIyQwMCQzNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "따뜻한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQ4MiQzNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "다정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxOTYxIzUxIyQxIyQ1IyQ2MiQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxOTYxIzUxIyQxIyQ1IyQ2MiQzNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "청강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxOTYxIzUxIyQxIyQ1IyQ4MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "혜민당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxOTYxIzUxIyQxIyQ1IyQ5OSQ0NjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "온유한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxOTYxIzUxIyQxIyQ1IyQwMyQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "청림한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM2MSMkMSMkNiMkMDMkMzgxOTYxIzUxIyQxIyQxIyQxMyQyNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "건강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxMTkxIzUxIyQxIyQ1IyQwMyQzNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "신나는인덕한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxMTkxIzUxIyQxIyQ1IyQxMyQzNjE4MzIjODEjJDEjJDIjJDgz",
+      "name": "다정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQ3IyQ3MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "부강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQ3IyQ3MiQzNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "동진한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQ3IyQ3OSQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "장생당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQ3IyQ4MiQzNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "미담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQzIyQ3MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "동인당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQzIyQ4MiQyNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "선한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQzIyQ4MiQzNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "원당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQzIyQ4OSQyNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "으뜸약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQzIyQ4OSQyNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "샛별약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQzIyQ5OSQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "명인원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ2MiQyNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "서정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ2MiQzNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "일등약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3MiQ0NjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "더슬림 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3MiQyNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "유한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3MiQzNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "회춘당 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3MiQzNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "제니스365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3MiQzNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "다복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ4MiQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "세솔한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ4MiQyNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "본초당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ4MiQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "용정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQ0NjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "영춘당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQyNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "동인당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "동의당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQzNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "동양당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "이가한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ4MiQ0NjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "목포하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ4OSQzNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "새희망한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ2MiQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "정원약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ5MiQyNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "행림당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQyIyQ1IyQwMCQ0NjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "뿌리깊은한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQyIyQ1IyQwMCQyNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "자연한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQyIyQ1IyQwMCQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "금강당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQyIyQ1IyQwMCQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "웰빙한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQyIyQ1IyQwMCQzNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "미미약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ2MiQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "365 종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ3OSQzNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "정성담은한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ4OSQzNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "안녕한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ5MiQzNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "닥터스팜한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQzIyQ2MiQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "24시새벽약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQzIyQ3OSQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "다온한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQzIyQ3OSQzNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "서림약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQzIyQxMyQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "365문화전당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4MiQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "365 열시약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4OSQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4OSQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "종합약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ5OSQyNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQwMyQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "밝은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQyIyQ3IyQwMCQzNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "평동종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ2MiQyNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "봄빛한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ2MiQzNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "하나로365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ3MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "365화목약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ3OSQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "첨단365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ4OSQyNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "건강 100세 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM3MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ5OSQzNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "온화약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3MiQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "대성한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ2MiQyNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "화산당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ3OSQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "느티나무한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQyIyQ1IyQwMCQ0NjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "건강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQyIyQ1IyQwMCQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "보명당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ3MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ3MiQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "경희약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ5MiQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQ5MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "다원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQwMyQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "수자당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQxMyQyNjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "옹기 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQxMyQzNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "동이한방약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQxMyQzNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "경희국보한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQ1IyQ2MiQ0NjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "신대학약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQ1IyQ2MiQyNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "동대구신세계약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQ1IyQwMyQyNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "반월당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ3OSQyNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "진성한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ3OSQzNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "삽재한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ4MiQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "대보한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQ3IyQ2MiQyNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "가가약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQ3IyQ3MiQ0NjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "반월당백화점약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQ3IyQwMyQyNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "팜플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQ3IyQxMyQyNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "경희수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQzIyQ3OSQ0NjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "대구진약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQzIyQ5MiQ0NjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "영대정문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQzIyQ5MiQzNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "경북대한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQzIyQxMyQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "두류경북약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ1IyQ2MiQyNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "약원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ1IyQ3OSQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "새경북약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ1IyQwMyQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "동산약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ4MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "동창약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ4OSQzNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "우리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ5MiQzNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "본리심야약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ5OSQ0NjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "쌍사약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQxMyQyNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "반월당자연사랑약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQ3MiQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "신국제약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQ4MiQzNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "우리들약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQwMyQyNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "북삼제일큰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQxMyQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "반월당명성약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQxMyQyNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQyIyQ5IyQwMCQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "365지키미약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQyIyQ5IyQwMCQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "동명당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ2MiQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "경주백화점대형약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ3MiQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "한방약국 청라",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ3MiQyNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "문덕365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ3OSQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "헤르메디한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ4MiQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "수성365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ4OSQyNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "손수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ3OSQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ3OSQyNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "반월당큰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ3OSQzNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ5MiQyNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "계대동문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQwMyQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "365칠곡대구제일큰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQyIyQ3IyQwMCQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "스마일약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQ3MiQ0NjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "장수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQ4MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "새봄약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQ4MiQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "삼성약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQ4OSQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "영천심야약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQ5MiQzNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "동구시장심야약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQxMyQzNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "365하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQ3OSQzNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "복현 가까운약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQ4OSQ0NjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "현곡약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxMTkxIzMxIyQxIyQ3IyQ5OSQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "삼일약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxMTkxIzMxIyQxIyQzIyQ3OSQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "24시약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzExIyQxIyQ3IyQ3MiQyNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "보생한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzExIyQxIyQ3IyQ4MiQyNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "경희당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQwMyQyNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "옥봉문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ4MiQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "경희예담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ5MiQ0NjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "평거한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ5MiQzNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "맘편 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQwMyQ0NjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "동인당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQwMyQzNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "동인당 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQwMyQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "푸른솔한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQxMyQyNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "본한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQxMyQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "영찬한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQxMyQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "보원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQxMyQzNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "대방건강 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQxIyQzIyQ4MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "울산세이브존약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3OSQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "이랑비랑한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3OSQyNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "도원당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3OSQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "향림한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3OSQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "바른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4OSQyNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "스타약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ5OSQzNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "보리수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ3OSQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "초록건강한약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQwMyQzNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ2MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "창원키다리한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ4MiQzNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQyIyQ1IyQwMCQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "대광당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQyIyQ1IyQwMCQzNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "푸른솔약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQyIyQxIyQwMCQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "늘푸른나무약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQxMyQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "바른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzExIyQxIyQzIyQ3MiQzNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "가음정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzExIyQxIyQzIyQ4OSQzNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "용한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzExIyQxIyQzIyQxMyQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "울대정문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ3MiQyNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "365큰솔약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ4OSQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "365매일약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ4OSQzNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "올리브약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ5MiQzNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "평거마트약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQwMyQ0NjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "the무동약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQwMyQyNjEyMjIjNDEjJDEjJDQjJDgz",
+      "name": "맑은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ2MiQ0NjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "365열린약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ3MiQyNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "훈약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ5MiQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "파랑새약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ4OSQyNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "가까운약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQxMyQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "예하리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ4MiQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "소중한약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ4OSQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "믿음약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ5MiQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "달빛약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ5MiQzNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "정촌약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ5OSQzNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "든든우리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQxMyQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "진주왕약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQxMyQzNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "다누리약국진영점",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzIxIyQxIyQ5IyQ5MiQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "흙한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzMxIyQxIyQ3IyQ2MiQzNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzMxIyQxIyQ3IyQ3OSQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "금강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzMxIyQxIyQ3IyQ3OSQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "스마트약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzMxIyQxIyQ3IyQwMyQzNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "효돈약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzMxIyQxIyQzIyQ4MiQzNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "청사약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzMxIyQxIyQzIyQ4OSQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "용머리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzMxIyQxIyQzIyQ4OSQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "동인한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzMxIyQxIyQzIyQwMyQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "더건강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTYyMiM4MSMkMSMkOCMkMDMkMzgxMzUxIzMxIyQyIyQ3IyQwMCQyNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "혜명한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQyIyQ3IyQwMCQyNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "대학약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ2MiQzNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "대치약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkMzgxNzAyIzMxIyQyIyQzIyQwMCQzNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "강동보건약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ3MiQzNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "시원약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQ3MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "소망이 샘솟는 느티나무 한약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzExIyQxIyQ3IyQ4MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "상계1번약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzExIyQxIyQ3IyQ4OSQ0NjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "참약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzExIyQxIyQ3IyQ4OSQzNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "잠실미소약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzExIyQxIyQ3IyQxMyQyNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "지니약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzExIyQxIyQzIyQ3MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "약초원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzExIyQxIyQzIyQ4OSQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "맘이편한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ1IyQ3MiQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "본약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ1IyQ3MiQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "망원시장약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ1IyQ3OSQzNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "명동명약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ1IyQ4MiQyNjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "행복나무한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ1IyQ5MiQ0NjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "경희다정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ1IyQ5OSQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "천호역자몽약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ5IyQ4MiQzNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "대명약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ5IyQ5MiQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "새내역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ5IyQ5OSQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "삼성해든약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQ5IyQxMyQyNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "경옥채한약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQxIyQ2MiQ0NjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "수서역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQxIyQxIyQ5MiQyNjEyMjIjNDEjJDEjJDQjJDgz",
+      "name": "홍대참신한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQyIyQ1IyQwMCQzNjEyMjIjNDEjJDEjJDQjJDgz",
+      "name": "연남약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzIxIyQyIyQxIyQwMCQzNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "청아토한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzMxIyQxIyQ3IyQ2MiQ0NjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "엄마약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzMxIyQxIyQ3IyQ2MiQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "종로백제약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzMxIyQxIyQ3IyQ4MiQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "청약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzMxIyQxIyQ3IyQ4OSQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "보건당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzMxIyQxIyQ3IyQ4OSQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "숭실길약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzMxIyQxIyQ3IyQwMyQzNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "더밝은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzMxIyQxIyQzIyQ4MiQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "구흥한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzMxIyQxIyQzIyQ4OSQyNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "대청약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzQxIyQxIyQ3IyQ3MiQyNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "바른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzQxIyQxIyQ3IyQ5OSQyNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "워커힐약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzUxIyQxIyQ1IyQ2MiQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "대학솔약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzUxIyQxIyQ1IyQ3MiQ0NjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "미소약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzUxIyQxIyQ1IyQ4OSQyNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "편안한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzUxIyQxIyQxIyQ4OSQyNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "새봄약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzUxIyQxIyQxIyQwMyQyNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "문경한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzUxIyQxIyQxIyQwMyQzNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMTkxIzUxIyQyIyQ1IyQwMCQyNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "오로라약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQ5MiQ0NjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "태평양약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQ5OSQ0NjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "알파약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzExIyQxIyQzIyQ3MiQzNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "경동삼우한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzExIyQxIyQzIyQ3OSQyNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "선한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ2MiQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "365매일약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ3OSQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "동의당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQ4OSQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "365자양미소약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ4MiQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "고은 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ4OSQyNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "강동경희한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ5MiQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "경희행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ5OSQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "수라인 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQwMyQyNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "보림한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQwMyQzNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "경희미소원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ4OSQzNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "경희자연한약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ5MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "올바른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQxMyQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "이대행복한 약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ3MiQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "다나한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ4MiQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "하늘수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ4OSQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "365 코끼리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzUxIyQxIyQ1IyQ2MiQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "친절한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzUxIyQxIyQ1IyQ3MiQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzUxIyQxIyQ1IyQ5MiQ0NjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "미소가득한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ3MiQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "여의도약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ3OSQzNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "경희자연한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQwMyQ0NjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "참한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQ3IyQ3MiQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "봉약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQ3IyQ3OSQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "스타약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQ3IyQ5OSQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "안국365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQ3IyQxMyQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "태이린한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ2MiQzNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "세계로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ3OSQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "펜타약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ3OSQyNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "설약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ3OSQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "자연다림노아한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ3OSQzNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "홍대어울림약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ5MiQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "신대방365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ5OSQyNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "라임약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQzIyQwMyQ0NjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "행복약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQxIyQzIyQxMyQ0NjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "호수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQyIyQ3IyQwMCQzNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "혜화설약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzExIyQyIyQzIyQwMCQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "대동약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQ2MiQ0NjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "튼튼약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQ2MiQ0NjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "사당역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQ2MiQyNjEyMjIjNDEjJDEjJDQjJDgz",
+      "name": "백화점약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQ4OSQzNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "단우한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQ5MiQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "고래약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQ5IyQ3MiQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "설약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQ5IyQ4OSQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "롱약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQxIyQ3MiQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "선릉역 약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQxIyQ4MiQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQxIyQxIyQ5MiQ0NjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "우정약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQyIyQ5IyQwMCQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "한약국더채움",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzIxIyQyIyQ5IyQwMCQzNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "신사역365 약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQ3IyQ4MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "중계상록수약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQ3IyQ4MiQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "매일여는약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQ3IyQ4OSQ0NjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "유원당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQ2MiQzNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "청담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQ3MiQyNjE4MzIjODEjJDEjJDIjJDgz",
+      "name": "청년약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQ3MiQzNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "365마트약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQ3MiQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "남대문대형약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQ3MiQzNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "북촌약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQ5OSQ0NjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "가람약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQwMyQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "덕성그린약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQyIyQ3IyQwMCQyNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "행운약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzMxIyQyIyQzIyQwMCQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "정담은한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQyIyQ3IyQwMCQzNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "라임약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzUxIyQxIyQ1IyQ3OSQyNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "팜프라자약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzUxIyQxIyQ1IyQ3OSQzNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "헤르바당산역약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzUxIyQyIyQ1IyQwMCQzNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "종로삼성약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzUxIyQyIyQxIyQwMCQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "이수밝은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzExIyQxIyQ3IyQ2MiQyNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "수종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzExIyQxIyQ3IyQ3MiQyNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "한중약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzExIyQxIyQ3IyQwMyQ0NjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "오이한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzIxIyQxIyQ1IyQ3MiQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "바로나한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ3OSQzNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "가람약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQwMyQzNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "사당건강약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQ4MiQ0NjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "365강남역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzIxIyQyIyQ1IyQwMCQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "희망약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ2MiQyNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "송파윤한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ2MiQzNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "예담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ3OSQyNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "미소담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ3OSQzNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "종로성지약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ3OSQzNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "청담장수 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ4MiQzNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ4MiQzNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "정수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ4OSQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "통인한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ5MiQ0NjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "365행복약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ5OSQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "자담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ5OSQyNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "경희소명한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ5OSQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "청춘한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ2MiQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "경희생한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ3MiQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "목동행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ3OSQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "효심당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ3OSQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "덕현당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ4MiQ0NjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "경희정산한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ4MiQ0NjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "고가모니한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ4MiQyNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "우리생한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ4MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "순수 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ4OSQ0NjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "지운당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ4OSQzNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "부성한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ5OSQ0NjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "자인한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQwMyQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "경희한방약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQwMyQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "이인치한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQwMyQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "송파한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQyIyQ3IyQwMCQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "모두약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQyIyQ3IyQwMCQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "연신내역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQyIyQ3IyQwMCQzNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "동의보감한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzMxIyQyIyQ3IyQwMCQzNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "경희삼일한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQ2MiQyNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "외대조은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQ4MiQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "강남호랑이한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQxMyQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "아현종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ2MiQ0NjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "일층가락약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ3MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "양재뿌리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ4MiQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "건대가온약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ4MiQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "신분당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ4MiQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQ3OSQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "기경한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQ4OSQzNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "한울약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQwMyQyNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "경희자연애한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQxMyQyNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "한길약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxOTYxIzUxIyQyIyQxIyQwMCQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "신촌대로 약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQ3IyQ2MiQ0NjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "오늘의약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQ3IyQ3OSQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "365서초메트로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQ3IyQ5MiQyNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "365중앙약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQ3IyQxMyQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "마곡드림약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQ3IyQxMyQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "달빛약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQzIyQ3OSQzNjE4MzIjODEjJDEjJDIjJDgz",
+      "name": "한약짓는약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQzIyQ4OSQzNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "삼거리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQzIyQwMyQ0NjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "웃음가득약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQzIyQxMyQ0NjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQxIyQzIyQxMyQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "종각역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzExIyQyIyQzIyQwMCQzNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "허브약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQ1IyQ4MiQzNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "자연생약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQ1IyQ5OSQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "꽃내음약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQ1IyQwMyQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "방학365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQ1IyQxMyQzNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "365회기역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQ5IyQ3MiQyNjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "사당365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQ5IyQ3OSQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "합정365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQ5IyQ5MiQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "신림역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQ5IyQxMyQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "강남정인한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQxIyQ4MiQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "지은당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQxIyQxIyQ5OSQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "월계365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQyIyQ1IyQwMCQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "세심당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzIxIyQyIyQxIyQwMCQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "문우약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzMxIyQxIyQ3IyQ4OSQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "대림제일큰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzMxIyQxIyQ3IyQwMyQzNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "365여의나루약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzMxIyQxIyQ3IyQxMyQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "서울심야약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzMxIyQxIyQzIyQ2MiQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "경희서아당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzMxIyQxIyQzIyQ2MiQyNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "자연뜰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzMxIyQxIyQzIyQ5OSQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "성수서울숲약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzMxIyQxIyQzIyQwMyQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "사당해피약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzMxIyQxIyQzIyQxMyQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "용답원약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzQxIyQxIyQ3IyQ3OSQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "신림365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzQxIyQxIyQ3IyQ4MiQyNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "전원당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzQxIyQxIyQ3IyQ5MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "건대365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzQxIyQxIyQ3IyQxMyQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "광화문123약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQxIyQ1IyQ3OSQyNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "오래하는약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQxIyQxIyQ3MiQyNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "365열린동대문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQxIyQxIyQ3MiQzNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "행복나무약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQxIyQxIyQ3OSQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "토닥토닥약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQxIyQxIyQ5MiQ0NjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "365종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQxIyQxIyQwMyQ0NjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "마곡아임약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQxIyQxIyQwMyQyNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "둔촌오륜약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQxIyQxIyQxMyQyNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "365비타민약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQyIyQxIyQwMCQ0NjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "신논현역365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNTgxMzUxIzUxIyQyIyQxIyQwMCQ0NjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "그린봄약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkOCMkMDMkMzgxMzUxIzExIyQxIyQ3IyQ3OSQ0NjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "월곡플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkOCMkMDMkMzgxMzUxIzExIyQxIyQ3IyQ3OSQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "현대약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkOCMkMDMkMzgxMzUxIzExIyQxIyQzIyQ2MiQzNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "신도림역약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkOCMkMDMkMzgxMzUxIzExIyQxIyQzIyQ5OSQzNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "홍대365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDQ4MTg4MSM1MSMkMSMkOCMkMDMkMzgxMzUxIzExIyQxIyQzIyQxMyQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "365그랜드약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzExIyQxIyQ3IyQ3MiQzNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "대학약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzExIyQxIyQ3IyQwMyQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "우리들약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzExIyQxIyQzIyQ2MiQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "늘씬엄마튼튼아이푸른솔한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzExIyQxIyQzIyQxMyQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "행복가득한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzIxIyQxIyQ5IyQ2MiQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "경희착한맘한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzMxIyQxIyQzIyQ3MiQyNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "동민약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzMxIyQxIyQzIyQ4MiQyNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "현덕약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzQxIyQxIyQ3IyQ2MiQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "여리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzQxIyQxIyQ3IyQ2MiQzNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "예담한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzQxIyQxIyQ3IyQ4OSQzNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzUxIyQxIyQ1IyQ4OSQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "다원약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzUxIyQxIyQxIyQ2MiQzNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "모던 한방약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzUxIyQxIyQxIyQ3OSQ0NjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "라임약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMTkxIzUxIyQyIyQ1IyQwMCQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "편안한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxMzUxIzUxIyQxIyQ1IyQ2MiQ0NjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "중동종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQ3IyQ3MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "설약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQ3IyQxMyQ0NjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "화정마더스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQ3IyQxMyQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "경희대한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQzIyQ3MiQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "아름다운건강 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzExIyQxIyQzIyQxMyQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "비타민약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ2MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "경희한약국 순수",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ2MiQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "용상약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ2MiQzNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "평화약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ2MiQzNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "경희유원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3MiQ0NjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "해울한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3MiQzNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "분당경희한약약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3OSQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "서림한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ3OSQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "범계 수 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ4MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "자연담은한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ4OSQ0NjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "새명약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ4OSQyNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "참사랑한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ4OSQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "경희논현한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "경희당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5MiQyNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "세이브존건강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQ0NjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "파주경희한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "터미널약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQyNjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "세광한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "고모약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQzNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "조한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQ5OSQzNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "원광한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQwMyQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "효자원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQwMyQzNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "명가한약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ1IyQxMyQzNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "허준한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ3MiQyNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "늘행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ3MiQyNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "키다리한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ3OSQ0NjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "올바른한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ3OSQyNjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "새잎한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ3OSQzNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "원광한약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQ3OSQzNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "무지개약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQ5IyQxMyQyNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "자연美한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ2MiQ0NjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "다함 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ2MiQyNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "주안허브약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ2MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "용한당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ3MiQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "기린한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ3MiQyNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "약초당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ3MiQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "원광약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ3MiQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "용한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ3MiQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "신우초한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ3OSQyNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "사랑약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ4MiQ0NjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "동의보감한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ4MiQyNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "바른정한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ4MiQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "예담원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ4MiQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "경희당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ4MiQzNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "아름드리한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ5MiQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "유달산한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ5MiQyNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "경희참한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ5MiQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "송한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ5MiQzNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "원광한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQ5OSQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "유진약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQwMyQ0NjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "보생한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQwMyQyNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "경희한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQwMyQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "오송한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQwMyQzNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "청호 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQwMyQzNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "수지 오송한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQxMyQ0NjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "자미한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQxIyQxIyQxMyQyNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "우리한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQyIyQ1IyQwMCQyNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "뜨란채약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzIxIyQyIyQ5IyQwMCQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "고양하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ3MiQzNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "정성 약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQxIyQ3IyQ4OSQzNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "새봄약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzMxIyQyIyQ3IyQwMCQyNjEyMjIjNjEjJDEjJDAjJDgz",
+      "name": "파주종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3MiQyNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "보약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ3OSQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "안산휴게소약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQxIyQ3IyQ4OSQyNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "제일건강한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQyIyQ3IyQwMCQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "삼성약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzQxIyQyIyQ3IyQwMCQyNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "오케이약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ4OSQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "경희양춘당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ5OSQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "몸사랑마음사랑 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQ1IyQ5OSQyNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "푸른나무 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxNzAyIzUxIyQxIyQxIyQwMyQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "하린약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzIxIyQxIyQ5IyQ5MiQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "세계로약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQ5OSQ0NjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "부평365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzMxIyQxIyQ3IyQ5OSQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzMxIyQxIyQzIyQ2MiQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "명리한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzMxIyQxIyQzIyQ2MiQzNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "용이푸른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzMxIyQyIyQzIyQwMCQ0NjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "광혜원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzQxIyQxIyQ3IyQ4OSQ0NjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "원광한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzQxIyQxIyQ3IyQ5MiQyNjE4MzIjNzEjJDEjJDgjJDgz",
+      "name": "수지민들레 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzQxIyQxIyQ3IyQwMyQyNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzUxIyQxIyQ1IyQ3OSQyNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "경희진한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkMzgxOTYxIzUxIyQxIyQ1IyQ3OSQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "원광한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzExIyQxIyQzIyQ2MiQ0NjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "정성약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzExIyQxIyQzIyQ5OSQzNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "데일리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzExIyQyIyQzIyQwMCQ0NjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "한양봄약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzIxIyQxIyQ1IyQ3OSQyNjEyMjIjNDEjJDEjJDQjJDgz",
+      "name": "이지약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzIxIyQxIyQ1IyQ4OSQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "문학모범약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzIxIyQxIyQ5IyQ5OSQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzIxIyQxIyQ5IyQ5OSQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "인하후문약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzIxIyQxIyQ5IyQxMyQyNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "명리본한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzIxIyQxIyQxIyQ3OSQzNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "종로사약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzIxIyQxIyQxIyQwMyQ0NjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "화은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzIxIyQxIyQxIyQxMyQzNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "삼육종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzIxIyQyIyQ5IyQwMCQzNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "광혜당약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzMxIyQxIyQ3IyQ5MiQyNjE4MzIjODEjJDEjJDIjJDgz",
+      "name": "제일큰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzMxIyQxIyQ3IyQwMyQyNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "청학약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzMxIyQxIyQzIyQwMyQyNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "365보건약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzMxIyQyIyQzIyQwMCQ0NjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "국제약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzQxIyQxIyQ3IyQ2MiQ0NjE0ODEjNTEjJDEjJDYjJDgz",
+      "name": "숨약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzQxIyQxIyQ3IyQ3OSQ0NjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "솔과향약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzQxIyQxIyQ3IyQ4OSQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "평촌공감약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzUxIyQxIyQ1IyQ5MiQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "비타민약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzUxIyQxIyQxIyQ3OSQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "동행약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzUxIyQxIyQxIyQ4MiQyNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "방교바른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMTkxIzUxIyQxIyQxIyQ4OSQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "지한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQ3MiQzNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "허브약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQ3OSQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "영통365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQ5OSQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "금강약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQ3IyQwMyQyNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "공진한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQzIyQ2MiQyNjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "삼육오사랑약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQzIyQ5MiQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "인하사랑약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzExIyQxIyQzIyQ5OSQzNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "정직한마음약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQ5OSQyNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "랄랄라약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQ1IyQxMyQyNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQ5IyQwMyQ0NjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "광명마더스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ2MiQyNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "뿌리한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQ4MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "경희수 한방약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQwMyQzNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "경희선제당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQxIyQxIyQxMyQzNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "명원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQyIyQ1IyQwMCQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "시화청담약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQyIyQxIyQwMCQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "늘푸른약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzIxIyQyIyQxIyQwMCQyNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "건강플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ3MiQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "건강플러스약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ5MiQ0NjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "서정리오렌지약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ5OSQyNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "경희행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQ3IyQ5OSQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "새솔약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ2MiQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ2MiQyNjEwMDIjNTEjJDEjJDIjJDgz",
+      "name": "새빛약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzMxIyQxIyQzIyQ4OSQzNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "성보약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQ4OSQyNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "더조은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzQxIyQxIyQ3IyQwMyQzNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "슬림라이프약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQ1IyQ3MiQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "미사경희약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ2MiQyNjEyMjIjNDEjJDEjJDQjJDgz",
+      "name": "용인하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ3MiQyNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "안성종로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxMzUxIzUxIyQxIyQxIyQ3OSQyNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "자인당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQ3IyQ2MiQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "팜스토리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQ3IyQ4MiQyNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "계양역365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQ3IyQ4MiQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "루미니약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQ3IyQxMyQzNjE4MzIjODEjJDEjJDYjJDgz",
+      "name": "예방원한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ2MiQyNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "원이약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ3OSQ0NjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "이동하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ3OSQzNjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "오슬로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQzIyQ5OSQzNjEwMDIjNjEjJDEjJDQjJDgz",
+      "name": "미본약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQzIyQwMyQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "비즈타워약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzExIyQxIyQzIyQxMyQzNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "안산건대약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQ3MiQzNjEwMDIjNjEjJDEjJDgjJDgz",
+      "name": "세계로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQ4OSQyNjEwMDIjNjEjJDEjJDAjJDgz",
+      "name": "이안약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQ5MiQyNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "365열린약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQxMyQ0NjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "진약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQ1IyQxMyQzNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "어바인365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQ5IyQ3MiQyNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "안양365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQ5IyQ5OSQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "365우리약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQ5IyQ5OSQzNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "돌고래약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQ5IyQwMyQzNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "안양일호약국",
+      "herbal_pharmacist_count": 2
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQxIyQ3MiQyNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "해봄약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQxIyQ4OSQzNjEyMjIjODEjJDEjJDYjJDgz",
+      "name": "보은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzIxIyQxIyQxIyQxMyQyNjE4MzIjNTEjJDEjJDIjJDgz",
+      "name": "부평큰약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQ3OSQyNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "삼대약손 한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQwMyQ0NjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "구남매 약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQwMyQ0NjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "365선유약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxNzAyIzMxIyQxIyQzIyQwMyQyNjE0ODEjNDEjJDEjJDQjJDgz",
+      "name": "작은약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQ3IyQ2MiQzNjEyMjIjNTEjJDEjJDYjJDgz",
+      "name": "프라자약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQ3IyQ3OSQyNjEyMjIjNDEjJDEjJDgjJDgz",
+      "name": "자이약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQzIyQ2MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "동인당한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQzIyQ2MiQzNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "동안생약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQzIyQ3MiQzNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "고색약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQzIyQ4OSQ0NjEwMDIjNDEjJDEjJDQjJDgz",
+      "name": "스마트약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQxIyQzIyQ5OSQ0NjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "평산한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQyIyQzIyQwMCQyNjE4MzIjNjEjJDEjJDQjJDgz",
+      "name": "상원약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzExIyQyIyQzIyQwMCQyNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "팜프라자아울렛약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ1IyQ5MiQzNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "다나약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ1IyQ5MiQzNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "반가워,약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ1IyQwMyQyNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "경희성수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ1IyQxMyQzNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "정성가득약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ3MiQzNjE4MzIjODEjJDEjJDIjJDgz",
+      "name": "행복한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ4MiQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "상현약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ4MiQzNjEyMjIjNzEjJDEjJDgjJDgz",
+      "name": "따뜻한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ4OSQyNjE4MzIjNjEjJDEjJDgjJDgz",
+      "name": "참미소약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQ5IyQ5MiQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "판교마트약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQ5OSQ0NjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "블루약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQ5OSQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "위례미소약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQwMyQyNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "일등365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQxMyQyNjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "루원시티약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQxIyQxIyQxMyQzNjEyMjIjNjEjJDEjJDgjJDgz",
+      "name": "동탄하나로약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzIxIyQyIyQxIyQwMCQyNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "천사약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ2MiQzNjEwMDIjNzEjJDEjJDgjJDgz",
+      "name": "경희참한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ2MiQzNjEyMjIjNjEjJDEjJDQjJDgz",
+      "name": "뉴스퀘어약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQ3IyQ3OSQ0NjE0ODEjNTEjJDEjJDIjJDgz",
+      "name": "산강약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQ5MiQyNjE0ODEjNDEjJDEjJDgjJDgz",
+      "name": "상동본약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQxMyQyNjE0ODEjNjEjJDEjJDgjJDgz",
+      "name": "선화약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzMxIyQxIyQzIyQxMyQzNjE0ODEjODEjJDEjJDYjJDgz",
+      "name": "비타민약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzQxIyQxIyQ3IyQ4MiQyNjE4MzIjNDEjJDEjJDgjJDgz",
+      "name": "토닥토닥약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ2MiQzNjE0ODEjODEjJDEjJDIjJDgz",
+      "name": "정왕국대약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ3MiQzNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "로즈마리한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ3OSQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "대명약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ5MiQzNjE4MzIjNjEjJDEjJDAjJDgz",
+      "name": "수원역365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQ5OSQyNjEwMDIjODEjJDEjJDYjJDgz",
+      "name": "더하기약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQxMyQ0NjE0ODEjNzEjJDEjJDgjJDgz",
+      "name": "수한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQ1IyQxMyQzNjE0ODEjNjEjJDEjJDAjJDgz",
+      "name": "365팜프라자약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQ3MiQyNjEyMjIjNTEjJDEjJDIjJDgz",
+      "name": "원곡365약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQ3OSQyNjEwMDIjODEjJDEjJDIjJDgz",
+      "name": "365에펠약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkMCMkMDMkNDgxOTYxIzUxIyQxIyQxIyQxMyQyNjE0ODEjNjEjJDEjJDQjJDgz",
+      "name": "경희서울한약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkNCMkMDMkMzgxMzUxIzExIyQxIyQzIyQ3MiQyNjEyMjIjODEjJDEjJDIjJDgz",
+      "name": "아카시아 약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkNCMkMDMkMzgxMzUxIzExIyQxIyQzIyQ3OSQyNjE4MzIjNDEjJDEjJDQjJDgz",
+      "name": "써니약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkNCMkMDMkMzgxMzUxIzExIyQxIyQzIyQ4OSQzNjEwMDIjNTEjJDEjJDYjJDgz",
+      "name": "청사약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkNCMkMDMkMzgxMzUxIzExIyQxIyQzIyQ5OSQzNjEwMDIjNDEjJDEjJDgjJDgz",
+      "name": "고덕스타약국",
+      "herbal_pharmacist_count": 1
+    },
+    {
+      "id": "JDU4MTI3MSM1MSMkMSMkOCMkMDMkMzgxMzUxIzExIyQxIyQzIyQ4OSQzNjE4MzIjNTEjJDEjJDYjJDgz",
+      "name": "레오심야약국",
+      "herbal_pharmacist_count": 1
+    }
+  ]
+}
