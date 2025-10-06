@@ -6,6 +6,14 @@ function normalize(str) {
   return (str || '').toString().replace(/\s+/g, ' ').trim();
 }
 
+function simplifyAddress(str) {
+  // 쉼표/괄호 제거, 다중 공백 정리
+  return normalize((str || '').toString()
+    .replace(/\(.*?\)/g, ' ')
+    .replace(/[，,]/g, ' ')
+  );
+}
+
 function extractBaseAddress(addr) {
   const a = normalize(addr);
   return a.split(',')[0];
@@ -76,6 +84,7 @@ module.exports = async (req, res) => {
     if (!docs.length) return res.status(200).json({ ok: false });
     // Scoring: PM9 boost + name similarity (Dice on bigrams + contains) + address containment + distance
     const base = normalize(baseAddr);
+    const baseSimp = simplifyAddress(baseAddr);
     const targetName = normalize(name);
 
     const toBigrams = (s) => {
@@ -98,13 +107,16 @@ module.exports = async (req, res) => {
       const isPharmacy = (d.category_group_code || '') === 'PM9';
       const nm = normalize(d.place_name);
       const adr = normalize(d.road_address_name || d.address_name || '');
+      const adrSimp = simplifyAddress(adr);
       const contains = targetName && (nm.includes(targetName) || targetName.includes(nm));
       const nameSim = dice(targetName, nm);
       const nameScore = (contains ? 0.6 : 0) + nameSim; // 0~1.6
-      const addrScore = base && (adr.includes(base) || base.includes(adr)) ? 1.0 : 0; // 0 or 1
+      const addrContain = base && (adr.includes(base) || base.includes(adr)) ? 1.0 : 0; // 0 or 1
+      const addrSim = dice(baseSimp, adrSimp); // 주소 유사도 점수 0~1
       const distance = parseInt(d.distance || '0', 10) || 0; // meters if x/y provided
       const distPenalty = Math.min(distance / 50, 6); // up to -6
-      const pri = (isPharmacy ? 8 : 0) + nameScore * 4 + addrScore * 2 - distPenalty;
+      // 가중치: 이름 유사도(4x), 주소 포함(2x), 주소 유사도(3x), PM9(8), 거리 패널티
+      const pri = (isPharmacy ? 8 : 0) + nameScore * 4 + addrContain * 2 + addrSim * 3 - distPenalty;
       return { d, pri };
     }).sort((a, b) => b.pri - a.pri);
 
