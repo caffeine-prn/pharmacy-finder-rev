@@ -322,22 +322,32 @@ function buildAllMarkersOnce() {
                 ${reportBtn}
             </div>`;
         marker.bindPopup(popupContent);
-        // 팝업 오픈 시 카카오 place 링크 시도 → 실패 시 검색 링크
+        // 팝업 오픈 시 카카오 place 링크 시도 → 실패 시 검색 링크 (디버그 로그 포함)
         marker.on('popupopen', async () => {
             const a = document.querySelector(`a[data-kakaotarget='${pharmacy.id}']`);
             if (!a) return;
             try {
-                const qs = new URLSearchParams({ name: pharmacy.name || '', address: pharmacy.address || '' }).toString();
-                const r = await fetch(`/api/kakao-local?${qs}`);
+                const qs = new URLSearchParams({
+                    name: pharmacy.name || '',
+                    address: pharmacy.address || '',
+                    x: String(pharmacy.longitude || ''),
+                    y: String(pharmacy.latitude || '')
+                }).toString();
+                const reqUrl = `/api/kakao-local?${qs}`;
+                console.debug('[kakao] request', { id: pharmacy.id, name: pharmacy.name, baseAddress, x: pharmacy.longitude, y: pharmacy.latitude, url: reqUrl });
+                const r = await fetch(reqUrl);
                 if (r.ok) {
                     const j = await r.json();
+                    console.debug('[kakao] response', j);
                     if (j && j.ok && j.placeUrl) {
                         a.href = j.placeUrl;
                         return;
                     }
                 }
             } catch(e) {}
-            a.href = `https://map.kakao.com/link/search/${encodeURIComponent(`${pharmacy.name} ${baseAddress}`)}`;
+            const fallback = `https://map.kakao.com/link/search/${encodeURIComponent(`${pharmacy.name} ${baseAddress}`)}`;
+            console.debug('[kakao] fallback link', fallback);
+            a.href = fallback;
         });
         marker.pharmacyData = pharmacy;
         idToMarker.set(pharmacy.id, marker);

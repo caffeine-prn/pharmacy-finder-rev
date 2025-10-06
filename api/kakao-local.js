@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
   const { name = '', address = '', x, y } = req.query || {};
   const baseAddr = extractBaseAddress(address);
   const query = normalize(`${name} ${baseAddr}`);
+  console.info('[kakao-proxy] incoming', { name, baseAddr, x, y, query });
   if (!query) return res.status(400).json({ ok: false, error: 'Missing query' });
 
   const params = new URLSearchParams({ query, size: '10' });
@@ -76,10 +77,12 @@ module.exports = async (req, res) => {
     }).sort((a, b) => b.pri - a.pri);
 
     const best = scored[0].d;
+    console.info('[kakao-proxy] best', { id: best.id, name: best.place_name, adr: best.road_address_name || best.address_name, distance: best.distance, x: best.x, y: best.y });
     const placeId = best.id;
     const placeUrl = `https://place.map.kakao.com/${placeId}`;
     res.status(200).json({ ok: true, placeId, placeUrl, x: best.x, y: best.y, name: best.place_name, address: best.road_address_name || best.address_name });
   } catch (e) {
+    console.error('[kakao-proxy] error', e);
     res.status(500).json({ ok: false, error: 'proxy error' });
   }
 };
