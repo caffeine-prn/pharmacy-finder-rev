@@ -287,42 +287,51 @@ function buildAllMarkersOnce() {
         const marker = L.marker([pharmacy.latitude, pharmacy.longitude], {
             icon: isHerbalPharmacy ? herbalPharmacyIcon : pharmacyIcon
         });
+        const countsHtml = (() => {
+            const parts = [];
+            if (pharmacistCount > 0) parts.push(`약사 ${pharmacistCount}명`);
+            if (isHerbalPharmacy && herbalInfo) parts.push(`한약사 ${herbalInfo.herbal_pharmacist_count}명`);
+            const badge = (pharmacistCount > 0 && isHerbalPharmacy && herbalInfo) ? '<span style="margin-left:6px; font-size:0.7rem; color:#6f42c1; background:#f0e8ff; padding:2px 6px; border-radius:6px;">교차고용</span>' : '';
+            return parts.length ? `<p style="margin: 5px 0; color: #333333; font-weight: 600;">${parts.join(' · ')} ${badge}</p>` : '';
+        })();
+
+        const reportBtn = `<div style="margin-top:10px;"><a href="${buildReportUrl(pharmacy.name, pharmacy.address, pharmacy.phone)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#ffc107;color:#222;padding:6px 10px;border-radius:8px;text-decoration:none;font-weight:600;"><i class="fas fa-flag"></i> 신고하기</a></div>`;
+
         const popupContent = `
             <div class="popup-content">
                 <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.1rem;">
                     ${isHerbalPharmacy ? herbalIconImg : pharmacyIconHtml} ${pharmacy.name}
                     ${isHerbalPharmacy ? '<span style="color: #333333; font-size: 0.8rem; margin-left: 5px;">[한약사]</span>' : ''}
                 </h3>
-                <p style="margin: 5px 0; color: #666;">
-                    <i class="fas fa-map-marker-alt"></i> ${pharmacy.address}
-                </p>
-                ${pharmacy.phone ? `
-                <p style="margin: 5px 0; color: #666;">
-                    <i class="fas fa-phone"></i> ${pharmacy.phone}
-                </p>` : ''}
-                <p style="margin: 5px 0; color: #666;">
-                    <i class="fas fa-calendar"></i> 개설일: ${formatDate(pharmacy.openDate)}
-                </p>
-                <p style="margin: 5px 0; color: #666;">
-                    <i class="fas fa-map"></i> ${pharmacy.sido} ${pharmacy.sigungu}
-                </p>
-                ${(() => {
-                    const parts = [];
-                    if (pharmacistCount > 0) parts.push(`약사 ${pharmacistCount}명`);
-                    if (isHerbalPharmacy && herbalInfo) parts.push(`한약사 ${herbalInfo.herbal_pharmacist_count}명`);
-                    const badge = (pharmacistCount > 0 && isHerbalPharmacy && herbalInfo)
-                        ? '<span style=\"margin-left:6px; font-size:0.7rem; color:#6f42c1; background:#f0e8ff; padding:2px 6px; border-radius:6px;\">교차고용</span>'
-                        : '';
-                    return parts.length ? `<p style=\"margin: 5px 0; color: #333333; font-weight: 600;\">${parts.join(' · ')} ${badge}</p>` : '';
-                })()}
-                <div style="margin-top:10px;">
-                    <a href="${buildReportUrl(pharmacy.name, pharmacy.address, pharmacy.phone)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#ffc107;color:#222;padding:6px 10px;border-radius:8px;text-decoration:none;font-weight:600;">
-                        <i class="fas fa-flag"></i> 신고하기
+                <p style="margin: 5px 0; color: #666;"><i class="fas fa-map-marker-alt"></i> ${pharmacy.address}</p>
+                ${pharmacy.phone ? `<p style="margin: 5px 0; color: #666;"><i class="fas fa-phone"></i> ${pharmacy.phone}</p>` : ''}
+                <p style="margin: 5px 0; color: #666;"><i class="fas fa-calendar"></i> 개설일: ${formatDate(pharmacy.openDate)}</p>
+                <p style="margin: 5px 0; color: #666;"><i class="fas fa-map"></i> ${pharmacy.sido} ${pharmacy.sigungu}</p>
+                ${countsHtml}
+                <p style="margin: 5px 0;">
+                    <a href="#" data-navertarget="${pharmacy.id}" style="color:#03C75A; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+                        <i class="fas fa-arrow-up-right-from-square"></i> 네이버에서 보기
                     </a>
-                </div>
-            </div>
-        `;
+                </p>
+                ${reportBtn}
+            </div>`;
         marker.bindPopup(popupContent);
+        marker.on('popupopen', async () => {
+            const linkEl = document.querySelector(`a[data-navertarget='${pharmacy.id}']`);
+            if (!linkEl) return;
+            const link = await fetchNaverLink(pharmacy.name, pharmacy.address);
+            if (link) {
+                linkEl.setAttribute('href', link);
+                linkEl.setAttribute('target', '_blank');
+                linkEl.setAttribute('rel', 'noopener');
+            } else {
+                // fallback to search page
+                const q = encodeURIComponent(`${pharmacy.name} ${pharmacy.address}`);
+                linkEl.setAttribute('href', `https://m.search.naver.com/search.naver?query=${q}`);
+                linkEl.setAttribute('target', '_blank');
+                linkEl.setAttribute('rel', 'noopener');
+            }
+        });
         marker.pharmacyData = pharmacy;
         idToMarker.set(pharmacy.id, marker);
     });
@@ -370,6 +379,20 @@ function buildReportUrl(name, address, phone) {
     params.set('entry.1318537606', address || '');
     params.set('entry.1084600480', phone || '');
     return `${base}&${params.toString()}`;
+}
+
+// 네이버 지역 링크 가져오기 (프록시 경유)
+async function fetchNaverLink(name, address) {
+    try {
+        const qs = new URLSearchParams({ name: name || '', address: address || '' }).toString();
+        const r = await fetch(`/api/naver-local?${qs}`);
+        if (!r.ok) return null;
+        const j = await r.json();
+        if (j && j.ok && j.link) return j.link;
+        return null;
+    } catch (e) {
+        return null;
+    }
 }
 
 // 약국 검색
@@ -491,8 +514,8 @@ function updatePharmacyList() {
                 if (pharmacistCount > 0) parts.push(`약사 ${pharmacistCount}명`);
                 if (isHerbalPharmacy && herbalInfo) parts.push(`한약사 ${herbalInfo.herbal_pharmacist_count}명`);
                 const body = parts.join(' · ');
-                const btn = `<a href=\"${buildReportUrl(pharmacy.name, pharmacy.address, pharmacy.phone)}\" target=\"_blank\" rel=\"noopener\" style=\"margin-left:8px; display:inline-flex;align-items:center;gap:4px;background:#ffc107;color:#222;padding:2px 6px;border-radius:6px;text-decoration:none;font-weight:600;\"><i class=\"fas fa-flag\"></i> 신고</a>`;
-                return parts.length ? `<div style=\"font-size: 0.8rem; color: #333333; margin-top: 0.25rem; font-weight: 600;\">${body} ${btn}</div>` : btn;
+                const btn = `<a href="${buildReportUrl(pharmacy.name, pharmacy.address, pharmacy.phone)}" target="_blank" rel="noopener" style="margin-left:8px; display:inline-flex;align-items:center;gap:4px;background:#ffc107;color:#222;padding:2px 6px;border-radius:6px;text-decoration:none;font-weight:600;"><i class="fas fa-flag"></i> 신고</a>`;
+                return parts.length ? `<div style="font-size: 0.8rem; color: #333333; margin-top: 0.25rem; font-weight: 600;">${body} ${btn}</div>` : btn;
             })()}
         `;
         
