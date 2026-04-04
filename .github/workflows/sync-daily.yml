@@ -1,0 +1,36 @@
+name: Daily Pharmacy Sync
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # KST 12:00 (UTC 03:00)
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run daily sync
+        run: python scripts/sync_daily.py
+        env:
+          DRUG_API_KEY: ${{ secrets.DRUG_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          MARKERS_JSON_PATH: /tmp/markers.json
+
+      - name: Upload markers.json as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: markers-json
+          path: /tmp/markers.json
+          retention-days: 7
