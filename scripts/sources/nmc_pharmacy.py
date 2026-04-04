@@ -49,7 +49,7 @@ def fetch_all_nmc_pharmacies(api_key: str, page_size: int = 100, delay: float = 
         success = False
         for attempt in range(max_retries):
             try:
-                req = urllib.request.Request(url)
+                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
                 with urllib.request.urlopen(req, timeout=120) as resp:
                     xml_text = resp.read().decode("utf-8")
                 items, total_count = parse_nmc_xml(xml_text)

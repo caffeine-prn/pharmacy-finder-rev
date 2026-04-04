@@ -38,7 +38,7 @@ def fetch_all_hira_pharmacies(api_key: str, page_size: int = 100, delay: float =
         url = f"{base_url}?ServiceKey={encoded_key}&pageNo={page}&numOfRows={page_size}"
         for attempt in range(max_retries):
             try:
-                req = urllib.request.Request(url)
+                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
                 with urllib.request.urlopen(req, timeout=120) as resp:
                     xml_text = resp.read().decode("utf-8")
                 break
