@@ -16,7 +16,7 @@
 | LOCALDATA 약국 CSV | ZIP download | Daily | None | 전체 약국 (25,766 영업중), 영업상태, EPSG:5174 좌표 |
 | LOCALDATA 동물약국 CSV | ZIP download | Daily | None | 동물약국 (13,250 영업중), 영업상태 |
 | HIRA 약국정보서비스 API | REST (paginated) | Daily | `DRUG_API_KEY` | ykiho, WGS84 좌표, 주소, 전화, 개설일 |
-| NMC 약국조회 API | REST (paginated) | Daily | `DRUG_API_KEY` | 영업시간 (요일별), WGS84 좌표 |
+| 국립중앙의료원 약국조회 API | REST (paginated) | Daily | `DRUG_API_KEY` | 영업시간 (요일별), WGS84 좌표 |
 | HIRA 분기 파일 (인력정보) | XLSX in ZIP | Quarterly | Manual/Playwright | 약사/한약사 인원수 (ykiho별) |
 
 ### 1.2 API Endpoints
@@ -26,7 +26,7 @@ LOCALDATA 약국:     https://www.localdata.go.kr/datafile/each/01_01_06_P_CSV.z
 LOCALDATA 동물약국:  https://www.localdata.go.kr/datafile/each/02_03_02_P_CSV.zip
 HIRA 약국정보:      https://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList
 HIRA 인력정보:      https://apis.data.go.kr/B551182/MadmDtlInfoService2.7/getEtcHstInfo2.7
-NMC 약국조회:       https://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyListInfoInqire
+국립중앙의료원 약국조회:       https://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyListInfoInqire
 HIRA 분기파일:      https://opendata.hira.or.kr (DEXT5 download, fileId variable)
 ```
 
@@ -44,13 +44,13 @@ Step 2: Fetch HIRA pharmacy API (all pages, ~257 requests)
   ├─ 100 records/page, ~6sec/request
   └─ Extract: ykiho, name, address, phone, coordinates
 
-Step 3: Fetch NMC pharmacy API (all pages, ~252 requests)
+Step 3: Fetch 국립중앙의료원 pharmacy API (all pages, ~252 requests)
   ├─ 100 records/page, ~2sec/request
   └─ Extract: dutyName, operating hours (dutyTime1s~7c), coordinates
 
 Step 4: Match & merge
   ├─ LOCALDATA ↔ HIRA: match by name + address → attach ykiho
-  ├─ HIRA ↔ NMC: match by name + address → attach operating hours
+  ├─ HIRA ↔ 국립중앙의료원: match by name + address → attach operating hours
   ├─ LOCALDATA 동물약국 ↔ base pharmacies: match by name + address
   ├─ Unmatched LOCALDATA entries = 요양기관번호 미부여 약국
   └─ Attach staff info from latest quarterly data (ykiho join)
@@ -59,6 +59,11 @@ Step 5: Upsert to Supabase
   ├─ pharmacies table (full upsert)
   ├─ animal_pharmacies table
   └─ Log sync metadata (timestamp, counts, errors)
+
+Step 6: Generate static JSON for CDN
+  ├─ markers.json — 전체 마커 좌표 + 최소 메타 (id, name, lng, lat, flags)
+  ├─ markers_chunked/ — 시도별 분할 JSON (필요 시)
+  └─ Deploy to Vercel static or Supabase Storage (CDN-backed)
 ```
 
 **Quarterly (manual or Playwright):**
@@ -129,7 +134,7 @@ CREATE TABLE pharmacies (
   is_cross_employed BOOLEAN DEFAULT false, -- 약사+한약사 교차고용
   pharmacist_count INTEGER DEFAULT 0,
   herbal_pharmacist_count INTEGER DEFAULT 0,
-  -- Operating hours (from NMC)
+  -- Operating hours (from 국립중앙의료원)
   hours_mon TEXT,    -- "0900-2000"
   hours_tue TEXT,
   hours_wed TEXT,
@@ -140,7 +145,7 @@ CREATE TABLE pharmacies (
   hours_hol TEXT,
   -- Metadata
   localdata_id TEXT,                      -- LOCALDATA 관리번호
-  nmc_id TEXT,                            -- NMC hpid
+  nmc_id TEXT,                            -- 국립중앙의료원 hpid
   source TEXT,                            -- 'localdata', 'hira', 'both'
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
@@ -208,14 +213,58 @@ CREATE TABLE data_freshness (
 );
 ```
 
-### 2.2 Key Queries for Frontend
+### 2.2 Data Serving Strategy
+
+**지도 마커 데이터: 정적 JSON via CDN (Supabase 호출 안 함)**
+
+동기화 시 생성되는 `markers.json`을 CDN에서 서빙.
+프론트엔드는 초기 로드 시 이 JSON만 fetch하여 마커 렌더링.
+
+```
+markers.json (~1.5MB, gzipped ~400KB)
+{
+  "generated_at": "2026-04-04T03:35:00Z",
+  "count": 25766,
+  "pharmacies": [
+    {
+      "id": "PHMD1...",
+      "n": "OO약국",           // name (축약 키로 용량 절감)
+      "lng": 126.921,
+      "lat": 37.398,
+      "h": true,               // is_herbal_pharmacy
+      "a": false,              // is_animal_pharmacy
+      "c": false,              // is_cross_employed
+      "y": true,               // has_ykiho
+      "s": "서울",             // sido
+      "g": "강남구",           // sigungu
+      "p": "02-123-4567"       // phone
+    }
+  ]
+}
+```
+
+저장 위치: Supabase Storage (CDN-backed) 또는 Vercel 정적 파일.
+
+**상세 조회/검색: Supabase 직접 쿼리**
 
 ```sql
--- Map view: lightweight markers (all pharmacies)
-SELECT id, name, longitude, latitude, is_herbal_pharmacy, is_animal_pharmacy,
-       is_cross_employed, has_ykiho
+-- 약국 상세 페이지 (개별 조회)
+SELECT p.*, ps_y.staff_count as pharmacist_count_live, ps_h.staff_count as herbal_count_live
+FROM pharmacies p
+LEFT JOIN pharmacy_staff ps_y ON p.ykiho = ps_y.ykiho AND ps_y.staff_type_code = '071'
+LEFT JOIN pharmacy_staff ps_h ON p.ykiho = ps_h.ykiho AND ps_h.staff_type_code = '072'
+WHERE p.id = $1;
+
+-- 테이블 뷰 (페이지네이션 + 필터 + 정렬)
+SELECT id, name, address, phone, sido, sigungu,
+       is_herbal_pharmacy, is_animal_pharmacy, is_cross_employed,
+       pharmacist_count, herbal_pharmacist_count, has_ykiho
 FROM pharmacies
-WHERE business_status = '영업중';
+WHERE business_status = '영업중'
+  AND ($1::text IS NULL OR sido = $1)
+  AND ($2::text IS NULL OR name ILIKE '%' || $2 || '%')
+ORDER BY $3
+LIMIT $4 OFFSET $5;
 
 -- Pharmacy detail page
 SELECT p.*, ps_y.staff_count as pharmacist_count_live, ps_h.staff_count as herbal_count_live
@@ -250,7 +299,7 @@ WHERE to_tsvector('simple', name) @@ plainto_tsquery('simple', $1)
 - **Map:** Leaflet + react-leaflet + MarkerCluster
 - **Fonts:** Pretendard (Korean) + Geist (UI)
 - **Icons:** Phosphor Icons
-- **Data:** Supabase JS client (direct query from client for map data, API routes for complex queries)
+- **Data:** 정적 JSON (CDN) for map markers, Supabase JS client for detail/search/table
 - **State:** zustand (minimal global state for filters/map)
 - **Motion:** CSS transitions + Framer Motion (selective, for panel transitions)
 
@@ -270,24 +319,27 @@ WHERE to_tsvector('simple', name) @@ plainto_tsquery('simple', $1)
 ```
 app/
 ├── layout.tsx              -- Root layout (fonts, metadata)
-├── page.tsx                -- Map main view (SSR shell + client map)
+├── page.tsx                -- Main view (지도/테이블 탭 전환)
 ├── pharmacy/
 │   └── [id]/
 │       └── page.tsx        -- Pharmacy detail (SSR, SEO)
-├── table/
-│   └── page.tsx            -- Data table view
 ├── api/
 │   ├── pharmacies/
-│   │   └── route.ts        -- Pharmacy list/search API
+│   │   └── route.ts        -- Pharmacy list/search/table API (paginated)
 │   ├── pharmacy/[id]/
 │   │   └── route.ts        -- Single pharmacy API
 │   └── kakao-local/
 │       └── route.ts        -- Kakao place proxy (migrated)
 └── components/
+    ├── ViewTabs.tsx         -- 지도/테이블 탭 전환 (client component)
     ├── map/
-    │   ├── PharmacyMap.tsx  -- Main map (client component)
+    │   ├── PharmacyMap.tsx  -- Main map (client component, CDN JSON fetch)
     │   ├── MarkerLayer.tsx  -- Clustered markers
     │   └── MapControls.tsx  -- Zoom, locate, filters
+    ├── table/
+    │   ├── PharmacyTable.tsx -- 테이블 뷰 (Supabase 페이지네이션)
+    │   ├── TableFilters.tsx  -- 시도/시군구/검색/필터 컨트롤
+    │   └── TablePagination.tsx
     ├── panels/
     │   ├── SearchPanel.tsx  -- Search + region filter
     │   ├── FilterBar.tsx    -- Toggle filters (herbal, animal, etc.)
@@ -303,10 +355,18 @@ app/
         └── Skeleton.tsx
 ```
 
-### 3.4 Map View UX
+### 3.4 뷰 전환 (지도 / 테이블)
 
-**Initial load:**
-1. Supabase에서 전체 마커 좌표 + 최소 메타데이터 fetch (~25K records, ~1.5MB JSON)
+메인 페이지에서 탭으로 전환. URL 파라미터(`?view=map` / `?view=table`)로 상태 유지.
+
+**공통 UI:**
+- 상단: 검색바 + 시도/시군구 드롭다운 + 필터 토글 (한약사/동물약국/교차고용/요양X)
+- 탭 전환 시 필터 상태 유지
+
+### 3.5 Map View
+
+**Data flow:**
+1. CDN에서 `markers.json` fetch (~400KB gzipped) — Supabase 호출 없음
 2. MarkerCluster로 클러스터링
 3. 사용자 위치 기반 자동 줌 (geolocation permission)
 
@@ -317,15 +377,31 @@ app/
 - "내 위치" button → nearest pharmacies highlighted
 - Dense view toggle (cluster disable with adaptive guard)
 
-**Data freshness indicator:**
-- Footer에 "데이터 기준: 약국정보 2026-04-04 / 인력정보 2025.12" 상시 표시
-- data_freshness 테이블에서 fetch
+### 3.6 Table View
 
-### 3.5 Pharmacy Detail Page (`/pharmacy/[id]`)
+**Data flow:**
+- Supabase에서 서버사이드 페이지네이션 (50건/페이지)
+- 필터/정렬/검색은 서버에서 처리 (클라이언트에서 25K 정렬하지 않음)
+
+**컬럼:**
+| 약국명 | 주소 | 전화번호 | 시��� | 시군구 | 약사 | 한약사 | 구분 |
+- 구분: 뱃지로 표시 (동물약국, 한약사, 교차고용, 요양X)
+- 행 클릭 → 상세 페이지 이동 또는 지도 뷰 전환+해당 약국 포커스
+- CSV/Excel 내보내기 버튼
+
+**정렬:** 약국명, 시도, 시군구, 약사수, 한약사수
+**필터:** 지도 뷰와 동일한 ����셋 공유
+
+### 3.7 Data Freshness
+
+- 하단 ��� 또는 info 버튼에 "데이터 기준: 약국정보 2026-04-04 / 인력정보 2025.12" 상시 표시
+- `data_freshness` 테이블에서 fetch
+
+### 3.8 Pharmacy Detail Page (`/pharmacy/[id]`)
 
 SSR rendered for SEO. Contains:
 - 약국명, 주소, 전화번호
-- 영업시간 (요일별, NMC 데이터)
+- 영업시간 (요일별, 국립중앙의료원 데이터)
 - 인력정보 (약사 N명, 한약사 N명)
 - 동물약국 여부
 - 교차고용 여부
@@ -334,7 +410,7 @@ SSR rendered for SEO. Contains:
 - 신고하기 (Google Forms)
 - 주변 약국 목록 (PostGIS proximity query)
 
-### 3.6 Visual Language
+### 3.9 Visual Language
 
 **Colors (CSS variables):**
 ```css
@@ -400,14 +476,15 @@ scripts/
 ├── sources/
 │   ├── localdata.py        -- LOCALDATA CSV download + parse
 │   ├── hira_pharmacy.py    -- HIRA pharmacy API fetcher
-│   ├── nmc_pharmacy.py     -- NMC operating hours fetcher
+│   ├── nmc_pharmacy.py     -- 국립중앙의료원 operating hours fetcher
 │   └── hira_staff.py       -- HIRA quarterly file parser
 ├── transform/
 │   ├── coordinate.py       -- EPSG:5174 → WGS84
 │   ├── matcher.py          -- Cross-source matching logic
 │   └── normalizer.py       -- Name/address normalization
 ├── load/
-│   └── supabase_loader.py  -- Upsert to Supabase
+│   ├── supabase_loader.py  -- Upsert to Supabase
+│   └── cdn_json.py         -- Generate markers.json + upload to Supabase Storage
 └── utils/
     ├── csv_parser.py       -- EUC-KR CSV handling
     └── logger.py           -- Sync logging
@@ -426,10 +503,12 @@ scripts/
 
 ### Phase 2: Frontend Rebuild
 1. Initialize Next.js project
-2. Map component (Leaflet + Supabase data)
-3. Search + filter panels
-4. Pharmacy detail page
-5. Data freshness display
+2. Map component (Leaflet + CDN JSON fetch)
+3. Table view component (Supabase paginated query)
+4. View tabs (지도/테이블 전환)
+5. Search + filter panels (공유 필터셋)
+6. Pharmacy detail page (SSR)
+7. Data freshness display
 
 ### Phase 3: Cutover
 1. Deploy Next.js to Vercel
