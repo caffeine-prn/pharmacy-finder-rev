@@ -1,11 +1,11 @@
-"use client";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/Skeleton";
+import { MainView } from "./MainView";
 
-import { PharmacyMap } from "@/components/map/PharmacyMap";
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex-1 flex flex-col h-full">
-      <PharmacyMap />
-    </div>
+    <Suspense fallback={<Skeleton className="flex-1" />}>
+      <MainView />
+    </Suspense>
   );
 }
