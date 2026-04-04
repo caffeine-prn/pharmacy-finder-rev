@@ -66,7 +66,7 @@ export default async function PharmacyDetailPage({ params }: PageProps) {
       .from("pharmacies")
       .select("id, name, longitude, latitude")
       .eq("sigungu", pharmacy.sigungu)
-      .eq("business_status", "영업중")
+      .eq("business_status", "영업/정상")
       .neq("id", pharmacy.id)
       .limit(5);
 

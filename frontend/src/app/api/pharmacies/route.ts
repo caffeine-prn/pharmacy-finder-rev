@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
       "id, name, address, phone, sido, sigungu, pharmacist_count, herbal_pharmacist_count, is_herbal_pharmacy, is_animal_pharmacy, is_cross_employed, has_ykiho",
       { count: "exact" }
     )
-    .eq("business_status", "영업중");
+    .eq("business_status", "영업/정상");
 
   // Filters
   if (search) {
