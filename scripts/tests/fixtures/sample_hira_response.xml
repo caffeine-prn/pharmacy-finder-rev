@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response>
+  <header>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <addr>서울특별시 강남구 테헤란로 10, (역삼동)</addr>
+        <clCd>81</clCd>
+        <clCdNm>약국</clCdNm>
+        <emdongNm>역삼동</emdongNm>
+        <estbDd>20200101</estbDd>
+        <postNo>06100</postNo>
+        <sgguCd>110001</sgguCd>
+        <sgguCdNm>강남구</sgguCdNm>
+        <sidoCd>110000</sidoCd>
+        <sidoCdNm>서울</sidoCdNm>
+        <telno>02-1234-5678</telno>
+        <XPos>127.0312</XPos>
+        <YPos>37.4998</YPos>
+        <yadmNm>테스트약국</yadmNm>
+        <ykiho>TESTYKIHO001</ykiho>
+      </item>
+    </items>
+    <numOfRows>1</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>1</totalCount>
+  </body>
+</response>
