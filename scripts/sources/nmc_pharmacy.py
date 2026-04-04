@@ -39,24 +39,34 @@ def parse_nmc_xml(xml_text: str) -> tuple[list[dict], int]:
     return items, total_count
 
 
-def fetch_all_nmc_pharmacies(api_key: str, page_size: int = 100, delay: float = 0.3) -> list[dict]:
+def fetch_all_nmc_pharmacies(api_key: str, page_size: int = 100, delay: float = 1.0, max_retries: int = 3) -> list[dict]:
     encoded_key = urllib.parse.quote(api_key, safe="")
     base_url = "https://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyListInfoInqire"
     all_items = []
     page = 1
     while True:
         url = f"{base_url}?ServiceKey={encoded_key}&pageNo={page}&numOfRows={page_size}"
-        try:
-            req = urllib.request.Request(url)
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                xml_text = resp.read().decode("utf-8")
-            items, total_count = parse_nmc_xml(xml_text)
-            all_items.extend(items)
-            print(f"  NMC page {page}: {len(all_items)}/{total_count}")
-            if len(all_items) >= total_count:
+        success = False
+        for attempt in range(max_retries):
+            try:
+                req = urllib.request.Request(url)
+                with urllib.request.urlopen(req, timeout=120) as resp:
+                    xml_text = resp.read().decode("utf-8")
+                items, total_count = parse_nmc_xml(xml_text)
+                all_items.extend(items)
+                print(f"  NMC page {page}: {len(all_items)}/{total_count}", flush=True)
+                if len(all_items) >= total_count:
+                    return all_items
+                success = True
                 break
-        except Exception as e:
-            print(f"  NMC page {page} failed: {e}, skipping")
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait = (attempt + 1) * 5
+                    print(f"  NMC page {page} attempt {attempt+1} failed: {e}, retrying in {wait}s...", flush=True)
+                    time.sleep(wait)
+                else:
+                    print(f"  NMC page {page} failed after {max_retries} attempts: {e}, stopping", flush=True)
+        if not success:
             break
         page += 1
         time.sleep(delay)

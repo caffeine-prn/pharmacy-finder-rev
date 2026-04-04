@@ -29,19 +29,29 @@ def parse_hira_xml(xml_text: str) -> tuple[list[dict], int]:
     return items, total_count
 
 
-def fetch_all_hira_pharmacies(api_key: str, page_size: int = 100, delay: float = 0.5) -> list[dict]:
+def fetch_all_hira_pharmacies(api_key: str, page_size: int = 100, delay: float = 1.0, max_retries: int = 3) -> list[dict]:
     encoded_key = urllib.parse.quote(api_key, safe="")
     base_url = "https://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList"
     all_items = []
     page = 1
     while True:
         url = f"{base_url}?ServiceKey={encoded_key}&pageNo={page}&numOfRows={page_size}"
-        req = urllib.request.Request(url)
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            xml_text = resp.read().decode("utf-8")
+        for attempt in range(max_retries):
+            try:
+                req = urllib.request.Request(url)
+                with urllib.request.urlopen(req, timeout=120) as resp:
+                    xml_text = resp.read().decode("utf-8")
+                break
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait = (attempt + 1) * 5
+                    print(f"  HIRA page {page} attempt {attempt+1} failed: {e}, retrying in {wait}s...")
+                    time.sleep(wait)
+                else:
+                    raise
         items, total_count = parse_hira_xml(xml_text)
         all_items.extend(items)
-        print(f"  HIRA page {page}: {len(all_items)}/{total_count}")
+        print(f"  HIRA page {page}: {len(all_items)}/{total_count}", flush=True)
         if len(all_items) >= total_count:
             break
         page += 1
