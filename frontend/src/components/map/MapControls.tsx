@@ -40,7 +40,7 @@ export function MapControls() {
   }, [map, setMapCenter, setMapZoom]);
 
   return (
-    <div className="absolute right-3 top-3 z-[1000] flex flex-col gap-1.5">
+    <div className="absolute right-3 top-3 z-[1000] flex flex-col gap-1.5 max-sm:top-auto max-sm:bottom-20 max-sm:right-2">
       <Button
         variant="secondary"
         size="sm"

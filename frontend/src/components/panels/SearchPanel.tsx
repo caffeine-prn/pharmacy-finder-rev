@@ -37,7 +37,7 @@ export function SearchPanel() {
   }, [setSearch]);
 
   return (
-    <div className="absolute left-3 top-3 z-[1000] flex flex-col gap-2 w-72">
+    <div className="absolute left-3 top-3 z-[1000] flex flex-col gap-2 w-72 max-sm:left-2 max-sm:right-2 max-sm:w-auto">
       {/* Search input */}
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-md border border-zinc-200 flex items-center px-3 py-2 gap-2">
         <MagnifyingGlass size={18} className="text-zinc-400 flex-shrink-0" />

@@ -162,10 +162,11 @@ export function PharmacyTable() {
 
       {/* Table */}
       <div className="flex-1 overflow-auto">
-        <table className="w-full min-w-[800px]">
+        <table className="w-full min-w-[800px] table-mobile">
           <thead className="sticky top-0 bg-zinc-50 border-b border-zinc-200">
             <tr>
               <SortHeader field="name" label="약국명" />
+              {/* sticky first column handled by CSS for mobile */}
               <th className="px-3 py-2.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">주소</th>
               <th className="px-3 py-2.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">전화번호</th>
               <SortHeader field="sido" label="시도" />

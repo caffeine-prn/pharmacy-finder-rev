@@ -1,7 +1,7 @@
 // frontend/src/components/panels/PharmacySlidePanel.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   X,
@@ -22,6 +22,14 @@ export function PharmacySlidePanel() {
   const { selectedPharmacyId, setSelectedPharmacyId } = usePharmacyStore();
   const [pharmacy, setPharmacy] = useState<Pharmacy | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     if (!selectedPharmacyId) {
@@ -81,11 +89,11 @@ export function PharmacySlidePanel() {
     <AnimatePresence>
       {selectedPharmacyId && (
         <motion.div
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
+          initial={isMobile ? { y: "100%" } : { x: "100%" }}
+          animate={isMobile ? { y: 0 } : { x: 0 }}
+          exit={isMobile ? { y: "100%" } : { x: "100%" }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="absolute right-0 top-0 bottom-0 w-[360px] max-w-[90vw] z-[1001] bg-white border-l border-zinc-200 shadow-2xl flex flex-col"
+          className="absolute right-0 top-0 bottom-0 w-[360px] max-w-[90vw] z-[1001] bg-white border-l border-zinc-200 shadow-2xl flex flex-col max-sm:left-0 max-sm:right-0 max-sm:top-auto max-sm:bottom-0 max-sm:w-full max-sm:max-w-full max-sm:max-h-[70vh] max-sm:rounded-t-2xl max-sm:border-l-0 max-sm:border-t"
         >
           {/* Header */}
           <div className="flex items-start justify-between p-4 border-b border-zinc-100">

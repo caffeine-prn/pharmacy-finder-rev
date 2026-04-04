@@ -37,7 +37,7 @@ export function FilterBar() {
     usePharmacyStore();
 
   return (
-    <div className="absolute left-3 top-[7.5rem] z-[1000] flex flex-wrap gap-1.5">
+    <div className="absolute left-3 top-[7.5rem] z-[1000] flex gap-1.5 max-sm:left-2 max-sm:right-2 max-sm:overflow-x-auto max-sm:flex-nowrap max-sm:pb-1 max-sm:scrollbar-none" style={{ scrollbarWidth: "none" }}>
       <FilterPill
         active={filters.herbal}
         onClick={toggleHerbal}
