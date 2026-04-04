@@ -1,0 +1,49 @@
+// frontend/src/app/layout.tsx
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { GeistMono } from "geist/font/mono";
+import { DataFreshnessFooter } from "@/components/DataFreshnessFooter";
+import "@/styles/globals.css";
+
+const pretendard = localFont({
+  src: "../../public/fonts/PretendardVariable.woff2",
+  variable: "--font-pretendard",
+  display: "swap",
+  weight: "100 900",
+});
+
+export const metadata: Metadata = {
+  title: "전국 약국 찾기",
+  description:
+    "전국 25,000+ 약국 위치, 영업시간, 인력정보를 한눈에. HIRA + LOCALDATA 기반 일일 자동 동기화.",
+  keywords: ["약국", "약국찾기", "한약국", "동물약국", "약국지도"],
+  openGraph: {
+    title: "전국 약국 찾기",
+    description: "전국 25,000+ 약국 위치, 영업시간, 인력정보를 한눈에.",
+    type: "website",
+    locale: "ko_KR",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="ko" className={`${pretendard.variable} ${GeistMono.variable}`}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossOrigin=""
+        />
+      </head>
+      <body className="font-sans antialiased bg-[var(--bg-primary)] text-[var(--text-primary)]">
+        <main className="h-screen flex flex-col">{children}</main>
+        <DataFreshnessFooter />
+      </body>
+    </html>
+  );
+}
