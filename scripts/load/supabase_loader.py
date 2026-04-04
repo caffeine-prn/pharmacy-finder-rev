@@ -105,9 +105,89 @@ def update_freshness(client, source: str, data_date: str, record_count: int, not
     }, on_conflict="source").execute()
 
 
+def detect_changes(client, new_pharmacies: list[dict]) -> dict:
+    """Compare new data with existing DB to detect opened/closed/changed pharmacies.
+    Returns {new_ids: [...], closed_ids: [...], changed: [...], counts: {...}}
+    """
+    # Fetch existing IDs from DB
+    existing = {}
+    offset = 0
+    while True:
+        resp = client.table("pharmacies").select("id, name, pharmacist_count, herbal_pharmacist_count, is_animal_pharmacy").range(offset, offset + 999).execute()
+        for r in resp.data:
+            existing[r["id"]] = r
+        if len(resp.data) < 1000:
+            break
+        offset += 1000
+
+    new_ids_set = {p["id"] for p in new_pharmacies}
+    existing_ids_set = set(existing.keys())
+
+    # Detect new (opened)
+    opened = new_ids_set - existing_ids_set
+    # Detect closed (in DB but not in new data)
+    closed = existing_ids_set - new_ids_set
+
+    # Detect changes in key fields
+    changed = []
+    for p in new_pharmacies:
+        pid = p["id"]
+        if pid not in existing or pid in opened:
+            continue
+        old = existing[pid]
+        diffs = {}
+        if p.get("pharmacist_count", 0) != (old.get("pharmacist_count") or 0):
+            diffs["pharmacist_count"] = {"old": old.get("pharmacist_count", 0), "new": p.get("pharmacist_count", 0)}
+        if p.get("herbal_pharmacist_count", 0) != (old.get("herbal_pharmacist_count") or 0):
+            diffs["herbal_pharmacist_count"] = {"old": old.get("herbal_pharmacist_count", 0), "new": p.get("herbal_pharmacist_count", 0)}
+        if p.get("is_animal_pharmacy", False) != (old.get("is_animal_pharmacy") or False):
+            diffs["is_animal_pharmacy"] = {"old": old.get("is_animal_pharmacy", False), "new": p.get("is_animal_pharmacy", False)}
+        if diffs:
+            changed.append({"id": pid, "name": p.get("name", ""), "diffs": diffs})
+
+    # Build pharmacy name lookup for changelog
+    new_by_id = {p["id"]: p.get("name", "") for p in new_pharmacies}
+
+    # Insert changelog entries
+    changelog_rows = []
+    for pid in opened:
+        changelog_rows.append({
+            "pharmacy_id": pid,
+            "pharmacy_name": new_by_id.get(pid, ""),
+            "event_type": "opened",
+            "details": None,
+        })
+    for pid in closed:
+        changelog_rows.append({
+            "pharmacy_id": pid,
+            "pharmacy_name": existing.get(pid, {}).get("name", ""),
+            "event_type": "closed",
+            "details": None,
+        })
+    for c in changed:
+        changelog_rows.append({
+            "pharmacy_id": c["id"],
+            "pharmacy_name": c["name"],
+            "event_type": "staff_changed" if any(k in c["diffs"] for k in ("pharmacist_count", "herbal_pharmacist_count")) else "info_changed",
+            "details": c["diffs"],
+        })
+
+    if changelog_rows:
+        # Batch insert
+        for i in range(0, len(changelog_rows), 500):
+            client.table("pharmacy_changelog").insert(changelog_rows[i:i+500]).execute()
+
+    return {
+        "new_count": len(opened),
+        "closed_count": len(closed),
+        "changed_count": len(changed),
+    }
+
+
 def log_sync(client, sync_type: str, started_at, status: str,
              pharmacy_count: int = 0, animal_count: int = 0,
-             staff_count: int = 0, errors=None, metadata=None):
+             staff_count: int = 0, errors=None, metadata=None,
+             new_pharmacies: int = 0, closed_pharmacies: int = 0, changed_pharmacies: int = 0):
     client.table("sync_log").insert({
         "sync_type": sync_type,
         "started_at": started_at,
@@ -118,4 +198,7 @@ def log_sync(client, sync_type: str, started_at, status: str,
         "staff_count": staff_count,
         "errors": errors,
         "metadata": metadata,
+        "new_pharmacies": new_pharmacies,
+        "closed_pharmacies": closed_pharmacies,
+        "changed_pharmacies": changed_pharmacies,
     }).execute()

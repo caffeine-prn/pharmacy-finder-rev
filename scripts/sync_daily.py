@@ -16,7 +16,7 @@ from transform.matcher import match_localdata_to_hira, match_to_animal, classify
 from transform.normalizer import normalize_name, extract_sido_sigungu
 from load.supabase_loader import (
     get_client, upsert_pharmacies, upsert_staff,
-    update_freshness, log_sync
+    update_freshness, log_sync, detect_changes
 )
 from load.cdn_json import generate_markers_json
 
@@ -117,10 +117,17 @@ def main():
     for p in all_pharmacies:
         p["source"] = "both" if p.get("has_ykiho") else "localdata"
 
-    # Step 5: Upsert to Supabase
+    # Step 5: Detect changes + Upsert to Supabase
     log.info("Step 5: Upserting to Supabase...")
+    change_stats = {"new_count": 0, "closed_count": 0, "changed_count": 0}
     try:
         client = get_client()
+
+        # Detect changes before upsert
+        log.info("  Detecting changes...")
+        change_stats = detect_changes(client, all_pharmacies)
+        log.info(f"  Changes: +{change_stats['new_count']} opened, -{change_stats['closed_count']} closed, ~{change_stats['changed_count']} changed")
+
         pharmacy_count = upsert_pharmacies(client, all_pharmacies)
         log.info(f"  Upserted {pharmacy_count} pharmacies")
 
@@ -138,7 +145,10 @@ def main():
         status = "partial" if errors else "success"
         log_sync(client, "daily", started_at, status,
                  pharmacy_count=pharmacy_count, animal_count=animal_count,
-                 staff_count=staff_count, errors=errors if errors else None)
+                 staff_count=staff_count, errors=errors if errors else None,
+                 new_pharmacies=change_stats["new_count"],
+                 closed_pharmacies=change_stats["closed_count"],
+                 changed_pharmacies=change_stats["changed_count"])
     except Exception as e:
         log.error(f"  Supabase failed: {e}")
         errors.append(f"Supabase: {e}")
