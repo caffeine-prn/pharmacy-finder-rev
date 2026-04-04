@@ -1,7 +1,7 @@
 import os
+import subprocess
 import tempfile
 import zipfile
-import requests
 from utils.csv_parser import parse_localdata_csv, parse_animal_csv
 
 PHARMACY_URL = "https://www.localdata.go.kr/datafile/each/01_01_06_P_CSV.zip"
@@ -9,10 +9,13 @@ ANIMAL_URL = "https://www.localdata.go.kr/datafile/each/02_03_02_P_CSV.zip"
 
 
 def _download_zip(url: str, dest: str) -> str:
-    resp = requests.get(url, timeout=60)
-    resp.raise_for_status()
-    with open(dest, "wb") as f:
-        f.write(resp.content)
+    """Download ZIP using curl (localdata.go.kr has TLS compatibility issues with Python ssl)."""
+    result = subprocess.run(
+        ["curl", "-sL", "-o", dest, "-w", "%{http_code}", url],
+        capture_output=True, text=True, timeout=120
+    )
+    if result.stdout.strip() != "200":
+        raise RuntimeError(f"Download failed: HTTP {result.stdout.strip()} for {url}")
     return dest
 
 
