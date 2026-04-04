@@ -10,6 +10,18 @@ def get_client():
 
 
 def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> int:
+    # Deduplicate by ykiho (multiple LOCALDATA records can match same HIRA ykiho)
+    seen_ykiho = set()
+    deduped = []
+    for p in pharmacies:
+        yk = p.get("ykiho")
+        if yk and yk in seen_ykiho:
+            continue
+        if yk:
+            seen_ykiho.add(yk)
+        deduped.append(p)
+    pharmacies = deduped
+
     rows = []
     for p in pharmacies:
         lng, lat = p.get("longitude"), p.get("latitude")
