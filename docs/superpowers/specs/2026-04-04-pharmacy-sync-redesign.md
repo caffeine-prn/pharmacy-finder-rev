@@ -99,6 +99,8 @@ Priority 1: Exact name match + address substring match
 Priority 2: Normalized name (remove spaces, parentheses) + sido/sigungu match
 Priority 3: Coordinate proximity (<50m) + name similarity (Dice coefficient)
 Unmatched: Flag as 요양기관번호 미부여
+  Note: COVID-19 공적마스크 교부 목적으로 요양기관번호를 취득한 한약국이 있으므로,
+        HIRA에 매칭되더라도 인력정보가 한약사만인 경우 한약사 단독 개국으로 분류
 ```
 
 ---
