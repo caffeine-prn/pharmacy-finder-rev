@@ -5,6 +5,9 @@ on:
     - cron: '0 3 * * *'  # KST 12:00 (UTC 03:00)
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -26,11 +29,23 @@ jobs:
           DRUG_API_KEY: ${{ secrets.DRUG_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          MARKERS_JSON_PATH: /tmp/markers.json
+          MARKERS_JSON_PATH: frontend/public/markers.json
+
+      - name: Commit updated markers
+        run: |
+          if git diff --quiet -- frontend/public/markers.json; then
+            echo "markers.json is already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add frontend/public/markers.json
+          git commit -m "chore: refresh pharmacy markers"
+          git push
 
       - name: Upload markers.json as artifact
         uses: actions/upload-artifact@v4
         with:
           name: markers-json
-          path: /tmp/markers.json
+          path: frontend/public/markers.json
           retention-days: 7
