@@ -1,19 +1,19 @@
 {
   "version": 1,
-  "updated_at": "2026-05-14T17:33:57.574529+00:00",
+  "updated_at": "2026-05-14T17:52:17.497440+00:00",
   "latest": {
-    "id": "25874648250",
+    "id": "25875425030",
     "status": "failed",
-    "started_at": "2026-05-14 17:23:01",
-    "finished_at": "2026-05-14T17:33:57.574529+00:00",
-    "github_run_id": "25874648250",
-    "github_run_number": "6",
-    "github_sha": "16729e0ef2fb1bf2641ab8097c0d5dc28842402a",
+    "started_at": "2026-05-14 17:38:49",
+    "finished_at": "2026-05-14T17:52:17.497440+00:00",
+    "github_run_id": "25875425030",
+    "github_run_number": "7",
+    "github_sha": "3b6126211d3a299cf01fdfd35a8b22f6302225bd",
     "github_ref": "main",
     "github_actor": "caffeine-prn",
-    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25874648250",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25875425030",
     "exit_code": 1,
-    "markers_generated_at": "2026-05-14T17:33:57.003044+00:00",
+    "markers_generated_at": "2026-05-14T17:52:16.957660+00:00",
     "marker_count": 25794,
     "source_counts": {
       "localdata_pharmacies": 25805,
@@ -24,16 +24,48 @@
       "unmatched_hira": 186,
       "matched_animal": 10908,
       "unmatched_animal": 1994,
-      "new_pharmacies": null,
-      "closed_pharmacies": null,
-      "changed_pharmacies": null
+      "new_pharmacies": 183,
+      "closed_pharmacies": 97,
+      "changed_pharmacies": 24822
     },
     "errors": [
-      "2026-05-14 17:33:56 [ERROR]   Supabase failed: {'message': 'permission denied for table mois_facility_raw', 'code': '42501', 'hint': None, 'details': None}",
-      "2026-05-14 17:33:57 [WARNING]   Errors: [\"Supabase: {'message': 'permission denied for table mois_facility_raw', 'code': '42501', 'hint': None, 'details': None}\"]"
+      "2026-05-14 17:52:16 [ERROR]   Supabase failed: {'message': 'duplicate key value violates unique constraint \"pharmacies_ykiho_key\"', 'code': '23505', 'hint': None, 'details': 'Key (ykiho)=(JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQyIyQ3IyQwMCQyNjEwMDIjNDEjJDEjJDQjJDgz) already exists.'}",
+      "2026-05-14 17:52:17 [WARNING]   Errors: ['Supabase: {\\'message\\': \\'duplicate key value violates unique constraint \"pharmacies_ykiho_key\"\\', \\'code\\': \\'23505\\', \\'hint\\': None, \\'details\\': \\'Key (ykiho)=(JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQyIyQ3IyQwMCQyNjEwMDIjNDEjJDEjJDQjJDgz) already exists.\\'}']"
     ]
   },
   "events": [
+    {
+      "id": "25875425030",
+      "status": "failed",
+      "started_at": "2026-05-14 17:38:49",
+      "finished_at": "2026-05-14T17:52:17.497440+00:00",
+      "github_run_id": "25875425030",
+      "github_run_number": "7",
+      "github_sha": "3b6126211d3a299cf01fdfd35a8b22f6302225bd",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25875425030",
+      "exit_code": 1,
+      "markers_generated_at": "2026-05-14T17:52:16.957660+00:00",
+      "marker_count": 25794,
+      "source_counts": {
+        "localdata_pharmacies": 25805,
+        "localdata_animal_pharmacies": 13356,
+        "hira_pharmacies": 25728,
+        "nmc_pharmacies": 25241,
+        "matched_hira": 25619,
+        "unmatched_hira": 186,
+        "matched_animal": 10908,
+        "unmatched_animal": 1994,
+        "new_pharmacies": 183,
+        "closed_pharmacies": 97,
+        "changed_pharmacies": 24822
+      },
+      "errors": [
+        "2026-05-14 17:52:16 [ERROR]   Supabase failed: {'message': 'duplicate key value violates unique constraint \"pharmacies_ykiho_key\"', 'code': '23505', 'hint': None, 'details': 'Key (ykiho)=(JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQyIyQ3IyQwMCQyNjEwMDIjNDEjJDEjJDQjJDgz) already exists.'}",
+        "2026-05-14 17:52:17 [WARNING]   Errors: ['Supabase: {\\'message\\': \\'duplicate key value violates unique constraint \"pharmacies_ykiho_key\"\\', \\'code\\': \\'23505\\', \\'hint\\': None, \\'details\\': \\'Key (ykiho)=(JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQyIyQ3IyQwMCQyNjEwMDIjNDEjJDEjJDQjJDgz) already exists.\\'}']"
+      ]
+    },
     {
       "id": "25874648250",
       "status": "failed",
