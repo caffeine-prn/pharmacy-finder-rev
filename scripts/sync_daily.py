@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from utils.logger import setup_logger
 from sources.localdata import download_and_parse_pharmacy, download_and_parse_animal
+from sources.mois_api import fetch_mois_records
 from sources.hira_pharmacy import fetch_all_hira_pharmacies
 from sources.nmc_pharmacy import fetch_all_nmc_pharmacies
 from sources.hira_staff import parse_staff_xlsx
@@ -16,7 +17,7 @@ from transform.matcher import match_localdata_to_hira, match_to_animal, classify
 from transform.normalizer import normalize_name, extract_sido_sigungu
 from load.supabase_loader import (
     get_client, upsert_pharmacies, upsert_staff,
-    update_freshness, log_sync, detect_changes
+    update_freshness, log_sync, detect_changes, upsert_mois_raw
 )
 from load.cdn_json import generate_markers_json
 
@@ -45,6 +46,38 @@ def _attach_operating_hours(pharmacies, nmc_data):
     log.info(f"Operating hours matched: {matched}/{len(pharmacies)}")
 
 
+def _load_mois_or_localdata(api_key: str):
+    raw_rows = []
+    source_notes = []
+    try:
+        log.info("Step 1: Fetching MOIS pharmacy APIs...")
+        pharmacies, pharmacy_raw = fetch_mois_records(
+            api_key,
+            source="pharmacy",
+            filters={"cond[SALS_STTS_CD::EQ]": "01"},
+        )
+        log.info(f"  MOIS pharmacies (active): {len(pharmacies)}")
+        animals, animal_raw = fetch_mois_records(
+            api_key,
+            source="animal_pharmacy",
+            filters={"cond[SALS_STTS_CD::EQ]": "01"},
+        )
+        log.info(f"  MOIS animal pharmacies (active): {len(animals)}")
+        raw_rows = pharmacy_raw + animal_raw
+        source_notes.append("mois_api")
+        return pharmacies, animals, raw_rows, source_notes
+    except Exception as e:
+        log.warning(f"  MOIS APIs failed, falling back to LOCALDATA ZIPs: {e}")
+        source_notes.append(f"localdata_zip_fallback: {e}")
+
+    log.info("Step 1 fallback: Downloading LOCALDATA CSVs...")
+    pharmacies = download_and_parse_pharmacy()
+    log.info(f"  Pharmacies (active): {len(pharmacies)}")
+    animals = download_and_parse_animal()
+    log.info(f"  Animal pharmacies (active): {len(animals)}")
+    return pharmacies, animals, raw_rows, source_notes
+
+
 def main():
     started_at = datetime.now(timezone.utc).isoformat()
     api_key = os.environ.get("DRUG_API_KEY", "")
@@ -53,12 +86,7 @@ def main():
 
     log.info("=== Daily Pharmacy Sync Started ===")
 
-    # Step 1: LOCALDATA
-    log.info("Step 1: Downloading LOCALDATA CSVs...")
-    localdata_pharmacies = download_and_parse_pharmacy()
-    log.info(f"  Pharmacies (active): {len(localdata_pharmacies)}")
-    localdata_animals = download_and_parse_animal()
-    log.info(f"  Animal pharmacies (active): {len(localdata_animals)}")
+    localdata_pharmacies, localdata_animals, mois_raw_rows, source_notes = _load_mois_or_localdata(api_key)
 
     log.info("  Converting EPSG:5174 → WGS84...")
     convert_batch(localdata_pharmacies)
@@ -123,6 +151,11 @@ def main():
     try:
         client = get_client()
 
+        if mois_raw_rows:
+            log.info("  Upserting MOIS raw source rows...")
+            raw_count = upsert_mois_raw(client, mois_raw_rows)
+            log.info(f"  Upserted {raw_count} MOIS raw rows")
+
         # Detect changes before upsert
         log.info("  Detecting changes...")
         change_stats = detect_changes(client, all_pharmacies)
@@ -136,16 +169,19 @@ def main():
             staff_count = upsert_staff(client, staff_data, os.environ.get("STAFF_PERIOD", "unknown"))
             log.info(f"  Upserted {staff_count} staff records")
 
-        update_freshness(client, "localdata", today, len(localdata_pharmacies))
+        update_freshness(client, "mois_pharmacy_api", today, len(localdata_pharmacies),
+                         notes="; ".join(source_notes))
         update_freshness(client, "hira_pharmacy", today, len(hira_pharmacies))
         if nmc_data:
             update_freshness(client, "nmc_hours", today, len(nmc_data))
-        update_freshness(client, "animal_pharmacy", today, len(localdata_animals))
+        update_freshness(client, "mois_animal_pharmacy_api", today, len(localdata_animals),
+                         notes="; ".join(source_notes))
 
         status = "partial" if errors else "success"
         log_sync(client, "daily", started_at, status,
                  pharmacy_count=pharmacy_count, animal_count=animal_count,
                  staff_count=staff_count, errors=errors if errors else None,
+                 metadata={"source_notes": source_notes, "mois_raw_rows": len(mois_raw_rows)},
                  new_pharmacies=change_stats["new_count"],
                  closed_pharmacies=change_stats["closed_count"],
                  changed_pharmacies=change_stats["changed_count"])

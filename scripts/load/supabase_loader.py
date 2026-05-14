@@ -95,6 +95,19 @@ def upsert_staff(client, staff: dict[str, dict], data_period: str) -> int:
     return len(rows)
 
 
+def upsert_mois_raw(client, rows: list[dict], batch_size: int = 500) -> int:
+    count = 0
+    for i in range(0, len(rows), batch_size):
+        batch = rows[i:i + batch_size]
+        client.table("mois_facility_raw").upsert(
+            batch,
+            on_conflict="source,mng_no",
+        ).execute()
+        count += len(batch)
+        print(f"  Upserted {count}/{len(rows)} MOIS raw rows")
+    return count
+
+
 def update_freshness(client, source: str, data_date: str, record_count: int, notes: str = ""):
     client.table("data_freshness").upsert({
         "source": source,

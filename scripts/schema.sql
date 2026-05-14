@@ -101,3 +101,37 @@ CREATE TABLE IF NOT EXISTS data_freshness (
   record_count INTEGER,
   notes TEXT
 );
+
+-- MOIS source rows from data.go.kr 1741000 APIs.
+-- This table preserves the raw licensing payload separately from the normalized
+-- map/search tables so freshness audits and event logs can be rebuilt later.
+CREATE TABLE IF NOT EXISTS mois_facility_raw (
+  source TEXT NOT NULL,
+  mng_no TEXT NOT NULL,
+  name TEXT,
+  status_code TEXT,
+  status_name TEXT,
+  detail_status_code TEXT,
+  detail_status_name TEXT,
+  license_date DATE,
+  closed_date DATE,
+  data_updated_at TIMESTAMPTZ,
+  last_modified_at TIMESTAMPTZ,
+  opn_atmy_grp_cd TEXT,
+  road_address TEXT,
+  lotno_address TEXT,
+  phone TEXT,
+  x_5174 DOUBLE PRECISION,
+  y_5174 DOUBLE PRECISION,
+  raw JSONB NOT NULL,
+  fetched_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now(),
+  PRIMARY KEY (source, mng_no)
+);
+
+CREATE INDEX IF NOT EXISTS idx_mois_facility_source_status
+  ON mois_facility_raw (source, status_code);
+CREATE INDEX IF NOT EXISTS idx_mois_facility_license_date
+  ON mois_facility_raw (source, license_date);
+CREATE INDEX IF NOT EXISTS idx_mois_facility_data_updated_at
+  ON mois_facility_raw (source, data_updated_at);

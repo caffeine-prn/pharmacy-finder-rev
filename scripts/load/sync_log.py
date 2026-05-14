@@ -29,8 +29,13 @@ def _parse_log(log_text: str) -> dict:
     animal = re.search(r"Animal matched:\s+(\d+), unmatched:\s+(\d+)", log_text)
 
     return {
-        "localdata_pharmacies": _first_int(r"Pharmacies \(active\):\s+(\d+)", log_text),
+        "localdata_pharmacies": (
+            _first_int(r"MOIS pharmacies \(active\):\s+(\d+)", log_text)
+            or _first_int(r"Pharmacies \(active\):\s+(\d+)", log_text)
+        ),
         "localdata_animal_pharmacies": _first_int(
+            r"MOIS animal pharmacies \(active\):\s+(\d+)", log_text
+        ) or _first_int(
             r"Animal pharmacies \(active\):\s+(\d+)", log_text
         ),
         "hira_pharmacies": _first_int(r"HIRA pharmacies:\s+(\d+)", log_text),
