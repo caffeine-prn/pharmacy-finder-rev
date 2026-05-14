@@ -3,6 +3,11 @@ from datetime import datetime, timezone
 from supabase import create_client
 
 
+def _chunks(items, size: int):
+    for i in range(0, len(items), size):
+        yield items[i:i + size]
+
+
 def get_client():
     url = os.environ["SUPABASE_URL"]
     key = os.environ["SUPABASE_SERVICE_KEY"]
@@ -60,9 +65,27 @@ def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> 
             "source": p.get("source", "localdata"),
             "updated_at": datetime.now(timezone.utc).isoformat(),
         })
+
+    ykihos = sorted({row["ykiho"] for row in rows if row.get("ykiho")})
+    existing_ids_by_ykiho = {}
+    for batch in _chunks(ykihos, 500):
+        resp = (
+            client.table("pharmacies")
+            .select("id,ykiho")
+            .in_("ykiho", batch)
+            .execute()
+        )
+        for existing in resp.data or []:
+            if existing.get("ykiho") and existing.get("id"):
+                existing_ids_by_ykiho[existing["ykiho"]] = existing["id"]
+
+    for row in rows:
+        existing_id = existing_ids_by_ykiho.get(row.get("ykiho"))
+        if existing_id:
+            row["id"] = existing_id
+
     count = 0
-    for i in range(0, len(rows), batch_size):
-        batch = rows[i:i + batch_size]
+    for batch in _chunks(rows, batch_size):
         client.table("pharmacies").upsert(batch, on_conflict="id").execute()
         count += len(batch)
         print(f"  Upserted {count}/{len(rows)} pharmacies")
@@ -97,8 +120,7 @@ def upsert_staff(client, staff: dict[str, dict], data_period: str) -> int:
 
 def upsert_mois_raw(client, rows: list[dict], batch_size: int = 500) -> int:
     count = 0
-    for i in range(0, len(rows), batch_size):
-        batch = rows[i:i + batch_size]
+    for batch in _chunks(rows, batch_size):
         client.table("mois_facility_raw").upsert(
             batch,
             on_conflict="source,mng_no",
