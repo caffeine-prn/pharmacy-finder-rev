@@ -1,19 +1,19 @@
 {
   "version": 1,
-  "updated_at": "2026-05-14T18:11:48.444438+00:00",
+  "updated_at": "2026-05-14T18:29:56.809547+00:00",
   "latest": {
-    "id": "25876399978",
-    "status": "failed",
-    "started_at": "2026-05-14 17:58:30",
-    "finished_at": "2026-05-14T18:11:48.444438+00:00",
-    "github_run_id": "25876399978",
-    "github_run_number": "8",
-    "github_sha": "efbc47811d5903eb77b80fe26c019b681a454824",
+    "id": "25877256039",
+    "status": "success",
+    "started_at": "2026-05-14 18:15:49",
+    "finished_at": "2026-05-14T18:29:56.809547+00:00",
+    "github_run_id": "25877256039",
+    "github_run_number": "9",
+    "github_sha": "60744bb76cd320687d1bfadcf501ab41fbd6fc28",
     "github_ref": "main",
     "github_actor": "caffeine-prn",
-    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25876399978",
-    "exit_code": 1,
-    "markers_generated_at": "2026-05-14T18:11:47.910550+00:00",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25877256039",
+    "exit_code": 0,
+    "markers_generated_at": "2026-05-14T18:29:56.303576+00:00",
     "marker_count": 25794,
     "source_counts": {
       "localdata_pharmacies": 25805,
@@ -28,12 +28,38 @@
       "closed_pharmacies": 97,
       "changed_pharmacies": 22872
     },
-    "errors": [
-      "2026-05-14 18:11:47 [ERROR]   Supabase failed: {'message': 'JSON could not be generated', 'code': 400, 'hint': 'Refer to full message for details', 'details': \"b'Bad Request'\"}",
-      "2026-05-14 18:11:48 [WARNING]   Errors: ['Supabase: {\\'message\\': \\'JSON could not be generated\\', \\'code\\': 400, \\'hint\\': \\'Refer to full message for details\\', \\'details\\': \"b\\'Bad Request\\'\"}']"
-    ]
+    "errors": []
   },
   "events": [
+    {
+      "id": "25877256039",
+      "status": "success",
+      "started_at": "2026-05-14 18:15:49",
+      "finished_at": "2026-05-14T18:29:56.809547+00:00",
+      "github_run_id": "25877256039",
+      "github_run_number": "9",
+      "github_sha": "60744bb76cd320687d1bfadcf501ab41fbd6fc28",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25877256039",
+      "exit_code": 0,
+      "markers_generated_at": "2026-05-14T18:29:56.303576+00:00",
+      "marker_count": 25794,
+      "source_counts": {
+        "localdata_pharmacies": 25805,
+        "localdata_animal_pharmacies": 13356,
+        "hira_pharmacies": 25728,
+        "nmc_pharmacies": 25241,
+        "matched_hira": 25619,
+        "unmatched_hira": 186,
+        "matched_animal": 10908,
+        "unmatched_animal": 1994,
+        "new_pharmacies": 182,
+        "closed_pharmacies": 97,
+        "changed_pharmacies": 22872
+      },
+      "errors": []
+    },
     {
       "id": "25876399978",
       "status": "failed",
