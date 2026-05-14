@@ -2,6 +2,7 @@ import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 def parse_hira_xml(xml_text: str) -> tuple[list[dict], int]:
@@ -29,31 +30,58 @@ def parse_hira_xml(xml_text: str) -> tuple[list[dict], int]:
     return items, total_count
 
 
-def fetch_all_hira_pharmacies(api_key: str, page_size: int = 100, delay: float = 1.0, max_retries: int = 3) -> list[dict]:
+def _fetch_hira_page(
+    base_url: str,
+    encoded_key: str,
+    page: int,
+    page_size: int,
+    max_retries: int,
+) -> tuple[list[dict], int]:
+    url = f"{base_url}?ServiceKey={encoded_key}&pageNo={page}&numOfRows={page_size}"
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                xml_text = resp.read().decode("utf-8")
+            return parse_hira_xml(xml_text)
+        except Exception as e:
+            if attempt < max_retries - 1:
+                wait = (attempt + 1) * 5
+                print(f"  HIRA page {page} attempt {attempt+1} failed: {e}, retrying in {wait}s...")
+                time.sleep(wait)
+            else:
+                raise
+    return [], 0
+
+
+def fetch_all_hira_pharmacies(
+    api_key: str,
+    page_size: int = 1000,
+    delay: float = 0.1,
+    max_retries: int = 3,
+    max_workers: int = 4,
+) -> list[dict]:
     encoded_key = urllib.parse.quote(api_key, safe="")
     base_url = "https://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList"
-    all_items = []
-    page = 1
-    while True:
-        url = f"{base_url}?ServiceKey={encoded_key}&pageNo={page}&numOfRows={page_size}"
-        for attempt in range(max_retries):
-            try:
-                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-                with urllib.request.urlopen(req, timeout=120) as resp:
-                    xml_text = resp.read().decode("utf-8")
-                break
-            except Exception as e:
-                if attempt < max_retries - 1:
-                    wait = (attempt + 1) * 5
-                    print(f"  HIRA page {page} attempt {attempt+1} failed: {e}, retrying in {wait}s...")
-                    time.sleep(wait)
-                else:
-                    raise
-        items, total_count = parse_hira_xml(xml_text)
-        all_items.extend(items)
-        print(f"  HIRA page {page}: {len(all_items)}/{total_count}", flush=True)
-        if len(all_items) >= total_count:
-            break
-        page += 1
-        time.sleep(delay)
+    first_items, total_count = _fetch_hira_page(base_url, encoded_key, 1, page_size, max_retries)
+    all_items = first_items[:]
+    print(f"  HIRA page 1: {len(all_items)}/{total_count}", flush=True)
+    if len(all_items) >= total_count:
+        return all_items
+
+    total_pages = (total_count + page_size - 1) // page_size
+    workers = max(1, min(max_workers, total_pages - 1))
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {
+            executor.submit(_fetch_hira_page, base_url, encoded_key, page, page_size, max_retries): page
+            for page in range(2, total_pages + 1)
+        }
+        for future in as_completed(futures):
+            page = futures[future]
+            items, _ = future.result()
+            all_items.extend(items)
+            print(f"  HIRA page {page}: {len(all_items)}/{total_count}", flush=True)
+            if delay:
+                time.sleep(delay)
+
     return all_items
