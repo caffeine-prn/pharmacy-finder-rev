@@ -66,18 +66,25 @@ def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> 
             "updated_at": datetime.now(timezone.utc).isoformat(),
         })
 
-    ykihos = sorted({row["ykiho"] for row in rows if row.get("ykiho")})
+    ykihos = {row["ykiho"] for row in rows if row.get("ykiho")}
     existing_ids_by_ykiho = {}
-    for batch in _chunks(ykihos, 500):
+    offset = 0
+    while ykihos:
         resp = (
             client.table("pharmacies")
             .select("id,ykiho")
-            .in_("ykiho", batch)
+            .range(offset, offset + 999)
             .execute()
         )
         for existing in resp.data or []:
-            if existing.get("ykiho") and existing.get("id"):
-                existing_ids_by_ykiho[existing["ykiho"]] = existing["id"]
+            ykiho = existing.get("ykiho")
+            if ykiho in ykihos and existing.get("id"):
+                existing_ids_by_ykiho[ykiho] = existing["id"]
+        if len(resp.data or []) < 1000:
+            break
+        if ykihos <= existing_ids_by_ykiho.keys():
+            break
+        offset += 1000
 
     for row in rows:
         existing_id = existing_ids_by_ykiho.get(row.get("ykiho"))

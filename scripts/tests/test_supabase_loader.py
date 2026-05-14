@@ -15,6 +15,11 @@ class _Query:
         self.columns = columns
         return self
 
+    def range(self, start, end):
+        self.calls.append((self.table_name, "select", start, end))
+        self.data = [{"id": "existing-localdata-id", "ykiho": "Y1"}]
+        return self
+
     def in_(self, column, values):
         self.calls.append((self.table_name, "select", column, values))
         self.data = [
