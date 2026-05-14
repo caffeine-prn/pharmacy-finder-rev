@@ -1,19 +1,19 @@
 {
   "version": 1,
-  "updated_at": "2026-05-14T17:52:17.497440+00:00",
+  "updated_at": "2026-05-14T18:11:48.444438+00:00",
   "latest": {
-    "id": "25875425030",
+    "id": "25876399978",
     "status": "failed",
-    "started_at": "2026-05-14 17:38:49",
-    "finished_at": "2026-05-14T17:52:17.497440+00:00",
-    "github_run_id": "25875425030",
-    "github_run_number": "7",
-    "github_sha": "3b6126211d3a299cf01fdfd35a8b22f6302225bd",
+    "started_at": "2026-05-14 17:58:30",
+    "finished_at": "2026-05-14T18:11:48.444438+00:00",
+    "github_run_id": "25876399978",
+    "github_run_number": "8",
+    "github_sha": "efbc47811d5903eb77b80fe26c019b681a454824",
     "github_ref": "main",
     "github_actor": "caffeine-prn",
-    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25875425030",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25876399978",
     "exit_code": 1,
-    "markers_generated_at": "2026-05-14T17:52:16.957660+00:00",
+    "markers_generated_at": "2026-05-14T18:11:47.910550+00:00",
     "marker_count": 25794,
     "source_counts": {
       "localdata_pharmacies": 25805,
@@ -24,16 +24,48 @@
       "unmatched_hira": 186,
       "matched_animal": 10908,
       "unmatched_animal": 1994,
-      "new_pharmacies": 183,
+      "new_pharmacies": 182,
       "closed_pharmacies": 97,
-      "changed_pharmacies": 24822
+      "changed_pharmacies": 22872
     },
     "errors": [
-      "2026-05-14 17:52:16 [ERROR]   Supabase failed: {'message': 'duplicate key value violates unique constraint \"pharmacies_ykiho_key\"', 'code': '23505', 'hint': None, 'details': 'Key (ykiho)=(JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQyIyQ3IyQwMCQyNjEwMDIjNDEjJDEjJDQjJDgz) already exists.'}",
-      "2026-05-14 17:52:17 [WARNING]   Errors: ['Supabase: {\\'message\\': \\'duplicate key value violates unique constraint \"pharmacies_ykiho_key\"\\', \\'code\\': \\'23505\\', \\'hint\\': None, \\'details\\': \\'Key (ykiho)=(JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQyIyQ3IyQwMCQyNjEwMDIjNDEjJDEjJDQjJDgz) already exists.\\'}']"
+      "2026-05-14 18:11:47 [ERROR]   Supabase failed: {'message': 'JSON could not be generated', 'code': 400, 'hint': 'Refer to full message for details', 'details': \"b'Bad Request'\"}",
+      "2026-05-14 18:11:48 [WARNING]   Errors: ['Supabase: {\\'message\\': \\'JSON could not be generated\\', \\'code\\': 400, \\'hint\\': \\'Refer to full message for details\\', \\'details\\': \"b\\'Bad Request\\'\"}']"
     ]
   },
   "events": [
+    {
+      "id": "25876399978",
+      "status": "failed",
+      "started_at": "2026-05-14 17:58:30",
+      "finished_at": "2026-05-14T18:11:48.444438+00:00",
+      "github_run_id": "25876399978",
+      "github_run_number": "8",
+      "github_sha": "efbc47811d5903eb77b80fe26c019b681a454824",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25876399978",
+      "exit_code": 1,
+      "markers_generated_at": "2026-05-14T18:11:47.910550+00:00",
+      "marker_count": 25794,
+      "source_counts": {
+        "localdata_pharmacies": 25805,
+        "localdata_animal_pharmacies": 13356,
+        "hira_pharmacies": 25728,
+        "nmc_pharmacies": 25241,
+        "matched_hira": 25619,
+        "unmatched_hira": 186,
+        "matched_animal": 10908,
+        "unmatched_animal": 1994,
+        "new_pharmacies": 182,
+        "closed_pharmacies": 97,
+        "changed_pharmacies": 22872
+      },
+      "errors": [
+        "2026-05-14 18:11:47 [ERROR]   Supabase failed: {'message': 'JSON could not be generated', 'code': 400, 'hint': 'Refer to full message for details', 'details': \"b'Bad Request'\"}",
+        "2026-05-14 18:11:48 [WARNING]   Errors: ['Supabase: {\\'message\\': \\'JSON could not be generated\\', \\'code\\': 400, \\'hint\\': \\'Refer to full message for details\\', \\'details\\': \"b\\'Bad Request\\'\"}']"
+      ]
+    },
     {
       "id": "25875425030",
       "status": "failed",
