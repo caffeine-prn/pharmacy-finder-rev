@@ -24,28 +24,53 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Run daily sync
-        run: python scripts/sync_daily.py
+        id: daily_sync
+        shell: bash
+        run: |
+          set +e
+          python scripts/sync_daily.py 2>&1 | tee /tmp/sync-daily.log
+          status=${PIPESTATUS[0]}
+          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
+          exit 0
         env:
           DRUG_API_KEY: ${{ secrets.DRUG_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           MARKERS_JSON_PATH: frontend/public/markers.json
 
-      - name: Commit updated markers
+      - name: Write sync log
+        if: always()
+        run: python scripts/load/sync_log.py
+        env:
+          SYNC_EXIT_CODE: ${{ steps.daily_sync.outputs.exit_code }}
+          SYNC_LOG_RAW_PATH: /tmp/sync-daily.log
+          SYNC_LOG_JSON_PATH: frontend/public/sync-log.json
+          MARKERS_JSON_PATH: frontend/public/markers.json
+
+      - name: Commit updated markers and sync log
+        if: always()
         run: |
-          if git diff --quiet -- frontend/public/markers.json; then
-            echo "markers.json is already up to date"
+          if git diff --quiet -- frontend/public/markers.json frontend/public/sync-log.json; then
+            echo "markers.json and sync-log.json are already up to date"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add frontend/public/markers.json
-          git commit -m "chore: refresh pharmacy markers"
+          git add frontend/public/markers.json frontend/public/sync-log.json
+          git commit -m "chore: refresh pharmacy sync data"
           git push
 
-      - name: Upload markers.json as artifact
+      - name: Upload sync artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: markers-json
-          path: frontend/public/markers.json
+          name: pharmacy-sync-artifacts
+          path: |
+            frontend/public/markers.json
+            frontend/public/sync-log.json
+            /tmp/sync-daily.log
           retention-days: 7
+
+      - name: Fail workflow if sync failed
+        if: ${{ steps.daily_sync.outputs.exit_code != '0' }}
+        run: exit 1

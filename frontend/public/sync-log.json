@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "updated_at": "2026-05-14T14:19:42+00:00",
+  "latest": {
+    "id": "manual-2026-05-14-workflow-repair",
+    "status": "manual_note",
+    "started_at": "2026-05-14 14:19:42",
+    "finished_at": "2026-05-14T14:19:42+00:00",
+    "github_run_id": "25865272373",
+    "github_run_number": "1",
+    "github_sha": "577383c097aef37b9d77b9b84d1044e434d11dab",
+    "github_ref": "main",
+    "github_actor": "caffeine-prn",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25865272373",
+    "exit_code": null,
+    "markers_generated_at": "2026-04-04T09:45:45.365184+00:00",
+    "marker_count": 25712,
+    "source_counts": {
+      "localdata_pharmacies": 25792,
+      "localdata_animal_pharmacies": 13316,
+      "hira_pharmacies": null,
+      "nmc_pharmacies": null,
+      "matched_hira": null,
+      "unmatched_hira": null,
+      "matched_animal": null,
+      "unmatched_animal": null,
+      "new_pharmacies": null,
+      "closed_pharmacies": null,
+      "changed_pharmacies": null
+    },
+    "errors": [
+      "운영 메모: main 브랜치에 Daily Pharmacy Sync 워크플로를 병합하고 수동 실행을 시작했습니다. 브라우저에서 HIRA 16,500/25,728 진행까지 확인했으며, 이 초기 로그 파일 이후 실행부터 자동 기록됩니다."
+    ]
+  },
+  "events": [
+    {
+      "id": "manual-2026-05-14-workflow-repair",
+      "status": "manual_note",
+      "started_at": "2026-05-14 14:19:42",
+      "finished_at": "2026-05-14T14:19:42+00:00",
+      "github_run_id": "25865272373",
+      "github_run_number": "1",
+      "github_sha": "577383c097aef37b9d77b9b84d1044e434d11dab",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25865272373",
+      "exit_code": null,
+      "markers_generated_at": "2026-04-04T09:45:45.365184+00:00",
+      "marker_count": 25712,
+      "source_counts": {
+        "localdata_pharmacies": 25792,
+        "localdata_animal_pharmacies": 13316,
+        "hira_pharmacies": null,
+        "nmc_pharmacies": null,
+        "matched_hira": null,
+        "unmatched_hira": null,
+        "matched_animal": null,
+        "unmatched_animal": null,
+        "new_pharmacies": null,
+        "closed_pharmacies": null,
+        "changed_pharmacies": null
+      },
+      "errors": [
+        "운영 메모: main 브랜치에 Daily Pharmacy Sync 워크플로를 병합하고 수동 실행을 시작했습니다. 브라우저에서 HIRA 16,500/25,728 진행까지 확인했으며, 이 초기 로그 파일 이후 실행부터 자동 기록됩니다."
+      ]
+    }
+  ]
+}
