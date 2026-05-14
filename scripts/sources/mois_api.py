@@ -7,6 +7,7 @@ fallback; this module is the preferred source for freshness-sensitive syncs.
 from __future__ import annotations
 
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from typing import Any
 from urllib.parse import unquote
@@ -109,6 +110,7 @@ def fetch_mois_records(
     delay: float = 0.2,
     filters: dict[str, str] | None = None,
     max_retries: int = 3,
+    max_workers: int = 6,
 ) -> tuple[list[dict], list[dict]]:
     """Fetch all rows from a MOIS endpoint.
 
@@ -122,12 +124,10 @@ def fetch_mois_records(
     url = PHARMACY_URL if source == "pharmacy" else ANIMAL_PHARMACY_URL
     api_source = "pharmacy" if source == "pharmacy" else "animal_pharmacy"
     service_key = unquote(api_key)
-    session = requests.Session()
-    page = 1
     normalized: list[dict] = []
     raw_source_rows: list[dict] = []
 
-    while True:
+    def fetch_page(page: int) -> tuple[int, list[dict], int]:
         params = {
             "serviceKey": service_key,
             "pageNo": page,
@@ -139,25 +139,45 @@ def fetch_mois_records(
 
         for attempt in range(max_retries):
             try:
-                resp = session.get(url, params=params, timeout=120)
+                resp = requests.get(url, params=params, timeout=120)
                 resp.raise_for_status()
                 rows, total_count = parse_mois_response(resp.json())
-                break
+                return page, rows, total_count
             except Exception:
                 if attempt == max_retries - 1:
                     raise
                 time.sleep((attempt + 1) * 3)
+        raise RuntimeError("unreachable MOIS retry state")
 
-        raw_source_rows.extend(rows)
-        for row in rows:
-            record = normalize_mois_record(row, source=api_source)
-            if record:
-                normalized.append(record)
+    first_page, rows, total_count = fetch_page(1)
+    raw_source_rows.extend(rows)
+    for row in rows:
+        record = normalize_mois_record(row, source=api_source)
+        if record:
+            normalized.append(record)
+    print(f"  MOIS {api_source} page {first_page}: {len(raw_source_rows)}/{total_count}", flush=True)
 
-        print(f"  MOIS {api_source} page {page}: {len(raw_source_rows)}/{total_count}", flush=True)
-        if len(raw_source_rows) >= total_count:
-            break
-        page += 1
-        time.sleep(delay)
+    total_pages = (total_count + page_size - 1) // page_size
+    if total_pages <= 1:
+        return normalized, build_raw_rows(raw_source_rows, source=api_source)
+
+    workers = max(1, min(max_workers, total_pages - 1))
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        future_to_page = {
+            executor.submit(fetch_page, page): page
+            for page in range(2, total_pages + 1)
+        }
+        completed = len(raw_source_rows)
+        for future in as_completed(future_to_page):
+            page, rows, total_count = future.result()
+            raw_source_rows.extend(rows)
+            completed += len(rows)
+            print(f"  MOIS {api_source} page {page}: {completed}/{total_count}", flush=True)
+            for row in rows:
+                record = normalize_mois_record(row, source=api_source)
+                if record:
+                    normalized.append(record)
+            if delay:
+                time.sleep(delay)
 
     return normalized, build_raw_rows(raw_source_rows, source=api_source)
