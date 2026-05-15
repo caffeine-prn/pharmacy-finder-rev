@@ -89,6 +89,25 @@ CREATE TABLE IF NOT EXISTS pharmacy_staff (
   UNIQUE(ykiho, staff_type_code)
 );
 
+-- Historical staff snapshots. pharmacy_staff remains the current summary,
+-- while this table preserves changes over time for longitudinal analysis.
+CREATE TABLE IF NOT EXISTS pharmacy_staff_history (
+  id BIGSERIAL PRIMARY KEY,
+  ykiho TEXT NOT NULL,
+  pharmacy_name TEXT,
+  staff_type_code TEXT NOT NULL,
+  staff_type_name TEXT,
+  staff_count INTEGER NOT NULL DEFAULT 0,
+  data_period TEXT,
+  observed_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  source_updated_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (ykiho, staff_type_code, staff_count, data_period, source_updated_at)
+);
+
+CREATE INDEX IF NOT EXISTS idx_pharmacy_staff_history_ykiho_observed
+  ON pharmacy_staff_history (ykiho, observed_at DESC);
+
 -- Sync log
 CREATE TABLE IF NOT EXISTS sync_log (
   id SERIAL PRIMARY KEY,
