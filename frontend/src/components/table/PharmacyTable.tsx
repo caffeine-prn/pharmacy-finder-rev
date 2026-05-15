@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   CaretUp,
   CaretDown,
@@ -49,6 +50,8 @@ function compactYkiho(ykiho: string | null) {
 }
 
 export function PharmacyTable() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const {
     filters,
     sortField,
@@ -58,6 +61,8 @@ export function PharmacyTable() {
     setPage,
     setView,
     setSelectedPharmacyId,
+    setMapCenter,
+    setMapZoom,
   } = usePharmacyStore();
 
   const [data, setData] = useState<PharmacyTableRow[]>([]);
@@ -123,7 +128,14 @@ export function PharmacyTable() {
   // Focus pharmacy on map
   function handleFocusOnMap(row: PharmacyTableRow) {
     setSelectedPharmacyId(row.id);
+    if (row.latitude != null && row.longitude != null) {
+      setMapCenter([row.latitude, row.longitude]);
+      setMapZoom(16);
+    }
     setView("map");
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("view", "map");
+    router.replace(`?${params.toString()}`, { scroll: false });
   }
 
   // CSV export

@@ -27,7 +27,13 @@ export function ViewTabs() {
   }
 
   return (
-    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[1000] max-sm:bottom-4">
+    <div
+      className={`absolute z-[1000] ${
+        view === "table"
+          ? "right-4 top-2 max-sm:right-3 max-sm:top-2"
+          : "bottom-6 left-1/2 -translate-x-1/2 max-sm:bottom-4"
+      }`}
+    >
       <div className="flex bg-white/95 backdrop-blur-sm rounded-full shadow-lg border border-zinc-200 p-1">
         <button
           onClick={() => handleViewChange("map")}

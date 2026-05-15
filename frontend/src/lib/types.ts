@@ -81,6 +81,8 @@ export interface PharmacyTableRow {
   hira_open_date: string | null;
   hira_staff_fetched_at: string | null;
   hira_staff_total_count: number | null;
+  latitude: number | null;
+  longitude: number | null;
   pharmacist_count: number;
   herbal_pharmacist_count: number;
   is_herbal_pharmacy: boolean;
