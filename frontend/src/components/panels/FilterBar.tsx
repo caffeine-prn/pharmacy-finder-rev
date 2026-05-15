@@ -54,7 +54,7 @@ export function FilterBar() {
   const hasOpenedFilter = Boolean(filters.openedFrom || filters.openedTo);
 
   return (
-    <div className="absolute left-3 top-[7.5rem] z-[1000] flex max-w-[calc(100%-1.5rem)] gap-1.5 overflow-x-auto pb-1 max-sm:left-2 max-sm:right-2 max-sm:max-w-none max-sm:flex-nowrap max-sm:scrollbar-none" style={{ scrollbarWidth: "none" }}>
+    <div className="absolute left-3 top-[12.3rem] z-[1000] flex max-w-[calc(100%-1.5rem)] gap-1.5 overflow-x-auto pb-1 max-sm:left-2 max-sm:right-2 max-sm:top-[12rem] max-sm:max-w-none max-sm:flex-nowrap max-sm:scrollbar-none" style={{ scrollbarWidth: "none" }}>
       <FilterPill
         active={filters.herbal}
         onClick={toggleHerbal}

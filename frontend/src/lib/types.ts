@@ -135,6 +135,8 @@ export type SortField =
   | "herbal_pharmacist_count";
 export type SortDirection = "asc" | "desc";
 
+export type HeatmapMode = "markers" | "herbal" | "animal" | "cross" | "noYkiho";
+
 export interface SortState {
   field: SortField;
   direction: SortDirection;
