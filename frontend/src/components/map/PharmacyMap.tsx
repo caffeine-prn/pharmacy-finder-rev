@@ -1,7 +1,7 @@
 // frontend/src/components/map/PharmacyMap.tsx
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { usePharmacyStore } from "@/lib/store";
 import type { MarkersJSON, MarkerData } from "@/lib/types";
@@ -38,7 +38,7 @@ export function PharmacyMap() {
   }, [setMarkers]);
 
   // Filter markers based on current filter state
-  const filteredMarkers = useCallback((): MarkerData[] => {
+  const filteredMarkers = useMemo((): MarkerData[] => {
     let result = markers;
 
     if (filters.search) {
@@ -103,7 +103,7 @@ export function PharmacyMap() {
           </div>
         </div>
       )}
-      <MapInner filteredMarkers={filteredMarkers()} />
+      <MapInner filteredMarkers={filteredMarkers} />
     </div>
   );
 }
