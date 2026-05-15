@@ -73,7 +73,7 @@ interface MarkerLayerProps {
 
 export function MarkerLayer({ markers }: MarkerLayerProps) {
   const map = useMap();
-  const { isDenseView, selectedPharmacyId, setSelectedPharmacyId } = usePharmacyStore();
+  const { isDenseView, selectedPharmacyId, selectedPharmacySeq, setSelectedPharmacyId } = usePharmacyStore();
   const clusterRef = useRef<L.MarkerClusterGroup | null>(null);
   const markerCacheRef = useRef<Map<string, L.Marker>>(new Map());
   const prevIdsRef = useRef<Set<string>>(new Set());
@@ -106,7 +106,10 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
       if (!cache.has(m.id)) {
         const marker = L.marker([m.lat, m.lng], { icon: createIcon(m) });
         marker.bindPopup(popupHtml(m));
-        marker.on("click", () => setSelectedPharmacyId(m.id));
+        marker.on("click", () => {
+          setSelectedPharmacyId(m.id);
+          marker.openPopup();
+        });
         cache.set(m.id, marker);
       }
       if (!prevIds.has(m.id)) {
@@ -185,7 +188,7 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
       console.warn("Falling back to direct marker focus", error);
       focusMarker();
     }
-  }, [selectedPharmacyId, markers, map]);
+  }, [selectedPharmacyId, selectedPharmacySeq, markers, map]);
 
   // Cleanup on unmount
   useEffect(() => {

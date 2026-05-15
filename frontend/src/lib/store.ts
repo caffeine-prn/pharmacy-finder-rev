@@ -31,6 +31,7 @@ interface PharmacyStore {
 
   // Map state
   selectedPharmacyId: string | null;
+  selectedPharmacySeq: number;
   setSelectedPharmacyId: (id: string | null) => void;
   mapCenter: [number, number];
   setMapCenter: (center: [number, number]) => void;
@@ -102,7 +103,12 @@ export const usePharmacyStore = create<PharmacyStore>((set, get) => ({
 
   // Map
   selectedPharmacyId: null,
-  setSelectedPharmacyId: (id) => set({ selectedPharmacyId: id }),
+  selectedPharmacySeq: 0,
+  setSelectedPharmacyId: (id) =>
+    set((s) => ({
+      selectedPharmacyId: id,
+      selectedPharmacySeq: id ? s.selectedPharmacySeq + 1 : s.selectedPharmacySeq,
+    })),
   mapCenter: [37.5665, 126.978],
   setMapCenter: (center) => set({ mapCenter: center }),
   mapZoom: 7,

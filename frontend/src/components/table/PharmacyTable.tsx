@@ -119,7 +119,7 @@ export function PharmacyTable() {
 
   // Focus pharmacy on map
   function handleFocusOnMap(row: PharmacyTableRow) {
-    setSelectedPharmacyId(row.id);
+    setSelectedPharmacyId(null);
     if (row.latitude != null && row.longitude != null) {
       setMapCenter([row.latitude, row.longitude]);
       setMapZoom(16);
@@ -128,6 +128,7 @@ export function PharmacyTable() {
     const params = new URLSearchParams(searchParams.toString());
     params.set("view", "map");
     router.replace(`?${params.toString()}`, { scroll: false });
+    window.setTimeout(() => setSelectedPharmacyId(row.id), 0);
   }
 
   // CSV export

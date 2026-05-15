@@ -23,7 +23,7 @@ import Link from "next/link";
 import { buildReportUrl } from "@/lib/report";
 
 export function PharmacySlidePanel() {
-  const { selectedPharmacyId, setSelectedPharmacyId } = usePharmacyStore();
+  const { selectedPharmacyId, selectedPharmacySeq, setSelectedPharmacyId } = usePharmacyStore();
   const [pharmacy, setPharmacy] = useState<Pharmacy | null>(null);
   const [loading, setLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -56,7 +56,7 @@ export function PharmacySlidePanel() {
         }
         setLoading(false);
       });
-  }, [selectedPharmacyId]);
+  }, [selectedPharmacyId, selectedPharmacySeq]);
 
   const handleClose = () => setSelectedPharmacyId(null);
 

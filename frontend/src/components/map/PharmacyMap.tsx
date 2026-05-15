@@ -13,6 +13,19 @@ const MapInner = dynamic(() => import("./MapInner").then((mod) => mod.MapInner),
   loading: () => <Skeleton className="flex-1 h-full" />,
 });
 
+function markersUrl() {
+  const raw = process.env.NEXT_PUBLIC_MARKERS_JSON_URL;
+  if (!raw) return "/markers.json";
+
+  const cleaned = raw
+    .trim()
+    .replace(/^['"]|['"]$/g, "")
+    .replace(/\\n/g, "")
+    .trim();
+
+  return cleaned || "/markers.json";
+}
+
 export function PharmacyMap() {
   const { markers, setMarkers, filters } = usePharmacyStore();
   const [loading, setLoading] = useState(true);
@@ -20,7 +33,7 @@ export function PharmacyMap() {
 
   // Fetch markers.json from CDN on mount
   useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_MARKERS_JSON_URL || "/markers.json";
+    const url = markersUrl();
     fetch(url)
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to fetch markers: ${res.status}`);
