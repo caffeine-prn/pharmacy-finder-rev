@@ -47,9 +47,9 @@ export function MainView() {
       ) : (
         <>
           {/* Table view has its own inline search/filter bar */}
-          <div className="bg-white border-b border-zinc-200 px-4 py-2.5 pr-40 flex items-center gap-3 flex-wrap max-sm:pr-4">
+          <div className="table-filter-toolbar flex flex-wrap items-center gap-3 border-b border-zinc-200 bg-white px-4 py-2.5 sm:pr-40 max-sm:flex-col max-sm:items-stretch max-sm:gap-2 max-sm:px-3 max-sm:py-2">
             <TableSearchFilters />
-            <div className="ml-auto flex items-center gap-2 text-xs font-medium">
+            <div className="table-filter-links ml-auto flex items-center gap-2 text-xs font-medium max-sm:ml-0 max-sm:w-[calc(100vw-1.5rem)] max-sm:justify-end max-sm:pr-1">
               <Link href="/about" className="text-zinc-500 hover:text-zinc-900">
                 서비스 안내
               </Link>
@@ -92,37 +92,39 @@ function TableSearchFilters() {
     : [];
 
   return (
-    <>
+    <div className="table-filter-controls flex flex-1 flex-wrap items-center gap-3 max-sm:w-[calc(100vw-1.5rem)] max-sm:max-w-[calc(100vw-1.5rem)] max-sm:flex-none max-sm:flex-col max-sm:items-stretch max-sm:gap-2 max-sm:overflow-hidden">
       <input
         type="text"
         value={filters.search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="약국명 검색"
-        className="border border-zinc-200 rounded-md px-2.5 py-1.5 text-sm w-48 outline-none focus:border-emerald-400"
+        className="w-48 rounded-md border border-zinc-200 px-2.5 py-1.5 text-sm outline-none focus:border-emerald-400 max-sm:h-10 max-sm:w-full"
       />
-      <select
-        value={filters.sido}
-        onChange={(e) => setSido(e.target.value)}
-        className="border border-zinc-200 rounded-md px-2 py-1.5 text-sm outline-none"
-      >
-        <option value="">전체 시도</option>
-        {SIDO_LIST.map((s) => (
-          <option key={s} value={s}>{s}</option>
-        ))}
-      </select>
-      <select
-        value={filters.sigungu}
-        onChange={(e) => setSigungu(e.target.value)}
-        className="border border-zinc-200 rounded-md px-2 py-1.5 text-sm outline-none"
-        disabled={!filters.sido}
-      >
-        <option value="">전체 시군구</option>
-        {sigunguList.map((g) => (
-          <option key={g} value={g}>{g}</option>
-        ))}
-      </select>
-      <div className="h-5 w-px bg-zinc-200" />
-      <div className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-2 py-1 text-xs text-zinc-500">
+      <div className="flex items-center gap-2 max-sm:w-full max-sm:min-w-0">
+        <select
+          value={filters.sido}
+          onChange={(e) => setSido(e.target.value)}
+          className="rounded-md border border-zinc-200 px-2 py-1.5 text-sm outline-none max-sm:h-10 max-sm:min-w-0 max-sm:flex-1"
+        >
+          <option value="">전체 시도</option>
+          {SIDO_LIST.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+        <select
+          value={filters.sigungu}
+          onChange={(e) => setSigungu(e.target.value)}
+          className="rounded-md border border-zinc-200 px-2 py-1.5 text-sm outline-none max-sm:h-10 max-sm:min-w-0 max-sm:flex-1"
+          disabled={!filters.sido}
+        >
+          <option value="">전체 시군구</option>
+          {sigunguList.map((g) => (
+            <option key={g} value={g}>{g}</option>
+          ))}
+        </select>
+      </div>
+      <div className="h-5 w-px bg-zinc-200 max-sm:hidden" />
+      <div className="table-date-filter flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-2 py-1 text-xs text-zinc-500 max-sm:w-full max-sm:min-w-0 max-sm:overflow-x-auto max-sm:py-1.5">
         <span className="font-semibold text-zinc-700">개업일</span>
         <span>이후</span>
         <input
@@ -130,7 +132,7 @@ function TableSearchFilters() {
           value={filters.openedFrom}
           onChange={(e) => setOpenedFrom(e.target.value)}
           aria-label="개업일 이후"
-          className="border border-zinc-200 rounded-md px-2 py-1.5 text-xs outline-none focus:border-emerald-400"
+          className="rounded-md border border-zinc-200 px-2 py-1.5 text-xs outline-none focus:border-emerald-400 max-sm:h-9"
         />
         <span>이전</span>
         <input
@@ -138,7 +140,7 @@ function TableSearchFilters() {
           value={filters.openedTo}
           onChange={(e) => setOpenedTo(e.target.value)}
           aria-label="개업일 이전"
-          className="border border-zinc-200 rounded-md px-2 py-1.5 text-xs outline-none focus:border-emerald-400"
+          className="rounded-md border border-zinc-200 px-2 py-1.5 text-xs outline-none focus:border-emerald-400 max-sm:h-9"
         />
         <button
           type="button"
@@ -146,7 +148,7 @@ function TableSearchFilters() {
             setOpenedFrom(dateNDaysAgo(30));
             setOpenedTo("");
           }}
-          className="rounded-md bg-white px-2 py-1.5 font-medium text-zinc-600 border border-zinc-200 hover:bg-zinc-100"
+          className="rounded-md border border-zinc-200 bg-white px-2 py-1.5 font-medium text-zinc-600 hover:bg-zinc-100 max-sm:h-9 max-sm:shrink-0"
         >
           최근 30일
         </button>
@@ -157,31 +159,33 @@ function TableSearchFilters() {
               setOpenedFrom("");
               setOpenedTo("");
             }}
-            className="rounded-md px-2 py-1.5 font-medium text-zinc-400 hover:bg-white hover:text-zinc-600"
+            className="rounded-md px-2 py-1.5 font-medium text-zinc-400 hover:bg-white hover:text-zinc-600 max-sm:h-9 max-sm:shrink-0"
           >
             해제
           </button>
         )}
       </div>
-      <div className="h-5 w-px bg-zinc-200" />
-      {[
-        { key: "herbal" as const, label: "한약사", toggle: toggleHerbal },
-        { key: "animal" as const, label: "동물약국", toggle: toggleAnimal },
-        { key: "cross" as const, label: "교차고용", toggle: toggleCross },
-        { key: "noYkiho" as const, label: "요양X", toggle: toggleNoYkiho },
-      ].map(({ key, label, toggle }) => (
-        <button
-          key={key}
-          onClick={toggle}
-          className={`text-xs rounded-full px-2.5 py-1 border transition-colors ${
-            filters[key]
-              ? "bg-zinc-900 text-white border-zinc-900"
-              : "bg-white text-zinc-500 border-zinc-200 hover:bg-zinc-50"
-          }`}
-        >
-          {label}
-        </button>
-      ))}
-    </>
+      <div className="h-5 w-px bg-zinc-200 max-sm:hidden" />
+      <div className="table-toggle-grid flex items-center gap-1.5 max-sm:grid max-sm:w-full max-sm:min-w-0 max-sm:grid-cols-2">
+        {[
+          { key: "herbal" as const, label: "한약사", toggle: toggleHerbal },
+          { key: "animal" as const, label: "동물약국", toggle: toggleAnimal },
+          { key: "cross" as const, label: "교차고용", toggle: toggleCross },
+          { key: "noYkiho" as const, label: "요양X", toggle: toggleNoYkiho },
+        ].map(({ key, label, toggle }) => (
+          <button
+            key={key}
+            onClick={toggle}
+            className={`rounded-full border px-2.5 py-1 text-xs transition-colors max-sm:h-9 max-sm:min-w-0 max-sm:truncate ${
+              filters[key]
+                ? "bg-zinc-900 text-white border-zinc-900"
+                : "bg-white text-zinc-500 border-zinc-200 hover:bg-zinc-50"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }

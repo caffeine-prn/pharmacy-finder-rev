@@ -52,7 +52,7 @@ function StatusButton({
     <button
       type="button"
       aria-pressed={active}
-      className={`flex min-h-11 items-center gap-2 rounded-md border px-2.5 text-left transition-colors ${
+      className={`flex min-h-11 items-center gap-2 rounded-md border px-2.5 text-left transition-colors max-sm:min-h-[3.25rem] max-sm:w-full ${
         active ? activeStyles : inactiveStyles
       } ${compact ? "py-1.5" : "py-2"}`}
     >
@@ -76,7 +76,7 @@ export function PharmacyStatusButtons({ pharmacy, compact }: PharmacyStatusButto
     : "HIRA 약국 API 미매칭";
 
   return (
-    <div className={`grid gap-2 ${compact ? "grid-cols-1" : "grid-cols-2"}`}>
+    <div className={`grid gap-2 ${compact ? "grid-cols-1" : "grid-cols-2 max-sm:grid-cols-1"}`}>
       <StatusButton
         active={pharmacy.is_herbal_pharmacy}
         label="한약사"

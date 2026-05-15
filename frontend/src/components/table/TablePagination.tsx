@@ -40,7 +40,7 @@ export function TablePagination({ page, totalPages, onPageChange }: TablePaginat
   }
 
   return (
-    <div className="flex items-center justify-center gap-1 px-4 py-3 border-t border-zinc-100">
+    <div className="flex items-center justify-center gap-1 border-t border-zinc-100 px-4 py-3 max-sm:pb-[calc(env(safe-area-inset-bottom)+4.75rem)]">
       <Button
         variant="ghost"
         size="sm"

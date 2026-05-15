@@ -141,4 +141,43 @@ body {
   .table-mobile tbody tr:hover td:first-child {
     background: #fafafa;
   }
+
+  .table-filter-toolbar {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .table-filter-controls,
+  .table-filter-links {
+    width: calc(100vw - 1.5rem);
+    max-width: calc(100vw - 1.5rem);
+  }
+
+  .table-filter-controls {
+    flex: none;
+    overflow: hidden;
+  }
+
+  .table-date-filter {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .table-date-filter::-webkit-scrollbar {
+    display: none;
+  }
+
+  .table-toggle-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .table-toggle-grid > button {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

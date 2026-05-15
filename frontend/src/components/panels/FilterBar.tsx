@@ -21,7 +21,7 @@ function FilterPill({ active, onClick, icon, label, activeColor }: FilterPillPro
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150 border cursor-pointer ${
+      className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-150 cursor-pointer max-sm:min-h-9 ${
         active
           ? `${activeColor} shadow-sm`
           : "bg-white/95 text-zinc-600 border-zinc-200 hover:bg-zinc-50"
@@ -84,7 +84,7 @@ export function FilterBar() {
         activeColor="bg-zinc-100 text-zinc-700 border-zinc-300"
       />
       <div
-        className={`inline-flex shrink-0 items-center gap-2 rounded-xl border bg-white/95 px-3 py-2 text-xs shadow-sm ${
+        className={`inline-flex shrink-0 items-center gap-2 rounded-xl border bg-white/95 px-3 py-2 text-xs shadow-sm max-sm:min-w-max ${
           hasOpenedFilter
             ? "border-emerald-300 text-emerald-800"
             : "border-zinc-200 text-zinc-600"

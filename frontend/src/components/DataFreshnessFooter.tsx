@@ -48,15 +48,15 @@ export function DataFreshnessFooter() {
         {/* Collapsed bar */}
         <button
           onClick={() => setExpanded(!expanded)}
-          className="absolute bottom-2 left-2 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-md border border-zinc-200 text-[11px] text-zinc-500 hover:text-zinc-700 transition-colors"
+          className="absolute bottom-2 left-2 flex max-w-[calc(100vw-1rem)] items-center gap-1.5 rounded-full border border-zinc-200 bg-white/90 px-3 py-1.5 text-[11px] text-zinc-500 shadow-md backdrop-blur-sm transition-colors hover:text-zinc-700 max-sm:bottom-[calc(env(safe-area-inset-bottom)+4.25rem)] max-sm:right-2 max-sm:justify-center max-sm:truncate max-sm:px-2.5"
         >
           <Info size={12} />
-          데이터 기준: {summaryText}
+          <span className="truncate">데이터 기준: {summaryText}</span>
         </button>
 
         {/* Expanded detail */}
         {expanded && (
-          <div className="absolute bottom-10 left-2 bg-white rounded-lg shadow-xl border border-zinc-200 p-3 w-72">
+          <div className="absolute bottom-10 left-2 w-72 rounded-lg border border-zinc-200 bg-white p-3 shadow-xl max-sm:bottom-[calc(env(safe-area-inset-bottom)+7rem)] max-sm:right-2 max-sm:w-auto">
             <div className="mb-2 flex items-center justify-between gap-2">
               <p className="text-xs font-semibold text-zinc-700">데이터 기준</p>
               <div className="flex items-center gap-2 text-[11px] font-medium">

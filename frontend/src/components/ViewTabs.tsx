@@ -28,16 +28,16 @@ export function ViewTabs() {
 
   return (
     <div
-      className={`absolute z-[1000] ${
+      className={`absolute z-[1000] max-sm:fixed max-sm:bottom-[calc(env(safe-area-inset-bottom)+0.75rem)] max-sm:left-1/2 max-sm:right-auto max-sm:top-auto max-sm:-translate-x-1/2 ${
         view === "table"
-          ? "right-4 top-2 max-sm:right-3 max-sm:top-2"
-          : "bottom-6 left-1/2 -translate-x-1/2 max-sm:bottom-4"
+          ? "right-4 top-2"
+          : "bottom-6 left-1/2 -translate-x-1/2"
       }`}
     >
-      <div className="flex bg-white/95 backdrop-blur-sm rounded-full shadow-lg border border-zinc-200 p-1">
+      <div className="flex bg-white/95 backdrop-blur-sm rounded-full shadow-lg border border-zinc-200 p-1 max-sm:min-w-[11.5rem] max-sm:justify-between max-sm:shadow-xl">
         <button
           onClick={() => handleViewChange("map")}
-          className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
+          className={`flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 max-sm:h-10 max-sm:flex-1 max-sm:px-3 ${
             view === "map"
               ? "bg-zinc-900 text-white shadow-sm"
               : "text-zinc-500 hover:text-zinc-700"
@@ -48,7 +48,7 @@ export function ViewTabs() {
         </button>
         <button
           onClick={() => handleViewChange("table")}
-          className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
+          className={`flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 max-sm:h-10 max-sm:flex-1 max-sm:px-3 ${
             view === "table"
               ? "bg-zinc-900 text-white shadow-sm"
               : "text-zinc-500 hover:text-zinc-700"
