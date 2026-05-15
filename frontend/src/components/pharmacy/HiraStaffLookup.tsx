@@ -7,6 +7,7 @@ import {
   ClockClockwise,
   WarningCircle,
 } from "@phosphor-icons/react";
+import { formatKstDateTime } from "@/lib/datetime";
 import type { Pharmacy } from "@/lib/types";
 
 interface HiraStaffLookupProps {
@@ -32,17 +33,6 @@ type LookupResult = {
   message?: string;
   rows: LookupRow[];
 };
-
-function formatDateTime(value: string | null) {
-  if (!value) return "";
-  return new Date(value).toLocaleString("ko-KR", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
 
 export function HiraStaffLookup({ pharmacy }: HiraStaffLookupProps) {
   const [loading, setLoading] = useState(false);
@@ -123,7 +113,7 @@ export function HiraStaffLookup({ pharmacy }: HiraStaffLookupProps) {
     result?.herbal_pharmacist_count ?? pharmacy.herbal_pharmacist_count ?? 0;
   const fetchedAt = result?.fetched_at || pharmacy.hira_staff_fetched_at;
   const basis = fetchedAt
-    ? `기준: HIRA API 조회, ${formatDateTime(fetchedAt)}`
+    ? `기준: HIRA API 조회, ${formatKstDateTime(fetchedAt)}`
     : "기준: CSV/기본 데이터";
 
   return (
@@ -164,14 +154,14 @@ export function HiraStaffLookup({ pharmacy }: HiraStaffLookupProps) {
             <span>
               {result.message ||
                 (result.fetched_at
-                  ? `${formatDateTime(result.fetched_at)} 기준 데이터`
+                  ? `${formatKstDateTime(result.fetched_at)} 기준 데이터`
                   : "저장된 인력 조회 내역이 없습니다.")}
             </span>
           </div>
         )}
         {result && !result.can_refresh && result.can_refresh_at && (
           <p className="rounded-lg bg-zinc-50 px-3 py-2 text-xs text-zinc-500">
-            다음 갱신 가능: {formatDateTime(result.can_refresh_at)}
+            다음 갱신 가능: {formatKstDateTime(result.can_refresh_at)}
           </p>
         )}
         <div className="grid grid-cols-2 gap-3">

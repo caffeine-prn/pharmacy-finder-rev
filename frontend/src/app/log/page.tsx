@@ -13,6 +13,7 @@ import {
   WarningCircle,
 } from "@phosphor-icons/react";
 import { supabase } from "@/lib/supabase/client";
+import { formatKstDateTime } from "@/lib/datetime";
 
 type SyncStatus = "success" | "failed" | "partial" | "manual_note" | string;
 
@@ -776,16 +777,5 @@ function formatNullable(value: number | null | undefined) {
 }
 
 function formatDateTime(value: string | null | undefined) {
-  if (!value) return "-";
-  const normalized = value.includes("T") ? value : `${value.replace(" ", "T")}Z`;
-  const date = new Date(normalized);
-  if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleString("ko-KR", {
-    timeZone: "Asia/Seoul",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  return formatKstDateTime(value);
 }

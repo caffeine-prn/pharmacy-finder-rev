@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Info } from "@phosphor-icons/react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase/client";
+import { formatKstDate, formatKstDateTime } from "@/lib/datetime";
 import type { DataFreshness } from "@/lib/types";
 
 export function DataFreshnessFooter() {
@@ -23,11 +24,14 @@ export function DataFreshnessFooter() {
   const pharmacyDate =
     freshness.find((f) => f.source === "mois_pharmacy_api")?.data_date ??
     freshness.find((f) => f.source === "localdata")?.data_date;
-  const staffDate =
-    freshness.find((f) => f.source === "hira_staff_lookup_batch")?.data_date ??
-    freshness.find((f) => f.source === "hira_staff_lookup")?.data_date ??
-    freshness.find((f) => f.source === "staff_info")?.data_date ??
-    freshness.find((f) => f.source === "hira_staff")?.data_date;
+  const staffFreshness =
+    freshness.find((f) => f.source === "hira_staff_lookup_batch") ??
+    freshness.find((f) => f.source === "hira_staff_lookup") ??
+    freshness.find((f) => f.source === "staff_info") ??
+    freshness.find((f) => f.source === "hira_staff");
+  const staffDate = staffFreshness?.last_sync
+    ? `${formatKstDate(staffFreshness.last_sync)} KST`
+    : staffFreshness?.data_date;
 
   if (!pharmacyDate && !staffDate) return null;
 
@@ -81,13 +85,17 @@ export function DataFreshnessFooter() {
                     {f.source === "localdata_animal" && "동물약국"}
                     {f.source === "mois_animal_pharmacy_api" && "행안부 동물약국"}
                   </span>
-                  <span className="text-xs text-zinc-700 font-mono">{f.data_date}</span>
+                  <span className="text-xs text-zinc-700 font-mono">
+                    {f.source.startsWith("hira_staff_lookup") && f.last_sync
+                      ? `${formatKstDate(f.last_sync)} KST`
+                      : f.data_date}
+                  </span>
                 </div>
               ))}
             </div>
             {freshness[0]?.last_sync && (
               <p className="text-[10px] text-zinc-400 mt-2 border-t border-zinc-100 pt-1.5">
-                마지막 동기화: {new Date(freshness[0].last_sync).toLocaleString("ko-KR")}
+                마지막 동기화: {formatKstDateTime(freshness[0].last_sync)}
               </p>
             )}
           </div>

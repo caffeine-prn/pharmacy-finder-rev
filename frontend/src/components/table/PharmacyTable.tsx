@@ -10,6 +10,7 @@ import {
   DownloadSimple,
 } from "@phosphor-icons/react";
 import { usePharmacyStore } from "@/lib/store";
+import { formatKstDate, formatKstDateTime, formatKstTime } from "@/lib/datetime";
 import type { PharmacyTableRow, PaginatedResponse, SortField } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -26,25 +27,6 @@ function displayDate(value: string | null | undefined) {
 
 function displayAddress(row: PharmacyTableRow) {
   return row.road_address || row.address || "-";
-}
-
-function displayDateTime(value: string | null | undefined) {
-  if (!value) return "";
-  return new Date(value).toLocaleString("ko-KR", {
-    year: "2-digit",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
-
-function displayTime(value: string | null | undefined) {
-  if (!value) return "";
-  return new Date(value).toLocaleTimeString("ko-KR", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 }
 
 function compactYkiho(ykiho: string | null) {
@@ -203,7 +185,7 @@ export function PharmacyTable() {
         r.name,
         displayDate(r.mois_license_date || r.open_date),
         displayDate(r.hira_open_date),
-        r.hira_staff_fetched_at || "",
+        r.hira_staff_fetched_at ? formatKstDateTime(r.hira_staff_fetched_at) : "",
         r.ykiho || "",
         displayAddress(r),
         r.phone || "",
@@ -332,9 +314,9 @@ export function PharmacyTable() {
                   <td className="px-3 py-2.5 text-sm text-zinc-700 whitespace-nowrap">
                     {row.hira_staff_fetched_at ? (
                       <div className="flex flex-col font-mono">
-                        <span>{displayDate(row.hira_staff_fetched_at)}</span>
+                        <span>{formatKstDate(row.hira_staff_fetched_at)}</span>
                         <span className="mt-0.5 text-[10px] text-zinc-400">
-                          {displayTime(row.hira_staff_fetched_at)}
+                          {formatKstTime(row.hira_staff_fetched_at)}
                         </span>
                       </div>
                     ) : (
@@ -375,7 +357,7 @@ export function PharmacyTable() {
                       </div>
                       <p className="text-[11px] text-zinc-400">
                         {row.hira_staff_fetched_at
-                          ? `조회 기준 ${displayDateTime(row.hira_staff_fetched_at)}`
+                          ? `조회 기준 ${formatKstDateTime(row.hira_staff_fetched_at)}`
                           : "CSV/기본 데이터 기준"}
                       </p>
                     </div>
