@@ -51,6 +51,8 @@ export function PharmacyTable() {
       if (filters.animal) params.set("animal", "true");
       if (filters.cross) params.set("cross", "true");
       if (filters.noYkiho) params.set("noYkiho", "true");
+      if (filters.openedFrom) params.set("openedFrom", filters.openedFrom);
+      if (filters.openedTo) params.set("openedTo", filters.openedTo);
 
       const res = await fetch(`/api/pharmacies?${params}`);
       if (!res.ok) throw new Error("Failed to fetch");
@@ -109,6 +111,8 @@ export function PharmacyTable() {
     if (filters.animal) params.set("animal", "true");
     if (filters.cross) params.set("cross", "true");
     if (filters.noYkiho) params.set("noYkiho", "true");
+    if (filters.openedFrom) params.set("openedFrom", filters.openedFrom);
+    if (filters.openedTo) params.set("openedTo", filters.openedTo);
 
     try {
       const res = await fetch(`/api/pharmacies?${params}`);

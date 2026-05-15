@@ -62,6 +62,8 @@ function TableSearchFilters() {
     toggleAnimal,
     toggleCross,
     toggleNoYkiho,
+    setOpenedFrom,
+    setOpenedTo,
     markers,
   } = usePharmacyStore();
 
@@ -104,6 +106,25 @@ function TableSearchFilters() {
           <option key={g} value={g}>{g}</option>
         ))}
       </select>
+      <div className="h-5 w-px bg-zinc-200" />
+      <div className="inline-flex items-center gap-1 text-xs text-zinc-500">
+        <span>개업일</span>
+        <input
+          type="date"
+          value={filters.openedFrom}
+          onChange={(e) => setOpenedFrom(e.target.value)}
+          aria-label="개업일 시작"
+          className="border border-zinc-200 rounded-md px-2 py-1.5 text-xs outline-none focus:border-emerald-400"
+        />
+        <span>~</span>
+        <input
+          type="date"
+          value={filters.openedTo}
+          onChange={(e) => setOpenedTo(e.target.value)}
+          aria-label="개업일 종료"
+          className="border border-zinc-200 rounded-md px-2 py-1.5 text-xs outline-none focus:border-emerald-400"
+        />
+      </div>
       <div className="h-5 w-px bg-zinc-200" />
       {[
         { key: "herbal" as const, label: "한약사", toggle: toggleHerbal },

@@ -16,6 +16,8 @@ interface PharmacyStore {
   toggleAnimal: () => void;
   toggleCross: () => void;
   toggleNoYkiho: () => void;
+  setOpenedFrom: (openedFrom: string) => void;
+  setOpenedTo: (openedTo: string) => void;
   resetFilters: () => void;
 
   // Table sort
@@ -52,6 +54,8 @@ const defaultFilters: FilterState = {
   animal: false,
   cross: false,
   noYkiho: false,
+  openedFrom: "",
+  openedTo: "",
 };
 
 export const usePharmacyStore = create<PharmacyStore>((set, get) => ({
@@ -75,6 +79,10 @@ export const usePharmacyStore = create<PharmacyStore>((set, get) => ({
     set((s) => ({ filters: { ...s.filters, cross: !s.filters.cross }, page: 1 })),
   toggleNoYkiho: () =>
     set((s) => ({ filters: { ...s.filters, noYkiho: !s.filters.noYkiho }, page: 1 })),
+  setOpenedFrom: (openedFrom) =>
+    set((s) => ({ filters: { ...s.filters, openedFrom }, page: 1 })),
+  setOpenedTo: (openedTo) =>
+    set((s) => ({ filters: { ...s.filters, openedTo }, page: 1 })),
   resetFilters: () => set({ filters: { ...defaultFilters }, page: 1 }),
 
   // Sort

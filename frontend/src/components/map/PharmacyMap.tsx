@@ -67,6 +67,12 @@ export function PharmacyMap() {
     if (filters.noYkiho) {
       result = result.filter((m) => !m.y);
     }
+    if (filters.openedFrom) {
+      result = result.filter((m) => m.o && m.o >= filters.openedFrom);
+    }
+    if (filters.openedTo) {
+      result = result.filter((m) => m.o && m.o <= filters.openedTo);
+    }
 
     return result;
   }, [markers, filters]);

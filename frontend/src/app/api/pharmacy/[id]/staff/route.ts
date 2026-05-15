@@ -3,6 +3,7 @@ import { createServiceSupabase } from "@/lib/supabase/server";
 
 const HIRA_STAFF_URL =
   "https://apis.data.go.kr/B551182/MadmDtlInfoService2.7/getEtcHstInfo2.7";
+const STAFF_REFRESH_INTERVAL_MS = 24 * 60 * 60 * 1000;
 
 type HiraStaffRow = {
   ykiho: string;
@@ -67,6 +68,152 @@ function sumStaff(rows: HiraStaffRow[], code: string, name: string) {
     .reduce((sum, row) => sum + row.staff_count, 0);
 }
 
+function getRefreshState(fetchedAt: string | null | undefined) {
+  if (!fetchedAt) {
+    return {
+      canRefresh: true,
+      canRefreshAt: null as string | null,
+      ageMs: null as number | null,
+    };
+  }
+
+  const lastFetchedAt = new Date(fetchedAt).getTime();
+  if (Number.isNaN(lastFetchedAt)) {
+    return {
+      canRefresh: true,
+      canRefreshAt: null as string | null,
+      ageMs: null as number | null,
+    };
+  }
+
+  const canRefreshAt = new Date(lastFetchedAt + STAFF_REFRESH_INTERVAL_MS);
+  const ageMs = Date.now() - lastFetchedAt;
+  return {
+    canRefresh: ageMs >= STAFF_REFRESH_INTERVAL_MS,
+    canRefreshAt: canRefreshAt.toISOString(),
+    ageMs,
+  };
+}
+
+function publicRows(rows: HiraStaffRow[]) {
+  return rows.map(({ raw: _raw, ...row }) => row);
+}
+
+async function fetchPharmacy(supabase: ReturnType<typeof createServiceSupabase>, id: string) {
+  const { data: pharmacy, error: pharmacyError } = await supabase
+    .from("pharmacies")
+    .select("id,name,ykiho,hira_staff_fetched_at,hira_staff_total_count")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (pharmacyError || !pharmacy) {
+    return { pharmacy: null, error: pharmacyError };
+  }
+
+  return { pharmacy, error: null };
+}
+
+async function fetchCachedRows(
+  supabase: ReturnType<typeof createServiceSupabase>,
+  ykiho: string
+) {
+  const { data, error } = await supabase
+    .from("hira_staff_lookup_raw")
+    .select("ykiho,pharmacy_name,staff_type_code,staff_type_name,staff_count,raw,fetched_at")
+    .eq("ykiho", ykiho)
+    .order("staff_type_code", { ascending: true });
+
+  if (error) throw error;
+
+  const rows = (data || []).map((row) => ({
+    ykiho: row.ykiho,
+    pharmacy_name: row.pharmacy_name,
+    staff_type_code: row.staff_type_code,
+    staff_type_name: row.staff_type_name,
+    staff_count: row.staff_count,
+    raw: row.raw || {},
+  })) as HiraStaffRow[];
+
+  const fetchedAt =
+    (data || [])
+      .map((row) => row.fetched_at)
+      .filter(Boolean)
+      .sort()
+      .at(-1) || null;
+
+  return { rows, fetchedAt };
+}
+
+function lookupPayload(args: {
+  pharmacyId: string;
+  ykiho: string;
+  fetchedAt: string | null;
+  totalCount: number;
+  rows: HiraStaffRow[];
+  refreshed: boolean;
+  message?: string;
+}) {
+  const pharmacistCount = sumStaff(args.rows, "071", "약사");
+  const herbalPharmacistCount = sumStaff(args.rows, "072", "한약사");
+  const refresh = getRefreshState(args.fetchedAt);
+
+  return {
+    pharmacy_id: args.pharmacyId,
+    ykiho: args.ykiho,
+    fetched_at: args.fetchedAt,
+    total_count: args.totalCount,
+    pharmacist_count: pharmacistCount,
+    herbal_pharmacist_count: herbalPharmacistCount,
+    can_refresh: refresh.canRefresh,
+    can_refresh_at: refresh.canRefreshAt,
+    refreshed: args.refreshed,
+    message: args.message,
+    rows: publicRows(args.rows),
+  };
+}
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const supabase = createServiceSupabase();
+  const { pharmacy, error: pharmacyError } = await fetchPharmacy(supabase, params.id);
+
+  if (pharmacyError) {
+    return NextResponse.json({ error: pharmacyError.message }, { status: 500 });
+  }
+  if (!pharmacy) {
+    return NextResponse.json({ error: "Pharmacy not found" }, { status: 404 });
+  }
+
+  if (!pharmacy.ykiho) {
+    return NextResponse.json(
+      { error: "This pharmacy has no HIRA ykiho" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    const cached = await fetchCachedRows(supabase, pharmacy.ykiho);
+    const fetchedAt = pharmacy.hira_staff_fetched_at || cached.fetchedAt;
+    return NextResponse.json(
+      lookupPayload({
+        pharmacyId: pharmacy.id,
+        ykiho: pharmacy.ykiho,
+        fetchedAt,
+        totalCount: pharmacy.hira_staff_total_count || cached.rows.length,
+        rows: cached.rows,
+        refreshed: false,
+      })
+    );
+  } catch (err) {
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Cached staff lookup failed" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -80,13 +227,12 @@ export async function POST(
   }
 
   const supabase = createServiceSupabase();
-  const { data: pharmacy, error: pharmacyError } = await supabase
-    .from("pharmacies")
-    .select("id,name,ykiho")
-    .eq("id", params.id)
-    .single();
+  const { pharmacy, error: pharmacyError } = await fetchPharmacy(supabase, params.id);
 
-  if (pharmacyError || !pharmacy) {
+  if (pharmacyError) {
+    return NextResponse.json({ error: pharmacyError.message }, { status: 500 });
+  }
+  if (!pharmacy) {
     return NextResponse.json({ error: "Pharmacy not found" }, { status: 404 });
   }
 
@@ -95,6 +241,35 @@ export async function POST(
       { error: "This pharmacy has no HIRA ykiho" },
       { status: 400 }
     );
+  }
+
+  let cachedForCooldown: Awaited<ReturnType<typeof fetchCachedRows>> | null = null;
+  if (!pharmacy.hira_staff_fetched_at) {
+    cachedForCooldown = await fetchCachedRows(supabase, pharmacy.ykiho);
+  }
+  const currentFetchedAt =
+    pharmacy.hira_staff_fetched_at || cachedForCooldown?.fetchedAt || null;
+  const refresh = getRefreshState(currentFetchedAt);
+  if (!refresh.canRefresh) {
+    try {
+      const cached = cachedForCooldown || (await fetchCachedRows(supabase, pharmacy.ykiho));
+      return NextResponse.json(
+        lookupPayload({
+          pharmacyId: pharmacy.id,
+          ykiho: pharmacy.ykiho,
+          fetchedAt: currentFetchedAt,
+          totalCount: pharmacy.hira_staff_total_count || cached.rows.length,
+          rows: cached.rows,
+          refreshed: false,
+          message: "최근 인력 조회 후 24시간이 지나야 다시 갱신할 수 있습니다.",
+        })
+      );
+    } catch (err) {
+      return NextResponse.json(
+        { error: err instanceof Error ? err.message : "Cached staff lookup failed" },
+        { status: 500 }
+      );
+    }
   }
 
   const url = new URL(withServiceKey(apiKey));
@@ -168,6 +343,8 @@ export async function POST(
       herbal_pharmacist_count: herbalPharmacistCount,
       is_herbal_pharmacy: herbalPharmacistCount > 0,
       is_cross_employed: pharmacistCount > 0 && herbalPharmacistCount > 0,
+      hira_staff_fetched_at: fetchedAt,
+      hira_staff_total_count: parsed.totalCount,
       updated_at: fetchedAt,
     })
     .eq("id", pharmacy.id);
@@ -177,12 +354,13 @@ export async function POST(
   }
 
   return NextResponse.json({
-    pharmacy_id: pharmacy.id,
-    ykiho: pharmacy.ykiho,
-    fetched_at: fetchedAt,
-    total_count: parsed.totalCount,
-    pharmacist_count: pharmacistCount,
-    herbal_pharmacist_count: herbalPharmacistCount,
-    rows: rows.map(({ raw: _raw, ...row }) => row),
+    ...lookupPayload({
+      pharmacyId: pharmacy.id,
+      ykiho: pharmacy.ykiho,
+      fetchedAt,
+      totalCount: parsed.totalCount,
+      rows,
+      refreshed: true,
+    }),
   });
 }

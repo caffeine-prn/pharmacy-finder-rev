@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS pharmacies (
   hira_open_date DATE,
   hira_last_event_type TEXT,
   hira_last_event_date DATE,
+  hira_staff_fetched_at TIMESTAMPTZ,
+  hira_staff_total_count INTEGER,
   location GEOGRAPHY(Point, 4326),
   longitude DOUBLE PRECISION,
   latitude DOUBLE PRECISION,

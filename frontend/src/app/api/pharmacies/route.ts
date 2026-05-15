@@ -26,6 +26,8 @@ export async function GET(request: NextRequest) {
   const animal = searchParams.get("animal") === "true";
   const cross = searchParams.get("cross") === "true";
   const noYkiho = searchParams.get("noYkiho") === "true";
+  const openedFrom = searchParams.get("openedFrom") || "";
+  const openedTo = searchParams.get("openedTo") || "";
 
   let sortField = (searchParams.get("sortField") || "name") as SortField;
   if (!VALID_SORT_FIELDS.includes(sortField)) sortField = "name";
@@ -41,7 +43,8 @@ export async function GET(request: NextRequest) {
       "id, name, address, phone, sido, sigungu, pharmacist_count, herbal_pharmacist_count, is_herbal_pharmacy, is_animal_pharmacy, is_cross_employed, has_ykiho",
       { count: "exact" }
     )
-    .eq("business_status", "영업/정상");
+    .eq("business_status", "영업/정상")
+    .is("mois_closed_date", null);
 
   // Filters
   if (search) {
@@ -64,6 +67,12 @@ export async function GET(request: NextRequest) {
   }
   if (noYkiho) {
     query = query.eq("has_ykiho", false);
+  }
+  if (openedFrom) {
+    query = query.gte("open_date", openedFrom);
+  }
+  if (openedTo) {
+    query = query.lte("open_date", openedTo);
   }
 
   // Sort

@@ -25,10 +25,24 @@
 html,
 body {
   height: 100%;
+  width: 100%;
   overflow: hidden;
   overflow-x: hidden;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
   background: var(--bg-primary);
   color: var(--text-primary);
+}
+
+body {
+  position: fixed;
+  inset: 0;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  touch-action: pan-x pan-y;
 }
 
 /* Leaflet popup overrides */
@@ -75,6 +89,10 @@ body {
 
 /* Mobile overrides */
 @media (max-width: 640px) {
+  .leaflet-control-attribution {
+    display: none;
+  }
+
   /* Search panel: full width */
   .search-panel-mobile {
     left: 0.5rem;

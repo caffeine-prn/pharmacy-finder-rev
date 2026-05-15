@@ -2,6 +2,7 @@
 
 import { usePharmacyStore } from "@/lib/store";
 import {
+  CalendarBlank,
   Leaf,
   PawPrint,
   UsersFour,
@@ -33,11 +34,19 @@ function FilterPill({ active, onClick, icon, label, activeColor }: FilterPillPro
 }
 
 export function FilterBar() {
-  const { filters, toggleHerbal, toggleAnimal, toggleCross, toggleNoYkiho } =
+  const {
+    filters,
+    toggleHerbal,
+    toggleAnimal,
+    toggleCross,
+    toggleNoYkiho,
+    setOpenedFrom,
+    setOpenedTo,
+  } =
     usePharmacyStore();
 
   return (
-    <div className="absolute left-3 top-[7.5rem] z-[1000] flex gap-1.5 max-sm:left-2 max-sm:right-2 max-sm:overflow-x-auto max-sm:flex-nowrap max-sm:pb-1 max-sm:scrollbar-none" style={{ scrollbarWidth: "none" }}>
+    <div className="absolute left-3 top-[7.5rem] z-[1000] flex max-w-[calc(100%-1.5rem)] gap-1.5 overflow-x-auto pb-1 max-sm:left-2 max-sm:right-2 max-sm:max-w-none max-sm:flex-nowrap max-sm:scrollbar-none" style={{ scrollbarWidth: "none" }}>
       <FilterPill
         active={filters.herbal}
         onClick={toggleHerbal}
@@ -66,6 +75,24 @@ export function FilterBar() {
         label="요양X"
         activeColor="bg-zinc-100 text-zinc-700 border-zinc-300"
       />
+      <div className="inline-flex shrink-0 items-center gap-1 rounded-full border border-zinc-200 bg-white/95 px-2 py-1 text-xs text-zinc-600 shadow-sm">
+        <CalendarBlank size={14} />
+        <input
+          type="date"
+          value={filters.openedFrom}
+          onChange={(e) => setOpenedFrom(e.target.value)}
+          aria-label="개업일 시작"
+          className="w-[7.7rem] bg-transparent text-xs outline-none"
+        />
+        <span className="text-zinc-300">~</span>
+        <input
+          type="date"
+          value={filters.openedTo}
+          onChange={(e) => setOpenedTo(e.target.value)}
+          aria-label="개업일 종료"
+          className="w-[7.7rem] bg-transparent text-xs outline-none"
+        />
+      </div>
     </div>
   );
 }

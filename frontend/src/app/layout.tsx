@@ -41,7 +41,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-[var(--bg-primary)] text-[var(--text-primary)]">
-        <main className="h-screen min-h-[100dvh] flex flex-col">{children}</main>
+        <main className="h-[100dvh] overflow-hidden flex flex-col">{children}</main>
         <DataFreshnessFooter />
       </body>
     </html>

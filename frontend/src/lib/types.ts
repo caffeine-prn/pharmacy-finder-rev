@@ -13,6 +13,7 @@ export interface MarkerData {
   s: string;    // sido
   g: string;    // sigungu
   p: string;    // phone
+  o?: string;   // opening date (YYYY-MM-DD)
 }
 
 export interface MarkersJSON {
@@ -41,6 +42,8 @@ export interface Pharmacy {
   hira_open_date: string | null;
   hira_last_event_type: string | null;
   hira_last_event_date: string | null;
+  hira_staff_fetched_at: string | null;
+  hira_staff_total_count: number | null;
   longitude: number | null;
   latitude: number | null;
   business_status: string;
@@ -106,6 +109,8 @@ export interface FilterState {
   animal: boolean;
   cross: boolean;
   noYkiho: boolean;
+  openedFrom: string;
+  openedTo: string;
 }
 
 /** Sort options for table */
