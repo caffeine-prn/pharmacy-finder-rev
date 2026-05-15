@@ -25,6 +25,12 @@ const PharmacyTable = dynamic(
   }
 );
 
+function dateNDaysAgo(days: number) {
+  const date = new Date();
+  date.setDate(date.getDate() - days);
+  return date.toISOString().slice(0, 10);
+}
+
 export function MainView() {
   const { view } = usePharmacyStore();
 
@@ -107,23 +113,46 @@ function TableSearchFilters() {
         ))}
       </select>
       <div className="h-5 w-px bg-zinc-200" />
-      <div className="inline-flex items-center gap-1 text-xs text-zinc-500">
-        <span>개업일</span>
+      <div className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-2 py-1 text-xs text-zinc-500">
+        <span className="font-semibold text-zinc-700">개업일</span>
+        <span>이후</span>
         <input
           type="date"
           value={filters.openedFrom}
           onChange={(e) => setOpenedFrom(e.target.value)}
-          aria-label="개업일 시작"
+          aria-label="개업일 이후"
           className="border border-zinc-200 rounded-md px-2 py-1.5 text-xs outline-none focus:border-emerald-400"
         />
-        <span>~</span>
+        <span>이전</span>
         <input
           type="date"
           value={filters.openedTo}
           onChange={(e) => setOpenedTo(e.target.value)}
-          aria-label="개업일 종료"
+          aria-label="개업일 이전"
           className="border border-zinc-200 rounded-md px-2 py-1.5 text-xs outline-none focus:border-emerald-400"
         />
+        <button
+          type="button"
+          onClick={() => {
+            setOpenedFrom(dateNDaysAgo(30));
+            setOpenedTo("");
+          }}
+          className="rounded-md bg-white px-2 py-1.5 font-medium text-zinc-600 border border-zinc-200 hover:bg-zinc-100"
+        >
+          최근 30일
+        </button>
+        {(filters.openedFrom || filters.openedTo) && (
+          <button
+            type="button"
+            onClick={() => {
+              setOpenedFrom("");
+              setOpenedTo("");
+            }}
+            className="rounded-md px-2 py-1.5 font-medium text-zinc-400 hover:bg-white hover:text-zinc-600"
+          >
+            해제
+          </button>
+        )}
       </div>
       <div className="h-5 w-px bg-zinc-200" />
       {[
