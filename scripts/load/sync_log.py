@@ -27,6 +27,10 @@ def _parse_log(log_text: str) -> dict:
         r"LOCALDATA↔HIRA matched:\s+(\d+), unmatched:\s+(\d+)", log_text
     )
     animal = re.search(r"Animal matched:\s+(\d+), unmatched:\s+(\d+)", log_text)
+    opclo = re.search(
+        r"HIRA op/clo events:\s+(\d+) total,\s+(\d+) opened,\s+(\d+) closed,\s+(\d+) suspended",
+        log_text,
+    )
 
     return {
         "localdata_pharmacies": (
@@ -39,6 +43,10 @@ def _parse_log(log_text: str) -> dict:
             r"Animal pharmacies \(active\):\s+(\d+)", log_text
         ),
         "hira_pharmacies": _first_int(r"HIRA pharmacies:\s+(\d+)", log_text),
+        "hira_opclo_events": int(opclo.group(1)) if opclo else None,
+        "hira_opclo_opened": int(opclo.group(2)) if opclo else None,
+        "hira_opclo_closed": int(opclo.group(3)) if opclo else None,
+        "hira_opclo_suspended": int(opclo.group(4)) if opclo else None,
         "nmc_pharmacies": _first_int(r"NMC pharmacies:\s+(\d+)", log_text),
         "matched_hira": int(matched.group(1)) if matched else None,
         "unmatched_hira": int(matched.group(2)) if matched else None,

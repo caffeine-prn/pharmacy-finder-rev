@@ -8,6 +8,15 @@ def _chunks(items, size: int):
         yield items[i:i + size]
 
 
+def _date_yyyymmdd_to_iso(value: str | None):
+    if not value:
+        return None
+    value = str(value).strip()
+    if len(value) == 8 and value.isdigit():
+        return f"{value[:4]}-{value[4:6]}-{value[6:]}"
+    return value
+
+
 def get_client():
     url = os.environ["SUPABASE_URL"]
     key = os.environ["SUPABASE_SERVICE_KEY"]
@@ -134,6 +143,40 @@ def upsert_mois_raw(client, rows: list[dict], batch_size: int = 500) -> int:
         ).execute()
         count += len(batch)
         print(f"  Upserted {count}/{len(rows)} MOIS raw rows")
+    return count
+
+
+def upsert_hira_opclo_raw(client, rows: list[dict], batch_size: int = 500) -> int:
+    db_rows = []
+    for row in rows:
+        ykiho = row.get("ykiho")
+        event_type = row.get("event_type")
+        event_date = row.get("event_date")
+        if not ykiho or not event_type or not event_date:
+            continue
+        db_rows.append({
+            "ykiho": ykiho,
+            "name": row.get("name", ""),
+            "category": row.get("category", ""),
+            "sido": row.get("sido", ""),
+            "sido_code": row.get("sido_code", ""),
+            "address": row.get("address", ""),
+            "phone": row.get("phone", ""),
+            "event_type": event_type,
+            "event_date": _date_yyyymmdd_to_iso(event_date),
+            "crtr_ym": row.get("crtr_ym", ""),
+            "raw": row.get("raw", row),
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+        })
+
+    count = 0
+    for batch in _chunks(db_rows, batch_size):
+        client.table("hira_opclo_raw").upsert(
+            batch,
+            on_conflict="ykiho,event_type,event_date",
+        ).execute()
+        count += len(batch)
+        print(f"  Upserted {count}/{len(db_rows)} HIRA op/clo rows")
     return count
 
 

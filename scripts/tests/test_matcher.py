@@ -1,4 +1,9 @@
-from transform.matcher import match_localdata_to_hira, match_to_animal, classify_herbal
+from transform.matcher import (
+    apply_hira_opclo_status,
+    match_localdata_to_hira,
+    match_to_animal,
+    classify_herbal,
+)
 
 
 def test_exact_name_address_match():
@@ -58,3 +63,17 @@ def test_classify_herbal():
     assert result[1]["is_herbal_pharmacy"] is True
     assert result[1]["is_cross_employed"] is True
     assert result[2]["is_herbal_pharmacy"] is False
+
+
+def test_apply_hira_opclo_status_marks_suspended():
+    pharmacies = [
+        {"id": "L1", "ykiho": "YK001", "name": "테스트약국", "business_status": "영업중"},
+    ]
+    events = [
+        {"ykiho": "YK001", "event_type": "개업", "event_date": "20260401"},
+        {"ykiho": "YK001", "event_type": "휴업", "event_date": "20260501"},
+    ]
+    result = apply_hira_opclo_status(pharmacies, events)
+    assert result[0]["hira_opclo_event_type"] == "휴업"
+    assert result[0]["business_status"] == "휴업"
+    assert result[0]["business_status_code"] == "02"

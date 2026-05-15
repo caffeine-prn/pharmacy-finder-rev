@@ -58,6 +58,7 @@ export function DataFreshnessFooter() {
                     {f.source === "localdata" && "약국 기본정보"}
                     {f.source === "mois_pharmacy_api" && "행안부 약국정보"}
                     {f.source === "hira_pharmacy" && "HIRA 약국정보"}
+                    {f.source === "hira_opclo" && "HIRA 개폐업"}
                     {f.source === "nmc_pharmacy" && "영업시간"}
                     {f.source === "nmc_hours" && "영업시간"}
                     {f.source === "hira_staff" && "인력정보"}

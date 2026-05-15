@@ -19,6 +19,10 @@ interface SyncSourceCounts {
   localdata_pharmacies: number | null;
   localdata_animal_pharmacies: number | null;
   hira_pharmacies: number | null;
+  hira_opclo_events: number | null;
+  hira_opclo_opened: number | null;
+  hira_opclo_closed: number | null;
+  hira_opclo_suspended: number | null;
   nmc_pharmacies: number | null;
   matched_hira: number | null;
   unmatched_hira: number | null;
@@ -57,6 +61,18 @@ interface SyncLog {
 interface MarkersSummary {
   generated_at: string;
   count: number;
+  herbal: number;
+  animal: number;
+  cross: number;
+  ykiho: number;
+  noYkiho: number;
+  herbalAnimal: number;
+  herbalNoYkiho: number;
+  animalNoYkiho: number;
+  crossNoYkiho: number;
+  onlyHerbal: number;
+  onlyAnimal: number;
+  onlyNoYkiho: number;
 }
 
 const numberFormat = new Intl.NumberFormat("ko-KR");
@@ -90,10 +106,7 @@ export default function LogPage() {
 
         if (!cancelled) {
           setSyncLog(logData as SyncLog);
-          setMarkers({
-            generated_at: markerData.generated_at,
-            count: markerData.count,
-          });
+          setMarkers(buildMarkersSummary(markerData));
         }
       } catch (error) {
         if (!cancelled) {
@@ -219,11 +232,76 @@ export default function LogPage() {
                 </div>
               </aside>
             </section>
+
+            {markers && (
+              <section className="mt-5 rounded-md border border-zinc-200 bg-white">
+                <div className="border-b border-zinc-100 px-4 py-3">
+                  <h2 className="text-sm font-semibold text-zinc-900">집합 관계</h2>
+                  <p className="mt-1 text-xs leading-5 text-zinc-500">
+                    요양X는 행안부 약국 목록 중 HIRA 약국 기본목록과 보강 이벤트에 아직 매칭되지 않은 상태입니다.
+                  </p>
+                </div>
+                <div className="grid gap-3 p-4 md:grid-cols-4">
+                  <Metric label="행안부 약국 마커" value={formatNumber(markers.count)} />
+                  <Metric label="HIRA 요양기관" value={formatNumber(markers.ykiho)} />
+                  <Metric label="요양X" value={formatNumber(markers.noYkiho)} />
+                  <Metric label="동물약국" value={formatNumber(markers.animal)} />
+                  <Metric label="한약사" value={formatNumber(markers.herbal)} />
+                  <Metric label="교차고용" value={formatNumber(markers.cross)} />
+                  <Metric label="한약사 ∩ 동물약국" value={formatNumber(markers.herbalAnimal)} />
+                  <Metric label="동물약국 ∩ 요양X" value={formatNumber(markers.animalNoYkiho)} />
+                  <Metric label="한약사 ∩ 요양X" value={formatNumber(markers.herbalNoYkiho)} />
+                  <Metric label="교차고용 ∩ 요양X" value={formatNumber(markers.crossNoYkiho)} />
+                  <Metric label="한약사 only" value={formatNumber(markers.onlyHerbal)} />
+                  <Metric label="요양X only" value={formatNumber(markers.onlyNoYkiho)} />
+                </div>
+              </section>
+            )}
           </>
         )}
       </div>
     </div>
   );
+}
+
+function buildMarkersSummary(markerData: any): MarkersSummary {
+  const rows = Array.isArray(markerData.pharmacies) ? markerData.pharmacies : [];
+  const summary: MarkersSummary = {
+    generated_at: markerData.generated_at,
+    count: markerData.count ?? rows.length,
+    herbal: 0,
+    animal: 0,
+    cross: 0,
+    ykiho: 0,
+    noYkiho: 0,
+    herbalAnimal: 0,
+    herbalNoYkiho: 0,
+    animalNoYkiho: 0,
+    crossNoYkiho: 0,
+    onlyHerbal: 0,
+    onlyAnimal: 0,
+    onlyNoYkiho: 0,
+  };
+
+  for (const row of rows) {
+    const herbal = Boolean(row.h);
+    const animal = Boolean(row.a);
+    const cross = Boolean(row.c);
+    const ykiho = Boolean(row.y);
+    if (herbal) summary.herbal += 1;
+    if (animal) summary.animal += 1;
+    if (cross) summary.cross += 1;
+    if (ykiho) summary.ykiho += 1;
+    if (!ykiho) summary.noYkiho += 1;
+    if (herbal && animal) summary.herbalAnimal += 1;
+    if (herbal && !ykiho) summary.herbalNoYkiho += 1;
+    if (animal && !ykiho) summary.animalNoYkiho += 1;
+    if (cross && !ykiho) summary.crossNoYkiho += 1;
+    if (herbal && !animal && !cross && ykiho) summary.onlyHerbal += 1;
+    if (animal && !herbal && !cross && ykiho) summary.onlyAnimal += 1;
+    if (!ykiho && !herbal && !animal && !cross) summary.onlyNoYkiho += 1;
+  }
+  return summary;
 }
 
 function StatusCard({
@@ -319,13 +397,15 @@ function LatestDetails({
 
   return (
     <div className="p-4">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid gap-3">
         <Metric label="LOCALDATA 약국" value={formatNullable(event.source_counts.localdata_pharmacies)} />
         <Metric label="배포 마커" value={formatNullable(currentMarkerCount)} />
         <Metric label="신규" value={formatNullable(event.source_counts.new_pharmacies)} />
         <Metric label="폐업" value={formatNullable(event.source_counts.closed_pharmacies)} />
         <Metric label="HIRA 매칭" value={formatNullable(event.source_counts.matched_hira)} />
         <Metric label="동물약국 매칭" value={formatNullable(event.source_counts.matched_animal)} />
+        <Metric label="HIRA 개폐업 보강" value={formatNullable(event.source_counts.hira_opclo_events)} />
+        <Metric label="보강 개업" value={formatNullable(event.source_counts.hira_opclo_opened)} />
       </div>
 
       {markerDelta !== null && (

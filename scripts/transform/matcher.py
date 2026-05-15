@@ -65,6 +65,38 @@ def match_localdata_to_hira(localdata, hira):
     return matched, unmatched
 
 
+def apply_hira_opclo_status(pharmacies, opclo_events):
+    """Attach the latest HIRA open/close/suspension event to matched pharmacies."""
+    latest_by_ykiho = {}
+    for event in opclo_events:
+        ykiho = event.get("ykiho")
+        event_date = event.get("event_date") or ""
+        if not ykiho or not event_date:
+            continue
+        previous = latest_by_ykiho.get(ykiho)
+        if previous is None or event_date >= (previous.get("event_date") or ""):
+            latest_by_ykiho[ykiho] = event
+
+    status_by_event = {
+        "개업": ("영업중", "01"),
+        "폐업": ("폐업", "03"),
+        "휴업": ("휴업", "02"),
+    }
+    for p in pharmacies:
+        event = latest_by_ykiho.get(p.get("ykiho"))
+        if not event:
+            continue
+        p["hira_opclo_event_type"] = event.get("event_type")
+        p["hira_opclo_event_date"] = event.get("event_date")
+        status = status_by_event.get(event.get("event_type"))
+        if status:
+            p["hira_business_status"] = status[0]
+            if event.get("event_type") != "개업":
+                p["business_status"] = status[0]
+                p["business_status_code"] = status[1]
+    return pharmacies
+
+
 def match_to_animal(pharmacies, animals):
     pharm_by_name = {}
     for p in pharmacies:

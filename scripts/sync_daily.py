@@ -2,28 +2,50 @@
 """Daily pharmacy data sync orchestrator."""
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from utils.logger import setup_logger
 from sources.localdata import download_and_parse_pharmacy, download_and_parse_animal
 from sources.mois_api import fetch_mois_records
-from sources.hira_pharmacy import fetch_all_hira_pharmacies
+from sources.hira_pharmacy import (
+    fetch_all_hira_pharmacies,
+    fetch_hira_opclo_events,
+    opclo_events_as_hira_candidates,
+)
 from sources.nmc_pharmacy import fetch_all_nmc_pharmacies
 from sources.hira_staff import parse_staff_xlsx
 from transform.coordinate import convert_batch
-from transform.matcher import match_localdata_to_hira, match_to_animal, classify_herbal
+from transform.matcher import (
+    apply_hira_opclo_status,
+    match_localdata_to_hira,
+    match_to_animal,
+    classify_herbal,
+)
 from transform.normalizer import normalize_name, extract_sido_sigungu
 from load.supabase_loader import (
     get_client, upsert_pharmacies, upsert_staff,
-    update_freshness, log_sync, detect_changes, upsert_mois_raw
+    update_freshness, log_sync, detect_changes, upsert_mois_raw,
+    upsert_hira_opclo_raw,
 )
 from load.cdn_json import generate_markers_json
 
 log = setup_logger()
 
 DEFAULT_STAFF_XLSX_PATH = "asset/12.의료기관별상세정보서비스_10_기타인력정보 2025.6.xlsx"
+
+
+def _current_quarter_start(today: date) -> date:
+    quarter_month = ((today.month - 1) // 3) * 3 + 1
+    return date(today.year, quarter_month, 1)
+
+
+def _parse_baseline_date(today: date) -> date:
+    configured = os.environ.get("HIRA_BASELINE_DATE", "").strip()
+    if configured:
+        return datetime.strptime(configured, "%Y-%m-%d").date()
+    return _current_quarter_start(today)
 
 
 def _attach_operating_hours(pharmacies, nmc_data):
@@ -83,7 +105,9 @@ def _load_mois_or_localdata(api_key: str):
 def main():
     started_at = datetime.now(timezone.utc).isoformat()
     api_key = os.environ.get("DRUG_API_KEY", "")
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today_date = datetime.now(timezone.utc).date()
+    today = today_date.strftime("%Y-%m-%d")
+    hira_baseline_date = _parse_baseline_date(today_date)
     errors = []
 
     log.info("=== Daily Pharmacy Sync Started ===")
@@ -109,6 +133,29 @@ def main():
         hira_pharmacies = []
         errors.append(f"HIRA: {e}")
 
+    log.info(f"Step 2b: Fetching HIRA open/close events since {hira_baseline_date.isoformat()}...")
+    try:
+        hira_opclo_events = fetch_hira_opclo_events(
+            api_key,
+            since=hira_baseline_date,
+            until=today_date,
+        )
+        hira_opclo_candidates = opclo_events_as_hira_candidates(hira_opclo_events)
+        hira_pharmacies_for_match = hira_pharmacies + hira_opclo_candidates
+        open_events = sum(1 for e in hira_opclo_events if e.get("event_type") == "개업")
+        closed_events = sum(1 for e in hira_opclo_events if e.get("event_type") == "폐업")
+        suspended_events = sum(1 for e in hira_opclo_events if e.get("event_type") == "휴업")
+        log.info(
+            "  HIRA op/clo events: "
+            f"{len(hira_opclo_events)} total, {open_events} opened, "
+            f"{closed_events} closed, {suspended_events} suspended"
+        )
+    except Exception as e:
+        log.warning(f"  HIRA open/close API failed (non-critical): {e}")
+        hira_opclo_events = []
+        hira_pharmacies_for_match = hira_pharmacies
+        errors.append(f"HIRA op/clo: {e}")
+
     # Step 3: NMC API
     log.info("Step 3: Fetching 국립중앙의료원 API...")
     try:
@@ -121,10 +168,11 @@ def main():
 
     # Step 4: Match & merge
     log.info("Step 4: Matching sources...")
-    matched, unmatched = match_localdata_to_hira(localdata_pharmacies, hira_pharmacies)
+    matched, unmatched = match_localdata_to_hira(localdata_pharmacies, hira_pharmacies_for_match)
     log.info(f"  LOCALDATA↔HIRA matched: {len(matched)}, unmatched: {len(unmatched)}")
 
     all_pharmacies = matched + unmatched
+    apply_hira_opclo_status(all_pharmacies, hira_opclo_events)
 
     all_pharmacies, unmatched_animals = match_to_animal(all_pharmacies, localdata_animals)
     animal_count = sum(1 for p in all_pharmacies if p.get("is_animal_pharmacy"))
@@ -162,6 +210,11 @@ def main():
             raw_count = upsert_mois_raw(client, mois_raw_rows)
             log.info(f"  Upserted {raw_count} MOIS raw rows")
 
+        if hira_opclo_events:
+            log.info("  Upserting HIRA op/clo source rows...")
+            opclo_count = upsert_hira_opclo_raw(client, hira_opclo_events)
+            log.info(f"  Upserted {opclo_count} HIRA op/clo rows")
+
         # Detect changes before upsert
         log.info("  Detecting changes...")
         change_stats = detect_changes(client, all_pharmacies)
@@ -178,6 +231,13 @@ def main():
         update_freshness(client, "mois_pharmacy_api", today, len(localdata_pharmacies),
                          notes="; ".join(source_notes))
         update_freshness(client, "hira_pharmacy", today, len(hira_pharmacies))
+        update_freshness(
+            client,
+            "hira_opclo",
+            today,
+            len(hira_opclo_events),
+            notes=f"baseline_date={hira_baseline_date.isoformat()}",
+        )
         if nmc_data:
             update_freshness(client, "nmc_hours", today, len(nmc_data))
         update_freshness(client, "mois_animal_pharmacy_api", today, len(localdata_animals),
@@ -187,7 +247,12 @@ def main():
         log_sync(client, "daily", started_at, status,
                  pharmacy_count=pharmacy_count, animal_count=animal_count,
                  staff_count=staff_count, errors=errors if errors else None,
-                 metadata={"source_notes": source_notes, "mois_raw_rows": len(mois_raw_rows)},
+                 metadata={
+                     "source_notes": source_notes,
+                     "mois_raw_rows": len(mois_raw_rows),
+                     "hira_opclo_rows": len(hira_opclo_events),
+                     "hira_baseline_date": hira_baseline_date.isoformat(),
+                 },
                  new_pharmacies=change_stats["new_count"],
                  closed_pharmacies=change_stats["closed_count"],
                  changed_pharmacies=change_stats["changed_count"])

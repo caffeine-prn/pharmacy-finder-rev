@@ -16,6 +16,7 @@ import { supabase } from "@/lib/supabase/client";
 import type { Pharmacy } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { PharmacyStatusButtons } from "@/components/pharmacy/PharmacyStatusButtons";
 import Link from "next/link";
 
 export function PharmacySlidePanel() {
@@ -133,6 +134,8 @@ export function PharmacySlidePanel() {
               </div>
             ) : pharmacy ? (
               <>
+                <PharmacyStatusButtons pharmacy={pharmacy} compact />
+
                 {/* Address */}
                 {pharmacy.address && (
                   <div className="flex items-start gap-2.5">

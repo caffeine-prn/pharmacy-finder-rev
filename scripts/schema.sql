@@ -135,3 +135,28 @@ CREATE INDEX IF NOT EXISTS idx_mois_facility_license_date
   ON mois_facility_raw (source, license_date);
 CREATE INDEX IF NOT EXISTS idx_mois_facility_data_updated_at
   ON mois_facility_raw (source, data_updated_at);
+
+-- HIRA pharmacy opening/closing/suspension event rows.
+-- This complements the HIRA pharmacy baseline list so newly opened pharmacies
+-- after the baseline date can still be matched by ykiho.
+CREATE TABLE IF NOT EXISTS hira_opclo_raw (
+  ykiho TEXT NOT NULL,
+  event_type TEXT NOT NULL,
+  event_date DATE NOT NULL,
+  name TEXT,
+  category TEXT,
+  sido TEXT,
+  sido_code TEXT,
+  address TEXT,
+  phone TEXT,
+  crtr_ym TEXT,
+  raw JSONB NOT NULL,
+  fetched_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now(),
+  PRIMARY KEY (ykiho, event_type, event_date)
+);
+
+CREATE INDEX IF NOT EXISTS idx_hira_opclo_event_date
+  ON hira_opclo_raw (event_date);
+CREATE INDEX IF NOT EXISTS idx_hira_opclo_event_type
+  ON hira_opclo_raw (event_type);
