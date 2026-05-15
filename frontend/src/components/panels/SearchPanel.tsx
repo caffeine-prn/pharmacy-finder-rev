@@ -86,7 +86,7 @@ export function SearchPanel() {
         </select>
       </div>
 
-      <div className="flex items-center gap-2 text-[11px] font-medium text-zinc-500">
+      <div className="flex items-center gap-2 text-[11px] font-medium text-zinc-500 max-sm:hidden">
         <Link
           href="/about"
           className="rounded-full border border-zinc-200 bg-white/90 px-2.5 py-1 shadow-sm backdrop-blur-sm hover:text-zinc-800"
