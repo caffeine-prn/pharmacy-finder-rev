@@ -37,6 +37,8 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           MARKERS_JSON_PATH: frontend/public/markers.json
+          STAFF_XLSX_PATH: asset/12.의료기관별상세정보서비스_10_기타인력정보 2025.6.xlsx
+          STAFF_PERIOD: "2025.6"
 
       - name: Write sync log
         if: always()

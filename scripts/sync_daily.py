@@ -23,6 +23,8 @@ from load.cdn_json import generate_markers_json
 
 log = setup_logger()
 
+DEFAULT_STAFF_XLSX_PATH = "asset/12.의료기관별상세정보서비스_10_기타인력정보 2025.6.xlsx"
+
 
 def _attach_operating_hours(pharmacies, nmc_data):
     nmc_by_name = {}
@@ -129,10 +131,14 @@ def main():
     log.info(f"  Animal matched: {animal_count}, unmatched: {len(unmatched_animals)}")
 
     staff_path = os.environ.get("STAFF_XLSX_PATH", "")
+    if not staff_path and os.path.exists(DEFAULT_STAFF_XLSX_PATH):
+        staff_path = DEFAULT_STAFF_XLSX_PATH
     staff_data = {}
     if staff_path and os.path.exists(staff_path):
         log.info(f"  Loading staff from {staff_path}")
         staff_data = parse_staff_xlsx(staff_path)
+    else:
+        log.info("  Staff file not configured; herbal/cross flags will be empty")
 
     classify_herbal(all_pharmacies, staff_data)
     herbal_count = sum(1 for p in all_pharmacies if p.get("is_herbal_pharmacy"))
