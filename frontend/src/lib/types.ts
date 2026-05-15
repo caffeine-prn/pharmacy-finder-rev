@@ -69,11 +69,17 @@ export interface Pharmacy {
 /** Pharmacy row for table view (subset of columns) */
 export interface PharmacyTableRow {
   id: string;
+  ykiho: string | null;
   name: string;
   address: string | null;
   phone: string | null;
   sido: string | null;
   sigungu: string | null;
+  open_date: string | null;
+  mois_license_date: string | null;
+  hira_open_date: string | null;
+  hira_staff_fetched_at: string | null;
+  hira_staff_total_count: number | null;
   pharmacist_count: number;
   herbal_pharmacist_count: number;
   is_herbal_pharmacy: boolean;
@@ -114,7 +120,7 @@ export interface FilterState {
 }
 
 /** Sort options for table */
-export type SortField = "name" | "sido" | "sigungu" | "pharmacist_count" | "herbal_pharmacist_count";
+export type SortField = "name" | "sido" | "sigungu" | "open_date" | "pharmacist_count" | "herbal_pharmacist_count";
 export type SortDirection = "asc" | "desc";
 
 export interface SortState {

@@ -18,6 +18,32 @@ import Link from "next/link";
 
 const PAGE_SIZE = 50;
 
+function displayDate(value: string | null | undefined) {
+  if (!value) return "-";
+  return value.slice(0, 10);
+}
+
+function displayOpenDate(row: PharmacyTableRow) {
+  return displayDate(row.mois_license_date || row.hira_open_date || row.open_date);
+}
+
+function displayDateTime(value: string | null | undefined) {
+  if (!value) return "";
+  return new Date(value).toLocaleString("ko-KR", {
+    year: "2-digit",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function compactYkiho(ykiho: string | null) {
+  if (!ykiho) return "";
+  if (ykiho.length <= 18) return ykiho;
+  return `${ykiho.slice(0, 8)}...${ykiho.slice(-6)}`;
+}
+
 export function PharmacyTable() {
   const {
     filters,
@@ -118,19 +144,35 @@ export function PharmacyTable() {
       const res = await fetch(`/api/pharmacies?${params}`);
       const json: PaginatedResponse<PharmacyTableRow> = await res.json();
 
-      const headers = ["약국명", "주소", "전화번호", "시도", "시군구", "약사", "한약사", "동물약국", "한약사약국", "교차고용", "요양기관"];
+      const headers = [
+        "약국명",
+        "개업일",
+        "요양기관번호",
+        "주소",
+        "전화번호",
+        "시도",
+        "시군구",
+        "약사",
+        "한약사",
+        "인력조회기준",
+        "동물약국",
+        "한약사약국",
+        "교차고용",
+      ];
       const rows = json.data.map((r) => [
         r.name,
+        displayOpenDate(r),
+        r.ykiho || "",
         r.address || "",
         r.phone || "",
         r.sido || "",
         r.sigungu || "",
         r.pharmacist_count,
         r.herbal_pharmacist_count,
+        r.hira_staff_fetched_at || "",
         r.is_animal_pharmacy ? "O" : "",
         r.is_herbal_pharmacy ? "O" : "",
         r.is_cross_employed ? "O" : "",
-        r.has_ykiho ? "O" : "X",
       ]);
 
       const BOM = "\uFEFF";
@@ -166,17 +208,16 @@ export function PharmacyTable() {
 
       {/* Table */}
       <div className="flex-1 overflow-auto">
-        <table className="w-full min-w-[800px] table-mobile">
+        <table className="w-full min-w-[1120px] table-mobile">
           <thead className="sticky top-0 bg-zinc-50 border-b border-zinc-200">
             <tr>
               <SortHeader field="name" label="약국명" />
+              <SortHeader field="open_date" label="개업일" />
+              <th className="px-3 py-2.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">요양기관번호</th>
               {/* sticky first column handled by CSS for mobile */}
               <th className="px-3 py-2.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">주소</th>
-              <th className="px-3 py-2.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">전화번호</th>
-              <SortHeader field="sido" label="시도" />
-              <SortHeader field="sigungu" label="시군구" />
-              <SortHeader field="pharmacist_count" label="약사" />
-              <SortHeader field="herbal_pharmacist_count" label="한약사" />
+              <SortHeader field="sido" label="지역" />
+              <th className="px-3 py-2.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">인력 구성</th>
               <th className="px-3 py-2.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">구분</th>
               <th className="px-3 py-2.5 w-8"></th>
             </tr>
@@ -185,14 +226,14 @@ export function PharmacyTable() {
             {loading ? (
               Array.from({ length: 10 }).map((_, i) => (
                 <tr key={i}>
-                  <td colSpan={9} className="px-0 py-0">
+                  <td colSpan={8} className="px-0 py-0">
                     <SkeletonRow />
                   </td>
                 </tr>
               ))
             ) : data.length === 0 ? (
               <tr>
-                <td colSpan={9} className="px-4 py-16 text-center text-zinc-400 text-sm">
+                <td colSpan={8} className="px-4 py-16 text-center text-zinc-400 text-sm">
                   조건에 맞는 약국이 없습니다.
                 </td>
               </tr>
@@ -204,25 +245,56 @@ export function PharmacyTable() {
                   onClick={() => handleFocusOnMap(row)}
                 >
                   <td className="px-3 py-2.5 text-sm font-medium text-zinc-900 whitespace-nowrap">
-                    {row.name}
+                    <div className="max-w-[180px]">
+                      <p className="truncate">{row.name}</p>
+                      {row.phone && (
+                        <p className="mt-0.5 font-mono text-[11px] font-normal text-zinc-400">
+                          {row.phone}
+                        </p>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-3 py-2.5 text-sm text-zinc-700 whitespace-nowrap font-mono">
+                    {displayOpenDate(row)}
+                  </td>
+                  <td className="px-3 py-2.5 whitespace-nowrap">
+                    {row.ykiho ? (
+                      <span
+                        title={row.ykiho}
+                        className="inline-flex rounded-md bg-emerald-50 px-2 py-1 font-mono text-[11px] font-medium text-emerald-700"
+                      >
+                        {compactYkiho(row.ykiho)}
+                      </span>
+                    ) : (
+                      <Badge variant="noYkiho">요양X</Badge>
+                    )}
                   </td>
                   <td className="px-3 py-2.5 text-sm text-zinc-600 max-w-[240px] truncate">
                     {row.address}
                   </td>
-                  <td className="px-3 py-2.5 text-sm text-zinc-600 whitespace-nowrap font-mono text-xs">
-                    {row.phone}
-                  </td>
                   <td className="px-3 py-2.5 text-sm text-zinc-600 whitespace-nowrap">
-                    {row.sido}
+                    {row.sido} {row.sigungu}
                   </td>
-                  <td className="px-3 py-2.5 text-sm text-zinc-600 whitespace-nowrap">
-                    {row.sigungu}
-                  </td>
-                  <td className="px-3 py-2.5 text-sm text-zinc-700 font-mono text-center">
-                    {row.pharmacist_count || "-"}
-                  </td>
-                  <td className="px-3 py-2.5 text-sm text-zinc-700 font-mono text-center">
-                    {row.herbal_pharmacist_count || "-"}
+                  <td className="px-3 py-2.5 whitespace-nowrap">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className="rounded-md bg-zinc-100 px-2 py-1 text-xs text-zinc-700">
+                          약사 <b className="font-mono">{row.pharmacist_count || 0}</b>
+                        </span>
+                        <span className={`rounded-md px-2 py-1 text-xs ${
+                          row.herbal_pharmacist_count > 0
+                            ? "bg-rose-50 text-rose-700"
+                            : "bg-zinc-100 text-zinc-500"
+                        }`}>
+                          한약사 <b className="font-mono">{row.herbal_pharmacist_count || 0}</b>
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-zinc-400">
+                        {row.hira_staff_fetched_at
+                          ? `조회 기준 ${displayDateTime(row.hira_staff_fetched_at)}`
+                          : "CSV/기본 데이터 기준"}
+                      </p>
+                    </div>
                   </td>
                   <td className="px-3 py-2.5">
                     <div className="flex flex-wrap gap-1">
