@@ -13,7 +13,6 @@ import {
 import type { Pharmacy, NearbyPharmacy } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
 import { OperatingHours } from "./OperatingHours";
-import { StaffInfo } from "./StaffInfo";
 import { NearbyPharmacies } from "./NearbyPharmacies";
 import { PharmacyStatusButtons } from "./PharmacyStatusButtons";
 import { LifecycleTimeline } from "./LifecycleTimeline";
@@ -113,8 +112,7 @@ export function PharmacyDetail({ pharmacy, nearby }: PharmacyDetailProps) {
         {/* Operating hours */}
         <OperatingHours pharmacy={pharmacy} />
 
-        {/* Staff info */}
-        <StaffInfo pharmacy={pharmacy} />
+        {/* Staff composition */}
         <HiraStaffLookup pharmacy={pharmacy} />
 
         {/* Mini map */}

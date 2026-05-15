@@ -179,31 +179,6 @@ export function PharmacySlidePanel() {
                   );
                 })()}
 
-                {/* Staff */}
-                {(pharmacy.pharmacist_count > 0 || pharmacy.herbal_pharmacist_count > 0) && (
-                  <div className="bg-zinc-50 rounded-lg p-3 space-y-1.5">
-                    <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider">인력정보</p>
-                    <div className="flex gap-4">
-                      {pharmacy.pharmacist_count > 0 && (
-                        <div>
-                          <span className="text-lg font-bold text-zinc-900 font-mono">
-                            {pharmacy.pharmacist_count}
-                          </span>
-                          <span className="text-xs text-zinc-500 ml-1">약사</span>
-                        </div>
-                      )}
-                      {pharmacy.herbal_pharmacist_count > 0 && (
-                        <div>
-                          <span className="text-lg font-bold text-rose-600 font-mono">
-                            {pharmacy.herbal_pharmacist_count}
-                          </span>
-                          <span className="text-xs text-zinc-500 ml-1">한약사</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
                 <HiraStaffLookup pharmacy={pharmacy} />
 
                 {/* External links */}
