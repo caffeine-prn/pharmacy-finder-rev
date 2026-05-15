@@ -68,10 +68,13 @@ export function PharmacyTable() {
   const [data, setData] = useState<PharmacyTableRow[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [exporting, setExporting] = useState(false);
 
   // Fetch table data from API route
   const fetchData = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const params = new URLSearchParams({
         page: String(page),
@@ -90,12 +93,15 @@ export function PharmacyTable() {
       if (filters.openedTo) params.set("openedTo", filters.openedTo);
 
       const res = await fetch(`/api/pharmacies?${params}`);
-      if (!res.ok) throw new Error("Failed to fetch");
+      if (!res.ok) throw new Error("약국 목록을 불러오지 못했습니다.");
       const json: PaginatedResponse<PharmacyTableRow> = await res.json();
       setData(json.data);
       setTotal(json.total);
     } catch (err) {
       console.error("Table fetch error:", err);
+      setData([]);
+      setTotal(0);
+      setError(err instanceof Error ? err.message : "약국 목록을 불러오지 못했습니다.");
     } finally {
       setLoading(false);
     }
@@ -140,12 +146,14 @@ export function PharmacyTable() {
 
   // CSV export
   async function handleExportCSV() {
+    setExporting(true);
     const params = new URLSearchParams({
       page: "1",
-      pageSize: "30000", // Export all
+      pageSize: "1000",
+      export: "true",
       sortField,
       sortDirection,
-    });
+      });
     if (filters.search) params.set("search", filters.search);
     if (filters.sido) params.set("sido", filters.sido);
     if (filters.sigungu) params.set("sigungu", filters.sigungu);
@@ -157,8 +165,19 @@ export function PharmacyTable() {
     if (filters.openedTo) params.set("openedTo", filters.openedTo);
 
     try {
-      const res = await fetch(`/api/pharmacies?${params}`);
-      const json: PaginatedResponse<PharmacyTableRow> = await res.json();
+      const allRows: PharmacyTableRow[] = [];
+      let currentPage = 1;
+      let totalPagesForExport = 1;
+
+      do {
+        params.set("page", String(currentPage));
+        const res = await fetch(`/api/pharmacies?${params}`);
+        if (!res.ok) throw new Error("CSV 데이터를 불러오지 못했습니다.");
+        const json: PaginatedResponse<PharmacyTableRow> = await res.json();
+        allRows.push(...json.data);
+        totalPagesForExport = json.totalPages || 1;
+        currentPage += 1;
+      } while (currentPage <= totalPagesForExport);
 
       const headers = [
         "약국명",
@@ -175,7 +194,7 @@ export function PharmacyTable() {
         "한약사약국",
         "교차고용",
       ];
-      const rows = json.data.map((r) => [
+      const rows = allRows.map((r) => [
         r.name,
         displayOpenDate(r),
         r.ykiho || "",
@@ -202,6 +221,9 @@ export function PharmacyTable() {
       URL.revokeObjectURL(url);
     } catch (err) {
       console.error("Export error:", err);
+      setError(err instanceof Error ? err.message : "CSV 데이터를 불러오지 못했습니다.");
+    } finally {
+      setExporting(false);
     }
   }
 
@@ -217,8 +239,9 @@ export function PharmacyTable() {
           size="sm"
           icon={<DownloadSimple size={14} />}
           onClick={handleExportCSV}
+          disabled={exporting}
         >
-          CSV 내보내기
+          {exporting ? "CSV 생성 중" : "CSV 내보내기"}
         </Button>
       </div>
 
@@ -249,8 +272,25 @@ export function PharmacyTable() {
               ))
             ) : data.length === 0 ? (
               <tr>
-                <td colSpan={8} className="px-4 py-16 text-center text-zinc-400 text-sm">
-                  조건에 맞는 약국이 없습니다.
+                <td colSpan={8} className="px-4 py-16 text-center text-sm">
+                  {error ? (
+                    <div className="mx-auto max-w-sm rounded-lg border border-rose-100 bg-rose-50 px-4 py-3 text-rose-700">
+                      <p className="font-medium">목록을 불러오지 못했습니다.</p>
+                      <p className="mt-1 text-xs text-rose-600">{error}</p>
+                      <button
+                        type="button"
+                        onClick={fetchData}
+                        className="mt-3 rounded-md bg-white px-3 py-1.5 text-xs font-medium text-rose-700 shadow-sm ring-1 ring-rose-100 hover:bg-rose-50"
+                      >
+                        다시 시도
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="mx-auto max-w-sm text-zinc-500">
+                      <p className="font-medium text-zinc-700">조건에 맞는 약국이 없습니다.</p>
+                      <p className="mt-1 text-xs text-zinc-400">검색어 또는 필터를 조금 넓혀보세요.</p>
+                    </div>
+                  )}
                 </td>
               </tr>
             ) : (

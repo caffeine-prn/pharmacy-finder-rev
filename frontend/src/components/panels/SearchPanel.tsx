@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
+import Link from "next/link";
 import { usePharmacyStore } from "@/lib/store";
 
 const SIDO_LIST = [
@@ -83,6 +84,21 @@ export function SearchPanel() {
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="flex items-center gap-2 text-[11px] font-medium text-zinc-500">
+        <Link
+          href="/about"
+          className="rounded-full border border-zinc-200 bg-white/90 px-2.5 py-1 shadow-sm backdrop-blur-sm hover:text-zinc-800"
+        >
+          서비스 안내
+        </Link>
+        <Link
+          href="/log"
+          className="rounded-full border border-emerald-100 bg-emerald-50/95 px-2.5 py-1 text-emerald-700 shadow-sm backdrop-blur-sm hover:text-emerald-900"
+        >
+          데이터 로그
+        </Link>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Info } from "@phosphor-icons/react";
+import Link from "next/link";
 import { supabase } from "@/lib/supabase/client";
 import type { DataFreshness } from "@/lib/types";
 
@@ -23,6 +24,8 @@ export function DataFreshnessFooter() {
     freshness.find((f) => f.source === "mois_pharmacy_api")?.data_date ??
     freshness.find((f) => f.source === "localdata")?.data_date;
   const staffDate =
+    freshness.find((f) => f.source === "hira_staff_lookup_batch")?.data_date ??
+    freshness.find((f) => f.source === "hira_staff_lookup")?.data_date ??
     freshness.find((f) => f.source === "staff_info")?.data_date ??
     freshness.find((f) => f.source === "hira_staff")?.data_date;
 
@@ -50,7 +53,17 @@ export function DataFreshnessFooter() {
         {/* Expanded detail */}
         {expanded && (
           <div className="absolute bottom-10 left-2 bg-white rounded-lg shadow-xl border border-zinc-200 p-3 w-72">
-            <p className="text-xs font-semibold text-zinc-700 mb-2">데이터 기준</p>
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <p className="text-xs font-semibold text-zinc-700">데이터 기준</p>
+              <div className="flex items-center gap-2 text-[11px] font-medium">
+                <Link href="/about" className="text-zinc-500 hover:text-zinc-800">
+                  안내
+                </Link>
+                <Link href="/log" className="text-emerald-700 hover:text-emerald-900">
+                  로그
+                </Link>
+              </div>
+            </div>
             <div className="space-y-1.5">
               {freshness.map((f) => (
                 <div key={f.source} className="flex items-center justify-between">
@@ -62,6 +75,8 @@ export function DataFreshnessFooter() {
                     {f.source === "nmc_pharmacy" && "영업시간"}
                     {f.source === "nmc_hours" && "영업시간"}
                     {f.source === "hira_staff" && "인력정보"}
+                    {f.source === "hira_staff_lookup" && "HIRA 인력조회"}
+                    {f.source === "hira_staff_lookup_batch" && "HIRA 인력조회 배치"}
                     {f.source === "staff_info" && "인력정보"}
                     {f.source === "localdata_animal" && "동물약국"}
                     {f.source === "mois_animal_pharmacy_api" && "행안부 동물약국"}

@@ -16,8 +16,9 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
 
   const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
+  const isExport = searchParams.get("export") === "true";
   const pageSize = Math.min(
-    100,
+    isExport ? 1000 : 100,
     Math.max(1, parseInt(searchParams.get("pageSize") || searchParams.get("limit") || "50", 10))
   );
   const search = searchParams.get("search") || "";
@@ -49,7 +50,15 @@ export async function GET(request: NextRequest) {
 
   // Filters
   if (search) {
-    query = query.ilike("name", `%${search}%`);
+    const escapedSearch = search.replace(/[%_,]/g, "\\$&");
+    query = query.or(
+      [
+        `name.ilike.%${escapedSearch}%`,
+        `phone.ilike.%${escapedSearch}%`,
+        `address.ilike.%${escapedSearch}%`,
+        `road_address.ilike.%${escapedSearch}%`,
+      ].join(",")
+    );
   }
   if (sido) {
     query = query.eq("sido", sido);

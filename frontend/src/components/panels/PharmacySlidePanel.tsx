@@ -20,6 +20,7 @@ import { PharmacyStatusButtons } from "@/components/pharmacy/PharmacyStatusButto
 import { LifecycleTimeline } from "@/components/pharmacy/LifecycleTimeline";
 import { HiraStaffLookup } from "@/components/pharmacy/HiraStaffLookup";
 import Link from "next/link";
+import { buildReportUrl } from "@/lib/report";
 
 export function PharmacySlidePanel() {
   const { selectedPharmacyId, setSelectedPharmacyId } = usePharmacyStore();
@@ -84,9 +85,7 @@ export function PharmacySlidePanel() {
     ? `https://map.kakao.com/?q=${encodeURIComponent(pharmacy.name + " " + (pharmacy.address || ""))}`
     : "";
 
-  const reportUrl = pharmacy
-    ? `https://docs.google.com/forms/d/e/1FAIpQLSfHBe1ztCW35Go0H1SmCQ0DzedfopwhFPChwD9tx7sYPLVqqA/viewform?usp=pp_url&entry.1356240170=${encodeURIComponent(pharmacy.name)}&entry.1318537606=${encodeURIComponent(pharmacy.address || "")}&entry.1084600480=${encodeURIComponent(pharmacy.phone || "")}`
-    : "";
+  const reportUrl = pharmacy ? buildReportUrl(pharmacy) : "";
 
   return (
     <AnimatePresence>

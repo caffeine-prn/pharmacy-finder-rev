@@ -13,15 +13,25 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://pharmacy-finder-kr.vercel.app"),
   title: "전국 약국 찾기",
   description:
     "전국 25,000+ 약국 위치, 영업시간, 인력정보를 한눈에. HIRA + LOCALDATA 기반 일일 자동 동기화.",
   keywords: ["약국", "약국찾기", "한약국", "동물약국", "약국지도"],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "전국 약국 찾기",
     description: "전국 25,000+ 약국 위치, 영업시간, 인력정보를 한눈에.",
+    url: "https://pharmacy-finder-kr.vercel.app",
+    siteName: "전국 약국 찾기",
     type: "website",
     locale: "ko_KR",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

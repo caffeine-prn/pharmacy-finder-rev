@@ -17,6 +17,7 @@ import { NearbyPharmacies } from "./NearbyPharmacies";
 import { PharmacyStatusButtons } from "./PharmacyStatusButtons";
 import { LifecycleTimeline } from "./LifecycleTimeline";
 import { HiraStaffLookup } from "./HiraStaffLookup";
+import { buildReportUrl } from "@/lib/report";
 
 interface PharmacyDetailProps {
   pharmacy: Pharmacy;
@@ -41,7 +42,7 @@ export function PharmacyDetail({ pharmacy, nearby }: PharmacyDetailProps) {
   );
   const naverUrl = `https://map.naver.com/v5/search/${addressQuery}`;
   const kakaoUrl = `https://map.kakao.com/?q=${addressQuery}`;
-  const reportUrl = `https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?usp=pp_url&entry.123=${encodeURIComponent(pharmacy.name)}&entry.456=${encodeURIComponent(pharmacy.id)}`;
+  const reportUrl = buildReportUrl(pharmacy);
 
   return (
     <div className="flex-1 overflow-y-auto bg-[var(--bg-primary,#f9fafb)]">

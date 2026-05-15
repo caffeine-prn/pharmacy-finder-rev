@@ -7,6 +7,7 @@ import { SearchPanel } from "@/components/panels/SearchPanel";
 import { FilterBar } from "@/components/panels/FilterBar";
 import { PharmacySlidePanel } from "@/components/panels/PharmacySlidePanel";
 import { Skeleton } from "@/components/ui/Skeleton";
+import Link from "next/link";
 
 // Dynamic imports to avoid SSR issues
 const PharmacyMap = dynamic(
@@ -46,8 +47,16 @@ export function MainView() {
       ) : (
         <>
           {/* Table view has its own inline search/filter bar */}
-          <div className="bg-white border-b border-zinc-200 px-4 py-2.5 flex items-center gap-3 flex-wrap">
+          <div className="bg-white border-b border-zinc-200 px-4 py-2.5 pr-40 flex items-center gap-3 flex-wrap max-sm:pr-4">
             <TableSearchFilters />
+            <div className="ml-auto flex items-center gap-2 text-xs font-medium">
+              <Link href="/about" className="text-zinc-500 hover:text-zinc-900">
+                서비스 안내
+              </Link>
+              <Link href="/log" className="text-emerald-700 hover:text-emerald-900">
+                데이터 로그
+              </Link>
+            </div>
           </div>
           <PharmacyTable />
         </>
