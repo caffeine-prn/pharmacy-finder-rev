@@ -8,6 +8,9 @@ const VALID_SORT_FIELDS: SortField[] = [
   "sido",
   "sigungu",
   "open_date",
+  "mois_license_date",
+  "hira_open_date",
+  "hira_staff_fetched_at",
   "pharmacist_count",
   "herbal_pharmacist_count",
 ];
@@ -86,7 +89,7 @@ export async function GET(request: NextRequest) {
   }
 
   // Sort
-  query = query.order(sortField, { ascending });
+  query = query.order(sortField, { ascending, nullsFirst: false });
 
   // Pagination
   const from = (page - 1) * pageSize;

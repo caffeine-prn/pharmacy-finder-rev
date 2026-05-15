@@ -123,7 +123,16 @@ export interface FilterState {
 }
 
 /** Sort options for table */
-export type SortField = "name" | "sido" | "sigungu" | "open_date" | "pharmacist_count" | "herbal_pharmacist_count";
+export type SortField =
+  | "name"
+  | "sido"
+  | "sigungu"
+  | "open_date"
+  | "mois_license_date"
+  | "hira_open_date"
+  | "hira_staff_fetched_at"
+  | "pharmacist_count"
+  | "herbal_pharmacist_count";
 export type SortDirection = "asc" | "desc";
 
 export interface SortState {

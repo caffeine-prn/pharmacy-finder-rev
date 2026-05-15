@@ -24,10 +24,6 @@ function displayDate(value: string | null | undefined) {
   return value.slice(0, 10);
 }
 
-function displayOpenDate(row: PharmacyTableRow) {
-  return displayDate(row.mois_license_date || row.hira_open_date || row.open_date);
-}
-
 function displayAddress(row: PharmacyTableRow) {
   return row.road_address || row.address || "-";
 }
@@ -38,6 +34,14 @@ function displayDateTime(value: string | null | undefined) {
     year: "2-digit",
     month: "2-digit",
     day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function displayTime(value: string | null | undefined) {
+  if (!value) return "";
+  return new Date(value).toLocaleTimeString("ko-KR", {
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -181,7 +185,9 @@ export function PharmacyTable() {
 
       const headers = [
         "약국명",
-        "개업일",
+        "행안부 인허가일",
+        "HIRA 개설일",
+        "최근 인력조회",
         "요양기관번호",
         "주소",
         "전화번호",
@@ -189,14 +195,15 @@ export function PharmacyTable() {
         "시군구",
         "약사",
         "한약사",
-        "인력조회기준",
         "동물약국",
         "한약사약국",
         "교차고용",
       ];
       const rows = allRows.map((r) => [
         r.name,
-        displayOpenDate(r),
+        displayDate(r.mois_license_date || r.open_date),
+        displayDate(r.hira_open_date),
+        r.hira_staff_fetched_at || "",
         r.ykiho || "",
         displayAddress(r),
         r.phone || "",
@@ -204,7 +211,6 @@ export function PharmacyTable() {
         r.sigungu || "",
         r.pharmacist_count,
         r.herbal_pharmacist_count,
-        r.hira_staff_fetched_at || "",
         r.is_animal_pharmacy ? "O" : "",
         r.is_herbal_pharmacy ? "O" : "",
         r.is_cross_employed ? "O" : "",
@@ -247,11 +253,13 @@ export function PharmacyTable() {
 
       {/* Table */}
       <div className="flex-1 overflow-auto pb-24">
-        <table className="w-full min-w-[1120px] table-mobile">
+        <table className="w-full min-w-[1360px] table-mobile">
           <thead className="sticky top-0 bg-zinc-50 border-b border-zinc-200">
             <tr>
               <SortHeader field="name" label="약국명" />
-              <SortHeader field="open_date" label="개업일" />
+              <SortHeader field="mois_license_date" label="행안부 인허가" />
+              <SortHeader field="hira_open_date" label="HIRA 개설" />
+              <SortHeader field="hira_staff_fetched_at" label="최근 인력조회" />
               <th className="px-3 py-2.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">요양기관번호</th>
               {/* sticky first column handled by CSS for mobile */}
               <th className="px-3 py-2.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">주소</th>
@@ -265,14 +273,14 @@ export function PharmacyTable() {
             {loading ? (
               Array.from({ length: 10 }).map((_, i) => (
                 <tr key={i}>
-                  <td colSpan={8} className="px-0 py-0">
+                  <td colSpan={10} className="px-0 py-0">
                     <SkeletonRow />
                   </td>
                 </tr>
               ))
             ) : data.length === 0 ? (
               <tr>
-                <td colSpan={8} className="px-4 py-16 text-center text-sm">
+                <td colSpan={10} className="px-4 py-16 text-center text-sm">
                   {error ? (
                     <div className="mx-auto max-w-sm rounded-lg border border-rose-100 bg-rose-50 px-4 py-3 text-rose-700">
                       <p className="font-medium">목록을 불러오지 못했습니다.</p>
@@ -311,7 +319,27 @@ export function PharmacyTable() {
                     </div>
                   </td>
                   <td className="px-3 py-2.5 text-sm text-zinc-700 whitespace-nowrap font-mono">
-                    {displayOpenDate(row)}
+                    <div className="flex flex-col">
+                      <span>{displayDate(row.mois_license_date || row.open_date)}</span>
+                      {!row.mois_license_date && row.open_date && (
+                        <span className="mt-0.5 text-[10px] text-zinc-400">기본 개업일</span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-3 py-2.5 text-sm text-zinc-700 whitespace-nowrap font-mono">
+                    {displayDate(row.hira_open_date)}
+                  </td>
+                  <td className="px-3 py-2.5 text-sm text-zinc-700 whitespace-nowrap">
+                    {row.hira_staff_fetched_at ? (
+                      <div className="flex flex-col font-mono">
+                        <span>{displayDate(row.hira_staff_fetched_at)}</span>
+                        <span className="mt-0.5 text-[10px] text-zinc-400">
+                          {displayTime(row.hira_staff_fetched_at)}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-zinc-400">미조회</span>
+                    )}
                   </td>
                   <td className="px-3 py-2.5 whitespace-nowrap">
                     {row.ykiho ? (
