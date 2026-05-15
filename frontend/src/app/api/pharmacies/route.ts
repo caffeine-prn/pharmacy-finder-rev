@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
   let query = supabase
     .from("pharmacies")
     .select(
-      "id, ykiho, name, address, phone, sido, sigungu, open_date, mois_license_date, hira_open_date, hira_staff_fetched_at, hira_staff_total_count, pharmacist_count, herbal_pharmacist_count, is_herbal_pharmacy, is_animal_pharmacy, is_cross_employed, has_ykiho",
+      "id, ykiho, name, address, road_address, phone, sido, sigungu, open_date, mois_license_date, hira_open_date, hira_staff_fetched_at, hira_staff_total_count, pharmacist_count, herbal_pharmacist_count, is_herbal_pharmacy, is_animal_pharmacy, is_cross_employed, has_ykiho",
       { count: "exact" }
     )
     .eq("business_status", "영업/정상")

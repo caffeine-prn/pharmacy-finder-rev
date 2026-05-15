@@ -72,6 +72,7 @@ export interface PharmacyTableRow {
   ykiho: string | null;
   name: string;
   address: string | null;
+  road_address: string | null;
   phone: string | null;
   sido: string | null;
   sigungu: string | null;

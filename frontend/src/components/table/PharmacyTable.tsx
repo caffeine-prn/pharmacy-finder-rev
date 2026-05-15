@@ -27,6 +27,10 @@ function displayOpenDate(row: PharmacyTableRow) {
   return displayDate(row.mois_license_date || row.hira_open_date || row.open_date);
 }
 
+function displayAddress(row: PharmacyTableRow) {
+  return row.road_address || row.address || "-";
+}
+
 function displayDateTime(value: string | null | undefined) {
   if (!value) return "";
   return new Date(value).toLocaleString("ko-KR", {
@@ -163,7 +167,7 @@ export function PharmacyTable() {
         r.name,
         displayOpenDate(r),
         r.ykiho || "",
-        r.address || "",
+        displayAddress(r),
         r.phone || "",
         r.sido || "",
         r.sigungu || "",
@@ -207,7 +211,7 @@ export function PharmacyTable() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-auto pb-24">
         <table className="w-full min-w-[1120px] table-mobile">
           <thead className="sticky top-0 bg-zinc-50 border-b border-zinc-200">
             <tr>
@@ -270,7 +274,7 @@ export function PharmacyTable() {
                     )}
                   </td>
                   <td className="px-3 py-2.5 text-sm text-zinc-600 max-w-[240px] truncate">
-                    {row.address}
+                    <span title={displayAddress(row)}>{displayAddress(row)}</span>
                   </td>
                   <td className="px-3 py-2.5 text-sm text-zinc-600 whitespace-nowrap">
                     {row.sido} {row.sigungu}

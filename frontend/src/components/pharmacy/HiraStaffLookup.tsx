@@ -117,9 +117,9 @@ export function HiraStaffLookup({ pharmacy }: HiraStaffLookupProps) {
     <div className="bg-white rounded-xl border border-zinc-200 p-4 sm:p-5 space-y-4">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold text-zinc-900">HIRA 인력 내역 조회</h3>
+          <h3 className="text-sm font-semibold text-zinc-900">HIRA API 원천 조회</h3>
           <p className="text-xs text-zinc-500 mt-1">
-            요양기관번호로 기타인력 정보를 조회하고 저장합니다.
+            요양기관번호로 현재 기타인력 원천값을 다시 확인하고 저장합니다.
           </p>
           <p className="mt-2 text-xs text-zinc-500">
             {result?.fetched_at
