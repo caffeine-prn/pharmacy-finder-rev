@@ -67,6 +67,13 @@ def _parse_float_env(name: str, default: float) -> float:
     return float(raw) if raw else default
 
 
+def _parse_bool_env(name: str, default: bool) -> bool:
+    raw = os.environ.get(name, "").strip().lower()
+    if not raw:
+        return default
+    return raw not in ("0", "false", "no", "off")
+
+
 def _attach_operating_hours(pharmacies, nmc_data):
     nmc_by_name = {}
     for n in nmc_data:
@@ -315,10 +322,26 @@ def main():
         pharmacy_count = upsert_pharmacies(client, all_pharmacies)
         log.info(f"  Upserted {pharmacy_count} pharmacies")
 
+        staff_lookup_updates = {}
         staff_count = 0
-        if staff_data:
-            staff_count = upsert_staff(client, staff_data, os.environ.get("STAFF_PERIOD", "unknown"))
-            log.info(f"  Upserted {staff_count} staff records")
+        if staff_data and _parse_bool_env("STAFF_XLSX_UPSERT_ENABLED", True):
+            skip_ykihos = set()
+            if _parse_bool_env("STAFF_XLSX_SKIP_API_REFRESHED", True):
+                staff_lookup_updates = fetch_staff_lookup_updates(client)
+                skip_ykihos = set(staff_lookup_updates.keys())
+                log.info(
+                    "  Skipping XLSX staff upsert for "
+                    f"{len(skip_ykihos)} pharmacies with HIRA API staff lookup"
+                )
+            staff_count = upsert_staff(
+                client,
+                staff_data,
+                os.environ.get("STAFF_PERIOD", "unknown"),
+                skip_ykihos=skip_ykihos,
+            )
+            log.info(f"  Upserted {staff_count} staff records from XLSX")
+        elif staff_data:
+            log.info("  Staff XLSX upsert disabled; keeping existing pharmacy_staff rows")
 
         log.info("  Running initial HIRA staff lookup for post-CSV openings...")
         staff_lookup_stats = _run_initial_staff_lookup(client, api_key, today_date, all_pharmacies)

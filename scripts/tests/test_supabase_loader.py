@@ -1,4 +1,4 @@
-from load.supabase_loader import upsert_mois_raw, upsert_pharmacies
+from load.supabase_loader import upsert_mois_raw, upsert_pharmacies, upsert_staff
 
 
 class _ExecuteResult:
@@ -90,3 +90,20 @@ def test_upsert_pharmacies_reuses_existing_id_for_ykiho_conflict():
     assert upsert_call[1][0]["mois_closed_date"] is None
     assert upsert_call[1][0]["hira_open_date"] == "2026-04-03"
     assert upsert_call[1][0]["hira_last_event_date"] == "2026-04-03"
+
+
+def test_upsert_staff_skips_api_refreshed_ykihos():
+    client = _Client()
+    staff = {
+        "Y1": {"pharmacist": 1, "herbal_pharmacist": 1},
+        "Y2": {"pharmacist": 2, "herbal_pharmacist": 0},
+    }
+
+    count = upsert_staff(client, staff, "2025.6", skip_ykihos={"Y1"})
+
+    assert count == 1
+    upsert_call = client.calls[0]
+    assert upsert_call[0] == "pharmacy_staff"
+    assert upsert_call[2] == "ykiho,staff_type_code"
+    assert [row["ykiho"] for row in upsert_call[1]] == ["Y2"]
+    assert upsert_call[1][0]["staff_count"] == 2

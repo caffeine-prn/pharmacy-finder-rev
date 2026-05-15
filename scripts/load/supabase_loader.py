@@ -129,9 +129,17 @@ def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> 
     return count
 
 
-def upsert_staff(client, staff: dict[str, dict], data_period: str) -> int:
+def upsert_staff(
+    client,
+    staff: dict[str, dict],
+    data_period: str,
+    skip_ykihos: set[str] | None = None,
+) -> int:
+    skip_ykihos = skip_ykihos or set()
     rows = []
     for ykiho, info in staff.items():
+        if ykiho in skip_ykihos:
+            continue
         if info.get("pharmacist", 0) > 0:
             rows.append({
                 "ykiho": ykiho,
