@@ -39,6 +39,65 @@ DEFAULT_STAFF_XLSX_PATH = "asset/12.의료기관별상세정보서비스_10_기�
 DEFAULT_STAFF_LOOKUP_BASELINE_DATE = "2025-07-01"
 
 
+class StageLog:
+    def __init__(self):
+        self.rows = []
+
+    def start(self, key: str, label: str, **metadata):
+        row = {
+            "key": key,
+            "label": label,
+            "status": "running",
+            "started_at": datetime.now(timezone.utc).isoformat(),
+            "_started_perf": time.perf_counter(),
+        }
+        if metadata:
+            row["metadata"] = metadata
+        self.rows.append(row)
+        return row
+
+    def success(self, row: dict, count: int | None = None, **metadata):
+        self._finish(row, "success", count=count, metadata=metadata)
+
+    def partial(self, row: dict, count: int | None = None, error: str | None = None, **metadata):
+        self._finish(row, "partial", count=count, error=error, metadata=metadata)
+
+    def failed(self, row: dict, error: Exception | str, count: int | None = None, **metadata):
+        self._finish(row, "failed", count=count, error=str(error), metadata=metadata)
+
+    def _finish(
+        self,
+        row: dict,
+        status: str,
+        count: int | None = None,
+        error: str | None = None,
+        metadata: dict | None = None,
+    ):
+        row["status"] = status
+        row["completed_at"] = datetime.now(timezone.utc).isoformat()
+        started_perf = row.pop("_started_perf", None)
+        if started_perf is not None:
+            row["duration_ms"] = int((time.perf_counter() - started_perf) * 1000)
+        if count is not None:
+            row["count"] = count
+        if error:
+            row["error"] = error
+        if metadata:
+            row.setdefault("metadata", {}).update(metadata)
+
+    def public_rows(self):
+        return [{k: v for k, v in row.items() if not k.startswith("_")} for row in self.rows]
+
+
+def _github_run_url() -> str | None:
+    server = os.environ.get("GITHUB_SERVER_URL", "").rstrip("/")
+    repo = os.environ.get("GITHUB_REPOSITORY", "")
+    run_id = os.environ.get("GITHUB_RUN_ID", "")
+    if server and repo and run_id:
+        return f"{server}/{repo}/actions/runs/{run_id}"
+    return None
+
+
 def _current_quarter_start(today: date) -> date:
     quarter_month = ((today.month - 1) // 3) * 3 + 1
     return date(today.year, quarter_month, 1)
@@ -207,11 +266,21 @@ def main():
     today = today_date.strftime("%Y-%m-%d")
     hira_baseline_date = _parse_baseline_date(today_date)
     errors = []
+    stages = StageLog()
 
     log.info("=== Daily Pharmacy Sync Started ===")
 
+    stage = stages.start("mois_source", "행안부 약국/동물약국 수집")
     localdata_pharmacies, localdata_animals, mois_raw_rows, source_notes = _load_mois_or_localdata(api_key)
+    stages.success(
+        stage,
+        count=len(localdata_pharmacies),
+        animal_count=len(localdata_animals),
+        raw_rows=len(mois_raw_rows),
+        source_notes=source_notes,
+    )
 
+    stage = stages.start("coordinates", "좌표 변환/지역 추출")
     log.info("  Converting EPSG:5174 → WGS84...")
     convert_batch(localdata_pharmacies)
     convert_batch(localdata_animals)
@@ -220,18 +289,23 @@ def main():
         sido, sigungu = extract_sido_sigungu(p.get("road_address") or p.get("address", ""))
         p["sido"] = sido
         p["sigungu"] = sigungu
+    stages.success(stage, count=len(localdata_pharmacies) + len(localdata_animals))
 
     # Step 2: HIRA Pharmacy API
     log.info("Step 2: Fetching HIRA pharmacy API...")
+    stage = stages.start("hira_pharmacy", "HIRA 약국 기본목록 수집")
     try:
         hira_pharmacies = fetch_all_hira_pharmacies(api_key)
         log.info(f"  HIRA pharmacies: {len(hira_pharmacies)}")
+        stages.success(stage, count=len(hira_pharmacies))
     except Exception as e:
         log.error(f"  HIRA API failed: {e}")
         hira_pharmacies = []
         errors.append(f"HIRA: {e}")
+        stages.failed(stage, e)
 
     log.info(f"Step 2b: Fetching HIRA open/close events since {hira_baseline_date.isoformat()}...")
+    stage = stages.start("hira_opclo", "HIRA 개폐업 이벤트 수집", baseline_date=hira_baseline_date.isoformat())
     try:
         hira_opclo_events = fetch_hira_opclo_events(
             api_key,
@@ -248,24 +322,36 @@ def main():
             f"{len(hira_opclo_events)} total, {open_events} opened, "
             f"{closed_events} closed, {suspended_events} suspended"
         )
+        stages.success(
+            stage,
+            count=len(hira_opclo_events),
+            opened=open_events,
+            closed=closed_events,
+            suspended=suspended_events,
+        )
     except Exception as e:
         log.warning(f"  HIRA open/close API failed (non-critical): {e}")
         hira_opclo_events = []
         hira_pharmacies_for_match = hira_pharmacies
         errors.append(f"HIRA op/clo: {e}")
+        stages.failed(stage, e)
 
     # Step 3: NMC API
     log.info("Step 3: Fetching 국립중앙의료원 API...")
+    stage = stages.start("nmc_hours", "공공 심야/휴일 약국 수집")
     try:
         nmc_data = fetch_all_nmc_pharmacies(api_key)
         log.info(f"  NMC pharmacies: {len(nmc_data)}")
+        stages.success(stage, count=len(nmc_data))
     except Exception as e:
         log.warning(f"  NMC API failed (non-critical): {e}")
         nmc_data = []
         errors.append(f"NMC: {e}")
+        stages.failed(stage, e)
 
     # Step 4: Match & merge
     log.info("Step 4: Matching sources...")
+    stage = stages.start("match_sources", "데이터 소스 매칭/분류")
     matched, unmatched = match_localdata_to_hira(localdata_pharmacies, hira_pharmacies_for_match)
     log.info(f"  LOCALDATA↔HIRA matched: {len(matched)}, unmatched: {len(unmatched)}")
 
@@ -296,35 +382,62 @@ def main():
 
     for p in all_pharmacies:
         p["source"] = "both" if p.get("has_ykiho") else "localdata"
+    stages.success(
+        stage,
+        count=len(all_pharmacies),
+        matched_hira=len(matched),
+        unmatched_hira=len(unmatched),
+        animal_count=animal_count,
+        unmatched_animals=len(unmatched_animals),
+        herbal_count=herbal_count,
+        cross_count=cross_count,
+    )
 
     # Step 5: Detect changes + Upsert to Supabase
     log.info("Step 5: Upserting to Supabase...")
     change_stats = {"new_count": 0, "closed_count": 0, "changed_count": 0}
     staff_lookup_stats = {"candidates": 0, "looked_up": 0, "rows": 0, "errors": 0}
     try:
+        stage = stages.start("supabase_connect", "Supabase 연결")
         client = get_client()
+        stages.success(stage)
 
         if mois_raw_rows:
+            stage = stages.start("upsert_mois_raw", "행안부 원천행 저장")
             log.info("  Upserting MOIS raw source rows...")
             raw_count = upsert_mois_raw(client, mois_raw_rows)
             log.info(f"  Upserted {raw_count} MOIS raw rows")
+            stages.success(stage, count=raw_count)
 
         if hira_opclo_events:
+            stage = stages.start("upsert_hira_opclo", "HIRA 개폐업 원천행 저장")
             log.info("  Upserting HIRA op/clo source rows...")
             opclo_count = upsert_hira_opclo_raw(client, hira_opclo_events)
             log.info(f"  Upserted {opclo_count} HIRA op/clo rows")
+            stages.success(stage, count=opclo_count)
 
         # Detect changes before upsert
+        stage = stages.start("detect_changes", "신규/폐업/변경 감지")
         log.info("  Detecting changes...")
         change_stats = detect_changes(client, all_pharmacies)
         log.info(f"  Changes: +{change_stats['new_count']} opened, -{change_stats['closed_count']} closed, ~{change_stats['changed_count']} changed")
+        stages.success(
+            stage,
+            count=sum(change_stats.values()),
+            new_count=change_stats["new_count"],
+            closed_count=change_stats["closed_count"],
+            changed_count=change_stats["changed_count"],
+        )
 
+        stage = stages.start("upsert_pharmacies", "정규화 약국 테이블 저장")
         pharmacy_count = upsert_pharmacies(client, all_pharmacies)
         log.info(f"  Upserted {pharmacy_count} pharmacies")
+        stages.success(stage, count=pharmacy_count)
 
         staff_lookup_updates = {}
         staff_count = 0
         if staff_data and _parse_bool_env("STAFF_XLSX_UPSERT_ENABLED", True):
+            stage = stages.start("upsert_staff_xlsx", "HIRA 분기 XLSX 인력 저장")
             skip_ykihos = set()
             if _parse_bool_env("STAFF_XLSX_SKIP_API_REFRESHED", True):
                 staff_lookup_updates = fetch_staff_lookup_updates(client)
@@ -340,14 +453,33 @@ def main():
                 skip_ykihos=skip_ykihos,
             )
             log.info(f"  Upserted {staff_count} staff records from XLSX")
+            stages.success(stage, count=staff_count, skipped_api_refreshed=len(skip_ykihos))
         elif staff_data:
             log.info("  Staff XLSX upsert disabled; keeping existing pharmacy_staff rows")
+            stage = stages.start("upsert_staff_xlsx", "HIRA 분기 XLSX 인력 저장")
+            stages.success(stage, count=0, disabled=True)
 
+        stage = stages.start("initial_staff_lookup", "신규 개업 약국 HIRA 인력 최초 조회")
         log.info("  Running initial HIRA staff lookup for post-CSV openings...")
         staff_lookup_stats = _run_initial_staff_lookup(client, api_key, today_date, all_pharmacies)
         if staff_lookup_stats.get("errors"):
             errors.append(f"HIRA staff lookup: {staff_lookup_stats['errors']} failed")
+            stages.partial(
+                stage,
+                count=staff_lookup_stats.get("looked_up", 0),
+                error=f"{staff_lookup_stats['errors']} failed",
+                candidates=staff_lookup_stats.get("candidates", 0),
+                raw_rows=staff_lookup_stats.get("rows", 0),
+            )
+        else:
+            stages.success(
+                stage,
+                count=staff_lookup_stats.get("looked_up", 0),
+                candidates=staff_lookup_stats.get("candidates", 0),
+                raw_rows=staff_lookup_stats.get("rows", 0),
+            )
 
+        stage = stages.start("apply_staff_summaries", "최신 인력 요약 재적용")
         staff_lookup_updates = fetch_staff_lookup_updates(client)
         if staff_lookup_updates:
             for pharmacy in all_pharmacies:
@@ -362,7 +494,9 @@ def main():
                         "hira_staff_total_count": update.get("hira_staff_total_count"),
                     })
             log.info(f"  Applied {len(staff_lookup_updates)} on-demand staff summaries")
+        stages.success(stage, count=len(staff_lookup_updates))
 
+        stage = stages.start("update_freshness", "데이터 소스 신선도 기록")
         update_freshness(client, "mois_pharmacy_api", today, len(localdata_pharmacies),
                          notes="; ".join(source_notes))
         update_freshness(client, "hira_pharmacy", today, len(hira_pharmacies))
@@ -384,6 +518,7 @@ def main():
             staff_lookup_stats.get("looked_up", 0),
             notes=f"baseline_date={staff_lookup_stats.get('baseline_date', DEFAULT_STAFF_LOOKUP_BASELINE_DATE)}",
         )
+        stages.success(stage, count=6 if nmc_data else 5)
 
         status = "partial" if errors else "success"
         log_sync(client, "daily", started_at, status,
@@ -397,6 +532,10 @@ def main():
                      "hira_staff_lookup_candidates": staff_lookup_stats.get("candidates", 0),
                      "hira_staff_lookup_count": staff_lookup_stats.get("looked_up", 0),
                      "hira_staff_lookup_rows": staff_lookup_stats.get("rows", 0),
+                     "stage_logs": stages.public_rows(),
+                     "github_run_url": _github_run_url(),
+                     "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+                     "github_run_number": os.environ.get("GITHUB_RUN_NUMBER"),
                  },
                  new_pharmacies=change_stats["new_count"],
                  closed_pharmacies=change_stats["closed_count"],
@@ -405,12 +544,16 @@ def main():
         log.error(f"  Supabase failed: {e}")
         errors.append(f"Supabase: {e}")
         status = "failed"
+        if "stage" in locals() and stage.get("status") == "running":
+            stages.failed(stage, e)
 
     # Step 6: CDN JSON
     log.info("Step 6: Generating markers.json...")
+    stage = stages.start("generate_markers", "배포용 markers.json 생성")
     output_path = os.environ.get("MARKERS_JSON_PATH", "/tmp/markers.json")
     generate_markers_json(all_pharmacies, output_path)
     log.info(f"  Written to {output_path}")
+    stages.success(stage, count=len(all_pharmacies), output_path=output_path)
 
     log.info(f"=== Sync complete: {status} ({len(all_pharmacies)} pharmacies) ===")
     if errors:

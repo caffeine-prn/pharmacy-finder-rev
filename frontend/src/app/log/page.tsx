@@ -83,6 +83,18 @@ interface FreshnessRow {
   notes: string | null;
 }
 
+interface StageLogEntry {
+  key?: string;
+  label?: string;
+  status?: string;
+  started_at?: string;
+  completed_at?: string;
+  duration_ms?: number;
+  count?: number;
+  error?: string;
+  metadata?: Record<string, unknown>;
+}
+
 interface MarkersSummary {
   generated_at: string;
   count: number;
@@ -475,6 +487,8 @@ function DbEventRow({ event }: { event: DbSyncEvent }) {
   const lookedUp = numberFromMetadata(metadata, "looked_up") ?? numberFromMetadata(metadata, "looked_up_count");
   const candidates = numberFromMetadata(metadata, "candidate_count");
   const rawRows = numberFromMetadata(metadata, "raw_rows");
+  const stageLogs = stageLogsFromMetadata(metadata);
+  const githubRunUrl = stringFromMetadata(metadata, "github_run_url");
 
   return (
     <div className="grid gap-3 px-4 py-4 sm:grid-cols-[190px_1fr] sm:items-start">
@@ -510,6 +524,62 @@ function DbEventRow({ event }: { event: DbSyncEvent }) {
             {String(event.errors[0])}
           </p>
         ) : null}
+        {stageLogs.length ? <StageLogList stages={stageLogs} /> : null}
+        {githubRunUrl ? (
+          <a
+            href={githubRunUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-flex text-xs font-medium text-emerald-700 hover:text-emerald-900"
+          >
+            GitHub Actions 원본 로그 보기
+          </a>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function StageLogList({ stages }: { stages: StageLogEntry[] }) {
+  return (
+    <div className="mt-3 rounded-md border border-zinc-100 bg-zinc-50">
+      <div className="border-b border-zinc-100 px-3 py-2 text-xs font-semibold text-zinc-600">
+        단계별 실행 로그
+      </div>
+      <div className="divide-y divide-zinc-100">
+        {stages.map((stage, index) => (
+          <div key={`${stage.key || stage.label || "stage"}-${index}`} className="px-3 py-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className={`h-2 w-2 rounded-full ${stageDotClass(stage.status)}`} />
+              <span className="text-xs font-medium text-zinc-900">
+                {stage.label || stage.key || "단계"}
+              </span>
+              <span className="rounded bg-white px-1.5 py-0.5 text-[11px] text-zinc-500">
+                {statusLabel(stage.status || "")}
+              </span>
+              {typeof stage.count === "number" && (
+                <span className="rounded bg-white px-1.5 py-0.5 text-[11px] text-zinc-500">
+                  {formatNumber(stage.count)}건
+                </span>
+              )}
+              {typeof stage.duration_ms === "number" && (
+                <span className="rounded bg-white px-1.5 py-0.5 text-[11px] text-zinc-500">
+                  {formatDuration(stage.duration_ms)}
+                </span>
+              )}
+            </div>
+            {stage.metadata && Object.keys(stage.metadata).length > 0 && (
+              <p className="mt-1 break-words text-[11px] leading-5 text-zinc-500">
+                {formatMetadata(stage.metadata)}
+              </p>
+            )}
+            {stage.error && (
+              <p className="mt-1 break-words rounded bg-rose-50 px-2 py-1 text-[11px] leading-5 text-rose-700">
+                {stage.error}
+              </p>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -607,6 +677,8 @@ function statusLabel(status: SyncStatus) {
       return "실패";
     case "partial":
       return "부분 성공";
+    case "running":
+      return "진행 중";
     case "manual_note":
       return "운영 메모";
     default:
@@ -651,6 +723,48 @@ function sourceLabel(value: string) {
 function numberFromMetadata(metadata: Record<string, unknown>, key: string) {
   const value = metadata[key];
   return typeof value === "number" ? value : null;
+}
+
+function stringFromMetadata(metadata: Record<string, unknown>, key: string) {
+  const value = metadata[key];
+  return typeof value === "string" ? value : null;
+}
+
+function stageLogsFromMetadata(metadata: Record<string, unknown>) {
+  const value = metadata.stage_logs;
+  if (!Array.isArray(value)) return [];
+  return value.filter((row): row is StageLogEntry => Boolean(row) && typeof row === "object");
+}
+
+function stageDotClass(status: string | undefined) {
+  switch (status) {
+    case "success":
+      return "bg-emerald-500";
+    case "partial":
+      return "bg-amber-500";
+    case "failed":
+      return "bg-rose-500";
+    case "running":
+      return "bg-sky-500";
+    default:
+      return "bg-zinc-300";
+  }
+}
+
+function formatDuration(ms: number) {
+  if (ms < 1000) return `${ms}ms`;
+  const seconds = ms / 1000;
+  if (seconds < 60) return `${seconds.toFixed(seconds < 10 ? 1 : 0)}초`;
+  const minutes = Math.floor(seconds / 60);
+  const rest = Math.round(seconds % 60);
+  return `${minutes}분 ${rest}초`;
+}
+
+function formatMetadata(metadata: Record<string, unknown>) {
+  return Object.entries(metadata)
+    .filter(([, value]) => value !== null && value !== undefined && value !== "")
+    .map(([key, value]) => `${key}=${Array.isArray(value) ? value.join(", ") : String(value)}`)
+    .join(" · ");
 }
 
 function formatNumber(value: number) {
