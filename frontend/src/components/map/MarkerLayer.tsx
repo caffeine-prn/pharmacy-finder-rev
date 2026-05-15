@@ -77,6 +77,7 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
   const clusterRef = useRef<L.MarkerClusterGroup | null>(null);
   const markerCacheRef = useRef<Map<string, L.Marker>>(new Map());
   const prevIdsRef = useRef<Set<string>>(new Set());
+  const visibleIdsRef = useRef<Set<string>>(new Set());
 
   // Build marker cache once, reuse across filter changes
   useEffect(() => {
@@ -97,6 +98,7 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
     const cache = markerCacheRef.current;
     const newIds = new Set(markers.map((m) => m.id));
     const prevIds = prevIdsRef.current;
+    visibleIdsRef.current = newIds;
 
     // Create markers for new IDs
     const toAdd: L.Marker[] = [];
@@ -140,6 +142,7 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
     if (opts.maxClusterRadius !== newRadius) {
       // Must recreate cluster group to change radius
       const currentMarkers = prevIdsRef.current;
+      cluster.clearLayers();
       map.removeLayer(cluster);
       clusterRef.current = L.markerClusterGroup({
         chunkedLoading: true,
@@ -161,6 +164,7 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
 
   useEffect(() => {
     if (!selectedPharmacyId || !clusterRef.current) return;
+    if (!visibleIdsRef.current.has(selectedPharmacyId)) return;
     const marker = markerCacheRef.current.get(selectedPharmacyId);
     if (!marker) return;
 
@@ -170,7 +174,17 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
       marker.openPopup();
     };
 
-    clusterRef.current.zoomToShowLayer(marker, focusMarker);
+    const cluster = clusterRef.current;
+    try {
+      if (cluster.hasLayer(marker)) {
+        cluster.zoomToShowLayer(marker, focusMarker);
+      } else {
+        focusMarker();
+      }
+    } catch (error) {
+      console.warn("Falling back to direct marker focus", error);
+      focusMarker();
+    }
   }, [selectedPharmacyId, markers, map]);
 
   // Cleanup on unmount
