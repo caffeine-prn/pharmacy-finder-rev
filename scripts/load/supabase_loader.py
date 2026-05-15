@@ -1,5 +1,5 @@
 import os
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from supabase import create_client
 
 
@@ -263,6 +263,67 @@ def fetch_staff_lookup_candidates(
             break
         offset += 1000
     return candidates
+
+
+def _parse_timestamp(value: str | None):
+    if not value:
+        return None
+    return datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+
+
+def fetch_staff_lookup_due_candidates(
+    client,
+    limit: int,
+    refresh_days: int = 1,
+) -> list[dict]:
+    """Find active ykiho pharmacies due for rolling HIRA staff lookup.
+
+    Priority is:
+    1. Never looked up
+    2. Oldest lookup timestamp first
+
+    This lets a daily capped batch eventually cycle through all HIRA-matched
+    pharmacies without repeatedly hammering recently refreshed rows.
+    """
+    cutoff = datetime.now(timezone.utc) - timedelta(days=refresh_days)
+    candidates = []
+    offset = 0
+    while True:
+        resp = (
+            client.table("pharmacies")
+            .select(
+                "id,name,ykiho,open_date,mois_license_date,hira_open_date,"
+                "hira_staff_fetched_at,business_status,mois_closed_date,has_ykiho"
+            )
+            .eq("has_ykiho", True)
+            .range(offset, offset + 999)
+            .execute()
+        )
+        rows = resp.data or []
+        for row in rows:
+            if not row.get("ykiho"):
+                continue
+            if row.get("mois_closed_date"):
+                continue
+            if row.get("business_status") not in (None, "", "영업/정상", "영업중"):
+                continue
+            fetched_at = _parse_timestamp(row.get("hira_staff_fetched_at"))
+            if fetched_at and fetched_at > cutoff:
+                continue
+            candidates.append(row)
+        if len(rows) < 1000:
+            break
+        offset += 1000
+
+    candidates.sort(
+        key=lambda row: (
+            row.get("hira_staff_fetched_at") is not None,
+            row.get("hira_staff_fetched_at") or "",
+            row.get("mois_license_date") or row.get("hira_open_date") or row.get("open_date") or "",
+            row.get("id") or "",
+        )
+    )
+    return candidates[:limit]
 
 
 def fetch_staff_lookup_updates(client) -> dict[str, dict]:

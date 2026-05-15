@@ -1,0 +1,32 @@
+name: Daily HIRA Staff Lookup
+
+on:
+  schedule:
+    - cron: '0 17 * * *'  # KST 02:00
+  workflow_dispatch:
+
+jobs:
+  staff-lookup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run rolling HIRA staff lookup batch
+        run: python scripts/run_staff_lookup_batch.py
+        env:
+          DRUG_API_KEY: ${{ secrets.DRUG_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          STAFF_LOOKUP_LIMIT: "5000"
+          STAFF_LOOKUP_REFRESH_DAYS: "1"
+          STAFF_LOOKUP_DELAY_SECONDS: "0.2"
+          STAFF_LOOKUP_FAIL_ON_ERROR: "false"
