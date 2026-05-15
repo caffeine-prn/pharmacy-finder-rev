@@ -12,6 +12,7 @@ import {
   Pulse,
   WarningCircle,
 } from "@phosphor-icons/react";
+import { supabase } from "@/lib/supabase/client";
 
 type SyncStatus = "success" | "failed" | "partial" | "manual_note" | string;
 
@@ -58,6 +59,30 @@ interface SyncLog {
   events: SyncEvent[];
 }
 
+interface DbSyncEvent {
+  id: number;
+  sync_type: string | null;
+  started_at: string | null;
+  completed_at: string | null;
+  status: SyncStatus;
+  pharmacy_count: number | null;
+  animal_count: number | null;
+  staff_count: number | null;
+  errors: string[] | null;
+  metadata: Record<string, unknown> | null;
+  new_pharmacies: number | null;
+  closed_pharmacies: number | null;
+  changed_pharmacies: number | null;
+}
+
+interface FreshnessRow {
+  source: string;
+  last_sync: string | null;
+  data_date: string | null;
+  record_count: number | null;
+  notes: string | null;
+}
+
 interface MarkersSummary {
   generated_at: string;
   count: number;
@@ -80,6 +105,8 @@ const numberFormat = new Intl.NumberFormat("ko-KR");
 export default function LogPage() {
   const [syncLog, setSyncLog] = useState<SyncLog | null>(null);
   const [markers, setMarkers] = useState<MarkersSummary | null>(null);
+  const [dbEvents, setDbEvents] = useState<DbSyncEvent[]>([]);
+  const [freshness, setFreshness] = useState<FreshnessRow[]>([]);
   const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -103,10 +130,25 @@ export default function LogPage() {
           logResponse.json(),
           markersResponse.json(),
         ]);
+        const [dbLogResult, freshnessResult] = await Promise.all([
+          supabase
+            .from("sync_log")
+            .select(
+              "id,sync_type,started_at,completed_at,status,pharmacy_count,animal_count,staff_count,errors,metadata,new_pharmacies,closed_pharmacies,changed_pharmacies"
+            )
+            .order("started_at", { ascending: false })
+            .limit(20),
+          supabase
+            .from("data_freshness")
+            .select("source,last_sync,data_date,record_count,notes")
+            .order("last_sync", { ascending: false }),
+        ]);
 
         if (!cancelled) {
           setSyncLog(logData as SyncLog);
           setMarkers(buildMarkersSummary(markerData));
+          setDbEvents((dbLogResult.data ?? []) as DbSyncEvent[]);
+          setFreshness((freshnessResult.data ?? []) as FreshnessRow[]);
         }
       } catch (error) {
         if (!cancelled) {
@@ -136,6 +178,9 @@ export default function LogPage() {
       stale: diffHours > 36,
     };
   }, [markers?.generated_at]);
+
+  const staffFreshness = freshness.find((row) => row.source === "hira_staff_lookup_batch")
+    ?? freshness.find((row) => row.source === "hira_staff_lookup");
 
   return (
     <div className="h-full overflow-y-auto bg-zinc-50">
@@ -192,24 +237,35 @@ export default function LogPage() {
               />
               <StatusCard
                 icon={<Clock size={18} />}
-                label="데이터 나이"
-                value={dataAge ? dataAge.label : "계산 중"}
-                detail={dataAge?.stale ? "36시간 이상 지나 점검이 필요합니다." : "최근 생성 데이터입니다."}
-                tone={dataAge?.stale ? "warn" : "ok"}
+                label="인력조회"
+                value={
+                  staffFreshness?.record_count != null
+                    ? `${formatNumber(staffFreshness.record_count)}건`
+                    : "기록 없음"
+                }
+                detail={
+                  staffFreshness
+                    ? `${sourceLabel(staffFreshness.source)} · ${formatDateTime(staffFreshness.last_sync)}`
+                    : "아직 배치 실행 기록이 없습니다."
+                }
+                tone={staffFreshness ? "ok" : "warn"}
               />
             </section>
 
             <section className="mt-5 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
               <div className="rounded-md border border-zinc-200 bg-white">
                 <div className="border-b border-zinc-100 px-4 py-3">
-                  <h2 className="text-sm font-semibold text-zinc-900">최근 실행 기록</h2>
+                  <h2 className="text-sm font-semibold text-zinc-900">DB 운영 로그</h2>
+                  <p className="mt-1 text-xs text-zinc-500">
+                    일일 동기화와 HIRA 인력조회 배치가 Supabase `sync_log`에 남긴 기록입니다.
+                  </p>
                 </div>
                 <div className="divide-y divide-zinc-100">
-                  {(syncLog?.events ?? []).map((event) => (
-                    <EventRow key={event.id} event={event} />
+                  {dbEvents.map((event) => (
+                    <DbEventRow key={event.id} event={event} />
                   ))}
-                  {!syncLog?.events?.length && (
-                    <p className="px-4 py-8 text-sm text-zinc-500">아직 기록된 실행이 없습니다.</p>
+                  {!dbEvents.length && (
+                    <p className="px-4 py-8 text-sm text-zinc-500">아직 DB에 기록된 실행이 없습니다.</p>
                   )}
                 </div>
               </div>
@@ -217,7 +273,21 @@ export default function LogPage() {
               <aside className="space-y-5">
                 <div className="rounded-md border border-zinc-200 bg-white">
                   <div className="border-b border-zinc-100 px-4 py-3">
-                    <h2 className="text-sm font-semibold text-zinc-900">최신 실행 상세</h2>
+                    <h2 className="text-sm font-semibold text-zinc-900">데이터 소스 신선도</h2>
+                  </div>
+                  <div className="divide-y divide-zinc-100">
+                    {freshness.map((row) => (
+                      <FreshnessRowItem key={row.source} row={row} />
+                    ))}
+                    {!freshness.length && (
+                      <p className="px-4 py-6 text-sm text-zinc-500">신선도 기록이 없습니다.</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="rounded-md border border-zinc-200 bg-white">
+                  <div className="border-b border-zinc-100 px-4 py-3">
+                    <h2 className="text-sm font-semibold text-zinc-900">배포 로그 상세</h2>
                   </div>
                   {latest ? <LatestDetails event={latest} markers={markers} /> : <DetailSkeleton />}
                 </div>
@@ -226,11 +296,28 @@ export default function LogPage() {
                   <h2 className="text-sm font-semibold text-zinc-900">확인 포인트</h2>
                   <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-600">
                     <li>배포 데이터 생성일이 오래됐으면 `markers.json` 커밋 또는 Vercel 배포가 멈춘 상태입니다.</li>
-                    <li>실행 기록이 실패면 GitHub Actions 로그 링크에서 실패 단계를 먼저 보면 됩니다.</li>
-                    <li>LOCALDATA 수와 배포 데이터 수 차이가 크면 신규 개업 약국 누락 가능성이 높습니다.</li>
+                    <li>`hira_staff_lookup_batch`가 오래됐거나 실패면 인력 구성 숫자가 오래된 상태입니다.</li>
+                    <li>실행 기록이 실패면 DB 운영 로그의 오류와 GitHub Actions 원본 로그를 같이 보면 됩니다.</li>
                   </ul>
                 </div>
               </aside>
+            </section>
+
+            <section className="mt-5 rounded-md border border-zinc-200 bg-white">
+              <div className="border-b border-zinc-100 px-4 py-3">
+                <h2 className="text-sm font-semibold text-zinc-900">배포 파일 실행 기록</h2>
+                <p className="mt-1 text-xs text-zinc-500">
+                  `sync-log.json`에 저장된 지도 데이터 생성 워크플로 기록입니다.
+                </p>
+              </div>
+              <div className="divide-y divide-zinc-100">
+                {(syncLog?.events ?? []).map((event) => (
+                  <EventRow key={event.id} event={event} />
+                ))}
+                {!syncLog?.events?.length && (
+                  <p className="px-4 py-8 text-sm text-zinc-500">아직 기록된 실행이 없습니다.</p>
+                )}
+              </div>
             </section>
 
             {markers && (
@@ -381,6 +468,78 @@ function EventRow({ event }: { event: SyncEvent }) {
   );
 }
 
+function DbEventRow({ event }: { event: DbSyncEvent }) {
+  const failed = event.status === "failed";
+  const partial = event.status === "partial";
+  const metadata = event.metadata ?? {};
+  const lookedUp = numberFromMetadata(metadata, "looked_up") ?? numberFromMetadata(metadata, "looked_up_count");
+  const candidates = numberFromMetadata(metadata, "candidate_count");
+  const rawRows = numberFromMetadata(metadata, "raw_rows");
+
+  return (
+    <div className="grid gap-3 px-4 py-4 sm:grid-cols-[190px_1fr] sm:items-start">
+      <div className="flex items-center gap-2">
+        {failed ? (
+          <WarningCircle size={18} className="text-rose-600" />
+        ) : partial ? (
+          <WarningCircle size={18} className="text-amber-600" />
+        ) : (
+          <CheckCircle size={18} className="text-emerald-600" />
+        )}
+        <div>
+          <span className="block text-sm font-semibold text-zinc-900">
+            {syncTypeLabel(event.sync_type)}
+          </span>
+          <span className="text-xs text-zinc-500">{statusLabel(event.status)}</span>
+        </div>
+      </div>
+      <div>
+        <p className="text-sm text-zinc-900">
+          {formatDateTime(event.completed_at ?? event.started_at)}
+          {event.staff_count ? ` · 인력 원천 ${formatNumber(event.staff_count)}건` : ""}
+        </p>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <SmallPill label="후보" value={formatNullable(candidates)} />
+          <SmallPill label="조회" value={formatNullable(lookedUp ?? event.pharmacy_count)} />
+          <SmallPill label="원천행" value={formatNullable(rawRows ?? event.staff_count)} />
+          <SmallPill label="신규" value={formatNullable(event.new_pharmacies)} />
+          <SmallPill label="폐업" value={formatNullable(event.closed_pharmacies)} />
+        </div>
+        {event.errors?.length ? (
+          <p className="mt-2 rounded-md bg-rose-50 px-3 py-2 text-xs leading-5 text-rose-700">
+            {String(event.errors[0])}
+          </p>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function FreshnessRowItem({ row }: { row: FreshnessRow }) {
+  return (
+    <div className="px-4 py-3">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-medium text-zinc-900">{sourceLabel(row.source)}</p>
+          <p className="mt-1 text-xs text-zinc-500">{formatDateTime(row.last_sync)}</p>
+        </div>
+        <span className="rounded-md bg-zinc-50 px-2 py-1 font-mono text-xs text-zinc-700">
+          {formatNullable(row.record_count)}
+        </span>
+      </div>
+      {row.notes && <p className="mt-2 text-xs leading-5 text-zinc-500">{row.notes}</p>}
+    </div>
+  );
+}
+
+function SmallPill({ label, value }: { label: string; value: string }) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-md bg-zinc-50 px-2 py-1 text-xs text-zinc-600">
+      {label} <b className="font-mono text-zinc-900">{value}</b>
+    </span>
+  );
+}
+
 function LatestDetails({
   event,
   markers,
@@ -453,6 +612,45 @@ function statusLabel(status: SyncStatus) {
     default:
       return status || "알 수 없음";
   }
+}
+
+function syncTypeLabel(value: string | null | undefined) {
+  switch (value) {
+    case "daily":
+      return "일일 데이터 동기화";
+    case "hira_staff_lookup_batch":
+      return "HIRA 인력조회 배치";
+    case "staff_lookup_backfill":
+      return "HIRA 인력조회 보강";
+    default:
+      return value || "알 수 없는 실행";
+  }
+}
+
+function sourceLabel(value: string) {
+  switch (value) {
+    case "mois_pharmacy_api":
+      return "행안부 약국";
+    case "mois_animal_pharmacy_api":
+      return "행안부 동물약국";
+    case "hira_pharmacy":
+      return "HIRA 약국";
+    case "hira_opclo":
+      return "HIRA 개폐업";
+    case "hira_staff_lookup":
+      return "HIRA 인력조회";
+    case "hira_staff_lookup_batch":
+      return "HIRA 인력조회 배치";
+    case "nmc_hours":
+      return "공공 심야/휴일 정보";
+    default:
+      return value;
+  }
+}
+
+function numberFromMetadata(metadata: Record<string, unknown>, key: string) {
+  const value = metadata[key];
+  return typeof value === "number" ? value : null;
 }
 
 function formatNumber(value: number) {
