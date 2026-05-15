@@ -13,11 +13,13 @@ def test_exact_name_address_match():
     ]
     hira = [
         {"ykiho": "YK001", "name": "테스트약국", "address": "서울특별시 강남구 테헤란로 10, (역삼동)",
-         "sido": "서울", "sigungu": "강남구", "longitude": 127.0, "latitude": 37.5},
+         "sido": "서울", "sigungu": "강남구", "open_date": "20200101",
+         "longitude": 127.0, "latitude": 37.5},
     ]
     matched, unmatched = match_localdata_to_hira(localdata, hira)
     assert len(matched) == 1
     assert matched[0]["ykiho"] == "YK001"
+    assert matched[0]["hira_open_date"] == "20200101"
     assert len(unmatched) == 0
 
 
@@ -75,5 +77,7 @@ def test_apply_hira_opclo_status_marks_suspended():
     ]
     result = apply_hira_opclo_status(pharmacies, events)
     assert result[0]["hira_opclo_event_type"] == "휴업"
+    assert result[0]["hira_last_event_type"] == "휴업"
+    assert result[0]["hira_last_event_date"] == "20260501"
     assert result[0]["business_status"] == "휴업"
     assert result[0]["business_status_code"] == "02"

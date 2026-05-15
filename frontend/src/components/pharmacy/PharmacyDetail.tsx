@@ -16,6 +16,7 @@ import { OperatingHours } from "./OperatingHours";
 import { StaffInfo } from "./StaffInfo";
 import { NearbyPharmacies } from "./NearbyPharmacies";
 import { PharmacyStatusButtons } from "./PharmacyStatusButtons";
+import { LifecycleTimeline } from "./LifecycleTimeline";
 
 interface PharmacyDetailProps {
   pharmacy: Pharmacy;
@@ -70,6 +71,7 @@ export function PharmacyDetail({ pharmacy, nearby }: PharmacyDetailProps) {
         </div>
 
         <PharmacyStatusButtons pharmacy={pharmacy} />
+        <LifecycleTimeline pharmacy={pharmacy} />
 
         {/* Basic info card */}
         <div className="bg-white rounded-xl border border-zinc-200 p-5 space-y-4">

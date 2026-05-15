@@ -33,6 +33,14 @@ export interface Pharmacy {
   road_address: string | null;
   phone: string | null;
   open_date: string | null;
+  mois_license_date: string | null;
+  mois_closed_date: string | null;
+  mois_detail_status_code: string | null;
+  mois_detail_status_name: string | null;
+  mois_data_updated_at: string | null;
+  hira_open_date: string | null;
+  hira_last_event_type: string | null;
+  hira_last_event_date: string | null;
   longitude: number | null;
   latitude: number | null;
   business_status: string;

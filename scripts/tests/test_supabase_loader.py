@@ -71,6 +71,12 @@ def test_upsert_pharmacies_reuses_existing_id_for_ykiho_conflict():
             "name": "테스트약국",
             "longitude": 127.1,
             "latitude": 37.5,
+            "mois_license_date": "2026-04-03",
+            "mois_closed_date": "",
+            "mois_detail_status_name": "영업중",
+            "hira_open_date": "20260403",
+            "hira_last_event_type": "개업",
+            "hira_last_event_date": "20260403",
         }
     ]
 
@@ -80,3 +86,7 @@ def test_upsert_pharmacies_reuses_existing_id_for_ykiho_conflict():
     upsert_call = [call for call in client.calls if call[0] == "pharmacies" and call[2] == "id"][0]
     assert upsert_call[1][0]["id"] == "existing-localdata-id"
     assert upsert_call[1][0]["localdata_id"] == "new-localdata-id"
+    assert upsert_call[1][0]["mois_license_date"] == "2026-04-03"
+    assert upsert_call[1][0]["mois_closed_date"] is None
+    assert upsert_call[1][0]["hira_open_date"] == "2026-04-03"
+    assert upsert_call[1][0]["hira_last_event_date"] == "2026-04-03"

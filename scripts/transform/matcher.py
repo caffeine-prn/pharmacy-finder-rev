@@ -54,7 +54,12 @@ def match_localdata_to_hira(localdata, hira):
                 best_match = h
 
         if best_match and best_score >= 0.3:
-            merged = {**ld, "ykiho": best_match["ykiho"], "has_ykiho": True}
+            merged = {
+                **ld,
+                "ykiho": best_match["ykiho"],
+                "has_ykiho": True,
+                "hira_open_date": best_match.get("open_date"),
+            }
             if best_match.get("longitude") and best_match.get("latitude"):
                 merged["longitude"] = best_match["longitude"]
                 merged["latitude"] = best_match["latitude"]
@@ -88,6 +93,8 @@ def apply_hira_opclo_status(pharmacies, opclo_events):
             continue
         p["hira_opclo_event_type"] = event.get("event_type")
         p["hira_opclo_event_date"] = event.get("event_date")
+        p["hira_last_event_type"] = event.get("event_type")
+        p["hira_last_event_date"] = event.get("event_date")
         status = status_by_event.get(event.get("event_type"))
         if status:
             p["hira_business_status"] = status[0]

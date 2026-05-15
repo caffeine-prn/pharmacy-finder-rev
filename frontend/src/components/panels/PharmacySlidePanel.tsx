@@ -17,6 +17,7 @@ import type { Pharmacy } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { PharmacyStatusButtons } from "@/components/pharmacy/PharmacyStatusButtons";
+import { LifecycleTimeline } from "@/components/pharmacy/LifecycleTimeline";
 import Link from "next/link";
 
 export function PharmacySlidePanel() {
@@ -135,6 +136,7 @@ export function PharmacySlidePanel() {
             ) : pharmacy ? (
               <>
                 <PharmacyStatusButtons pharmacy={pharmacy} compact />
+                <LifecycleTimeline pharmacy={pharmacy} compact />
 
                 {/* Address */}
                 {pharmacy.address && (
