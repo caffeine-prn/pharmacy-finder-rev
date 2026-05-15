@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { PharmacyStatusButtons } from "@/components/pharmacy/PharmacyStatusButtons";
 import { LifecycleTimeline } from "@/components/pharmacy/LifecycleTimeline";
+import { HiraStaffLookup } from "@/components/pharmacy/HiraStaffLookup";
 import Link from "next/link";
 
 export function PharmacySlidePanel() {
@@ -202,6 +203,8 @@ export function PharmacySlidePanel() {
                     </div>
                   </div>
                 )}
+
+                <HiraStaffLookup pharmacy={pharmacy} />
 
                 {/* External links */}
                 <div className="flex gap-2">
