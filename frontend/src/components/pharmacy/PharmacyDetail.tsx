@@ -17,6 +17,7 @@ import { StaffInfo } from "./StaffInfo";
 import { NearbyPharmacies } from "./NearbyPharmacies";
 import { PharmacyStatusButtons } from "./PharmacyStatusButtons";
 import { LifecycleTimeline } from "./LifecycleTimeline";
+import { HiraStaffLookup } from "./HiraStaffLookup";
 
 interface PharmacyDetailProps {
   pharmacy: Pharmacy;
@@ -114,6 +115,7 @@ export function PharmacyDetail({ pharmacy, nearby }: PharmacyDetailProps) {
 
         {/* Staff info */}
         <StaffInfo pharmacy={pharmacy} />
+        <HiraStaffLookup pharmacy={pharmacy} />
 
         {/* Mini map */}
         {pharmacy.latitude && pharmacy.longitude && (
