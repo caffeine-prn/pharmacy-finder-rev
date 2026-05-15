@@ -1,5 +1,5 @@
 import os
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from supabase import create_client
 
 
@@ -69,6 +69,8 @@ def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> 
             "is_cross_employed": p.get("is_cross_employed", False),
             "pharmacist_count": p.get("pharmacist_count", 0),
             "herbal_pharmacist_count": p.get("herbal_pharmacist_count", 0),
+            "hira_staff_fetched_at": p.get("hira_staff_fetched_at"),
+            "hira_staff_total_count": p.get("hira_staff_total_count"),
             "hours_mon": p.get("hours_mon"),
             "hours_tue": p.get("hours_tue"),
             "hours_wed": p.get("hours_wed"),
@@ -84,29 +86,40 @@ def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> 
         })
 
     ykihos = {row["ykiho"] for row in rows if row.get("ykiho")}
-    existing_ids_by_ykiho = {}
+    existing_by_ykiho = {}
     offset = 0
     while ykihos:
         resp = (
             client.table("pharmacies")
-            .select("id,ykiho")
+            .select(
+                "id,ykiho,pharmacist_count,herbal_pharmacist_count,"
+                "is_herbal_pharmacy,is_cross_employed,hira_staff_fetched_at,"
+                "hira_staff_total_count"
+            )
             .range(offset, offset + 999)
             .execute()
         )
         for existing in resp.data or []:
             ykiho = existing.get("ykiho")
             if ykiho in ykihos and existing.get("id"):
-                existing_ids_by_ykiho[ykiho] = existing["id"]
+                existing_by_ykiho[ykiho] = existing
         if len(resp.data or []) < 1000:
             break
-        if ykihos <= existing_ids_by_ykiho.keys():
+        if ykihos <= existing_by_ykiho.keys():
             break
         offset += 1000
 
     for row in rows:
-        existing_id = existing_ids_by_ykiho.get(row.get("ykiho"))
-        if existing_id:
-            row["id"] = existing_id
+        existing = existing_by_ykiho.get(row.get("ykiho"))
+        if existing:
+            row["id"] = existing["id"]
+            if existing.get("hira_staff_fetched_at"):
+                row["pharmacist_count"] = existing.get("pharmacist_count") or 0
+                row["herbal_pharmacist_count"] = existing.get("herbal_pharmacist_count") or 0
+                row["is_herbal_pharmacy"] = existing.get("is_herbal_pharmacy") or False
+                row["is_cross_employed"] = existing.get("is_cross_employed") or False
+                row["hira_staff_fetched_at"] = existing.get("hira_staff_fetched_at")
+                row["hira_staff_total_count"] = existing.get("hira_staff_total_count")
 
     count = 0
     for batch in _chunks(rows, batch_size):
@@ -186,6 +199,169 @@ def upsert_hira_opclo_raw(client, rows: list[dict], batch_size: int = 500) -> in
         count += len(batch)
         print(f"  Upserted {count}/{len(db_rows)} HIRA op/clo rows")
     return count
+
+
+def _parse_iso_date(value):
+    if not value:
+        return None
+    if isinstance(value, date):
+        return value
+    return datetime.strptime(str(value)[:10], "%Y-%m-%d").date()
+
+
+def _coalesced_open_date(row: dict):
+    return _parse_iso_date(
+        row.get("mois_license_date")
+        or row.get("hira_open_date")
+        or row.get("open_date")
+    )
+
+
+def fetch_staff_lookup_candidates(
+    client,
+    baseline_date: date,
+    until_date: date,
+    limit: int | None = None,
+) -> list[dict]:
+    """Find active ykiho pharmacies opened after the staff CSV baseline.
+
+    These are pharmacies missing post-CSV staff composition and should receive
+    the on-demand HIRA staff lookup once.
+    """
+    candidates = []
+    offset = 0
+    while True:
+        resp = (
+            client.table("pharmacies")
+            .select(
+                "id,name,ykiho,open_date,mois_license_date,hira_open_date,"
+                "hira_staff_fetched_at,business_status,mois_closed_date,has_ykiho"
+            )
+            .eq("has_ykiho", True)
+            .is_("hira_staff_fetched_at", "null")
+            .range(offset, offset + 999)
+            .execute()
+        )
+        rows = resp.data or []
+        for row in rows:
+            if not row.get("ykiho"):
+                continue
+            if row.get("mois_closed_date"):
+                continue
+            if row.get("business_status") not in (None, "", "영업/정상", "영업중"):
+                continue
+            open_date = _coalesced_open_date(row)
+            if not open_date:
+                continue
+            if open_date < baseline_date or open_date > until_date:
+                continue
+            row["staff_lookup_open_date"] = open_date.isoformat()
+            candidates.append(row)
+            if limit and len(candidates) >= limit:
+                return candidates
+        if len(rows) < 1000:
+            break
+        offset += 1000
+    return candidates
+
+
+def fetch_staff_lookup_updates(client) -> dict[str, dict]:
+    updates = {}
+    offset = 0
+    while True:
+        resp = (
+            client.table("pharmacies")
+            .select(
+                "ykiho,pharmacist_count,herbal_pharmacist_count,"
+                "is_herbal_pharmacy,is_cross_employed,hira_staff_fetched_at,"
+                "hira_staff_total_count"
+            )
+            .range(offset, offset + 999)
+            .execute()
+        )
+        rows = resp.data or []
+        for row in rows:
+            ykiho = row.get("ykiho")
+            if ykiho and row.get("hira_staff_fetched_at"):
+                updates[ykiho] = row
+        if len(rows) < 1000:
+            break
+        offset += 1000
+    return updates
+
+
+def upsert_staff_lookup_result(
+    client,
+    pharmacy: dict,
+    rows: list[dict],
+    total_count: int,
+    fetched_at: str | None = None,
+) -> int:
+    fetched_at = fetched_at or datetime.now(timezone.utc).isoformat()
+    ykiho = pharmacy["ykiho"]
+
+    raw_rows = []
+    for row in rows:
+        if not row.get("ykiho"):
+            row["ykiho"] = ykiho
+        if not row.get("staff_type_code"):
+            continue
+        raw_rows.append({
+            "ykiho": row["ykiho"],
+            "staff_type_code": row.get("staff_type_code"),
+            "staff_type_name": row.get("staff_type_name"),
+            "staff_count": row.get("staff_count", 0),
+            "pharmacy_name": row.get("pharmacy_name") or pharmacy.get("name", ""),
+            "raw": row.get("raw", row),
+            "fetched_at": fetched_at,
+            "updated_at": fetched_at,
+        })
+
+    if raw_rows:
+        client.table("hira_staff_lookup_raw").upsert(
+            raw_rows,
+            on_conflict="ykiho,staff_type_code",
+        ).execute()
+
+        staff_rows = [
+            {
+                "ykiho": row["ykiho"],
+                "pharmacy_name": row.get("pharmacy_name") or pharmacy.get("name", ""),
+                "staff_type_code": row.get("staff_type_code"),
+                "staff_type_name": row.get("staff_type_name"),
+                "staff_count": row.get("staff_count", 0),
+                "data_period": "on_demand",
+                "updated_at": fetched_at,
+            }
+            for row in raw_rows
+        ]
+        client.table("pharmacy_staff").upsert(
+            staff_rows,
+            on_conflict="ykiho,staff_type_code",
+        ).execute()
+
+    pharmacist_count = sum(
+        int(row.get("staff_count") or 0)
+        for row in rows
+        if row.get("staff_type_code") == "071" or row.get("staff_type_name") == "약사"
+    )
+    herbal_pharmacist_count = sum(
+        int(row.get("staff_count") or 0)
+        for row in rows
+        if row.get("staff_type_code") == "072" or row.get("staff_type_name") == "한약사"
+    )
+
+    client.table("pharmacies").update({
+        "pharmacist_count": pharmacist_count,
+        "herbal_pharmacist_count": herbal_pharmacist_count,
+        "is_herbal_pharmacy": herbal_pharmacist_count > 0,
+        "is_cross_employed": pharmacist_count > 0 and herbal_pharmacist_count > 0,
+        "hira_staff_fetched_at": fetched_at,
+        "hira_staff_total_count": total_count,
+        "updated_at": fetched_at,
+    }).eq("id", pharmacy["id"]).execute()
+
+    return len(raw_rows)
 
 
 def update_freshness(client, source: str, data_date: str, record_count: int, notes: str = ""):

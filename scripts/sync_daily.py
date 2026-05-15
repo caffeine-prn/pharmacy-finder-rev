@@ -2,6 +2,7 @@
 """Daily pharmacy data sync orchestrator."""
 import os
 import sys
+import time
 from datetime import date, datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -15,7 +16,7 @@ from sources.hira_pharmacy import (
     opclo_events_as_hira_candidates,
 )
 from sources.nmc_pharmacy import fetch_all_nmc_pharmacies
-from sources.hira_staff import parse_staff_xlsx
+from sources.hira_staff import fetch_staff_lookup, parse_staff_xlsx, sum_staff_count
 from transform.coordinate import convert_batch
 from transform.matcher import (
     apply_hira_opclo_status,
@@ -27,13 +28,15 @@ from transform.normalizer import normalize_name, extract_sido_sigungu
 from load.supabase_loader import (
     get_client, upsert_pharmacies, upsert_staff,
     update_freshness, log_sync, detect_changes, upsert_mois_raw,
-    upsert_hira_opclo_raw,
+    upsert_hira_opclo_raw, fetch_staff_lookup_candidates,
+    fetch_staff_lookup_updates, upsert_staff_lookup_result,
 )
 from load.cdn_json import generate_markers_json
 
 log = setup_logger()
 
 DEFAULT_STAFF_XLSX_PATH = "asset/12.의료기관별상세정보서비스_10_기타인력정보 2025.6.xlsx"
+DEFAULT_STAFF_LOOKUP_BASELINE_DATE = "2025-07-01"
 
 
 def _current_quarter_start(today: date) -> date:
@@ -46,6 +49,22 @@ def _parse_baseline_date(today: date) -> date:
     if configured:
         return datetime.strptime(configured, "%Y-%m-%d").date()
     return _current_quarter_start(today)
+
+
+def _parse_date_env(name: str, default: str) -> date:
+    return datetime.strptime(os.environ.get(name, default).strip(), "%Y-%m-%d").date()
+
+
+def _parse_int_env(name: str, default: int | None = None) -> int | None:
+    raw = os.environ.get(name, "").strip()
+    if not raw:
+        return default
+    return int(raw)
+
+
+def _parse_float_env(name: str, default: float) -> float:
+    raw = os.environ.get(name, "").strip()
+    return float(raw) if raw else default
 
 
 def _attach_operating_hours(pharmacies, nmc_data):
@@ -68,6 +87,78 @@ def _attach_operating_hours(pharmacies, nmc_data):
                 matched += 1
                 break
     log.info(f"Operating hours matched: {matched}/{len(pharmacies)}")
+
+
+def _run_initial_staff_lookup(client, api_key: str, today_date: date, all_pharmacies: list[dict]) -> dict:
+    if os.environ.get("STAFF_LOOKUP_ENABLED", "true").lower() in ("0", "false", "no"):
+        log.info("  HIRA staff lookup backfill disabled")
+        return {"candidates": 0, "looked_up": 0, "rows": 0, "errors": 0, "updates": {}}
+    if not api_key:
+        log.info("  HIRA staff lookup skipped: DRUG_API_KEY is not configured")
+        return {"candidates": 0, "looked_up": 0, "rows": 0, "errors": 0, "updates": {}}
+
+    baseline_date = _parse_date_env("STAFF_LOOKUP_BASELINE_DATE", DEFAULT_STAFF_LOOKUP_BASELINE_DATE)
+    limit = _parse_int_env("STAFF_LOOKUP_LIMIT")
+    delay = _parse_float_env("STAFF_LOOKUP_DELAY_SECONDS", 0.15)
+
+    candidates = fetch_staff_lookup_candidates(
+        client,
+        baseline_date=baseline_date,
+        until_date=today_date,
+        limit=limit,
+    )
+    log.info(
+        "  HIRA staff lookup candidates: "
+        f"{len(candidates)} (baseline={baseline_date.isoformat()}, limit={limit or 'none'})"
+    )
+
+    looked_up = 0
+    raw_rows = 0
+    failed = 0
+    updates_by_ykiho = {}
+    for index, pharmacy in enumerate(candidates, start=1):
+        try:
+            rows, total_count = fetch_staff_lookup(api_key, pharmacy["ykiho"])
+            row_count = upsert_staff_lookup_result(client, pharmacy, rows, total_count)
+            pharmacist_count = sum_staff_count(rows, "071", "약사")
+            herbal_pharmacist_count = sum_staff_count(rows, "072", "한약사")
+            updates_by_ykiho[pharmacy["ykiho"]] = {
+                "pharmacist_count": pharmacist_count,
+                "herbal_pharmacist_count": herbal_pharmacist_count,
+                "is_herbal_pharmacy": herbal_pharmacist_count > 0,
+                "is_cross_employed": pharmacist_count > 0 and herbal_pharmacist_count > 0,
+            }
+            looked_up += 1
+            raw_rows += row_count
+            if index % 25 == 0 or index == len(candidates):
+                log.info(f"  HIRA staff lookup progress: {index}/{len(candidates)}")
+            if delay:
+                time.sleep(delay)
+        except Exception as e:
+            failed += 1
+            log.warning(
+                "  HIRA staff lookup failed "
+                f"for {pharmacy.get('name', '')} ({pharmacy.get('id', '')}): {e}"
+            )
+
+    if updates_by_ykiho:
+        for pharmacy in all_pharmacies:
+            update = updates_by_ykiho.get(pharmacy.get("ykiho"))
+            if update:
+                pharmacy.update(update)
+
+    log.info(
+        "  HIRA staff lookup completed: "
+        f"{looked_up} pharmacies, {raw_rows} raw rows, {failed} errors"
+    )
+    return {
+        "candidates": len(candidates),
+        "looked_up": looked_up,
+        "rows": raw_rows,
+        "errors": failed,
+        "updates": updates_by_ykiho,
+        "baseline_date": baseline_date.isoformat(),
+    }
 
 
 def _load_mois_or_localdata(api_key: str):
@@ -202,6 +293,7 @@ def main():
     # Step 5: Detect changes + Upsert to Supabase
     log.info("Step 5: Upserting to Supabase...")
     change_stats = {"new_count": 0, "closed_count": 0, "changed_count": 0}
+    staff_lookup_stats = {"candidates": 0, "looked_up": 0, "rows": 0, "errors": 0}
     try:
         client = get_client()
 
@@ -228,6 +320,26 @@ def main():
             staff_count = upsert_staff(client, staff_data, os.environ.get("STAFF_PERIOD", "unknown"))
             log.info(f"  Upserted {staff_count} staff records")
 
+        log.info("  Running initial HIRA staff lookup for post-CSV openings...")
+        staff_lookup_stats = _run_initial_staff_lookup(client, api_key, today_date, all_pharmacies)
+        if staff_lookup_stats.get("errors"):
+            errors.append(f"HIRA staff lookup: {staff_lookup_stats['errors']} failed")
+
+        staff_lookup_updates = fetch_staff_lookup_updates(client)
+        if staff_lookup_updates:
+            for pharmacy in all_pharmacies:
+                update = staff_lookup_updates.get(pharmacy.get("ykiho"))
+                if update:
+                    pharmacy.update({
+                        "pharmacist_count": update.get("pharmacist_count") or 0,
+                        "herbal_pharmacist_count": update.get("herbal_pharmacist_count") or 0,
+                        "is_herbal_pharmacy": update.get("is_herbal_pharmacy") or False,
+                        "is_cross_employed": update.get("is_cross_employed") or False,
+                        "hira_staff_fetched_at": update.get("hira_staff_fetched_at"),
+                        "hira_staff_total_count": update.get("hira_staff_total_count"),
+                    })
+            log.info(f"  Applied {len(staff_lookup_updates)} on-demand staff summaries")
+
         update_freshness(client, "mois_pharmacy_api", today, len(localdata_pharmacies),
                          notes="; ".join(source_notes))
         update_freshness(client, "hira_pharmacy", today, len(hira_pharmacies))
@@ -242,6 +354,13 @@ def main():
             update_freshness(client, "nmc_hours", today, len(nmc_data))
         update_freshness(client, "mois_animal_pharmacy_api", today, len(localdata_animals),
                          notes="; ".join(source_notes))
+        update_freshness(
+            client,
+            "hira_staff_lookup",
+            today,
+            staff_lookup_stats.get("looked_up", 0),
+            notes=f"baseline_date={staff_lookup_stats.get('baseline_date', DEFAULT_STAFF_LOOKUP_BASELINE_DATE)}",
+        )
 
         status = "partial" if errors else "success"
         log_sync(client, "daily", started_at, status,
@@ -252,6 +371,9 @@ def main():
                      "mois_raw_rows": len(mois_raw_rows),
                      "hira_opclo_rows": len(hira_opclo_events),
                      "hira_baseline_date": hira_baseline_date.isoformat(),
+                     "hira_staff_lookup_candidates": staff_lookup_stats.get("candidates", 0),
+                     "hira_staff_lookup_count": staff_lookup_stats.get("looked_up", 0),
+                     "hira_staff_lookup_rows": staff_lookup_stats.get("rows", 0),
                  },
                  new_pharmacies=change_stats["new_count"],
                  closed_pharmacies=change_stats["closed_count"],

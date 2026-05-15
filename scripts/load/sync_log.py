@@ -31,6 +31,13 @@ def _parse_log(log_text: str) -> dict:
         r"HIRA op/clo events:\s+(\d+) total,\s+(\d+) opened,\s+(\d+) closed,\s+(\d+) suspended",
         log_text,
     )
+    staff_lookup_candidates = re.search(
+        r"HIRA staff lookup candidates:\s+(\d+)", log_text
+    )
+    staff_lookup_completed = re.search(
+        r"HIRA staff lookup completed:\s+(\d+) pharmacies,\s+(\d+) raw rows,\s+(\d+) errors",
+        log_text,
+    )
 
     return {
         "localdata_pharmacies": (
@@ -47,6 +54,10 @@ def _parse_log(log_text: str) -> dict:
         "hira_opclo_opened": int(opclo.group(2)) if opclo else None,
         "hira_opclo_closed": int(opclo.group(3)) if opclo else None,
         "hira_opclo_suspended": int(opclo.group(4)) if opclo else None,
+        "hira_staff_lookup_candidates": int(staff_lookup_candidates.group(1)) if staff_lookup_candidates else None,
+        "hira_staff_lookup_pharmacies": int(staff_lookup_completed.group(1)) if staff_lookup_completed else None,
+        "hira_staff_lookup_rows": int(staff_lookup_completed.group(2)) if staff_lookup_completed else None,
+        "hira_staff_lookup_errors": int(staff_lookup_completed.group(3)) if staff_lookup_completed else None,
         "nmc_pharmacies": _first_int(r"NMC pharmacies:\s+(\d+)", log_text),
         "matched_hira": int(matched.group(1)) if matched else None,
         "unmatched_hira": int(matched.group(2)) if matched else None,

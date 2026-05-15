@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response>
+  <header>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <dtlGnlNopCdNm>약사</dtlGnlNopCdNm>
+        <gnlNopCnt>2</gnlNopCnt>
+        <gnlNopDtlCd>071</gnlNopDtlCd>
+        <yadmNm>테스트약국</yadmNm>
+        <ykiho>TESTYKIHO003</ykiho>
+      </item>
+      <item>
+        <dtlGnlNopCdNm>한약사</dtlGnlNopCdNm>
+        <gnlNopCnt>1</gnlNopCnt>
+        <gnlNopDtlCd>072</gnlNopDtlCd>
+        <yadmNm>테스트약국</yadmNm>
+        <ykiho>TESTYKIHO003</ykiho>
+      </item>
+    </items>
+    <numOfRows>100</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>2</totalCount>
+  </body>
+</response>

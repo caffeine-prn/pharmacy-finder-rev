@@ -7,6 +7,7 @@ from sources.hira_pharmacy import (
     parse_hira_opclo_xml,
     parse_hira_xml,
 )
+from sources.hira_staff import parse_staff_lookup_xml, sum_staff_count
 
 FIXTURE_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
 
@@ -77,3 +78,20 @@ def test_opclo_open_events_become_hira_candidates():
     assert len(candidates) == 1
     assert candidates[0]["ykiho"] == "YK-OPEN"
     assert candidates[0]["source"] == "hira_opclo"
+
+
+def test_parse_staff_lookup_xml():
+    xml_path = os.path.join(FIXTURE_DIR, "sample_hira_staff_lookup_response.xml")
+    with open(xml_path) as f:
+        xml_text = f.read()
+
+    rows, total_count = parse_staff_lookup_xml(xml_text)
+
+    assert total_count == 2
+    assert len(rows) == 2
+    assert rows[0]["ykiho"] == "TESTYKIHO003"
+    assert rows[0]["staff_type_code"] == "071"
+    assert rows[0]["staff_type_name"] == "약사"
+    assert rows[0]["staff_count"] == 2
+    assert sum_staff_count(rows, "071", "약사") == 2
+    assert sum_staff_count(rows, "072", "한약사") == 1
