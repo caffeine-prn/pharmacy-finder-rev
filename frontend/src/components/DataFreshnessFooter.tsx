@@ -19,8 +19,12 @@ export function DataFreshnessFooter() {
   }, []);
 
   // Get summary text
-  const pharmacyDate = freshness.find((f) => f.source === "localdata")?.data_date;
-  const staffDate = freshness.find((f) => f.source === "hira_staff")?.data_date;
+  const pharmacyDate =
+    freshness.find((f) => f.source === "mois_pharmacy_api")?.data_date ??
+    freshness.find((f) => f.source === "localdata")?.data_date;
+  const staffDate =
+    freshness.find((f) => f.source === "staff_info")?.data_date ??
+    freshness.find((f) => f.source === "hira_staff")?.data_date;
 
   if (!pharmacyDate && !staffDate) return null;
 
@@ -52,10 +56,14 @@ export function DataFreshnessFooter() {
                 <div key={f.source} className="flex items-center justify-between">
                   <span className="text-xs text-zinc-500">
                     {f.source === "localdata" && "약국 기본정보"}
+                    {f.source === "mois_pharmacy_api" && "행안부 약국정보"}
                     {f.source === "hira_pharmacy" && "HIRA 약국정보"}
                     {f.source === "nmc_pharmacy" && "영업시간"}
+                    {f.source === "nmc_hours" && "영업시간"}
                     {f.source === "hira_staff" && "인력정보"}
+                    {f.source === "staff_info" && "인력정보"}
                     {f.source === "localdata_animal" && "동물약국"}
+                    {f.source === "mois_animal_pharmacy_api" && "행안부 동물약국"}
                   </span>
                   <span className="text-xs text-zinc-700 font-mono">{f.data_date}</span>
                 </div>
