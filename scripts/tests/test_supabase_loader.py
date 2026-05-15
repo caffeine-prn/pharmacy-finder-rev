@@ -1,4 +1,4 @@
-from load.supabase_loader import upsert_mois_raw, upsert_pharmacies, upsert_staff
+from load.supabase_loader import _parse_timestamp, upsert_mois_raw, upsert_pharmacies, upsert_staff
 
 
 class _ExecuteResult:
@@ -107,3 +107,12 @@ def test_upsert_staff_skips_api_refreshed_ykihos():
     assert upsert_call[2] == "ykiho,staff_type_code"
     assert [row["ykiho"] for row in upsert_call[1]] == ["Y2"]
     assert upsert_call[1][0]["staff_count"] == 2
+
+
+def test_parse_timestamp_accepts_supabase_fractional_timezone_variants():
+    assert _parse_timestamp("2026-05-15T12:11:45.93187+00:00").isoformat() == (
+        "2026-05-15T12:11:45.931870+00:00"
+    )
+    assert _parse_timestamp("2026-05-15 12:11:45.93187+00").isoformat() == (
+        "2026-05-15T12:11:45.931870+00:00"
+    )

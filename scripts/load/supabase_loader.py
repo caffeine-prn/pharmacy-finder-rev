@@ -1,4 +1,5 @@
 import os
+import re
 from datetime import date, datetime, timedelta, timezone
 from supabase import create_client
 
@@ -276,7 +277,14 @@ def fetch_staff_lookup_candidates(
 def _parse_timestamp(value: str | None):
     if not value:
         return None
-    return datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    normalized = str(value).strip().replace(" ", "T").replace("Z", "+00:00")
+    normalized = re.sub(r"([+-]\d{2})$", r"\1:00", normalized)
+    normalized = re.sub(
+        r"\.(\d{1,6})([+-]\d{2}:\d{2})$",
+        lambda match: f".{match.group(1).ljust(6, '0')}{match.group(2)}",
+        normalized,
+    )
+    return datetime.fromisoformat(normalized)
 
 
 def fetch_staff_lookup_due_candidates(

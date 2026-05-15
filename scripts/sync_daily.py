@@ -267,6 +267,10 @@ def main():
     hira_baseline_date = _parse_baseline_date(today_date)
     errors = []
     stages = StageLog()
+    client = None
+    pharmacy_count = 0
+    staff_count = 0
+    sync_metadata = {}
 
     log.info("=== Daily Pharmacy Sync Started ===")
 
@@ -521,25 +525,18 @@ def main():
         stages.success(stage, count=6 if nmc_data else 5)
 
         status = "partial" if errors else "success"
-        log_sync(client, "daily", started_at, status,
-                 pharmacy_count=pharmacy_count, animal_count=animal_count,
-                 staff_count=staff_count, errors=errors if errors else None,
-                 metadata={
-                     "source_notes": source_notes,
-                     "mois_raw_rows": len(mois_raw_rows),
-                     "hira_opclo_rows": len(hira_opclo_events),
-                     "hira_baseline_date": hira_baseline_date.isoformat(),
-                     "hira_staff_lookup_candidates": staff_lookup_stats.get("candidates", 0),
-                     "hira_staff_lookup_count": staff_lookup_stats.get("looked_up", 0),
-                     "hira_staff_lookup_rows": staff_lookup_stats.get("rows", 0),
-                     "stage_logs": stages.public_rows(),
-                     "github_run_url": _github_run_url(),
-                     "github_run_id": os.environ.get("GITHUB_RUN_ID"),
-                     "github_run_number": os.environ.get("GITHUB_RUN_NUMBER"),
-                 },
-                 new_pharmacies=change_stats["new_count"],
-                 closed_pharmacies=change_stats["closed_count"],
-                 changed_pharmacies=change_stats["changed_count"])
+        sync_metadata = {
+            "source_notes": source_notes,
+            "mois_raw_rows": len(mois_raw_rows),
+            "hira_opclo_rows": len(hira_opclo_events),
+            "hira_baseline_date": hira_baseline_date.isoformat(),
+            "hira_staff_lookup_candidates": staff_lookup_stats.get("candidates", 0),
+            "hira_staff_lookup_count": staff_lookup_stats.get("looked_up", 0),
+            "hira_staff_lookup_rows": staff_lookup_stats.get("rows", 0),
+            "github_run_url": _github_run_url(),
+            "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+            "github_run_number": os.environ.get("GITHUB_RUN_NUMBER"),
+        }
     except Exception as e:
         log.error(f"  Supabase failed: {e}")
         errors.append(f"Supabase: {e}")
@@ -554,6 +551,16 @@ def main():
     generate_markers_json(all_pharmacies, output_path)
     log.info(f"  Written to {output_path}")
     stages.success(stage, count=len(all_pharmacies), output_path=output_path)
+
+    if client:
+        sync_metadata["stage_logs"] = stages.public_rows()
+        log_sync(client, "daily", started_at, status,
+                 pharmacy_count=pharmacy_count, animal_count=animal_count,
+                 staff_count=staff_count, errors=errors if errors else None,
+                 metadata=sync_metadata,
+                 new_pharmacies=change_stats["new_count"],
+                 closed_pharmacies=change_stats["closed_count"],
+                 changed_pharmacies=change_stats["changed_count"])
 
     log.info(f"=== Sync complete: {status} ({len(all_pharmacies)} pharmacies) ===")
     if errors:
