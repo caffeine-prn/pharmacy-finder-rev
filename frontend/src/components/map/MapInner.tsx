@@ -6,10 +6,7 @@ import { useEffect } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { usePharmacyStore } from "@/lib/store";
 import type { MarkerData } from "@/lib/types";
-import { HeatmapLayer } from "./HeatmapLayer";
-import { HeatmapModeControl } from "./HeatmapModeControl";
 import { MarkerLayer } from "./MarkerLayer";
-import { MapControls } from "./MapControls";
 
 interface MapInnerProps {
   filteredMarkers: MarkerData[];
@@ -34,8 +31,7 @@ function MapResizeHandler() {
 }
 
 export function MapInner({ filteredMarkers }: MapInnerProps) {
-  const { heatmapMode, mapCenter, mapZoom } = usePharmacyStore();
-  const heatMode = heatmapMode === "markers" ? null : heatmapMode;
+  const { mapCenter, mapZoom } = usePharmacyStore();
 
   return (
     <MapContainer
@@ -52,13 +48,7 @@ export function MapInner({ filteredMarkers }: MapInnerProps) {
         maxZoom={18}
       />
       <MapResizeHandler />
-      {heatMode ? (
-        <HeatmapLayer markers={filteredMarkers} mode={heatMode} />
-      ) : (
-        <MarkerLayer markers={filteredMarkers} />
-      )}
-      <MapControls />
-      <HeatmapModeControl markers={filteredMarkers} />
+      <MarkerLayer markers={filteredMarkers} />
     </MapContainer>
   );
 }

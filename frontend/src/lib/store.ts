@@ -1,6 +1,6 @@
 // frontend/src/lib/store.ts
 import { create } from "zustand";
-import type { FilterState, SortField, SortDirection, MarkerData, HeatmapMode } from "./types";
+import type { FilterState, SortField, SortDirection, MarkerData } from "./types";
 
 interface PharmacyStore {
   // View
@@ -44,10 +44,6 @@ interface PharmacyStore {
   // Dense view toggle
   isDenseView: boolean;
   toggleDenseView: () => void;
-
-  // Map render mode
-  heatmapMode: HeatmapMode;
-  setHeatmapMode: (mode: HeatmapMode) => void;
 }
 
 const defaultFilters: FilterState = {
@@ -119,8 +115,4 @@ export const usePharmacyStore = create<PharmacyStore>((set, get) => ({
   // Dense view
   isDenseView: false,
   toggleDenseView: () => set((s) => ({ isDenseView: !s.isDenseView })),
-
-  // Map render mode
-  heatmapMode: "markers",
-  setHeatmapMode: (heatmapMode) => set({ heatmapMode }),
 }));
