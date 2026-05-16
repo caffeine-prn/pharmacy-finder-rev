@@ -7,6 +7,7 @@ import { SearchPanel } from "@/components/panels/SearchPanel";
 import { FilterBar } from "@/components/panels/FilterBar";
 import { PharmacySlidePanel } from "@/components/panels/PharmacySlidePanel";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 import Link from "next/link";
 
 // Dynamic imports to avoid SSR issues
@@ -91,6 +92,14 @@ function TableSearchFilters() {
     ? Array.from(new Set(markers.filter((m) => m.s === filters.sido).map((m) => m.g))).sort()
     : [];
 
+  const trackFilter = (filter: string, enabled: boolean) => {
+    trackAnalyticsEvent({
+      eventName: "filter_toggle",
+      view: "table",
+      metadata: { filter, enabled },
+    });
+  };
+
   return (
     <div className="table-filter-controls flex flex-1 flex-wrap items-center gap-3 max-sm:w-[calc(100vw-1.5rem)] max-sm:max-w-[calc(100vw-1.5rem)] max-sm:flex-none max-sm:flex-col max-sm:items-stretch max-sm:gap-2 max-sm:overflow-hidden">
       <input
@@ -103,7 +112,14 @@ function TableSearchFilters() {
       <div className="flex items-center gap-2 max-sm:w-full max-sm:min-w-0">
         <select
           value={filters.sido}
-          onChange={(e) => setSido(e.target.value)}
+          onChange={(e) => {
+            setSido(e.target.value);
+            trackAnalyticsEvent({
+              eventName: "region_filter",
+              view: "table",
+              metadata: { field: "sido", value: e.target.value },
+            });
+          }}
           className="rounded-md border border-zinc-200 px-2 py-1.5 text-sm outline-none max-sm:h-10 max-sm:min-w-0 max-sm:flex-1"
         >
           <option value="">전체 시도</option>
@@ -113,7 +129,14 @@ function TableSearchFilters() {
         </select>
         <select
           value={filters.sigungu}
-          onChange={(e) => setSigungu(e.target.value)}
+          onChange={(e) => {
+            setSigungu(e.target.value);
+            trackAnalyticsEvent({
+              eventName: "region_filter",
+              view: "table",
+              metadata: { field: "sigungu", value: e.target.value, sido: filters.sido },
+            });
+          }}
           className="rounded-md border border-zinc-200 px-2 py-1.5 text-sm outline-none max-sm:h-10 max-sm:min-w-0 max-sm:flex-1"
           disabled={!filters.sido}
         >
@@ -130,7 +153,14 @@ function TableSearchFilters() {
         <input
           type="date"
           value={filters.openedFrom}
-          onChange={(e) => setOpenedFrom(e.target.value)}
+          onChange={(e) => {
+            setOpenedFrom(e.target.value);
+            trackAnalyticsEvent({
+              eventName: "date_filter",
+              view: "table",
+              metadata: { field: "openedFrom", value: e.target.value },
+            });
+          }}
           aria-label="개업일 이후"
           className="shrink-0 rounded-md border border-zinc-200 px-2 py-1.5 text-xs outline-none focus:border-emerald-400 max-sm:h-9"
         />
@@ -138,7 +168,14 @@ function TableSearchFilters() {
         <input
           type="date"
           value={filters.openedTo}
-          onChange={(e) => setOpenedTo(e.target.value)}
+          onChange={(e) => {
+            setOpenedTo(e.target.value);
+            trackAnalyticsEvent({
+              eventName: "date_filter",
+              view: "table",
+              metadata: { field: "openedTo", value: e.target.value },
+            });
+          }}
           aria-label="개업일 이전"
           className="shrink-0 rounded-md border border-zinc-200 px-2 py-1.5 text-xs outline-none focus:border-emerald-400 max-sm:h-9"
         />
@@ -147,6 +184,11 @@ function TableSearchFilters() {
           onClick={() => {
             setOpenedFrom(dateNDaysAgo(30));
             setOpenedTo("");
+            trackAnalyticsEvent({
+              eventName: "date_filter",
+              view: "table",
+              metadata: { preset: "recent_30_days" },
+            });
           }}
           className="rounded-md border border-zinc-200 bg-white px-2 py-1.5 font-medium text-zinc-600 hover:bg-zinc-100 max-sm:h-9 max-sm:shrink-0"
         >
@@ -158,6 +200,11 @@ function TableSearchFilters() {
             onClick={() => {
               setOpenedFrom("");
               setOpenedTo("");
+              trackAnalyticsEvent({
+                eventName: "date_filter",
+                view: "table",
+                metadata: { cleared: true },
+              });
             }}
             className="rounded-md px-2 py-1.5 font-medium text-zinc-400 hover:bg-white hover:text-zinc-600 max-sm:h-9 max-sm:shrink-0"
           >
@@ -175,7 +222,10 @@ function TableSearchFilters() {
         ].map(({ key, label, toggle }) => (
           <button
             key={key}
-            onClick={toggle}
+            onClick={() => {
+              trackFilter(key, !filters[key]);
+              toggle();
+            }}
             className={`rounded-full border px-2.5 py-1 text-xs transition-colors max-sm:h-9 max-sm:min-w-0 max-sm:truncate ${
               filters[key]
                 ? "bg-zinc-900 text-white border-zinc-900"

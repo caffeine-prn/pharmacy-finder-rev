@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { badgeTypeLabel } from "@/lib/badges";
 import type { PharmacyBadgeReport } from "@/lib/types";
 
@@ -75,7 +76,12 @@ export function AdminBadgeReview() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-zinc-900">커뮤니티 배지 관리자</h1>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <h1 className="text-2xl font-bold text-zinc-900">커뮤니티 배지 관리자</h1>
+          <Link href="/admin/analytics" className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50">
+            이용 분석
+          </Link>
+        </div>
         <p className="mt-2 text-sm text-zinc-500">
           공식 자료와 별개인 현장 제보를 검토하고 공개 배지로 전환합니다.
         </p>
@@ -150,4 +156,3 @@ export function AdminBadgeReview() {
     </div>
   );
 }
-

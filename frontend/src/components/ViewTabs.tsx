@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { MapTrifold, Table } from "@phosphor-icons/react";
 import { usePharmacyStore } from "@/lib/store";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 export function ViewTabs() {
   const router = useRouter();
@@ -21,6 +22,11 @@ export function ViewTabs() {
   // Update URL when view changes
   function handleViewChange(newView: "map" | "table") {
     setView(newView);
+    trackAnalyticsEvent({
+      eventName: "view_change",
+      view: newView,
+      metadata: { from: view, to: newView },
+    });
     const params = new URLSearchParams(searchParams.toString());
     params.set("view", newView);
     router.replace(`?${params.toString()}`, { scroll: false });

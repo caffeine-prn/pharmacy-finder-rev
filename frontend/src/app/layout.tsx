@@ -2,6 +2,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { GeistMono } from "geist/font/mono";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { DataFreshnessFooter } from "@/components/DataFreshnessFooter";
 import "@/styles/globals.css";
 
@@ -59,6 +60,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-[var(--bg-primary)] text-[var(--text-primary)]">
+        <AnalyticsTracker />
         <main className="h-[100dvh] overflow-hidden flex flex-col">{children}</main>
         <DataFreshnessFooter />
       </body>

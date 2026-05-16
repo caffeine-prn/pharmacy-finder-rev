@@ -8,6 +8,7 @@ import {
   WarningCircle,
 } from "@phosphor-icons/react";
 import { formatKstDateTime } from "@/lib/datetime";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 import type { Pharmacy } from "@/lib/types";
 
 interface HiraStaffLookupProps {
@@ -85,6 +86,15 @@ export function HiraStaffLookup({ pharmacy }: HiraStaffLookupProps) {
   }
 
   async function refreshStaff() {
+    trackAnalyticsEvent({
+      eventName: "hira_staff_lookup_click",
+      pharmacyId: pharmacy.id,
+      metadata: {
+        name: pharmacy.name,
+        canRefresh,
+        hasYkiho: pharmacy.has_ykiho,
+      },
+    });
     setLoading(true);
     setError(null);
 

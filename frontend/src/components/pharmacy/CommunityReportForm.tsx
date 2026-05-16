@@ -8,6 +8,7 @@ import {
   type BadgeEvidenceType,
   type CommunityBadgeType,
 } from "@/lib/badges";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 import type { Pharmacy } from "@/lib/types";
 
 interface CommunityReportFormProps {
@@ -41,6 +42,15 @@ export function CommunityReportForm({ pharmacy }: CommunityReportFormProps) {
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "제보 접수에 실패했습니다.");
+      trackAnalyticsEvent({
+        eventName: "field_report_submit",
+        pharmacyId: pharmacy.id,
+        metadata: {
+          badgeType,
+          evidenceType,
+          reportId: payload.report?.id,
+        },
+      });
       setDescription("");
       setContact("");
       setMessage("제보가 접수되었습니다. 관리자 검토 후 공개 여부가 결정됩니다.");
@@ -123,4 +133,3 @@ export function CommunityReportForm({ pharmacy }: CommunityReportFormProps) {
     </form>
   );
 }
-

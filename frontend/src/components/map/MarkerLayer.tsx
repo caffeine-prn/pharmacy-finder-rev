@@ -9,6 +9,7 @@ import "leaflet.markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { usePharmacyStore } from "@/lib/store";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 import type { MarkerData } from "@/lib/types";
 
 function createIcon(m: MarkerData): L.DivIcon {
@@ -117,6 +118,18 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
         const marker = L.marker([m.lat, m.lng], { icon: createIcon(m) });
         marker.bindPopup(popupHtml(m));
         marker.on("click", () => {
+          trackAnalyticsEvent({
+            eventName: "pharmacy_click",
+            pharmacyId: m.id,
+            view: "map",
+            metadata: {
+              name: m.n,
+              herbal: m.h,
+              communityHerbal: Boolean(m.hr),
+              animal: m.a,
+              noYkiho: !m.y,
+            },
+          });
           setSelectedPharmacyId(m.id);
           marker.openPopup();
         });

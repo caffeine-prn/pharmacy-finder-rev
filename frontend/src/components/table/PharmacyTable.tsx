@@ -10,6 +10,7 @@ import {
   DownloadSimple,
 } from "@phosphor-icons/react";
 import { usePharmacyStore } from "@/lib/store";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 import { formatKstDate, formatKstDateTime, formatKstTime } from "@/lib/datetime";
 import type { PharmacyTableRow, PaginatedResponse, SortField } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
@@ -119,6 +120,18 @@ export function PharmacyTable() {
 
   // Focus pharmacy on map
   function handleFocusOnMap(row: PharmacyTableRow) {
+    trackAnalyticsEvent({
+      eventName: "pharmacy_click",
+      pharmacyId: row.id,
+      view: "table",
+      metadata: {
+        name: row.name,
+        herbal: row.is_herbal_pharmacy,
+        communityHerbal: Boolean(row.community_herbal_staff_reported),
+        animal: row.is_animal_pharmacy,
+        noYkiho: !row.has_ykiho,
+      },
+    });
     setSelectedPharmacyId(null);
     if (row.latitude != null && row.longitude != null) {
       setMapCenter([row.latitude, row.longitude]);
@@ -133,6 +146,16 @@ export function PharmacyTable() {
 
   // CSV export
   async function handleExportCSV() {
+    trackAnalyticsEvent({
+      eventName: "csv_export",
+      view: "table",
+      metadata: {
+        total,
+        sortField,
+        sortDirection,
+        filters,
+      },
+    });
     setExporting(true);
     const params = new URLSearchParams({
       page: "1",

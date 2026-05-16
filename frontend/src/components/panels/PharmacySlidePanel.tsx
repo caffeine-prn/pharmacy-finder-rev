@@ -12,6 +12,7 @@ import {
   NavigationArrow,
 } from "@phosphor-icons/react";
 import { usePharmacyStore } from "@/lib/store";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 import { supabase } from "@/lib/supabase/client";
 import type { Pharmacy, PharmacyBadgeAssertion } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
@@ -110,7 +111,15 @@ export function PharmacySlidePanel() {
                   {pharmacy && (
                     <button
                       type="button"
-                      onClick={() => reportFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                      onClick={() => {
+                        trackAnalyticsEvent({
+                          eventName: "field_report_open",
+                          pharmacyId: pharmacy.id,
+                          view: "panel",
+                          metadata: { name: pharmacy.name },
+                        });
+                        reportFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
                       className="inline-flex h-7 shrink-0 items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-100"
                     >
                       <Flag size={13} />

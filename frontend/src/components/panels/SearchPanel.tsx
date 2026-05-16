@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePharmacyStore } from "@/lib/store";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 const SIDO_LIST = [
   "서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종",
@@ -60,7 +61,14 @@ export function SearchPanel() {
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-md border border-zinc-200 flex gap-2 px-3 py-2">
         <select
           value={filters.sido}
-          onChange={(e) => setSido(e.target.value)}
+          onChange={(e) => {
+            setSido(e.target.value);
+            trackAnalyticsEvent({
+              eventName: "region_filter",
+              view: "map",
+              metadata: { field: "sido", value: e.target.value },
+            });
+          }}
           className="flex-1 text-sm bg-transparent text-zinc-700 outline-none cursor-pointer"
         >
           <option value="">전체 시도</option>
@@ -73,7 +81,14 @@ export function SearchPanel() {
         <div className="w-px bg-zinc-200" />
         <select
           value={filters.sigungu}
-          onChange={(e) => setSigungu(e.target.value)}
+          onChange={(e) => {
+            setSigungu(e.target.value);
+            trackAnalyticsEvent({
+              eventName: "region_filter",
+              view: "map",
+              metadata: { field: "sigungu", value: e.target.value, sido: filters.sido },
+            });
+          }}
           className="flex-1 text-sm bg-transparent text-zinc-700 outline-none cursor-pointer"
           disabled={!filters.sido}
         >

@@ -8,6 +8,7 @@ import {
   UsersFour,
   Question,
 } from "@phosphor-icons/react";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 interface FilterPillProps {
   active: boolean;
@@ -52,33 +53,52 @@ export function FilterBar() {
     usePharmacyStore();
 
   const hasOpenedFilter = Boolean(filters.openedFrom || filters.openedTo);
+  const trackFilter = (filter: string, enabled: boolean) => {
+    trackAnalyticsEvent({
+      eventName: "filter_toggle",
+      view: "map",
+      metadata: { filter, enabled },
+    });
+  };
 
   return (
     <div className="absolute left-3 top-[7.5rem] z-[1000] flex max-w-[calc(100%-1.5rem)] gap-1.5 overflow-x-auto pb-1 max-sm:left-2 max-sm:right-2 max-sm:max-w-none max-sm:flex-nowrap max-sm:scrollbar-none" style={{ scrollbarWidth: "none" }}>
       <FilterPill
         active={filters.herbal}
-        onClick={toggleHerbal}
+        onClick={() => {
+          trackFilter("herbal", !filters.herbal);
+          toggleHerbal();
+        }}
         icon={<Leaf size={14} weight={filters.herbal ? "fill" : "regular"} />}
         label="한약사"
         activeColor="bg-rose-50 text-rose-700 border-rose-300"
       />
       <FilterPill
         active={filters.animal}
-        onClick={toggleAnimal}
+        onClick={() => {
+          trackFilter("animal", !filters.animal);
+          toggleAnimal();
+        }}
         icon={<PawPrint size={14} weight={filters.animal ? "fill" : "regular"} />}
         label="동물약국"
         activeColor="bg-orange-50 text-orange-700 border-orange-300"
       />
       <FilterPill
         active={filters.cross}
-        onClick={toggleCross}
+        onClick={() => {
+          trackFilter("cross", !filters.cross);
+          toggleCross();
+        }}
         icon={<UsersFour size={14} weight={filters.cross ? "fill" : "regular"} />}
         label="교차고용"
         activeColor="bg-violet-50 text-violet-700 border-violet-300"
       />
       <FilterPill
         active={filters.noYkiho}
-        onClick={toggleNoYkiho}
+        onClick={() => {
+          trackFilter("noYkiho", !filters.noYkiho);
+          toggleNoYkiho();
+        }}
         icon={<Question size={14} weight={filters.noYkiho ? "fill" : "regular"} />}
         label="요양X"
         activeColor="bg-zinc-100 text-zinc-700 border-zinc-300"
@@ -99,7 +119,14 @@ export function FilterBar() {
           <input
             type="date"
             value={filters.openedFrom}
-            onChange={(e) => setOpenedFrom(e.target.value)}
+            onChange={(e) => {
+              setOpenedFrom(e.target.value);
+              trackAnalyticsEvent({
+                eventName: "date_filter",
+                view: "map",
+                metadata: { field: "openedFrom", value: e.target.value },
+              });
+            }}
             aria-label="개업일 이후"
             className="w-[7.2rem] rounded-md border border-zinc-200 bg-white px-1.5 py-1 text-xs text-zinc-700 outline-none focus:border-emerald-400"
           />
@@ -109,7 +136,14 @@ export function FilterBar() {
           <input
             type="date"
             value={filters.openedTo}
-            onChange={(e) => setOpenedTo(e.target.value)}
+            onChange={(e) => {
+              setOpenedTo(e.target.value);
+              trackAnalyticsEvent({
+                eventName: "date_filter",
+                view: "map",
+                metadata: { field: "openedTo", value: e.target.value },
+              });
+            }}
             aria-label="개업일 이전"
             className="w-[7.2rem] rounded-md border border-zinc-200 bg-white px-1.5 py-1 text-xs text-zinc-700 outline-none focus:border-emerald-400"
           />
@@ -119,6 +153,11 @@ export function FilterBar() {
           onClick={() => {
             setOpenedFrom(dateNDaysAgo(30));
             setOpenedTo("");
+            trackAnalyticsEvent({
+              eventName: "date_filter",
+              view: "map",
+              metadata: { preset: "recent_30_days" },
+            });
           }}
           className="rounded-md bg-zinc-100 px-2 py-1 font-medium text-zinc-600 transition hover:bg-zinc-200"
         >
@@ -130,6 +169,11 @@ export function FilterBar() {
             onClick={() => {
               setOpenedFrom("");
               setOpenedTo("");
+              trackAnalyticsEvent({
+                eventName: "date_filter",
+                view: "map",
+                metadata: { cleared: true },
+              });
             }}
             className="rounded-md px-2 py-1 font-medium text-zinc-400 transition hover:bg-zinc-100 hover:text-zinc-600"
           >
