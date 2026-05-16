@@ -69,6 +69,40 @@ def test_match_hira_when_prefix_differs_but_address_and_coordinate_match():
     assert unmatched == []
 
 
+def test_match_hira_when_sharp_symbol_differs():
+    localdata = [
+        {
+            "id": "PHMD120263030033084000007",
+            "name": "도레미약국 샾(sharp) 성수점",
+            "address": "서울특별시 성동구 성수동2가 273-26",
+            "road_address": "서울특별시 성동구 연무장길 73, 2층 (성수동2가)",
+            "sido": "서울",
+            "sigungu": "성동구",
+            "longitude": 127.0572326,
+            "latitude": 37.5421338,
+        },
+    ]
+    hira = [
+        {
+            "ykiho": "YK-DOREMI",
+            "name": "도레미약국 ?(sharp) 성수점",
+            "address": "서울특별시 성동구 연무장길 73, 2층 (성수동2가)",
+            "sido": "서울",
+            "sigungu": "성동구",
+            "open_date": "20260406",
+            "longitude": 127.0576533,
+            "latitude": 37.5420593,
+        },
+    ]
+
+    matched, unmatched = match_localdata_to_hira(localdata, hira)
+
+    assert len(matched) == 1
+    assert matched[0]["ykiho"] == "YK-DOREMI"
+    assert matched[0]["hira_open_date"] == "20260406"
+    assert unmatched == []
+
+
 def test_match_to_animal():
     pharmacies = [
         {"id": "L1", "name": "우리약국", "address": "서울특별시 강남구 역삼동 123",

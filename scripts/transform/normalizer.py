@@ -17,7 +17,9 @@ _SIGUNGU_MERGE = re.compile(r"^(.+[시군])\s+(.+[구])$")
 def normalize_name(name: str) -> str:
     """Remove parenthetical prefixes, extra whitespace."""
     name = name.strip()
+    name = re.sub(r"\bsharp\b", "샵", name, flags=re.IGNORECASE)
     name = re.sub(r"\([^)]*\)", "", name)
+    name = name.replace("샾", "샵").replace("#", "샵").replace("?", "샵")
     name = re.sub(r"\s+", "", name)
     return name
 

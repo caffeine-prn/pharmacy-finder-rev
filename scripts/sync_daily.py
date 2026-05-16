@@ -155,6 +155,31 @@ def _attach_operating_hours(pharmacies, nmc_data):
     log.info(f"Operating hours matched: {matched}/{len(pharmacies)}")
 
 
+def _is_active_without_ykiho(pharmacy: dict) -> bool:
+    return (
+        not pharmacy.get("has_ykiho")
+        and pharmacy.get("business_status_code") in (None, "", "01")
+        and not pharmacy.get("mois_closed_date")
+    )
+
+
+def _missing_ykiho_watchlist(pharmacies: list[dict], limit: int = 20) -> list[dict]:
+    watchlist = []
+    for p in pharmacies:
+        if not _is_active_without_ykiho(p):
+            continue
+        watchlist.append({
+            "id": p.get("id") or p.get("localdata_id"),
+            "name": p.get("name"),
+            "sido": p.get("sido"),
+            "sigungu": p.get("sigungu"),
+            "open_date": p.get("mois_license_date") or p.get("open_date"),
+            "road_address": p.get("road_address") or p.get("address"),
+        })
+    watchlist.sort(key=lambda row: (row.get("open_date") or "", row.get("name") or ""))
+    return watchlist[:limit]
+
+
 def _run_initial_staff_lookup(client, api_key: str, today_date: date, all_pharmacies: list[dict]) -> dict:
     if os.environ.get("STAFF_LOOKUP_ENABLED", "true").lower() in ("0", "false", "no"):
         log.info("  HIRA staff lookup backfill disabled")
@@ -386,11 +411,20 @@ def main():
 
     for p in all_pharmacies:
         p["source"] = "both" if p.get("has_ykiho") else "localdata"
+    missing_ykiho_count = sum(1 for p in all_pharmacies if _is_active_without_ykiho(p))
+    missing_ykiho_watchlist = _missing_ykiho_watchlist(all_pharmacies)
+    if missing_ykiho_count:
+        log.warning(
+            "  Active pharmacies without HIRA ykiho: "
+            f"{missing_ykiho_count}; samples={missing_ykiho_watchlist[:5]}"
+        )
     stages.success(
         stage,
         count=len(all_pharmacies),
         matched_hira=len(matched),
         unmatched_hira=len(unmatched),
+        missing_ykiho_active=missing_ykiho_count,
+        missing_ykiho_samples=missing_ykiho_watchlist,
         animal_count=animal_count,
         unmatched_animals=len(unmatched_animals),
         herbal_count=herbal_count,
@@ -533,6 +567,8 @@ def main():
             "hira_staff_lookup_candidates": staff_lookup_stats.get("candidates", 0),
             "hira_staff_lookup_count": staff_lookup_stats.get("looked_up", 0),
             "hira_staff_lookup_rows": staff_lookup_stats.get("rows", 0),
+            "missing_ykiho_active": missing_ykiho_count,
+            "missing_ykiho_samples": missing_ykiho_watchlist,
             "github_run_url": _github_run_url(),
             "github_run_id": os.environ.get("GITHUB_RUN_ID"),
             "github_run_number": os.environ.get("GITHUB_RUN_NUMBER"),
