@@ -10,18 +10,21 @@ import {
   NavigationArrow,
   Flag,
 } from "@phosphor-icons/react";
-import type { Pharmacy, NearbyPharmacy } from "@/lib/types";
+import type { Pharmacy, NearbyPharmacy, PharmacyBadgeAssertion } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
 import { OperatingHours } from "./OperatingHours";
 import { NearbyPharmacies } from "./NearbyPharmacies";
 import { PharmacyStatusButtons } from "./PharmacyStatusButtons";
 import { LifecycleTimeline } from "./LifecycleTimeline";
 import { HiraStaffLookup } from "./HiraStaffLookup";
+import { CommunityBadgePanel } from "./CommunityBadgePanel";
+import { CommunityReportForm } from "./CommunityReportForm";
 import { buildReportUrl } from "@/lib/report";
 
 interface PharmacyDetailProps {
   pharmacy: Pharmacy;
   nearby: NearbyPharmacy[];
+  badgeAssertions: PharmacyBadgeAssertion[];
 }
 
 function MiniMap({ lat, lng, name }: { lat: number; lng: number; name: string }) {
@@ -36,7 +39,7 @@ function MiniMap({ lat, lng, name }: { lat: number; lng: number; name: string })
   );
 }
 
-export function PharmacyDetail({ pharmacy, nearby }: PharmacyDetailProps) {
+export function PharmacyDetail({ pharmacy, nearby, badgeAssertions }: PharmacyDetailProps) {
   const addressQuery = encodeURIComponent(
     pharmacy.name + " " + (pharmacy.road_address || pharmacy.address || "")
   );
@@ -69,8 +72,14 @@ export function PharmacyDetail({ pharmacy, nearby }: PharmacyDetailProps) {
           {pharmacy.is_animal_pharmacy && <Badge variant="animal">동물약국</Badge>}
           {pharmacy.is_cross_employed && <Badge variant="cross">교차고용</Badge>}
           {!pharmacy.has_ykiho && <Badge variant="noYkiho">요양기관번호 미부여</Badge>}
+          {badgeAssertions.map((assertion) => (
+            <Badge key={assertion.id} variant="herbal">
+              {assertion.label}
+            </Badge>
+          ))}
         </div>
 
+        <CommunityBadgePanel assertions={badgeAssertions} />
         <PharmacyStatusButtons pharmacy={pharmacy} />
         <LifecycleTimeline pharmacy={pharmacy} />
 
@@ -160,6 +169,8 @@ export function PharmacyDetail({ pharmacy, nearby }: PharmacyDetailProps) {
           <Flag size={16} />
           정보 오류 신고하기
         </a>
+
+        <CommunityReportForm pharmacy={pharmacy} />
 
         {/* Nearby pharmacies */}
         {nearby.length > 0 && <NearbyPharmacies pharmacies={nearby} />}

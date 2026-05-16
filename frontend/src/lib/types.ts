@@ -66,6 +66,39 @@ export interface Pharmacy {
   updated_at: string;
 }
 
+export interface PharmacyBadgeAssertion {
+  id: string;
+  pharmacy_id: string;
+  badge_type: string;
+  assertion_status: string;
+  confidence: string;
+  label: string;
+  public_note: string;
+  evidence_summary: string | null;
+  report_count: number;
+  first_reported_at: string | null;
+  confirmed_at: string;
+  expires_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface PharmacyBadgeReport {
+  id: string;
+  pharmacy_id: string;
+  badge_type: string;
+  report_status: string;
+  evidence_type: string;
+  description: string;
+  reporter_contact: string | null;
+  admin_note: string | null;
+  reviewed_at: string | null;
+  reviewed_by: string | null;
+  created_at: string;
+  updated_at: string;
+  pharmacies?: Pick<Pharmacy, "id" | "name" | "sido" | "sigungu" | "road_address" | "address" | "has_ykiho" | "pharmacist_count" | "herbal_pharmacist_count" | "hira_staff_fetched_at">;
+}
+
 /** Pharmacy row for table view (subset of columns) */
 export interface PharmacyTableRow {
   id: string;

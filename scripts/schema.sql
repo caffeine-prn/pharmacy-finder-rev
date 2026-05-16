@@ -206,3 +206,40 @@ CREATE TABLE IF NOT EXISTS hira_staff_lookup_raw (
 
 CREATE INDEX IF NOT EXISTS idx_hira_staff_lookup_ykiho
   ON hira_staff_lookup_raw (ykiho);
+
+-- Public reports and admin-confirmed badges for observations that are not
+-- official HIRA/MOIS facts, such as suspected unregistered herbal staff.
+CREATE TABLE IF NOT EXISTS pharmacy_badge_reports (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  pharmacy_id TEXT NOT NULL REFERENCES pharmacies(id) ON DELETE CASCADE,
+  badge_type TEXT NOT NULL,
+  report_status TEXT NOT NULL DEFAULT 'pending',
+  evidence_type TEXT NOT NULL DEFAULT 'other',
+  description TEXT NOT NULL,
+  reporter_contact TEXT,
+  reporter_ip_hash TEXT,
+  user_agent TEXT,
+  admin_note TEXT,
+  reviewed_at TIMESTAMPTZ,
+  reviewed_by TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS pharmacy_badge_assertions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  pharmacy_id TEXT NOT NULL REFERENCES pharmacies(id) ON DELETE CASCADE,
+  badge_type TEXT NOT NULL,
+  assertion_status TEXT NOT NULL DEFAULT 'published',
+  confidence TEXT NOT NULL DEFAULT 'admin_reviewed',
+  label TEXT NOT NULL,
+  public_note TEXT NOT NULL,
+  evidence_summary TEXT,
+  report_count INTEGER NOT NULL DEFAULT 0,
+  first_reported_at TIMESTAMPTZ,
+  confirmed_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  expires_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (pharmacy_id, badge_type)
+);

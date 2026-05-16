@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { createServerSupabase } from "@/lib/supabase/server";
 import { PharmacyDetail } from "@/components/pharmacy/PharmacyDetail";
-import type { Pharmacy, NearbyPharmacy } from "@/lib/types";
+import type { Pharmacy, NearbyPharmacy, PharmacyBadgeAssertion } from "@/lib/types";
 
 interface PageProps {
   params: { id: string };
@@ -81,5 +81,18 @@ export default async function PharmacyDetailPage({ params }: PageProps) {
     }
   }
 
-  return <PharmacyDetail pharmacy={pharmacy as Pharmacy} nearby={nearby} />;
+  const { data: badgeAssertions } = await supabase
+    .from("pharmacy_badge_assertions")
+    .select("*")
+    .eq("pharmacy_id", pharmacy.id)
+    .eq("assertion_status", "published")
+    .order("confirmed_at", { ascending: false });
+
+  return (
+    <PharmacyDetail
+      pharmacy={pharmacy as Pharmacy}
+      nearby={nearby}
+      badgeAssertions={(badgeAssertions || []) as PharmacyBadgeAssertion[]}
+    />
+  );
 }
