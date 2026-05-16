@@ -125,22 +125,22 @@ function TableSearchFilters() {
       </div>
       <div className="h-5 w-px bg-zinc-200 max-sm:hidden" />
       <div className="table-date-filter flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-2 py-1 text-xs text-zinc-500 max-sm:w-full max-sm:min-w-0 max-sm:overflow-x-auto max-sm:py-1.5">
-        <span className="font-semibold text-zinc-700">개업일</span>
-        <span>이후</span>
+        <span className="shrink-0 font-semibold text-zinc-700">개업일</span>
+        <span className="shrink-0">이후</span>
         <input
           type="date"
           value={filters.openedFrom}
           onChange={(e) => setOpenedFrom(e.target.value)}
           aria-label="개업일 이후"
-          className="rounded-md border border-zinc-200 px-2 py-1.5 text-xs outline-none focus:border-emerald-400 max-sm:h-9"
+          className="shrink-0 rounded-md border border-zinc-200 px-2 py-1.5 text-xs outline-none focus:border-emerald-400 max-sm:h-9"
         />
-        <span>이전</span>
+        <span className="shrink-0">이전</span>
         <input
           type="date"
           value={filters.openedTo}
           onChange={(e) => setOpenedTo(e.target.value)}
           aria-label="개업일 이전"
-          className="rounded-md border border-zinc-200 px-2 py-1.5 text-xs outline-none focus:border-emerald-400 max-sm:h-9"
+          className="shrink-0 rounded-md border border-zinc-200 px-2 py-1.5 text-xs outline-none focus:border-emerald-400 max-sm:h-9"
         />
         <button
           type="button"

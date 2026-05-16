@@ -6,8 +6,10 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase/client";
 import { formatKstDate, formatKstDateTime } from "@/lib/datetime";
 import type { DataFreshness } from "@/lib/types";
+import { usePharmacyStore } from "@/lib/store";
 
 export function DataFreshnessFooter() {
+  const { view } = usePharmacyStore();
   const [freshness, setFreshness] = useState<DataFreshness[]>([]);
   const [expanded, setExpanded] = useState(false);
 
@@ -43,7 +45,10 @@ export function DataFreshnessFooter() {
     .join(" / ");
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[999] pointer-events-none">
+    <div
+      data-view={view}
+      className="data-freshness-footer fixed bottom-0 left-0 right-0 z-[999] pointer-events-none"
+    >
       <div className="pointer-events-auto">
         {/* Collapsed bar */}
         <button

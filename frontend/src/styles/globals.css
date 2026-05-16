@@ -89,6 +89,10 @@ body {
 
 /* Mobile overrides */
 @media (max-width: 640px) {
+  .data-freshness-footer[data-view="table"] {
+    display: none;
+  }
+
   .leaflet-control-attribution {
     display: none;
   }
