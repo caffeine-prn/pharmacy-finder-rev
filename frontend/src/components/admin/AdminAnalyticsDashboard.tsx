@@ -123,7 +123,7 @@ export function AdminAnalyticsDashboard() {
   }
 
   return (
-    <div className="min-h-[100dvh] bg-zinc-50 px-4 py-8">
+    <div className="flex-1 overflow-y-auto bg-zinc-50 px-4 py-8">
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
           <div>
