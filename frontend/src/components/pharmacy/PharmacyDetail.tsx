@@ -8,7 +8,6 @@ import {
   Phone,
   Calendar,
   NavigationArrow,
-  Flag,
 } from "@phosphor-icons/react";
 import type { Pharmacy, NearbyPharmacy, PharmacyBadgeAssertion } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
@@ -19,7 +18,6 @@ import { LifecycleTimeline } from "./LifecycleTimeline";
 import { HiraStaffLookup } from "./HiraStaffLookup";
 import { CommunityBadgePanel } from "./CommunityBadgePanel";
 import { CommunityReportForm } from "./CommunityReportForm";
-import { buildReportUrl } from "@/lib/report";
 
 interface PharmacyDetailProps {
   pharmacy: Pharmacy;
@@ -45,7 +43,6 @@ export function PharmacyDetail({ pharmacy, nearby, badgeAssertions }: PharmacyDe
   );
   const naverUrl = `https://map.naver.com/v5/search/${addressQuery}`;
   const kakaoUrl = `https://map.kakao.com/?q=${addressQuery}`;
-  const reportUrl = buildReportUrl(pharmacy);
 
   return (
     <div className="flex-1 overflow-y-auto bg-[var(--bg-primary,#f9fafb)]">
@@ -158,17 +155,6 @@ export function PharmacyDetail({ pharmacy, nearby, badgeAssertions }: PharmacyDe
             카카오맵
           </a>
         </div>
-
-        {/* Report button */}
-        <a
-          href={reportUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 rounded-xl border border-rose-200 bg-rose-50 py-3 text-sm font-medium text-rose-600 hover:bg-rose-100 transition-colors"
-        >
-          <Flag size={16} />
-          정보 오류 신고하기
-        </a>
 
         <CommunityReportForm pharmacy={pharmacy} />
 

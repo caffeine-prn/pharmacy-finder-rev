@@ -8,6 +8,7 @@ import {
   Phone,
   MapPin,
   Calendar,
+  Flag,
   NavigationArrow,
 } from "@phosphor-icons/react";
 import { usePharmacyStore } from "@/lib/store";
@@ -21,7 +22,6 @@ import { HiraStaffLookup } from "@/components/pharmacy/HiraStaffLookup";
 import { OperatingHours } from "@/components/pharmacy/OperatingHours";
 import { CommunityBadgePanel } from "@/components/pharmacy/CommunityBadgePanel";
 import { CommunityReportForm } from "@/components/pharmacy/CommunityReportForm";
-import { buildReportUrl } from "@/lib/report";
 
 export function PharmacySlidePanel() {
   const { selectedPharmacyId, selectedPharmacySeq, setSelectedPharmacyId } = usePharmacyStore();
@@ -29,6 +29,7 @@ export function PharmacySlidePanel() {
   const [badgeAssertions, setBadgeAssertions] = useState<PharmacyBadgeAssertion[]>([]);
   const [loading, setLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const reportFormRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 640);
@@ -85,8 +86,6 @@ export function PharmacySlidePanel() {
     ? `https://map.kakao.com/?q=${encodeURIComponent(pharmacy.name + " " + (pharmacy.address || ""))}`
     : "";
 
-  const reportUrl = pharmacy ? buildReportUrl(pharmacy) : "";
-
   return (
     <AnimatePresence>
       {selectedPharmacyId && (
@@ -99,14 +98,26 @@ export function PharmacySlidePanel() {
           className="absolute right-0 top-0 bottom-0 w-[360px] max-w-[90vw] z-[1001] bg-white border-l border-zinc-200 shadow-2xl flex flex-col max-sm:left-0 max-sm:right-0 max-sm:top-auto max-sm:bottom-0 max-sm:w-full max-sm:max-w-full max-sm:max-h-[70vh] max-sm:rounded-t-2xl max-sm:border-l-0 max-sm:border-t"
         >
           {/* Header */}
-          <div className="flex items-start justify-between p-4 border-b border-zinc-100">
+          <div className="sticky top-0 z-10 flex items-start justify-between gap-3 border-b border-zinc-100 bg-white/95 p-4 backdrop-blur-sm">
             <div className="flex-1 min-w-0">
               {loading ? (
                 <Skeleton className="h-6 w-40" />
               ) : (
-                <h2 className="text-lg font-bold text-zinc-900 truncate">
-                  {pharmacy?.name}
-                </h2>
+                <div className="flex min-w-0 items-center gap-2">
+                  <h2 className="truncate text-lg font-bold text-zinc-900">
+                    {pharmacy?.name}
+                  </h2>
+                  {pharmacy && (
+                    <button
+                      type="button"
+                      onClick={() => reportFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                      className="inline-flex h-7 shrink-0 items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-100"
+                    >
+                      <Flag size={13} />
+                      현장정보제보
+                    </button>
+                  )}
+                </div>
               )}
               {!loading && pharmacy && (
                 <div className="flex flex-wrap gap-1 mt-1.5">
@@ -204,17 +215,9 @@ export function PharmacySlidePanel() {
                   </a>
                 </div>
 
-                {/* Report link */}
-                <a
-                  href={reportUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full text-center rounded-lg border border-zinc-200 py-2 text-sm text-zinc-500 hover:bg-zinc-50 transition-colors"
-                >
-                  신고하기
-                </a>
-
-                <CommunityReportForm pharmacy={pharmacy} />
+                <div ref={reportFormRef} className="scroll-mt-4">
+                  <CommunityReportForm pharmacy={pharmacy} />
+                </div>
               </>
             ) : (
               <p className="text-sm text-zinc-500">약국 정보를 불러올 수 없습니다.</p>
