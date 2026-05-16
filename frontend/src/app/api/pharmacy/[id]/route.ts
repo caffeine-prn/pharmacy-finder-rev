@@ -2,6 +2,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServerSupabase } from "@/lib/supabase/server";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -18,5 +21,9 @@ export async function GET(
     return NextResponse.json({ error: "Pharmacy not found" }, { status: 404 });
   }
 
-  return NextResponse.json(data);
+  return NextResponse.json(data, {
+    headers: {
+      "Cache-Control": "no-store, max-age=0",
+    },
+  });
 }
