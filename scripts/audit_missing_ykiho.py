@@ -243,7 +243,12 @@ def main() -> int:
     print(f"Auditing active pharmacies without ykiho: {len(pharmacies)}", flush=True)
     if args.mode == "all-hira":
         hira_items = fetch_all_hira_pharmacies(api_key, page_size=1000, delay=args.delay, max_workers=4)
+        hira_by_ykiho = {item["ykiho"]: item for item in hira_items if item.get("ykiho")}
         matched_rows, unmatched_rows = match_localdata_to_hira(pharmacies, hira_items)
+        for row in matched_rows:
+            hira_match = hira_by_ykiho.get(row.get("ykiho"))
+            if hira_match and not row.get("phone") and hira_match.get("phone"):
+                row["phone"] = hira_match["phone"]
         matched_by_id = {row["id"]: row for row in matched_rows}
         for index, pharmacy in enumerate(pharmacies, 1):
             match = matched_by_id.get(pharmacy["id"])
