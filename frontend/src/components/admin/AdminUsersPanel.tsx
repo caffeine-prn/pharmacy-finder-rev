@@ -75,7 +75,11 @@ export function AdminUsersPanel() {
     }
     setEmailToAdd("");
     setUsers((items) => [payload.user, ...items.filter((item) => item.id !== payload.user.id)]);
-    setMessage("관리자 이메일을 등록했습니다. 해당 사용자는 이메일 OTP로 로그인하면 됩니다.");
+    setMessage(
+      payload.inviteWarning
+        ? `관리자 이메일은 등록했지만 초대 메일 발송은 확인이 필요합니다: ${payload.inviteWarning}`
+        : "관리자 이메일을 등록했고 초대 메일을 발송했습니다. 이후 해당 사용자는 이메일 OTP로 로그인하면 됩니다."
+    );
   }
 
   async function updateUser(user: AdminUserRow, patch: Partial<Pick<AdminUserRow, "role" | "status">>) {

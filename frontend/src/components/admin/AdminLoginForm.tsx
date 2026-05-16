@@ -23,6 +23,7 @@ export function AdminLoginForm() {
       email: email.trim().toLowerCase(),
       options: {
         emailRedirectTo: `${origin}/admin/auth/callback?next=${encodeURIComponent(next)}`,
+        shouldCreateUser: false,
       },
     });
     setLoading(false);

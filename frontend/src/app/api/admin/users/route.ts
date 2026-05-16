@@ -62,11 +62,34 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  let user = data;
+  let inviteWarning: string | null = null;
+  if (!data.user_id && status === "active") {
+    const redirectTo = new URL("/admin/auth/callback", request.nextUrl.origin);
+    redirectTo.searchParams.set("next", "/admin/users");
+    const { data: inviteData, error: inviteError } = await supabase.auth.admin.inviteUserByEmail(email, {
+      redirectTo: redirectTo.toString(),
+    });
+
+    if (inviteData?.user?.id) {
+      const { data: linkedUser } = await supabase
+        .from("admin_users")
+        .update({ user_id: inviteData.user.id, updated_at: now })
+        .eq("id", data.id)
+        .select("id,user_id,email,role,status,display_name,last_seen_at,created_at,updated_at")
+        .single();
+      user = linkedUser || data;
+    } else if (inviteError && !inviteError.message.toLowerCase().includes("already")) {
+      inviteWarning = inviteError.message;
+    }
+  }
+
   await writeAdminAudit(auth.context, "admin_user_upsert", "admin_user", data.id, {
     email,
     role,
     status,
+    invite_warning: inviteWarning,
   });
 
-  return NextResponse.json({ user: data });
+  return NextResponse.json({ user, inviteWarning });
 }
