@@ -11,6 +11,8 @@ import {
   UsersThree,
 } from "@phosphor-icons/react";
 import { formatKstDateTime } from "@/lib/datetime";
+import { LegacyAdminTokenInput } from "@/components/admin/LegacyAdminTokenInput";
+import { useAdminSession } from "@/components/admin/useAdminSession";
 
 type CountEntry = { key: string; count: number };
 type PharmacyEntry = CountEntry & {
@@ -105,12 +107,21 @@ export function AdminAnalyticsDashboard() {
   const [data, setData] = useState<AnalyticsPayload | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const { loading: sessionLoading, email, authHeaders } = useAdminSession();
+
+  function adminHeaders() {
+    const headers: Record<string, string> = {
+      ...authHeaders(),
+    };
+    if (token) headers["x-admin-token"] = token;
+    return headers;
+  }
 
   async function loadAnalytics() {
     setLoading(true);
     setMessage(null);
     const response = await fetch(`/api/admin/analytics?days=${days}`, {
-      headers: { "x-admin-token": token },
+      headers: adminHeaders(),
       cache: "no-store",
     });
     const payload = await response.json();
@@ -132,19 +143,27 @@ export function AdminAnalyticsDashboard() {
               개인 식별정보 없이 익명 세션 기준으로 주요 사용 흐름을 집계합니다.
             </p>
           </div>
-          <Link href="/admin/badges" className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50">
-            제보 관리자
-          </Link>
+          <div className="flex flex-wrap items-center gap-2">
+            {email ? (
+              <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
+                {email}
+              </span>
+            ) : (
+              <Link href="/admin/login?next=/admin/analytics" className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100">
+                이메일 로그인
+              </Link>
+            )}
+            <Link href="/admin/badges" className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50">
+              제보 관리자
+            </Link>
+            <Link href="/admin/users" className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50">
+              관리자 계정
+            </Link>
+          </div>
         </div>
 
-        <div className="mb-5 flex flex-wrap gap-2 rounded-lg border border-zinc-200 bg-white p-3">
-          <input
-            value={token}
-            onChange={(event) => setToken(event.target.value)}
-            placeholder="관리자 토큰"
-            type="password"
-            className="h-10 min-w-64 rounded-lg border border-zinc-200 px-3 text-sm outline-none focus:border-emerald-400"
-          />
+        <div className="mb-5 space-y-3 rounded-lg border border-zinc-200 bg-white p-3">
+          <div className="flex flex-wrap gap-2">
           <select
             value={days}
             onChange={(event) => setDays(event.target.value)}
@@ -157,11 +176,13 @@ export function AdminAnalyticsDashboard() {
           </select>
           <button
             onClick={loadAnalytics}
-            disabled={loading || !token}
+            disabled={loading || sessionLoading || (!email && !token)}
             className="h-10 rounded-lg bg-zinc-900 px-4 text-sm font-semibold text-white disabled:opacity-50"
           >
             {loading ? "불러오는 중" : "조회"}
           </button>
+          </div>
+          {!email && <LegacyAdminTokenInput token={token} setToken={setToken} />}
         </div>
 
         {message && <p className="mb-4 text-sm text-rose-600">{message}</p>}
@@ -234,7 +255,7 @@ export function AdminAnalyticsDashboard() {
           </div>
         ) : (
           <div className="rounded-lg border border-dashed border-zinc-200 bg-white p-10 text-center text-sm text-zinc-400">
-            관리자 토큰을 입력하고 조회하면 이용 현황이 표시됩니다.
+            이메일로 로그인하거나 비상용 토큰을 입력하고 조회하면 이용 현황이 표시됩니다.
           </div>
         )}
       </div>

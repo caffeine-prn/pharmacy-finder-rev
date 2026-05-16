@@ -1,21 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceSupabase } from "@/lib/supabase/server";
+import { requireAdmin, writeAdminAudit } from "@/lib/adminAuth";
 import {
   isCommunityBadgeType,
   publicBadgeLabel,
   sanitizeText,
 } from "@/lib/badges";
 
-function isAdmin(request: NextRequest) {
-  const configured = process.env.ADMIN_BADGE_TOKEN;
-  const provided = request.headers.get("x-admin-token") || request.nextUrl.searchParams.get("token");
-  return Boolean(configured && provided && configured === provided);
-}
-
 export async function POST(request: NextRequest) {
-  if (!isAdmin(request)) {
-    return NextResponse.json({ error: "관리자 토큰이 필요합니다." }, { status: 401 });
-  }
+  const auth = await requireAdmin(request, "reviewer");
+  if ("response" in auth) return auth.response;
 
   const body = await request.json().catch(() => null);
   const pharmacyId = sanitizeText(body?.pharmacy_id, 80);
@@ -50,6 +44,16 @@ export async function POST(request: NextRequest) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+  await writeAdminAudit(
+    auth.context,
+    "badge_assertion_publish",
+    "pharmacy_badge_assertion",
+    data?.id || `${pharmacyId}:${badgeType}`,
+    {
+      pharmacy_id: pharmacyId,
+      badge_type: badgeType,
+      assertion_status: payload.assertion_status,
+    }
+  );
   return NextResponse.json({ assertion: data });
 }
-

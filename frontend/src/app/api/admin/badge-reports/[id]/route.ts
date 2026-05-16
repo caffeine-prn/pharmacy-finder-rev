@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceSupabase } from "@/lib/supabase/server";
 import { sanitizeText } from "@/lib/badges";
+import { requireAdmin, writeAdminAudit } from "@/lib/adminAuth";
 
 const STATUSES = new Set([
   "pending",
@@ -10,19 +11,12 @@ const STATUSES = new Set([
   "needs_more_evidence",
 ]);
 
-function isAdmin(request: NextRequest) {
-  const configured = process.env.ADMIN_BADGE_TOKEN;
-  const provided = request.headers.get("x-admin-token") || request.nextUrl.searchParams.get("token");
-  return Boolean(configured && provided && configured === provided);
-}
-
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  if (!isAdmin(request)) {
-    return NextResponse.json({ error: "관리자 토큰이 필요합니다." }, { status: 401 });
-  }
+  const auth = await requireAdmin(request, "reviewer");
+  if ("response" in auth) return auth.response;
 
   const body = await request.json().catch(() => null);
   const status = String(body?.report_status || "");
@@ -37,7 +31,7 @@ export async function PATCH(
     .update({
       report_status: status,
       admin_note: sanitizeText(body?.admin_note, 1000) || null,
-      reviewed_by: sanitizeText(body?.reviewed_by, 100) || "admin",
+      reviewed_by: auth.context.email,
       reviewed_at: now,
       updated_at: now,
     })
@@ -48,6 +42,8 @@ export async function PATCH(
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+  await writeAdminAudit(auth.context, "badge_report_status_update", "pharmacy_badge_report", params.id, {
+    status,
+  });
   return NextResponse.json({ report: data });
 }
-

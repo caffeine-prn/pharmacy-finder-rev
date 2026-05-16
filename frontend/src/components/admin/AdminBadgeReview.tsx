@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { badgeTypeLabel } from "@/lib/badges";
+import { LegacyAdminTokenInput } from "@/components/admin/LegacyAdminTokenInput";
+import { useAdminSession } from "@/components/admin/useAdminSession";
 import type { PharmacyBadgeReport } from "@/lib/types";
 
 const STATUS_OPTIONS = [
@@ -19,12 +21,22 @@ export function AdminBadgeReview() {
   const [reports, setReports] = useState<PharmacyBadgeReport[]>([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const { loading: sessionLoading, email, authHeaders } = useAdminSession();
+
+  function adminHeaders(contentType = false) {
+    const headers: Record<string, string> = {
+      ...authHeaders(),
+    };
+    if (token) headers["x-admin-token"] = token;
+    if (contentType) headers["Content-Type"] = "application/json";
+    return headers;
+  }
 
   async function loadReports() {
     setLoading(true);
     setMessage(null);
     const response = await fetch(`/api/admin/badge-reports?status=${status}`, {
-      headers: { "x-admin-token": token },
+      headers: adminHeaders(),
       cache: "no-store",
     });
     const payload = await response.json();
@@ -39,8 +51,8 @@ export function AdminBadgeReview() {
   async function updateReport(report: PharmacyBadgeReport, nextStatus: string) {
     const response = await fetch(`/api/admin/badge-reports/${report.id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json", "x-admin-token": token },
-      body: JSON.stringify({ report_status: nextStatus, reviewed_by: "admin" }),
+      headers: adminHeaders(true),
+      body: JSON.stringify({ report_status: nextStatus }),
     });
     const payload = await response.json();
     if (!response.ok) {
@@ -54,7 +66,7 @@ export function AdminBadgeReview() {
   async function publishAssertion(report: PharmacyBadgeReport) {
     const response = await fetch("/api/admin/badge-assertions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-admin-token": token },
+      headers: adminHeaders(true),
       body: JSON.stringify({
         pharmacy_id: report.pharmacy_id,
         badge_type: report.badge_type,
@@ -79,22 +91,30 @@ export function AdminBadgeReview() {
         <div className="mb-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <h1 className="text-2xl font-bold text-zinc-900">커뮤니티 배지 관리자</h1>
-            <Link href="/admin/analytics" className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50">
-              이용 분석
-            </Link>
+            <div className="flex flex-wrap items-center gap-2">
+              {email ? (
+                <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
+                  {email}
+                </span>
+              ) : (
+                <Link href="/admin/login?next=/admin/badges" className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100">
+                  이메일 로그인
+                </Link>
+              )}
+              <Link href="/admin/analytics" className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50">
+                이용 분석
+              </Link>
+              <Link href="/admin/users" className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50">
+                관리자 계정
+              </Link>
+            </div>
           </div>
           <p className="mt-2 text-sm text-zinc-500">
             공식 자료와 별개인 현장 제보를 검토하고 공개 배지로 전환합니다.
           </p>
         </div>
-        <div className="mb-5 flex flex-wrap gap-2 rounded-xl border border-zinc-200 bg-white p-3">
-          <input
-            value={token}
-            onChange={(event) => setToken(event.target.value)}
-            placeholder="관리자 토큰"
-            type="password"
-            className="h-10 min-w-64 rounded-lg border border-zinc-200 px-3 text-sm outline-none focus:border-emerald-400"
-          />
+        <div className="mb-5 space-y-3 rounded-xl border border-zinc-200 bg-white p-3">
+          <div className="flex flex-wrap gap-2">
           <select
             value={status}
             onChange={(event) => setStatus(event.target.value)}
@@ -106,11 +126,13 @@ export function AdminBadgeReview() {
           </select>
           <button
             onClick={loadReports}
-            disabled={loading || !token}
+            disabled={loading || sessionLoading || (!email && !token)}
             className="h-10 rounded-lg bg-zinc-900 px-4 text-sm font-semibold text-white disabled:opacity-50"
           >
             {loading ? "불러오는 중" : "조회"}
           </button>
+          </div>
+          {!email && <LegacyAdminTokenInput token={token} setToken={setToken} />}
         </div>
         {message && <p className="mb-4 text-sm text-zinc-600">{message}</p>}
         <div className="space-y-3">
