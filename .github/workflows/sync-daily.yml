@@ -44,6 +44,27 @@ jobs:
           STAFF_LOOKUP_BASELINE_DATE: "2025-07-01"
           STAFF_LOOKUP_DELAY_SECONDS: "0.15"
 
+      - name: Audit active pharmacies missing HIRA ykiho
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          python scripts/audit_missing_ykiho.py \
+            --apply \
+            --refresh-markers \
+            --delay 0.02 \
+            --json /tmp/missing-ykiho-audit.json \
+            2>&1 | tee -a /tmp/sync-daily.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            echo "[WARNING] missing ykiho audit failed with status $status" | tee -a /tmp/sync-daily.log
+          fi
+          exit 0
+        env:
+          DRUG_API_KEY: ${{ secrets.DRUG_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
       - name: Write sync log
         if: always()
         run: python scripts/load/sync_log.py
@@ -74,6 +95,7 @@ jobs:
           path: |
             frontend/public/markers.json
             frontend/public/sync-log.json
+            /tmp/missing-ykiho-audit.json
             /tmp/sync-daily.log
           retention-days: 7
 
