@@ -107,7 +107,7 @@ export const usePharmacyStore = create<PharmacyStore>((set, get) => ({
   setSelectedPharmacyId: (id) =>
     set((s) => ({
       selectedPharmacyId: id,
-      selectedPharmacySeq: id ? s.selectedPharmacySeq + 1 : s.selectedPharmacySeq,
+      selectedPharmacySeq: s.selectedPharmacySeq + 1,
     })),
   mapCenter: [37.5665, 126.978],
   setMapCenter: (center) => set({ mapCenter: center }),

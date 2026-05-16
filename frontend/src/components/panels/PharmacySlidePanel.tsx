@@ -7,24 +7,26 @@ import {
   X,
   Phone,
   MapPin,
-  Clock,
+  Calendar,
   NavigationArrow,
-  ArrowSquareOut,
 } from "@phosphor-icons/react";
 import { usePharmacyStore } from "@/lib/store";
 import { supabase } from "@/lib/supabase/client";
-import type { Pharmacy } from "@/lib/types";
+import type { Pharmacy, PharmacyBadgeAssertion } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { PharmacyStatusButtons } from "@/components/pharmacy/PharmacyStatusButtons";
 import { LifecycleTimeline } from "@/components/pharmacy/LifecycleTimeline";
 import { HiraStaffLookup } from "@/components/pharmacy/HiraStaffLookup";
-import Link from "next/link";
+import { OperatingHours } from "@/components/pharmacy/OperatingHours";
+import { CommunityBadgePanel } from "@/components/pharmacy/CommunityBadgePanel";
+import { CommunityReportForm } from "@/components/pharmacy/CommunityReportForm";
 import { buildReportUrl } from "@/lib/report";
 
 export function PharmacySlidePanel() {
   const { selectedPharmacyId, selectedPharmacySeq, setSelectedPharmacyId } = usePharmacyStore();
   const [pharmacy, setPharmacy] = useState<Pharmacy | null>(null);
+  const [badgeAssertions, setBadgeAssertions] = useState<PharmacyBadgeAssertion[]>([]);
   const [loading, setLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -38,45 +40,43 @@ export function PharmacySlidePanel() {
   useEffect(() => {
     if (!selectedPharmacyId) {
       setPharmacy(null);
+      setBadgeAssertions([]);
       return;
     }
 
+    let ignore = false;
     setLoading(true);
-    supabase
-      .from("pharmacies")
-      .select("*")
-      .eq("id", selectedPharmacyId)
-      .single()
-      .then(({ data, error }) => {
-        if (error) {
-          console.error("Failed to fetch pharmacy:", error);
-          setPharmacy(null);
-        } else {
-          setPharmacy(data as Pharmacy);
-        }
-        setLoading(false);
-      });
+    Promise.all([
+      supabase
+        .from("pharmacies")
+        .select("*")
+        .eq("id", selectedPharmacyId)
+        .single(),
+      supabase
+        .from("pharmacy_badge_assertions")
+        .select("*")
+        .eq("pharmacy_id", selectedPharmacyId)
+        .eq("assertion_status", "published")
+        .order("confirmed_at", { ascending: false }),
+    ]).then(([pharmacyResult, assertionsResult]) => {
+      if (ignore) return;
+      if (pharmacyResult.error) {
+        console.error("Failed to fetch pharmacy:", pharmacyResult.error);
+        setPharmacy(null);
+        setBadgeAssertions([]);
+      } else {
+        setPharmacy(pharmacyResult.data as Pharmacy);
+        setBadgeAssertions((assertionsResult.data || []) as PharmacyBadgeAssertion[]);
+      }
+      setLoading(false);
+    });
+
+    return () => {
+      ignore = true;
+    };
   }, [selectedPharmacyId, selectedPharmacySeq]);
 
   const handleClose = () => setSelectedPharmacyId(null);
-
-  // Format operating hours for today
-  function getTodayHours(p: Pharmacy): string | null {
-    const dayMap: Record<number, keyof Pharmacy> = {
-      0: "hours_sun",
-      1: "hours_mon",
-      2: "hours_tue",
-      3: "hours_wed",
-      4: "hours_thu",
-      5: "hours_fri",
-      6: "hours_sat",
-    };
-    const key = dayMap[new Date().getDay()];
-    const val = p[key] as string | null;
-    if (!val) return null;
-    // Format "0900-1800" -> "09:00 - 18:00"
-    return val.replace(/(\d{2})(\d{2})-(\d{2})(\d{2})/, "$1:$2 - $3:$4");
-  }
 
   const naverSearchUrl = pharmacy
     ? `https://map.naver.com/v5/search/${encodeURIComponent(pharmacy.name + " " + (pharmacy.address || ""))}`
@@ -91,6 +91,7 @@ export function PharmacySlidePanel() {
     <AnimatePresence>
       {selectedPharmacyId && (
         <motion.div
+          key={selectedPharmacyId}
           initial={isMobile ? { y: "100%" } : { x: "100%" }}
           animate={isMobile ? { y: 0 } : { x: 0 }}
           exit={isMobile ? { y: "100%" } : { x: "100%" }}
@@ -113,6 +114,11 @@ export function PharmacySlidePanel() {
                   {pharmacy.is_animal_pharmacy && <Badge variant="animal">동물약국</Badge>}
                   {pharmacy.is_cross_employed && <Badge variant="cross">교차고용</Badge>}
                   {!pharmacy.has_ykiho && <Badge variant="noYkiho">요양X</Badge>}
+                  {badgeAssertions.map((assertion) => (
+                    <Badge key={assertion.id} variant="herbal">
+                      {assertion.label}
+                    </Badge>
+                  ))}
                 </div>
               )}
             </div>
@@ -135,6 +141,7 @@ export function PharmacySlidePanel() {
               </div>
             ) : pharmacy ? (
               <>
+                <CommunityBadgePanel assertions={badgeAssertions} />
                 <PharmacyStatusButtons pharmacy={pharmacy} compact />
                 <LifecycleTimeline pharmacy={pharmacy} compact />
 
@@ -164,19 +171,14 @@ export function PharmacySlidePanel() {
                   </div>
                 )}
 
-                {/* Today's hours */}
-                {(() => {
-                  const hours = getTodayHours(pharmacy);
-                  if (!hours) return null;
-                  return (
-                    <div className="flex items-center gap-2.5">
-                      <Clock size={16} className="text-zinc-400 flex-shrink-0" />
-                      <p className="text-sm text-zinc-700">
-                        오늘 <span className="font-mono text-xs">{hours}</span>
-                      </p>
-                    </div>
-                  );
-                })()}
+                {pharmacy.open_date && (
+                  <div className="flex items-center gap-2.5">
+                    <Calendar size={16} className="text-zinc-400 flex-shrink-0" />
+                    <p className="text-sm text-zinc-600">개설일: {pharmacy.open_date}</p>
+                  </div>
+                )}
+
+                <OperatingHours pharmacy={pharmacy} />
 
                 <HiraStaffLookup pharmacy={pharmacy} />
 
@@ -212,14 +214,7 @@ export function PharmacySlidePanel() {
                   신고하기
                 </a>
 
-                {/* Detail page link */}
-                <Link
-                  href={`/pharmacy/${pharmacy.id}`}
-                  className="block w-full text-center rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-medium hover:bg-emerald-700 transition-colors"
-                >
-                  상세 정보 보기
-                  <ArrowSquareOut size={14} className="inline ml-1" />
-                </Link>
+                <CommunityReportForm pharmacy={pharmacy} />
               </>
             ) : (
               <p className="text-sm text-zinc-500">약국 정보를 불러올 수 없습니다.</p>
