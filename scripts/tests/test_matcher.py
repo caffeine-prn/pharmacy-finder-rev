@@ -35,6 +35,40 @@ def test_unmatched_flagged():
     assert unmatched[0]["has_ykiho"] is False
 
 
+def test_match_hira_when_prefix_differs_but_address_and_coordinate_match():
+    localdata = [
+        {
+            "id": "PHMD120255530506084000009",
+            "name": "동탄메가온누리약국",
+            "address": "경기도 화성시 동탄구 송동 725-1 더샵 동탄센텀폴리스 2단지",
+            "road_address": "경기도 화성시 동탄구 동탄대로5길 9, 더샵 동탄센텀폴리스 2단지 1012호 외 7개호 (송동)",
+            "sido": "경기",
+            "sigungu": "화성동탄구",
+            "longitude": 127.1058272,
+            "latitude": 37.1676291,
+        },
+    ]
+    hira = [
+        {
+            "ykiho": "YK-MEGA",
+            "name": "메가온누리약국",
+            "address": "경기도 화성시 동탄구 동탄대로5길 9, 더샵 동탄센텀폴리스 2단지 1012호 외 7개호 (송동)",
+            "sido": "경기",
+            "sigungu": "화성동탄구",
+            "open_date": "20251111",
+            "longitude": 127.1058272,
+            "latitude": 37.1676291,
+        },
+    ]
+
+    matched, unmatched = match_localdata_to_hira(localdata, hira)
+
+    assert len(matched) == 1
+    assert matched[0]["ykiho"] == "YK-MEGA"
+    assert matched[0]["hira_open_date"] == "20251111"
+    assert unmatched == []
+
+
 def test_match_to_animal():
     pharmacies = [
         {"id": "L1", "name": "우리약국", "address": "서울특별시 강남구 역삼동 123",
@@ -47,6 +81,34 @@ def test_match_to_animal():
     result, unmatched_animals = match_to_animal(pharmacies, animals)
     assert result[0]["is_animal_pharmacy"] is True
     assert len(unmatched_animals) == 0
+
+
+def test_match_to_animal_when_prefix_differs_but_same_location():
+    pharmacies = [
+        {
+            "id": "PHMD120255530506084000009",
+            "name": "동탄메가온누리약국",
+            "sido": "경기",
+            "sigungu": "화성동탄구",
+            "longitude": 127.1058272,
+            "latitude": 37.1676291,
+        },
+    ]
+    animals = [
+        {
+            "id": "553000001120250037",
+            "name": "메가온누리약국",
+            "sido": "경기",
+            "sigungu": "화성동탄구",
+            "longitude": 127.1058272,
+            "latitude": 37.1676291,
+        },
+    ]
+
+    result, unmatched_animals = match_to_animal(pharmacies, animals)
+
+    assert result[0]["is_animal_pharmacy"] is True
+    assert unmatched_animals == []
 
 
 def test_classify_herbal():

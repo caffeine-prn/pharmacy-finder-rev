@@ -23,9 +23,22 @@ def _distance_m(lon1, lat1, lon2, lat2):
 
 def match_localdata_to_hira(localdata, hira):
     hira_by_name = {}
+    hira_by_region = {}
     for h in hira:
         key = normalize_name(h["name"])
         hira_by_name.setdefault(key, []).append(h)
+        region_key = (h.get("sido") or "", h.get("sigungu") or "")
+        hira_by_region.setdefault(region_key, []).append(h)
+
+    def candidates_for(ld, ld_name_norm):
+        exact = hira_by_name.get(ld_name_norm, [])
+        if exact:
+            return exact
+        region_key = (ld.get("sido") or "", ld.get("sigungu") or "")
+        regional = hira_by_region.get(region_key, [])
+        if regional:
+            return regional
+        return hira
 
     matched = []
     unmatched = []
@@ -36,16 +49,21 @@ def match_localdata_to_hira(localdata, hira):
         best_match = None
         best_score = 0.0
 
-        candidates = hira_by_name.get(ld_name_norm, [])
-        for h in candidates:
+        for h in candidates_for(ld, ld_name_norm):
+            h_name_norm = normalize_name(h["name"])
             h_addr_norm = normalize_address(h.get("address", ""))
+            name_sim = _dice_similarity(ld_name_norm, h_name_norm)
             addr_sim = _dice_similarity(ld_addr_norm, h_addr_norm)
             dist = _distance_m(
                 ld.get("longitude"), ld.get("latitude"),
                 h.get("longitude"), h.get("latitude")
             )
-            score = addr_sim
-            if dist < 50:
+            score = (addr_sim * 0.7) + (name_sim * 0.3)
+            if ld_name_norm == h_name_norm:
+                score += 0.2
+            if dist < 30:
+                score += 0.35
+            elif dist < 50:
                 score += 0.3
             elif dist < 200:
                 score += 0.1
@@ -53,7 +71,7 @@ def match_localdata_to_hira(localdata, hira):
                 best_score = score
                 best_match = h
 
-        if best_match and best_score >= 0.3:
+        if best_match and best_score >= 0.65:
             merged = {
                 **ld,
                 "ykiho": best_match["ykiho"],
@@ -106,20 +124,26 @@ def apply_hira_opclo_status(pharmacies, opclo_events):
 
 def match_to_animal(pharmacies, animals):
     pharm_by_name = {}
+    pharm_by_region = {}
     for p in pharmacies:
         key = normalize_name(p["name"])
         pharm_by_name.setdefault(key, []).append(p)
+        region_key = (p.get("sido") or "", p.get("sigungu") or "")
+        pharm_by_region.setdefault(region_key, []).append(p)
 
     matched_animal_ids = set()
     for a in animals:
         a_name = normalize_name(a["name"])
         candidates = pharm_by_name.get(a_name, [])
+        if not candidates:
+            candidates = pharm_by_region.get((a.get("sido") or "", a.get("sigungu") or ""), pharmacies)
         for p in candidates:
             dist = _distance_m(
                 p.get("longitude"), p.get("latitude"),
                 a.get("longitude"), a.get("latitude")
             )
-            if dist < 200:
+            name_sim = _dice_similarity(normalize_name(p["name"]), a_name)
+            if dist < 50 and name_sim >= 0.45:
                 p["is_animal_pharmacy"] = True
                 matched_animal_ids.add(a["id"])
                 break
