@@ -89,6 +89,16 @@ body {
 
 /* Mobile overrides */
 @media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  input[type="date"] {
+    min-height: 2.25rem;
+  }
+
   .data-freshness-footer[data-view="table"] {
     display: none;
   }
