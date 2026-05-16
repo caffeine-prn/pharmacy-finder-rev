@@ -16,7 +16,11 @@ function createIcon(m: MarkerData): L.DivIcon {
   let border = "solid";
   let inner = `<div style="width:8px;height:8px;border-radius:50%;background:${ring}"></div>`;
 
-  if (m.h && !m.a) {
+  if (m.hr && !m.h) {
+    ring = "#f59e0b";
+    border = "dashed";
+    inner = `<span style="color:${ring};font-size:10px;font-weight:800;line-height:1;">제</span>`;
+  } else if (m.h && !m.a) {
     ring = "#e11d48";
     inner = `<svg width="14" height="14" viewBox="0 0 256 256" fill="${ring}"><path d="M205.41,159.07a60.9,60.9,0,0,1-31.83,8.86,71.71,71.71,0,0,1-24.3-4.43,162.24,162.24,0,0,0,19-44.27A59.75,59.75,0,0,1,205.41,159.07ZM128,44a97.83,97.83,0,0,0-18,1.68A60,60,0,0,1,192,88c0,50.29-37.53,93.07-64,112.68-26.47-19.61-64-62.39-64-112.68A60,60,0,0,1,128,44Z"/></svg>`;
   } else if (m.a && !m.h) {
@@ -39,6 +43,10 @@ function createIcon(m: MarkerData): L.DivIcon {
   });
 }
 
+function markerVisualKey(m: MarkerData): string {
+  return [m.h, m.hr, m.a, m.c, m.y].map(Boolean).join(":");
+}
+
 function clusterIcon(cluster: L.MarkerCluster): L.DivIcon {
   const n = cluster.getChildCount();
   const sz = n > 100 ? 48 : n > 50 ? 42 : 36;
@@ -55,6 +63,7 @@ function clusterIcon(cluster: L.MarkerCluster): L.DivIcon {
 function popupHtml(m: MarkerData): string {
   const badges: string[] = [];
   if (m.h) badges.push('<span style="font-size:10px;padding:1px 4px;border-radius:4px;background:#ffe4e6;color:#be123c;border:1px solid #fecdd3">한약사</span>');
+  if (m.hr) badges.push('<span style="font-size:10px;padding:1px 4px;border-radius:4px;background:#fef3c7;color:#b45309;border:1px dashed #f59e0b">현장 한약사 제보</span>');
   if (m.a) badges.push('<span style="font-size:10px;padding:1px 4px;border-radius:4px;background:#ffedd5;color:#c2410c;border:1px solid #fed7aa">동물약국</span>');
   if (m.c) badges.push('<span style="font-size:10px;padding:1px 4px;border-radius:4px;background:#ede9fe;color:#6d28d9;border:1px solid #ddd6fe">교차고용</span>');
   if (!m.y) badges.push('<span style="font-size:10px;padding:1px 4px;border-radius:4px;background:#f4f4f5;color:#52525b;border:1px solid #e4e4e7">요양X</span>');
@@ -76,6 +85,7 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
   const { isDenseView, selectedPharmacyId, selectedPharmacySeq, setSelectedPharmacyId } = usePharmacyStore();
   const clusterRef = useRef<L.MarkerClusterGroup | null>(null);
   const markerCacheRef = useRef<Map<string, L.Marker>>(new Map());
+  const markerVisualKeyRef = useRef<Map<string, string>>(new Map());
   const prevIdsRef = useRef<Set<string>>(new Set());
   const visibleIdsRef = useRef<Set<string>>(new Set());
 
@@ -111,6 +121,15 @@ export function MarkerLayer({ markers }: MarkerLayerProps) {
           marker.openPopup();
         });
         cache.set(m.id, marker);
+        markerVisualKeyRef.current.set(m.id, markerVisualKey(m));
+      } else {
+        const key = markerVisualKey(m);
+        const marker = cache.get(m.id)!;
+        if (markerVisualKeyRef.current.get(m.id) !== key) {
+          marker.setIcon(createIcon(m));
+          marker.setPopupContent(popupHtml(m));
+          markerVisualKeyRef.current.set(m.id, key);
+        }
       }
       if (!prevIds.has(m.id)) {
         toAdd.push(cache.get(m.id)!);

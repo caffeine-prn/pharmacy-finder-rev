@@ -15,6 +15,21 @@ const VALID_SORT_FIELDS: SortField[] = [
   "herbal_pharmacist_count",
 ];
 
+async function getCommunityHerbalPharmacyIds(supabase: ReturnType<typeof createServerSupabase>) {
+  const { data, error } = await supabase
+    .from("pharmacy_badge_assertions")
+    .select("pharmacy_id")
+    .eq("badge_type", "unregistered_herbal_staff")
+    .eq("assertion_status", "published");
+
+  if (error) {
+    console.warn("Failed to load community herbal assertions:", error);
+    return [];
+  }
+
+  return Array.from(new Set((data || []).map((row) => String(row.pharmacy_id)).filter(Boolean)));
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
 
@@ -40,6 +55,7 @@ export async function GET(request: NextRequest) {
   const ascending = sortDirection === "asc";
 
   const supabase = createServerSupabase();
+  const communityHerbalIds = await getCommunityHerbalPharmacyIds(supabase);
 
   // Build query
   let query = supabase
@@ -70,7 +86,11 @@ export async function GET(request: NextRequest) {
     query = query.eq("sigungu", sigungu);
   }
   if (herbal) {
-    query = query.eq("is_herbal_pharmacy", true);
+    if (communityHerbalIds.length > 0) {
+      query = query.or(`is_herbal_pharmacy.eq.true,id.in.(${communityHerbalIds.join(",")})`);
+    } else {
+      query = query.eq("is_herbal_pharmacy", true);
+    }
   }
   if (animal) {
     query = query.eq("is_animal_pharmacy", true);
@@ -103,9 +123,14 @@ export async function GET(request: NextRequest) {
   }
 
   const total = count || 0;
+  const communityHerbalSet = new Set(communityHerbalIds);
+  const rows = (data || []).map((row) => ({
+    ...row,
+    community_herbal_staff_reported: communityHerbalSet.has(row.id),
+  }));
 
   return NextResponse.json({
-    data: data || [],
+    data: rows,
     total,
     page,
     pageSize,

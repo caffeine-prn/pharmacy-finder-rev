@@ -180,6 +180,7 @@ export function PharmacyTable() {
         "한약사",
         "동물약국",
         "한약사약국",
+        "현장 한약사 제보",
         "교차고용",
       ];
       const rows = allRows.map((r) => [
@@ -196,6 +197,7 @@ export function PharmacyTable() {
         r.herbal_pharmacist_count,
         r.is_animal_pharmacy ? "O" : "",
         r.is_herbal_pharmacy ? "O" : "",
+        r.community_herbal_staff_reported ? "O" : "",
         r.is_cross_employed ? "O" : "",
       ]);
 
@@ -288,12 +290,23 @@ export function PharmacyTable() {
               data.map((row) => (
                 <tr
                   key={row.id}
-                  className="hover:bg-zinc-50 cursor-pointer transition-colors"
+                  className={`cursor-pointer transition-colors hover:bg-zinc-50 ${
+                    row.community_herbal_staff_reported && !row.is_herbal_pharmacy
+                      ? "bg-amber-50/40"
+                      : ""
+                  }`}
                   onClick={() => handleFocusOnMap(row)}
                 >
                   <td className="px-3 py-2.5 text-sm font-medium text-zinc-900 whitespace-nowrap">
                     <div className="max-w-[180px]">
-                      <p className="truncate">{row.name}</p>
+                      <div className="flex min-w-0 items-center gap-1.5">
+                        <p className="truncate">{row.name}</p>
+                        {row.community_herbal_staff_reported && (
+                          <span className="shrink-0 rounded-md border border-amber-300 bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700">
+                            현장제보
+                          </span>
+                        )}
+                      </div>
                       {row.phone && (
                         <p className="mt-0.5 font-mono text-[11px] font-normal text-zinc-400">
                           {row.phone}
@@ -351,6 +364,8 @@ export function PharmacyTable() {
                         <span className={`rounded-md px-2 py-1 text-xs ${
                           row.herbal_pharmacist_count > 0
                             ? "bg-rose-50 text-rose-700"
+                            : row.community_herbal_staff_reported
+                              ? "border border-dashed border-amber-300 bg-amber-50 text-amber-700"
                             : "bg-zinc-100 text-zinc-500"
                         }`}>
                           한약사 <b className="font-mono">{row.herbal_pharmacist_count || 0}</b>
@@ -359,13 +374,20 @@ export function PharmacyTable() {
                       <p className="text-[11px] text-zinc-400">
                         {row.hira_staff_fetched_at
                           ? `조회 기준 ${formatKstDateTime(row.hira_staff_fetched_at)}`
-                          : "CSV/기본 데이터 기준"}
+                          : row.community_herbal_staff_reported
+                            ? "관리자 승인 현장 제보 포함"
+                            : "CSV/기본 데이터 기준"}
                       </p>
                     </div>
                   </td>
                   <td className="px-3 py-2.5">
                     <div className="flex flex-wrap gap-1">
                       {row.is_herbal_pharmacy && <Badge variant="herbal">한약</Badge>}
+                      {row.community_herbal_staff_reported && (
+                        <Badge variant="default" className="border-amber-300 bg-amber-50 text-amber-700">
+                          현장 한약사
+                        </Badge>
+                      )}
                       {row.is_animal_pharmacy && <Badge variant="animal">동물</Badge>}
                       {row.is_cross_employed && <Badge variant="cross">교차</Badge>}
                       {!row.has_ykiho && <Badge variant="noYkiho">요양X</Badge>}

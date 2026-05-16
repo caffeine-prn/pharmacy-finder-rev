@@ -7,6 +7,7 @@ export interface MarkerData {
   lng: number;
   lat: number;
   h: boolean;   // is_herbal_pharmacy
+  hr?: boolean; // approved community report for unregistered herbal staff
   a: boolean;   // is_animal_pharmacy
   c: boolean;   // is_cross_employed
   y: boolean;   // has_ykiho
@@ -119,6 +120,7 @@ export interface PharmacyTableRow {
   pharmacist_count: number;
   herbal_pharmacist_count: number;
   is_herbal_pharmacy: boolean;
+  community_herbal_staff_reported?: boolean;
   is_animal_pharmacy: boolean;
   is_cross_employed: boolean;
   has_ykiho: boolean;

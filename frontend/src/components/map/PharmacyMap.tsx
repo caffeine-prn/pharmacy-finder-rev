@@ -4,6 +4,7 @@
 import { useEffect, useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { usePharmacyStore } from "@/lib/store";
+import { supabase } from "@/lib/supabase/client";
 import type { MarkersJSON, MarkerData } from "@/lib/types";
 import { Skeleton } from "@/components/ui/Skeleton";
 
@@ -30,6 +31,7 @@ export function PharmacyMap() {
   const { markers, setMarkers, filters } = usePharmacyStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [reportedHerbalIds, setReportedHerbalIds] = useState<Set<string>>(new Set());
 
   // Fetch markers.json from CDN on mount
   useEffect(() => {
@@ -50,9 +52,33 @@ export function PharmacyMap() {
       });
   }, [setMarkers]);
 
+  useEffect(() => {
+    supabase
+      .from("pharmacy_badge_assertions")
+      .select("pharmacy_id")
+      .eq("badge_type", "unregistered_herbal_staff")
+      .eq("assertion_status", "published")
+      .then(({ data, error: badgeError }) => {
+        if (badgeError) {
+          console.warn("Failed to load community herbal reports:", badgeError);
+          return;
+        }
+        setReportedHerbalIds(new Set((data || []).map((row) => row.pharmacy_id as string)));
+      });
+  }, []);
+
+  const augmentedMarkers = useMemo((): MarkerData[] => {
+    if (reportedHerbalIds.size === 0) return markers;
+    return markers.map((marker) =>
+      reportedHerbalIds.has(marker.id)
+        ? { ...marker, hr: true }
+        : marker
+    );
+  }, [markers, reportedHerbalIds]);
+
   // Filter markers based on current filter state
   const filteredMarkers = useMemo((): MarkerData[] => {
-    let result = markers;
+    let result = augmentedMarkers;
 
     if (filters.search) {
       const q = filters.search.toLowerCase();
@@ -69,7 +95,7 @@ export function PharmacyMap() {
       result = result.filter((m) => m.g === filters.sigungu);
     }
     if (filters.herbal) {
-      result = result.filter((m) => m.h);
+      result = result.filter((m) => m.h || m.hr);
     }
     if (filters.animal) {
       result = result.filter((m) => m.a);
@@ -88,7 +114,7 @@ export function PharmacyMap() {
     }
 
     return result;
-  }, [markers, filters]);
+  }, [augmentedMarkers, filters]);
 
   if (error) {
     return (
