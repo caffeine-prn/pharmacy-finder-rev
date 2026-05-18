@@ -459,7 +459,16 @@ def detect_changes(client, new_pharmacies: list[dict]) -> dict:
     existing = {}
     offset = 0
     while True:
-        resp = client.table("pharmacies").select("id, name, pharmacist_count, herbal_pharmacist_count, is_animal_pharmacy").range(offset, offset + 999).execute()
+        resp = (
+            client.table("pharmacies")
+            .select(
+                "id, name, pharmacist_count, herbal_pharmacist_count, "
+                "is_animal_pharmacy, business_status, business_status_code, "
+                "mois_closed_date"
+            )
+            .range(offset, offset + 999)
+            .execute()
+        )
         for r in resp.data:
             existing[r["id"]] = r
         if len(resp.data) < 1000:
@@ -467,20 +476,25 @@ def detect_changes(client, new_pharmacies: list[dict]) -> dict:
         offset += 1000
 
     new_ids_set = {p["id"] for p in new_pharmacies}
-    existing_ids_set = set(existing.keys())
+    active_existing = {
+        pid: row
+        for pid, row in existing.items()
+        if not _is_existing_closed(row)
+    }
+    active_existing_ids_set = set(active_existing.keys())
 
     # Detect new (opened)
-    opened = new_ids_set - existing_ids_set
+    opened = new_ids_set - active_existing_ids_set
     # Detect closed (in DB but not in new data)
-    closed = existing_ids_set - new_ids_set
+    closed = active_existing_ids_set - new_ids_set
 
     # Detect changes in key fields
     changed = []
     for p in new_pharmacies:
         pid = p["id"]
-        if pid not in existing or pid in opened:
+        if pid not in active_existing or pid in opened:
             continue
-        old = existing[pid]
+        old = active_existing[pid]
         diffs = {}
         if p.get("pharmacist_count", 0) != (old.get("pharmacist_count") or 0):
             diffs["pharmacist_count"] = {"old": old.get("pharmacist_count", 0), "new": p.get("pharmacist_count", 0)}
@@ -506,7 +520,7 @@ def detect_changes(client, new_pharmacies: list[dict]) -> dict:
     for pid in closed:
         changelog_rows.append({
             "pharmacy_id": pid,
-            "pharmacy_name": existing.get(pid, {}).get("name", ""),
+            "pharmacy_name": active_existing.get(pid, {}).get("name", ""),
             "event_type": "closed",
             "details": None,
         })
@@ -523,11 +537,34 @@ def detect_changes(client, new_pharmacies: list[dict]) -> dict:
         for i in range(0, len(changelog_rows), 500):
             client.table("pharmacy_changelog").insert(changelog_rows[i:i+500]).execute()
 
+    _mark_closed_pharmacies(client, sorted(closed))
+
     return {
         "new_count": len(opened),
         "closed_count": len(closed),
         "changed_count": len(changed),
     }
+
+
+def _is_existing_closed(row: dict) -> bool:
+    if row.get("mois_closed_date"):
+        return True
+    if row.get("business_status_code") in ("02", "03"):
+        return True
+    return row.get("business_status") in ("휴업", "폐업")
+
+
+def _mark_closed_pharmacies(client, closed_ids: list[str], batch_size: int = 500):
+    if not closed_ids:
+        return
+    now = datetime.now(timezone.utc).isoformat()
+    patch = {
+        "business_status": "폐업",
+        "business_status_code": "03",
+        "updated_at": now,
+    }
+    for batch in _chunks(closed_ids, batch_size):
+        client.table("pharmacies").update(patch).in_("id", batch).execute()
 
 
 def log_sync(client, sync_type: str, started_at, status: str,
