@@ -9,6 +9,16 @@ def _chunks(items, size: int):
         yield items[i:i + size]
 
 
+def _dedupe_rows_by_key(rows: list[dict], key: str) -> list[dict]:
+    """Keep one row per upsert key so Postgres ON CONFLICT sees each row once."""
+    deduped_by_key = {}
+    for row in rows:
+        value = row.get(key)
+        if value:
+            deduped_by_key[value] = row
+    return list(deduped_by_key.values())
+
+
 def _date_yyyymmdd_to_iso(value: str | None):
     if not value:
         return None
@@ -121,6 +131,8 @@ def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> 
                 row["is_cross_employed"] = existing.get("is_cross_employed") or False
                 row["hira_staff_fetched_at"] = existing.get("hira_staff_fetched_at")
                 row["hira_staff_total_count"] = existing.get("hira_staff_total_count")
+
+    rows = _dedupe_rows_by_key(rows, "id")
 
     count = 0
     for batch in _chunks(rows, batch_size):

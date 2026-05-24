@@ -144,6 +144,31 @@ def test_upsert_pharmacies_reuses_existing_id_for_ykiho_conflict():
     assert upsert_call[1][0]["hira_last_event_date"] == "2026-04-03"
 
 
+def test_upsert_pharmacies_dedupes_after_existing_ykiho_id_remap():
+    client = _Client()
+    pharmacies = [
+        {
+            "id": "first-localdata-id",
+            "ykiho": "Y1",
+            "name": "첫번째약국",
+            "mois_license_date": "2026-04-03",
+        },
+        {
+            "id": "second-localdata-id",
+            "ykiho": "Y1",
+            "name": "두번째약국",
+            "mois_license_date": "2026-04-04",
+        },
+    ]
+
+    count = upsert_pharmacies(client, pharmacies)
+
+    assert count == 1
+    upsert_call = [call for call in client.calls if call[0] == "pharmacies" and call[2] == "id"][0]
+    assert len(upsert_call[1]) == 1
+    assert upsert_call[1][0]["id"] == "existing-localdata-id"
+
+
 def test_upsert_staff_skips_api_refreshed_ykihos():
     client = _Client()
     staff = {
