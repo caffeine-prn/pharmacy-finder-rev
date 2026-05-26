@@ -101,6 +101,27 @@ function CountList({ title, rows, renderKey = (key: string) => key }: { title: s
   );
 }
 
+function PharmacyLink({
+  pharmacyId,
+  label,
+  className = "",
+}: {
+  pharmacyId: string | null;
+  label?: string | null;
+  className?: string;
+}) {
+  if (!pharmacyId) return <span className={className || "text-zinc-400"}>-</span>;
+
+  return (
+    <Link
+      href={`/pharmacy/${encodeURIComponent(pharmacyId)}`}
+      className={`font-mono text-xs text-emerald-700 underline-offset-2 hover:underline ${className}`}
+    >
+      {label || pharmacyId}
+    </Link>
+  );
+}
+
 export function AdminAnalyticsDashboard() {
   const [token, setToken] = useState("");
   const [days, setDays] = useState("7");
@@ -211,7 +232,13 @@ export function AdminAnalyticsDashboard() {
                 {data.topPharmacies.length ? data.topPharmacies.map((row) => (
                   <div key={row.key} className="flex items-center justify-between gap-3 px-4 py-2.5 text-sm">
                     <div className="min-w-0">
-                      <p className="truncate font-medium text-zinc-800">{row.pharmacy?.name || row.key}</p>
+                      <p className="truncate font-medium text-zinc-800">
+                        <PharmacyLink
+                          pharmacyId={row.key}
+                          label={row.pharmacy?.name || row.key}
+                          className="font-sans text-sm font-medium text-zinc-800"
+                        />
+                      </p>
                       {row.pharmacy && <p className="mt-0.5 text-xs text-zinc-400">{row.pharmacy.sido} {row.pharmacy.sigungu}</p>}
                     </div>
                     <span className="font-mono font-semibold text-zinc-900">{row.count.toLocaleString()}</span>
@@ -244,7 +271,9 @@ export function AdminAnalyticsDashboard() {
                         <td className="whitespace-nowrap px-3 py-2 font-mono text-xs text-zinc-500">{formatKstDateTime(event.created_at)}</td>
                         <td className="px-3 py-2 text-zinc-800">{labelEvent(event.event_name)}</td>
                         <td className="px-3 py-2 text-zinc-500">{event.view_name || "-"}</td>
-                        <td className="px-3 py-2 font-mono text-xs text-zinc-500">{event.pharmacy_id || "-"}</td>
+                        <td className="px-3 py-2">
+                          <PharmacyLink pharmacyId={event.pharmacy_id} />
+                        </td>
                         <td className="max-w-[240px] truncate px-3 py-2 text-zinc-500">{event.path || "-"}</td>
                       </tr>
                     ))}
