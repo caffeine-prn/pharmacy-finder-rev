@@ -39,7 +39,7 @@ jobs:
           MARKERS_JSON_PATH: frontend/public/markers.json
           STAFF_XLSX_PATH: asset/12.의료기관별상세정보서비스_10_기타인력정보 2025.6.xlsx
           STAFF_PERIOD: "2025.6"
-          STAFF_XLSX_UPSERT_ENABLED: "true"
+          STAFF_XLSX_UPSERT_ENABLED: "false"
           STAFF_XLSX_SKIP_API_REFRESHED: "true"
           STAFF_LOOKUP_BASELINE_DATE: "2025-07-01"
           STAFF_LOOKUP_DELAY_SECONDS: "0.15"
