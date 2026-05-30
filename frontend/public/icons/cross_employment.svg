@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="교차고용">
+  <circle cx="84" cy="112" r="32" fill="#7c3aed"/>
+  <circle cx="172" cy="112" r="32" fill="#7c3aed"/>
+  <circle cx="128" cy="76" r="34" fill="#6d28d9"/>
+  <path d="M33 209c6.9-35.1 25.6-56 51-56s44.1 20.9 51 56H33Z" fill="#8b5cf6"/>
+  <path d="M121 209c6.9-35.1 25.6-56 51-56s44.1 20.9 51 56H121Z" fill="#8b5cf6"/>
+  <path d="M71 209c7.7-43.4 28.7-69 57-69s49.3 25.6 57 69H71Z" fill="#6d28d9"/>
+</svg>

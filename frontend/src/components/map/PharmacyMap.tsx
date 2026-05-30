@@ -7,6 +7,9 @@ import { usePharmacyStore } from "@/lib/store";
 import { supabase } from "@/lib/supabase/client";
 import type { MarkersJSON, MarkerData } from "@/lib/types";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { distanceKm } from "@/lib/geo";
+
+const NEARBY_RADIUS_KM = 3;
 
 // Dynamic import of the entire map inner component — avoids SSR issues with Leaflet + react-leaflet-cluster
 const MapInner = dynamic(() => import("./MapInner").then((mod) => mod.MapInner), {
@@ -28,7 +31,7 @@ function markersUrl() {
 }
 
 export function PharmacyMap() {
-  const { markers, setMarkers, filters } = usePharmacyStore();
+  const { markers, setMarkers, filters, userLocation } = usePharmacyStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [reportedHerbalIds, setReportedHerbalIds] = useState<Set<string>>(new Set());
@@ -112,9 +115,12 @@ export function PharmacyMap() {
     if (filters.openedTo) {
       result = result.filter((m) => m.o && m.o <= filters.openedTo);
     }
+    if (filters.nearby && userLocation) {
+      result = result.filter((m) => distanceKm(userLocation, m) <= NEARBY_RADIUS_KM);
+    }
 
     return result;
-  }, [augmentedMarkers, filters]);
+  }, [augmentedMarkers, filters, userLocation]);
 
   if (error) {
     return (

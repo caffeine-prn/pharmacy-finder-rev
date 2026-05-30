@@ -47,6 +47,7 @@ export function FilterBar() {
     toggleAnimal,
     toggleCross,
     toggleNoYkiho,
+    setNearbyFilter,
     setOpenedFrom,
     setOpenedTo,
   } =
@@ -103,6 +104,18 @@ export function FilterBar() {
         label="요양X"
         activeColor="bg-zinc-100 text-zinc-700 border-zinc-300"
       />
+      {filters.nearby && (
+        <FilterPill
+          active
+          onClick={() => {
+            trackFilter("nearby", false);
+            setNearbyFilter(false);
+          }}
+          icon={<span className="h-2 w-2 rounded-full bg-emerald-600" />}
+          label="내 주변 3km"
+          activeColor="bg-emerald-50 text-emerald-700 border-emerald-300"
+        />
+      )}
       <div
         className={`inline-flex shrink-0 items-center gap-2 rounded-xl border bg-white/95 px-3 py-2 text-xs shadow-sm max-sm:min-w-max ${
           hasOpenedFilter

@@ -155,6 +155,7 @@ export interface FilterState {
   noYkiho: boolean;
   openedFrom: string;
   openedTo: string;
+  nearby: boolean;
 }
 
 /** Sort options for table */

@@ -19,6 +19,16 @@ def _dedupe_rows_by_key(rows: list[dict], key: str) -> list[dict]:
     return list(deduped_by_key.values())
 
 
+def _dedupe_rows_by_keys(rows: list[dict], keys: tuple[str, ...]) -> list[dict]:
+    """Keep one row per composite upsert key inside a single PostgREST request."""
+    deduped_by_key = {}
+    for row in rows:
+        value = tuple(row.get(key) for key in keys)
+        if all(value):
+            deduped_by_key[value] = row
+    return list(deduped_by_key.values())
+
+
 def _date_yyyymmdd_to_iso(value: str | None):
     if not value:
         return None
@@ -177,6 +187,7 @@ def upsert_staff(
 
 
 def upsert_mois_raw(client, rows: list[dict], batch_size: int = 500) -> int:
+    rows = _dedupe_rows_by_keys(rows, ("source", "mng_no"))
     count = 0
     for batch in _chunks(rows, batch_size):
         client.table("mois_facility_raw").upsert(
@@ -210,6 +221,8 @@ def upsert_hira_opclo_raw(client, rows: list[dict], batch_size: int = 500) -> in
             "raw": row.get("raw", row),
             "updated_at": datetime.now(timezone.utc).isoformat(),
         })
+
+    db_rows = _dedupe_rows_by_keys(db_rows, ("ykiho", "event_type", "event_date"))
 
     count = 0
     for batch in _chunks(db_rows, batch_size):

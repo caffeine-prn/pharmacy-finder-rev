@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Info } from "@phosphor-icons/react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase/client";
 import { formatKstDate, formatKstDateTime } from "@/lib/datetime";
 import type { DataFreshness } from "@/lib/types";
 import { usePharmacyStore } from "@/lib/store";
@@ -14,12 +13,14 @@ export function DataFreshnessFooter() {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    supabase
-      .from("data_freshness")
-      .select("*")
-      .then(({ data }) => {
-        if (data) setFreshness(data as DataFreshness[]);
-      });
+    import("@/lib/supabase/client").then(({ supabase }) => {
+      supabase
+        .from("data_freshness")
+        .select("*")
+        .then(({ data }) => {
+          if (data) setFreshness(data as DataFreshness[]);
+        });
+    });
   }, []);
 
   // Get summary text
@@ -53,10 +54,12 @@ export function DataFreshnessFooter() {
         {/* Collapsed bar */}
         <button
           onClick={() => setExpanded(!expanded)}
-          className="absolute bottom-2 left-2 flex max-w-[calc(100vw-1rem)] items-center gap-1.5 rounded-full border border-zinc-200 bg-white/90 px-3 py-1.5 text-[11px] text-zinc-500 shadow-md backdrop-blur-sm transition-colors hover:text-zinc-700 max-sm:bottom-[calc(env(safe-area-inset-bottom)+4.25rem)] max-sm:right-2 max-sm:justify-center max-sm:truncate max-sm:px-2.5"
+          aria-label={`데이터 기준 보기: ${summaryText}`}
+          title={`데이터 기준: ${summaryText}`}
+          className="absolute bottom-2 left-2 flex h-8 w-8 items-center justify-center rounded-full border border-zinc-200 bg-white/90 text-zinc-500 shadow-md backdrop-blur-sm transition-colors hover:text-zinc-700 max-sm:bottom-[calc(env(safe-area-inset-bottom)+4.25rem)]"
         >
-          <Info size={12} />
-          <span className="truncate">데이터 기준: {summaryText}</span>
+          <Info size={14} weight={expanded ? "fill" : "regular"} />
+          <span className="sr-only">데이터 기준 보기</span>
         </button>
 
         {/* Expanded detail */}

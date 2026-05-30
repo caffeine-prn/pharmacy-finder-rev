@@ -75,10 +75,12 @@ jobs:
           MARKERS_JSON_PATH: frontend/public/markers.json
 
       - name: Commit updated markers and sync log
+        id: commit_data
         if: always()
         run: |
           if git diff --quiet -- frontend/public/markers.json frontend/public/sync-log.json; then
             echo "markers.json and sync-log.json are already up to date"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
@@ -86,6 +88,23 @@ jobs:
           git add frontend/public/markers.json frontend/public/sync-log.json
           git commit -m "chore: refresh pharmacy sync data"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy refreshed data to Vercel
+        if: ${{ always() && steps.commit_data.outputs.changed == 'true' }}
+        working-directory: frontend
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "VERCEL_TOKEN secret is not configured; skipping Vercel deploy"
+            exit 0
+          fi
+          mkdir -p .vercel
+          cat > .vercel/project.json <<'JSON'
+          {"projectId":"prj_txpaR9UBlJwTsNt4jScork3jTvcm","orgId":"team_eDnVRQpe2wviDPNrg1Q9yFqS","projectName":"pharmacy-finder-kr"}
+          JSON
+          npx vercel@latest deploy --prod --token "$VERCEL_TOKEN" --yes
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
       - name: Upload sync artifacts
         if: always()

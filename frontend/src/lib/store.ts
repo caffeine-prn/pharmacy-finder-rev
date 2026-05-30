@@ -16,6 +16,7 @@ interface PharmacyStore {
   toggleAnimal: () => void;
   toggleCross: () => void;
   toggleNoYkiho: () => void;
+  setNearbyFilter: (nearby: boolean) => void;
   setOpenedFrom: (openedFrom: string) => void;
   setOpenedTo: (openedTo: string) => void;
   resetFilters: () => void;
@@ -37,6 +38,8 @@ interface PharmacyStore {
   setMapCenter: (center: [number, number]) => void;
   mapZoom: number;
   setMapZoom: (zoom: number) => void;
+  userLocation: [number, number] | null;
+  setUserLocation: (location: [number, number] | null) => void;
 
   // Markers data (loaded once from CDN)
   markers: MarkerData[];
@@ -57,6 +60,7 @@ const defaultFilters: FilterState = {
   noYkiho: false,
   openedFrom: "",
   openedTo: "",
+  nearby: false,
 };
 
 export const usePharmacyStore = create<PharmacyStore>((set, get) => ({
@@ -80,6 +84,8 @@ export const usePharmacyStore = create<PharmacyStore>((set, get) => ({
     set((s) => ({ filters: { ...s.filters, cross: !s.filters.cross }, page: 1 })),
   toggleNoYkiho: () =>
     set((s) => ({ filters: { ...s.filters, noYkiho: !s.filters.noYkiho }, page: 1 })),
+  setNearbyFilter: (nearby) =>
+    set((s) => ({ filters: { ...s.filters, nearby }, page: 1 })),
   setOpenedFrom: (openedFrom) =>
     set((s) => ({ filters: { ...s.filters, openedFrom }, page: 1 })),
   setOpenedTo: (openedTo) =>
@@ -113,6 +119,8 @@ export const usePharmacyStore = create<PharmacyStore>((set, get) => ({
   setMapCenter: (center) => set({ mapCenter: center }),
   mapZoom: 7,
   setMapZoom: (zoom) => set({ mapZoom: zoom }),
+  userLocation: null,
+  setUserLocation: (location) => set({ userLocation: location }),
 
   // Markers
   markers: [],

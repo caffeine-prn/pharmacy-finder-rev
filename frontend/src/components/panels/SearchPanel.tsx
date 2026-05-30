@@ -39,69 +39,77 @@ export function SearchPanel() {
   }, [setSearch]);
 
   return (
-    <div className="absolute left-3 top-3 z-[1000] flex flex-col gap-2 w-72 max-sm:left-2 max-sm:right-2 max-sm:w-auto">
-      {/* Search input */}
-      <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-md border border-zinc-200 flex items-center px-3 py-2 gap-2">
-        <MagnifyingGlass size={18} className="text-zinc-400 flex-shrink-0" />
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder="약국명 또는 전화번호 검색"
-          className="flex-1 bg-transparent text-sm text-zinc-900 placeholder-zinc-400 outline-none"
-        />
-        {inputValue && (
-          <button onClick={handleClear} className="text-zinc-400 hover:text-zinc-600">
-            <X size={14} />
-          </button>
-        )}
+    <>
+      <div className="absolute left-3 top-3 z-[1000] flex w-72 flex-col gap-2 max-sm:left-2 max-sm:right-2 max-sm:w-auto">
+        {/* Search input */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-md border border-zinc-200 flex items-center px-3 py-2 gap-2">
+          <MagnifyingGlass size={18} className="text-zinc-400 flex-shrink-0" />
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="약국명 또는 전화번호 검색"
+            className="flex-1 bg-transparent text-sm text-zinc-900 placeholder-zinc-400 outline-none"
+          />
+          {inputValue && (
+            <button onClick={handleClear} className="text-zinc-400 hover:text-zinc-600">
+              <X size={14} />
+            </button>
+          )}
+        </div>
+
+        {/* Region dropdowns */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-md border border-zinc-200 flex gap-2 px-3 py-2">
+          <select
+            value={filters.sido}
+            onChange={(e) => {
+              setSido(e.target.value);
+              trackAnalyticsEvent({
+                eventName: "region_filter",
+                view: "map",
+                metadata: { field: "sido", value: e.target.value },
+              });
+            }}
+            className="flex-1 text-sm bg-transparent text-zinc-700 outline-none cursor-pointer"
+          >
+            <option value="">전체 시도</option>
+            {SIDO_LIST.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+          <div className="w-px bg-zinc-200" />
+          <select
+            value={filters.sigungu}
+            onChange={(e) => {
+              setSigungu(e.target.value);
+              trackAnalyticsEvent({
+                eventName: "region_filter",
+                view: "map",
+                metadata: { field: "sigungu", value: e.target.value, sido: filters.sido },
+              });
+            }}
+            className="flex-1 text-sm bg-transparent text-zinc-700 outline-none cursor-pointer"
+            disabled={!filters.sido}
+          >
+            <option value="">전체 시군구</option>
+            {sigunguList.map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      {/* Region dropdowns */}
-      <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-md border border-zinc-200 flex gap-2 px-3 py-2">
-        <select
-          value={filters.sido}
-          onChange={(e) => {
-            setSido(e.target.value);
-            trackAnalyticsEvent({
-              eventName: "region_filter",
-              view: "map",
-              metadata: { field: "sido", value: e.target.value },
-            });
-          }}
-          className="flex-1 text-sm bg-transparent text-zinc-700 outline-none cursor-pointer"
+      <div className="absolute left-[19rem] top-3 z-[1000] hidden items-center gap-2 text-[11px] font-medium text-zinc-500 md:flex">
+        <Link
+          href="/nearby-herbal"
+          className="rounded-full border border-emerald-200 bg-emerald-700 px-2.5 py-1 text-white shadow-sm backdrop-blur-sm hover:bg-emerald-800"
         >
-          <option value="">전체 시도</option>
-          {SIDO_LIST.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-        <div className="w-px bg-zinc-200" />
-        <select
-          value={filters.sigungu}
-          onChange={(e) => {
-            setSigungu(e.target.value);
-            trackAnalyticsEvent({
-              eventName: "region_filter",
-              view: "map",
-              metadata: { field: "sigungu", value: e.target.value, sido: filters.sido },
-            });
-          }}
-          className="flex-1 text-sm bg-transparent text-zinc-700 outline-none cursor-pointer"
-          disabled={!filters.sido}
-        >
-          <option value="">전체 시군구</option>
-          {sigunguList.map((g) => (
-            <option key={g} value={g}>
-              {g}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="flex items-center gap-2 text-[11px] font-medium text-zinc-500 max-sm:hidden">
+          내 주변 한약사
+        </Link>
         <Link
           href="/about"
           className="rounded-full border border-zinc-200 bg-white/90 px-2.5 py-1 shadow-sm backdrop-blur-sm hover:text-zinc-800"
@@ -115,6 +123,6 @@ export function SearchPanel() {
           데이터 로그
         </Link>
       </div>
-    </div>
+    </>
   );
 }

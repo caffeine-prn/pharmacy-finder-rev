@@ -114,6 +114,50 @@ def test_upsert_mois_raw_batches_source_rows():
     assert [row["mng_no"] for row in client.calls[1][1]] == ["P3"]
 
 
+def test_upsert_mois_raw_dedupes_composite_conflict_key():
+    client = _Client()
+    rows = [
+        {"source": "pharmacy", "mng_no": "P1", "raw": {"old": True}},
+        {"source": "pharmacy", "mng_no": "P1", "raw": {"new": True}},
+        {"source": "animal", "mng_no": "P1", "raw": {"animal": True}},
+    ]
+
+    count = upsert_mois_raw(client, rows, batch_size=500)
+
+    assert count == 2
+    upsert_call = client.calls[0]
+    assert upsert_call[0] == "mois_facility_raw"
+    assert upsert_call[2] == "source,mng_no"
+    assert [(row["source"], row["mng_no"]) for row in upsert_call[1]] == [
+        ("pharmacy", "P1"),
+        ("animal", "P1"),
+    ]
+    assert upsert_call[1][0]["raw"] == {"new": True}
+
+
+def test_upsert_hira_opclo_raw_dedupes_composite_conflict_key():
+    client = _Client()
+    rows = [
+        {"ykiho": "Y1", "event_type": "개업", "event_date": "20260501", "name": "이전"},
+        {"ykiho": "Y1", "event_type": "개업", "event_date": "20260501", "name": "최신"},
+        {"ykiho": "Y1", "event_type": "휴업", "event_date": "20260501", "name": "휴업"},
+    ]
+
+    from load.supabase_loader import upsert_hira_opclo_raw
+
+    count = upsert_hira_opclo_raw(client, rows, batch_size=500)
+
+    assert count == 2
+    upsert_call = client.calls[0]
+    assert upsert_call[0] == "hira_opclo_raw"
+    assert upsert_call[2] == "ykiho,event_type,event_date"
+    assert [(row["ykiho"], row["event_type"], row["event_date"]) for row in upsert_call[1]] == [
+        ("Y1", "개업", "2026-05-01"),
+        ("Y1", "휴업", "2026-05-01"),
+    ]
+    assert upsert_call[1][0]["name"] == "최신"
+
+
 def test_upsert_pharmacies_reuses_existing_id_for_ykiho_conflict():
     client = _Client()
     pharmacies = [

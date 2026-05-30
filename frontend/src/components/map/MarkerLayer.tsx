@@ -12,36 +12,52 @@ import { usePharmacyStore } from "@/lib/store";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 import type { MarkerData } from "@/lib/types";
 
+const PHARMACY_ICON_URL = "/icons/yakgook_1.svg";
+const HERBAL_ICON_URL = "/icons/hanyakook_2.svg";
+const ANIMAL_ICON_URL = "/icons/animal_pharmacy.svg";
+const CROSS_EMPLOYMENT_ICON_URL = "/icons/cross_employment.svg";
+
 function createIcon(m: MarkerData): L.DivIcon {
   let ring = "#059669";
   let border = "solid";
-  let inner = `<div style="width:8px;height:8px;border-radius:50%;background:${ring}"></div>`;
+  let bg = "#ffffff";
+  let inner = assetIcon(PHARMACY_ICON_URL, "약국");
 
   if (m.hr && !m.h) {
     ring = "#f59e0b";
     border = "dashed";
-    inner = `<span style="color:${ring};font-size:10px;font-weight:800;line-height:1;">제</span>`;
-  } else if (m.h && !m.a) {
-    ring = "#e11d48";
-    inner = `<svg width="14" height="14" viewBox="0 0 256 256" fill="${ring}"><path d="M205.41,159.07a60.9,60.9,0,0,1-31.83,8.86,71.71,71.71,0,0,1-24.3-4.43,162.24,162.24,0,0,0,19-44.27A59.75,59.75,0,0,1,205.41,159.07ZM128,44a97.83,97.83,0,0,0-18,1.68A60,60,0,0,1,192,88c0,50.29-37.53,93.07-64,112.68-26.47-19.61-64-62.39-64-112.68A60,60,0,0,1,128,44Z"/></svg>`;
-  } else if (m.a && !m.h) {
-    ring = "#ea580c";
-    inner = `<svg width="14" height="14" viewBox="0 0 256 256" fill="${ring}"><path d="M212,80a28,28,0,1,0,28,28A28,28,0,0,0,212,80ZM44,80a28,28,0,1,0,28,28A28,28,0,0,0,44,80Zm68-44A28,28,0,1,0,84,64,28,28,0,0,0,112,36Zm60,0a28,28,0,1,0-28,28A28,28,0,0,0,172,36ZM188,168c-16.59,0-32.63-8.61-42.89-21.86a4,4,0,0,0-6.22,0C128.63,159.39,112.59,168,96,168a52,52,0,0,0,0,104c30,0,44-20,44-44V204a28,28,0,0,1,56,0v24c0,24,14,44,44,44a52,52,0,0,0,0-104Z"/></svg>`;
+    bg = "#fffbeb";
+    inner = assetIcon(HERBAL_ICON_URL, "한약국");
   } else if (m.c) {
     ring = "#7c3aed";
-    inner = `<span style="color:${ring};font-size:11px;font-weight:700;">+</span>`;
+    bg = "#f5f3ff";
+    inner = assetIcon(CROSS_EMPLOYMENT_ICON_URL, "교차고용");
+  } else if (m.h) {
+    ring = "#e11d48";
+    bg = "#fff1f2";
+    inner = assetIcon(HERBAL_ICON_URL, "한약국");
+  } else if (m.a) {
+    ring = "#ea580c";
+    bg = "#fff7ed";
+    inner = assetIcon(ANIMAL_ICON_URL, "동물약국");
   } else if (!m.y) {
     ring = "#6b7280";
     border = "dashed";
+    bg = "#f9fafb";
+    inner = assetIcon(PHARMACY_ICON_URL, "약국");
   }
 
   return L.divIcon({
     className: "",
-    html: `<div style="width:28px;height:28px;border-radius:50%;border:2.5px ${border} ${ring};background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.15);cursor:pointer">${inner}</div>`,
-    iconSize: [28, 28],
-    iconAnchor: [14, 14],
-    popupAnchor: [0, -16],
+    html: `<div style="width:31px;height:31px;border-radius:50% 50% 50% 9px;transform:rotate(-45deg);border:2.5px ${border} ${ring};background:${bg};display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px rgba(15,23,42,.22);cursor:pointer"><div style="transform:rotate(45deg);display:flex;align-items:center;justify-content:center">${inner}</div></div>`,
+    iconSize: [31, 31],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -28],
   });
+}
+
+function assetIcon(src: string, alt: string) {
+  return `<img src="${src}" alt="${alt}" width="20" height="20" style="display:block;width:20px;height:20px;object-fit:contain;" />`;
 }
 
 function markerVisualKey(m: MarkerData): string {
