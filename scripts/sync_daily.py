@@ -30,6 +30,7 @@ from load.supabase_loader import (
     update_freshness, log_sync, detect_changes, upsert_mois_raw,
     upsert_hira_opclo_raw, fetch_staff_lookup_candidates,
     fetch_staff_lookup_updates, upsert_staff_lookup_result,
+    fetch_active_pharmacies_for_markers,
 )
 from load.cdn_json import generate_markers_json
 
@@ -584,9 +585,10 @@ def main():
     log.info("Step 6: Generating markers.json...")
     stage = stages.start("generate_markers", "배포용 markers.json 생성")
     output_path = os.environ.get("MARKERS_JSON_PATH", "/tmp/markers.json")
-    generate_markers_json(all_pharmacies, output_path)
+    marker_pharmacies = fetch_active_pharmacies_for_markers(client) if client else all_pharmacies
+    generate_markers_json(marker_pharmacies, output_path)
     log.info(f"  Written to {output_path}")
-    stages.success(stage, count=len(all_pharmacies), output_path=output_path)
+    stages.success(stage, count=len(marker_pharmacies), output_path=output_path)
 
     if client:
         sync_metadata["stage_logs"] = stages.public_rows()

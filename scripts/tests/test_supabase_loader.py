@@ -158,7 +158,7 @@ def test_upsert_hira_opclo_raw_dedupes_composite_conflict_key():
     assert upsert_call[1][0]["name"] == "최신"
 
 
-def test_upsert_pharmacies_reuses_existing_id_for_ykiho_conflict():
+def test_upsert_pharmacies_does_not_blend_new_license_into_existing_ykiho_row():
     client = _Client()
     pharmacies = [
         {
@@ -180,15 +180,19 @@ def test_upsert_pharmacies_reuses_existing_id_for_ykiho_conflict():
 
     assert count == 1
     upsert_call = [call for call in client.calls if call[0] == "pharmacies" and call[2] == "id"][0]
-    assert upsert_call[1][0]["id"] == "existing-localdata-id"
+    assert upsert_call[1][0]["id"] == "new-localdata-id"
     assert upsert_call[1][0]["localdata_id"] == "new-localdata-id"
+    assert upsert_call[1][0]["ykiho"] is None
+    assert upsert_call[1][0]["has_ykiho"] is False
+    assert upsert_call[1][0]["pharmacist_count"] == 0
+    assert upsert_call[1][0]["herbal_pharmacist_count"] == 0
     assert upsert_call[1][0]["mois_license_date"] == "2026-04-03"
     assert upsert_call[1][0]["mois_closed_date"] is None
-    assert upsert_call[1][0]["hira_open_date"] == "2026-04-03"
-    assert upsert_call[1][0]["hira_last_event_date"] == "2026-04-03"
+    assert upsert_call[1][0]["hira_open_date"] is None
+    assert upsert_call[1][0]["hira_last_event_date"] is None
 
 
-def test_upsert_pharmacies_dedupes_after_existing_ykiho_id_remap():
+def test_upsert_pharmacies_keeps_distinct_mois_rows_when_ykiho_conflicts_existing_id():
     client = _Client()
     pharmacies = [
         {
@@ -207,10 +211,45 @@ def test_upsert_pharmacies_dedupes_after_existing_ykiho_id_remap():
 
     count = upsert_pharmacies(client, pharmacies)
 
-    assert count == 1
+    assert count == 2
     upsert_call = [call for call in client.calls if call[0] == "pharmacies" and call[2] == "id"][0]
-    assert len(upsert_call[1]) == 1
-    assert upsert_call[1][0]["id"] == "existing-localdata-id"
+    assert len(upsert_call[1]) == 2
+    assert upsert_call[1][0]["id"] == "first-localdata-id"
+    assert upsert_call[1][0]["ykiho"] is None
+    assert upsert_call[1][1]["id"] == "second-localdata-id"
+    assert upsert_call[1][1]["ykiho"] is None
+
+
+def test_upsert_pharmacies_preserves_existing_ykiho_row_and_splits_new_license_duplicate():
+    client = _Client()
+    pharmacies = [
+        {
+            "id": "existing-localdata-id",
+            "ykiho": "Y1",
+            "name": "기존약국",
+            "mois_license_date": "2016-03-08",
+            "hira_open_date": "20160308",
+        },
+        {
+            "id": "new-localdata-id",
+            "ykiho": "Y1",
+            "name": "기존약국",
+            "mois_license_date": "2026-06-01",
+            "hira_open_date": "20160308",
+        },
+    ]
+
+    count = upsert_pharmacies(client, pharmacies)
+
+    assert count == 2
+    upsert_call = [call for call in client.calls if call[0] == "pharmacies" and call[2] == "id"][0]
+    rows_by_id = {row["id"]: row for row in upsert_call[1]}
+    assert rows_by_id["existing-localdata-id"]["ykiho"] == "Y1"
+    assert rows_by_id["existing-localdata-id"]["mois_license_date"] == "2016-03-08"
+    assert rows_by_id["new-localdata-id"]["ykiho"] is None
+    assert rows_by_id["new-localdata-id"]["has_ykiho"] is False
+    assert rows_by_id["new-localdata-id"]["pharmacist_count"] == 0
+    assert rows_by_id["new-localdata-id"]["mois_license_date"] == "2026-06-01"
 
 
 def test_upsert_staff_skips_api_refreshed_ykihos():

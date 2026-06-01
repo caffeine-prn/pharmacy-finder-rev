@@ -45,18 +45,6 @@ def get_client():
 
 
 def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> int:
-    # Deduplicate by ykiho (multiple LOCALDATA records can match same HIRA ykiho)
-    seen_ykiho = set()
-    deduped = []
-    for p in pharmacies:
-        yk = p.get("ykiho")
-        if yk and yk in seen_ykiho:
-            continue
-        if yk:
-            seen_ykiho.add(yk)
-        deduped.append(p)
-    pharmacies = deduped
-
     rows = []
     for p in pharmacies:
         lng, lat = p.get("longitude"), p.get("latitude")
@@ -133,6 +121,23 @@ def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> 
     for row in rows:
         existing = existing_by_ykiho.get(row.get("ykiho"))
         if existing:
+            if row.get("id") != existing.get("id"):
+                # A new MOIS license row can look identical to an older HIRA
+                # provider row. Do not blend the new license date/address into
+                # the existing pharmacy just because the fuzzy matcher attached
+                # the same ykiho.
+                row["ykiho"] = None
+                row["has_ykiho"] = False
+                row["hira_open_date"] = None
+                row["hira_last_event_type"] = None
+                row["hira_last_event_date"] = None
+                row["pharmacist_count"] = 0
+                row["herbal_pharmacist_count"] = 0
+                row["is_herbal_pharmacy"] = False
+                row["is_cross_employed"] = False
+                row["hira_staff_fetched_at"] = None
+                row["hira_staff_total_count"] = None
+                continue
             row["id"] = existing["id"]
             if existing.get("hira_staff_fetched_at"):
                 row["pharmacist_count"] = existing.get("pharmacist_count") or 0
@@ -141,6 +146,29 @@ def upsert_pharmacies(client, pharmacies: list[dict], batch_size: int = 500) -> 
                 row["is_cross_employed"] = existing.get("is_cross_employed") or False
                 row["hira_staff_fetched_at"] = existing.get("hira_staff_fetched_at")
                 row["hira_staff_total_count"] = existing.get("hira_staff_total_count")
+
+    # The DB has a unique ykiho constraint. If multiple incoming rows still
+    # claim the same ykiho after reconciling known existing rows, keep the first
+    # confident match and leave the others as MOIS-only candidates.
+    seen_ykiho = set()
+    for row in rows:
+        ykiho = row.get("ykiho")
+        if not ykiho:
+            continue
+        if ykiho in seen_ykiho:
+            row["ykiho"] = None
+            row["has_ykiho"] = False
+            row["hira_open_date"] = None
+            row["hira_last_event_type"] = None
+            row["hira_last_event_date"] = None
+            row["pharmacist_count"] = 0
+            row["herbal_pharmacist_count"] = 0
+            row["is_herbal_pharmacy"] = False
+            row["is_cross_employed"] = False
+            row["hira_staff_fetched_at"] = None
+            row["hira_staff_total_count"] = None
+            continue
+        seen_ykiho.add(ykiho)
 
     rows = _dedupe_rows_by_key(rows, "id")
 
@@ -474,6 +502,30 @@ def update_freshness(client, source: str, data_date: str, record_count: int, not
         "record_count": record_count,
         "notes": notes,
     }, on_conflict="source").execute()
+
+
+def fetch_active_pharmacies_for_markers(client, batch_size: int = 1000) -> list[dict]:
+    """Load the post-upsert public pharmacy rows used to build markers.json."""
+    rows = []
+    offset = 0
+    columns = (
+        "id,name,longitude,latitude,is_herbal_pharmacy,is_animal_pharmacy,"
+        "is_cross_employed,has_ykiho,sido,sigungu,phone,mois_license_date,"
+        "hira_open_date,open_date,mois_closed_date,business_status"
+    )
+    while True:
+        resp = (
+            client.table("pharmacies")
+            .select(columns)
+            .range(offset, offset + batch_size - 1)
+            .execute()
+        )
+        batch = resp.data or []
+        rows.extend(batch)
+        if len(batch) < batch_size:
+            break
+        offset += batch_size
+    return rows
 
 
 def detect_changes(client, new_pharmacies: list[dict]) -> dict:
