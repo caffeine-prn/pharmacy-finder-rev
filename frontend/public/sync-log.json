@@ -1,46 +1,85 @@
 {
   "version": 1,
-  "updated_at": "2026-06-05T04:40:11.948105+00:00",
+  "updated_at": "2026-06-06T05:18:43.394454+00:00",
   "latest": {
-    "id": "26995367916",
+    "id": "27052420552",
     "status": "success",
-    "started_at": "2026-06-05 04:28:01",
-    "finished_at": "2026-06-05T04:40:11.948105+00:00",
-    "github_run_id": "26995367916",
-    "github_run_number": "33",
-    "github_sha": "1a6a7ffc0fb2469dada715061ed62c3e6a34e18b",
+    "started_at": "2026-06-06 04:21:28",
+    "finished_at": "2026-06-06T05:18:43.394454+00:00",
+    "github_run_id": "27052420552",
+    "github_run_number": "34",
+    "github_sha": "bacbfb845ebb925f947ba3f7367b9a7b9083b679",
     "github_ref": "main",
     "github_actor": "caffeine-prn",
-    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/26995367916",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/27052420552",
     "exit_code": 0,
-    "markers_generated_at": "2026-06-05T04:40:11.560232+00:00",
-    "marker_count": 25532,
+    "markers_generated_at": "2026-06-06T05:18:42.712330+00:00",
+    "marker_count": 25483,
     "source_counts": {
-      "localdata_pharmacies": 25824,
-      "localdata_animal_pharmacies": 13394,
-      "hira_pharmacies": 25738,
+      "localdata_pharmacies": 25823,
+      "localdata_animal_pharmacies": 13407,
+      "hira_pharmacies": 25739,
       "hira_opclo_events": 194,
       "hira_opclo_opened": 191,
       "hira_opclo_closed": 3,
       "hira_opclo_suspended": 0,
-      "hira_staff_lookup_candidates": 4,
-      "hira_staff_lookup_pharmacies": 4,
-      "hira_staff_lookup_rows": 4,
+      "hira_staff_lookup_candidates": 2,
+      "hira_staff_lookup_pharmacies": 2,
+      "hira_staff_lookup_rows": 2,
       "hira_staff_lookup_errors": 0,
       "nmc_pharmacies": 25226,
-      "matched_hira": 25753,
-      "unmatched_hira": 71,
-      "matched_animal": 10075,
-      "unmatched_animal": 2744,
-      "new_pharmacies": 1,
-      "closed_pharmacies": 0,
-      "changed_pharmacies": 4410
+      "matched_hira": 24723,
+      "unmatched_hira": 1100,
+      "matched_animal": 8448,
+      "unmatched_animal": 4523,
+      "new_pharmacies": 68,
+      "closed_pharmacies": 97,
+      "changed_pharmacies": 8520
     },
     "errors": [
-      "2026-06-05 04:32:35 [WARNING]   Active pharmacies without HIRA ykiho: 71; samples=[{'id': 'PHMD119733020033084000002', 'name': '김상돈약국', 'sido': '서울', 'sigungu': '용산구', 'open_date': '1973-05-03', 'road_address': '서울특별시 용산구 한남1동 263-15'}, {'id': 'PHMD119954970018084000001', 'name': '명신약국', 'sido': '전남', 'sigungu': '영광군', 'open_date': '1995-07-06', 'road_address': '전라남도 영광군 영광읍 중앙로 165'}, {'id': 'PHMD119963160034084001253', 'name': '그린프라자약국', 'sido': '서울', 'sigungu': '구로구', 'open_date': '1996-09-02', 'road_address': '서울특별시 구로구 구로동로 137 (구로동, GS 칼텍스)'}, {'id': 'PHMD119974040023084000001', 'name': '순리원약국', 'sido': '경기', 'sigungu': '하남시', 'open_date': '1997-01-15', 'road_address': '경기도 하남시 신장1로 24 (신장동)'}, {'id': 'PHMD120014810029084000008', 'name': '공한약국', 'sido': '전남', 'sigungu': '여수시', 'open_date': '2001-06-14', 'road_address': '전라남도 여수시 충무5길 14 (충무동)'}]"
+      "2026-06-06 04:28:09 [WARNING]   Active pharmacies without HIRA ykiho: 1100; samples=[{'id': 'PHMD119663820050084000001', 'name': '아리랑약국', 'sido': '경기', 'sigungu': '의정부시', 'open_date': '1966-05-27', 'road_address': '경기도 의정부시 평화로 634, 1층 (의정부동)'}, {'id': 'PHMD119674330012084000001', 'name': '제민약국', 'sido': '강원', 'sigungu': '인제군', 'open_date': '1967-07-10', 'road_address': '강원특별자치도 인제군 인제읍 비봉로 6'}, {'id': 'PHMD119684550041084000001', 'name': '충남약국', 'sido': '충남', 'sigungu': '금산군', 'open_date': '1968-06-24', 'road_address': '충청남도 금산군 금산읍 인삼약초로 45'}, {'id': 'PHMD119684570019084000001', 'name': '감초당약국', 'sido': '충남', 'sigungu': '부여군', 'open_date': '1968-10-23', 'road_address': '충청남도 부여군 부여읍 사비로99번길 1'}, {'id': 'PHMD119714640131084000001', 'name': '아시아약국', 'sido': '전북', 'sigungu': '전주완산구', 'open_date': '1971-06-19', 'road_address': '전북특별자치도 전주시 완산구 팔달로 133 (전동)'}]"
     ]
   },
   "events": [
+    {
+      "id": "27052420552",
+      "status": "success",
+      "started_at": "2026-06-06 04:21:28",
+      "finished_at": "2026-06-06T05:18:43.394454+00:00",
+      "github_run_id": "27052420552",
+      "github_run_number": "34",
+      "github_sha": "bacbfb845ebb925f947ba3f7367b9a7b9083b679",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/27052420552",
+      "exit_code": 0,
+      "markers_generated_at": "2026-06-06T05:18:42.712330+00:00",
+      "marker_count": 25483,
+      "source_counts": {
+        "localdata_pharmacies": 25823,
+        "localdata_animal_pharmacies": 13407,
+        "hira_pharmacies": 25739,
+        "hira_opclo_events": 194,
+        "hira_opclo_opened": 191,
+        "hira_opclo_closed": 3,
+        "hira_opclo_suspended": 0,
+        "hira_staff_lookup_candidates": 2,
+        "hira_staff_lookup_pharmacies": 2,
+        "hira_staff_lookup_rows": 2,
+        "hira_staff_lookup_errors": 0,
+        "nmc_pharmacies": 25226,
+        "matched_hira": 24723,
+        "unmatched_hira": 1100,
+        "matched_animal": 8448,
+        "unmatched_animal": 4523,
+        "new_pharmacies": 68,
+        "closed_pharmacies": 97,
+        "changed_pharmacies": 8520
+      },
+      "errors": [
+        "2026-06-06 04:28:09 [WARNING]   Active pharmacies without HIRA ykiho: 1100; samples=[{'id': 'PHMD119663820050084000001', 'name': '아리랑약국', 'sido': '경기', 'sigungu': '의정부시', 'open_date': '1966-05-27', 'road_address': '경기도 의정부시 평화로 634, 1층 (의정부동)'}, {'id': 'PHMD119674330012084000001', 'name': '제민약국', 'sido': '강원', 'sigungu': '인제군', 'open_date': '1967-07-10', 'road_address': '강원특별자치도 인제군 인제읍 비봉로 6'}, {'id': 'PHMD119684550041084000001', 'name': '충남약국', 'sido': '충남', 'sigungu': '금산군', 'open_date': '1968-06-24', 'road_address': '충청남도 금산군 금산읍 인삼약초로 45'}, {'id': 'PHMD119684570019084000001', 'name': '감초당약국', 'sido': '충남', 'sigungu': '부여군', 'open_date': '1968-10-23', 'road_address': '충청남도 부여군 부여읍 사비로99번길 1'}, {'id': 'PHMD119714640131084000001', 'name': '아시아약국', 'sido': '전북', 'sigungu': '전주완산구', 'open_date': '1971-06-19', 'road_address': '전북특별자치도 전주시 완산구 팔달로 133 (전동)'}]"
+      ]
+    },
     {
       "id": "26995367916",
       "status": "success",
@@ -1143,38 +1182,6 @@
       "errors": [
         "2026-05-14 18:11:47 [ERROR]   Supabase failed: {'message': 'JSON could not be generated', 'code': 400, 'hint': 'Refer to full message for details', 'details': \"b'Bad Request'\"}",
         "2026-05-14 18:11:48 [WARNING]   Errors: ['Supabase: {\\'message\\': \\'JSON could not be generated\\', \\'code\\': 400, \\'hint\\': \\'Refer to full message for details\\', \\'details\\': \"b\\'Bad Request\\'\"}']"
-      ]
-    },
-    {
-      "id": "25875425030",
-      "status": "failed",
-      "started_at": "2026-05-14 17:38:49",
-      "finished_at": "2026-05-14T17:52:17.497440+00:00",
-      "github_run_id": "25875425030",
-      "github_run_number": "7",
-      "github_sha": "3b6126211d3a299cf01fdfd35a8b22f6302225bd",
-      "github_ref": "main",
-      "github_actor": "caffeine-prn",
-      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25875425030",
-      "exit_code": 1,
-      "markers_generated_at": "2026-05-14T17:52:16.957660+00:00",
-      "marker_count": 25794,
-      "source_counts": {
-        "localdata_pharmacies": 25805,
-        "localdata_animal_pharmacies": 13356,
-        "hira_pharmacies": 25728,
-        "nmc_pharmacies": 25241,
-        "matched_hira": 25619,
-        "unmatched_hira": 186,
-        "matched_animal": 10908,
-        "unmatched_animal": 1994,
-        "new_pharmacies": 183,
-        "closed_pharmacies": 97,
-        "changed_pharmacies": 24822
-      },
-      "errors": [
-        "2026-05-14 17:52:16 [ERROR]   Supabase failed: {'message': 'duplicate key value violates unique constraint \"pharmacies_ykiho_key\"', 'code': '23505', 'hint': None, 'details': 'Key (ykiho)=(JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQyIyQ3IyQwMCQyNjEwMDIjNDEjJDEjJDQjJDgz) already exists.'}",
-        "2026-05-14 17:52:17 [WARNING]   Errors: ['Supabase: {\\'message\\': \\'duplicate key value violates unique constraint \"pharmacies_ykiho_key\"\\', \\'code\\': \\'23505\\', \\'hint\\': None, \\'details\\': \\'Key (ykiho)=(JDQ4MTg4MSM1MSMkMSMkNCMkMDMkNDgxNzAyIzQxIyQyIyQ3IyQwMCQyNjEwMDIjNDEjJDEjJDQjJDgz) already exists.\\'}']"
       ]
     }
   ]
