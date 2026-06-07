@@ -1,46 +1,85 @@
 {
   "version": 1,
-  "updated_at": "2026-06-06T05:18:43.394454+00:00",
+  "updated_at": "2026-06-07T04:55:04.601884+00:00",
   "latest": {
-    "id": "27052420552",
+    "id": "27082650128",
     "status": "success",
-    "started_at": "2026-06-06 04:21:28",
-    "finished_at": "2026-06-06T05:18:43.394454+00:00",
-    "github_run_id": "27052420552",
-    "github_run_number": "34",
-    "github_sha": "bacbfb845ebb925f947ba3f7367b9a7b9083b679",
+    "started_at": "2026-06-07 04:28:34",
+    "finished_at": "2026-06-07T04:55:04.601884+00:00",
+    "github_run_id": "27082650128",
+    "github_run_number": "35",
+    "github_sha": "a7ae747277fec8f3b54fb5770bf1c4c874699b98",
     "github_ref": "main",
     "github_actor": "caffeine-prn",
-    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/27052420552",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/27082650128",
     "exit_code": 0,
-    "markers_generated_at": "2026-06-06T05:18:42.712330+00:00",
-    "marker_count": 25483,
+    "markers_generated_at": "2026-06-07T04:55:04.157588+00:00",
+    "marker_count": 25522,
     "source_counts": {
-      "localdata_pharmacies": 25823,
-      "localdata_animal_pharmacies": 13407,
+      "localdata_pharmacies": 25820,
+      "localdata_animal_pharmacies": 13409,
       "hira_pharmacies": 25739,
       "hira_opclo_events": 194,
       "hira_opclo_opened": 191,
       "hira_opclo_closed": 3,
       "hira_opclo_suspended": 0,
-      "hira_staff_lookup_candidates": 2,
-      "hira_staff_lookup_pharmacies": 2,
-      "hira_staff_lookup_rows": 2,
+      "hira_staff_lookup_candidates": 39,
+      "hira_staff_lookup_pharmacies": 39,
+      "hira_staff_lookup_rows": 38,
       "hira_staff_lookup_errors": 0,
       "nmc_pharmacies": 25226,
-      "matched_hira": 24723,
-      "unmatched_hira": 1100,
-      "matched_animal": 8448,
-      "unmatched_animal": 4523,
-      "new_pharmacies": 68,
-      "closed_pharmacies": 97,
-      "changed_pharmacies": 8520
+      "matched_hira": 25518,
+      "unmatched_hira": 302,
+      "matched_animal": 9667,
+      "unmatched_animal": 3202,
+      "new_pharmacies": 93,
+      "closed_pharmacies": 71,
+      "changed_pharmacies": 8167
     },
     "errors": [
-      "2026-06-06 04:28:09 [WARNING]   Active pharmacies without HIRA ykiho: 1100; samples=[{'id': 'PHMD119663820050084000001', 'name': '아리랑약국', 'sido': '경기', 'sigungu': '의정부시', 'open_date': '1966-05-27', 'road_address': '경기도 의정부시 평화로 634, 1층 (의정부동)'}, {'id': 'PHMD119674330012084000001', 'name': '제민약국', 'sido': '강원', 'sigungu': '인제군', 'open_date': '1967-07-10', 'road_address': '강원특별자치도 인제군 인제읍 비봉로 6'}, {'id': 'PHMD119684550041084000001', 'name': '충남약국', 'sido': '충남', 'sigungu': '금산군', 'open_date': '1968-06-24', 'road_address': '충청남도 금산군 금산읍 인삼약초로 45'}, {'id': 'PHMD119684570019084000001', 'name': '감초당약국', 'sido': '충남', 'sigungu': '부여군', 'open_date': '1968-10-23', 'road_address': '충청남도 부여군 부여읍 사비로99번길 1'}, {'id': 'PHMD119714640131084000001', 'name': '아시아약국', 'sido': '전북', 'sigungu': '전주완산구', 'open_date': '1971-06-19', 'road_address': '전북특별자치도 전주시 완산구 팔달로 133 (전동)'}]"
+      "2026-06-07 04:32:41 [WARNING]   Active pharmacies without HIRA ykiho: 302; samples=[{'id': 'PHMD119673070034084000001', 'name': '용수약국', 'sido': '서울', 'sigungu': '성북구', 'open_date': '1967-04-15', 'road_address': '서울특별시 성북구 동소문로13나길 111 (동소문동7가)'}, {'id': 'PHMD119684570019084000001', 'name': '감초당약국', 'sido': '충남', 'sigungu': '부여군', 'open_date': '1968-10-23', 'road_address': '충청남도 부여군 부여읍 사비로99번길 1'}, {'id': 'PHMD119683070034084000004', 'name': '운용약국', 'sido': '서울', 'sigungu': '성북구', 'open_date': '1968-11-11', 'road_address': '서울특별시 성북구 회기로 9 (종암동)'}, {'id': 'PHMD119714360069084000001', 'name': '영생약국', 'sido': '충북', 'sigungu': '청주상당구', 'open_date': '1971-07-08', 'road_address': '충청북도 청주시 상당구 대성로 169 (수동)'}, {'id': 'PHMD119733020033084000002', 'name': '김상돈약국', 'sido': '서울', 'sigungu': '용산구', 'open_date': '1973-05-03', 'road_address': '서울특별시 용산구 한남1동 263-15'}]"
     ]
   },
   "events": [
+    {
+      "id": "27082650128",
+      "status": "success",
+      "started_at": "2026-06-07 04:28:34",
+      "finished_at": "2026-06-07T04:55:04.601884+00:00",
+      "github_run_id": "27082650128",
+      "github_run_number": "35",
+      "github_sha": "a7ae747277fec8f3b54fb5770bf1c4c874699b98",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/27082650128",
+      "exit_code": 0,
+      "markers_generated_at": "2026-06-07T04:55:04.157588+00:00",
+      "marker_count": 25522,
+      "source_counts": {
+        "localdata_pharmacies": 25820,
+        "localdata_animal_pharmacies": 13409,
+        "hira_pharmacies": 25739,
+        "hira_opclo_events": 194,
+        "hira_opclo_opened": 191,
+        "hira_opclo_closed": 3,
+        "hira_opclo_suspended": 0,
+        "hira_staff_lookup_candidates": 39,
+        "hira_staff_lookup_pharmacies": 39,
+        "hira_staff_lookup_rows": 38,
+        "hira_staff_lookup_errors": 0,
+        "nmc_pharmacies": 25226,
+        "matched_hira": 25518,
+        "unmatched_hira": 302,
+        "matched_animal": 9667,
+        "unmatched_animal": 3202,
+        "new_pharmacies": 93,
+        "closed_pharmacies": 71,
+        "changed_pharmacies": 8167
+      },
+      "errors": [
+        "2026-06-07 04:32:41 [WARNING]   Active pharmacies without HIRA ykiho: 302; samples=[{'id': 'PHMD119673070034084000001', 'name': '용수약국', 'sido': '서울', 'sigungu': '성북구', 'open_date': '1967-04-15', 'road_address': '서울특별시 성북구 동소문로13나길 111 (동소문동7가)'}, {'id': 'PHMD119684570019084000001', 'name': '감초당약국', 'sido': '충남', 'sigungu': '부여군', 'open_date': '1968-10-23', 'road_address': '충청남도 부여군 부여읍 사비로99번길 1'}, {'id': 'PHMD119683070034084000004', 'name': '운용약국', 'sido': '서울', 'sigungu': '성북구', 'open_date': '1968-11-11', 'road_address': '서울특별시 성북구 회기로 9 (종암동)'}, {'id': 'PHMD119714360069084000001', 'name': '영생약국', 'sido': '충북', 'sigungu': '청주상당구', 'open_date': '1971-07-08', 'road_address': '충청북도 청주시 상당구 대성로 169 (수동)'}, {'id': 'PHMD119733020033084000002', 'name': '김상돈약국', 'sido': '서울', 'sigungu': '용산구', 'open_date': '1973-05-03', 'road_address': '서울특별시 용산구 한남1동 263-15'}]"
+      ]
+    },
     {
       "id": "27052420552",
       "status": "success",
@@ -1151,38 +1190,6 @@
         "changed_pharmacies": 22872
       },
       "errors": []
-    },
-    {
-      "id": "25876399978",
-      "status": "failed",
-      "started_at": "2026-05-14 17:58:30",
-      "finished_at": "2026-05-14T18:11:48.444438+00:00",
-      "github_run_id": "25876399978",
-      "github_run_number": "8",
-      "github_sha": "efbc47811d5903eb77b80fe26c019b681a454824",
-      "github_ref": "main",
-      "github_actor": "caffeine-prn",
-      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/25876399978",
-      "exit_code": 1,
-      "markers_generated_at": "2026-05-14T18:11:47.910550+00:00",
-      "marker_count": 25794,
-      "source_counts": {
-        "localdata_pharmacies": 25805,
-        "localdata_animal_pharmacies": 13356,
-        "hira_pharmacies": 25728,
-        "nmc_pharmacies": 25241,
-        "matched_hira": 25619,
-        "unmatched_hira": 186,
-        "matched_animal": 10908,
-        "unmatched_animal": 1994,
-        "new_pharmacies": 182,
-        "closed_pharmacies": 97,
-        "changed_pharmacies": 22872
-      },
-      "errors": [
-        "2026-05-14 18:11:47 [ERROR]   Supabase failed: {'message': 'JSON could not be generated', 'code': 400, 'hint': 'Refer to full message for details', 'details': \"b'Bad Request'\"}",
-        "2026-05-14 18:11:48 [WARNING]   Errors: ['Supabase: {\\'message\\': \\'JSON could not be generated\\', \\'code\\': 400, \\'hint\\': \\'Refer to full message for details\\', \\'details\\': \"b\\'Bad Request\\'\"}']"
-      ]
     }
   ]
 }
