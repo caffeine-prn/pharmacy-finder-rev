@@ -1,46 +1,85 @@
 {
   "version": 1,
-  "updated_at": "2026-07-13T06:15:39.353267+00:00",
+  "updated_at": "2026-07-14T05:39:50.450241+00:00",
   "latest": {
-    "id": "29227549258",
+    "id": "29308185449",
     "status": "success",
-    "started_at": "2026-07-13 05:56:32",
-    "finished_at": "2026-07-13T06:15:39.353267+00:00",
-    "github_run_id": "29227549258",
-    "github_run_number": "71",
-    "github_sha": "4e286e42609b6f5988ff528bbc257eb1a30f6265",
+    "started_at": "2026-07-14 05:18:42",
+    "finished_at": "2026-07-14T05:39:50.450241+00:00",
+    "github_run_id": "29308185449",
+    "github_run_number": "72",
+    "github_sha": "fa95a4450879830e9a7d356399c40889401e674f",
     "github_ref": "main",
     "github_actor": "caffeine-prn",
-    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/29227549258",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/29308185449",
     "exit_code": 0,
-    "markers_generated_at": "2026-07-13T06:15:39.053111+00:00",
+    "markers_generated_at": "2026-07-14T05:39:50.110980+00:00",
     "marker_count": 25803,
     "source_counts": {
       "localdata_pharmacies": 25820,
       "localdata_animal_pharmacies": 13516,
-      "hira_pharmacies": 25749,
+      "hira_pharmacies": 25741,
       "hira_opclo_events": 0,
       "hira_opclo_opened": 0,
       "hira_opclo_closed": 0,
       "hira_opclo_suspended": 0,
-      "hira_staff_lookup_candidates": 0,
-      "hira_staff_lookup_pharmacies": 0,
-      "hira_staff_lookup_rows": 0,
+      "hira_staff_lookup_candidates": 1,
+      "hira_staff_lookup_pharmacies": 1,
+      "hira_staff_lookup_rows": 1,
       "hira_staff_lookup_errors": 0,
-      "nmc_pharmacies": 25241,
+      "nmc_pharmacies": 25239,
       "matched_hira": 25751,
       "unmatched_hira": 69,
-      "matched_animal": 9708,
-      "unmatched_animal": 3388,
+      "matched_animal": 9713,
+      "unmatched_animal": 3383,
       "new_pharmacies": 1,
       "closed_pharmacies": 0,
-      "changed_pharmacies": 4057
+      "changed_pharmacies": 4075
     },
     "errors": [
-      "2026-07-13 06:10:38 [WARNING]   Active pharmacies without HIRA ykiho: 69; samples=[{'id': 'PHMD119733020033084000002', 'name': '김상돈약국', 'sido': '서울', 'sigungu': '용산구', 'open_date': '1973-05-03', 'road_address': '서울특별시 용산구 한남1동 263-15'}, {'id': 'PHMD119954970018084000001', 'name': '명신약국', 'sido': '전남광주통합특별시', 'sigungu': '영광군', 'open_date': '1995-07-06', 'road_address': '전남광주통합특별시 영광군 영광읍 중앙로 165'}, {'id': 'PHMD119963820050084000001', 'name': '건우약국', 'sido': '경기', 'sigungu': '의정부시', 'open_date': '1996-08-10', 'road_address': '경기도 의정부시 호동로 52, 101호 (호원동, 가든아파트상가)'}, {'id': 'PHMD119974040023084000001', 'name': '순리원약국', 'sido': '경기', 'sigungu': '하남시', 'open_date': '1997-01-15', 'road_address': '경기도 하남시 신장1로 24 (신장동)'}, {'id': 'PHMD120014810029084000008', 'name': '공한약국', 'sido': '전남광주통합특별시', 'sigungu': '여수시', 'open_date': '2001-06-14', 'road_address': '전남광주통합특별시 여수시 충무5길 14 (충무동)'}]"
+      "2026-07-14 05:32:25 [WARNING]   Active pharmacies without HIRA ykiho: 69; samples=[{'id': 'PHMD119733020033084000002', 'name': '김상돈약국', 'sido': '서울', 'sigungu': '용산구', 'open_date': '1973-05-03', 'road_address': '서울특별시 용산구 한남1동 263-15'}, {'id': 'PHMD119954970018084000001', 'name': '명신약국', 'sido': '전남광주통합특별시', 'sigungu': '영광군', 'open_date': '1995-07-06', 'road_address': '전남광주통합특별시 영광군 영광읍 중앙로 165'}, {'id': 'PHMD119963820050084000001', 'name': '건우약국', 'sido': '경기', 'sigungu': '의정부시', 'open_date': '1996-08-10', 'road_address': '경기도 의정부시 호동로 52, 101호 (호원동, 가든아파트상가)'}, {'id': 'PHMD119974040023084000001', 'name': '순리원약국', 'sido': '경기', 'sigungu': '하남시', 'open_date': '1997-01-15', 'road_address': '경기도 하남시 신장1로 24 (신장동)'}, {'id': 'PHMD120014810029084000008', 'name': '공한약국', 'sido': '전남광주통합특별시', 'sigungu': '여수시', 'open_date': '2001-06-14', 'road_address': '전남광주통합특별시 여수시 충무5길 14 (충무동)'}]"
     ]
   },
   "events": [
+    {
+      "id": "29308185449",
+      "status": "success",
+      "started_at": "2026-07-14 05:18:42",
+      "finished_at": "2026-07-14T05:39:50.450241+00:00",
+      "github_run_id": "29308185449",
+      "github_run_number": "72",
+      "github_sha": "fa95a4450879830e9a7d356399c40889401e674f",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/29308185449",
+      "exit_code": 0,
+      "markers_generated_at": "2026-07-14T05:39:50.110980+00:00",
+      "marker_count": 25803,
+      "source_counts": {
+        "localdata_pharmacies": 25820,
+        "localdata_animal_pharmacies": 13516,
+        "hira_pharmacies": 25741,
+        "hira_opclo_events": 0,
+        "hira_opclo_opened": 0,
+        "hira_opclo_closed": 0,
+        "hira_opclo_suspended": 0,
+        "hira_staff_lookup_candidates": 1,
+        "hira_staff_lookup_pharmacies": 1,
+        "hira_staff_lookup_rows": 1,
+        "hira_staff_lookup_errors": 0,
+        "nmc_pharmacies": 25239,
+        "matched_hira": 25751,
+        "unmatched_hira": 69,
+        "matched_animal": 9713,
+        "unmatched_animal": 3383,
+        "new_pharmacies": 1,
+        "closed_pharmacies": 0,
+        "changed_pharmacies": 4075
+      },
+      "errors": [
+        "2026-07-14 05:32:25 [WARNING]   Active pharmacies without HIRA ykiho: 69; samples=[{'id': 'PHMD119733020033084000002', 'name': '김상돈약국', 'sido': '서울', 'sigungu': '용산구', 'open_date': '1973-05-03', 'road_address': '서울특별시 용산구 한남1동 263-15'}, {'id': 'PHMD119954970018084000001', 'name': '명신약국', 'sido': '전남광주통합특별시', 'sigungu': '영광군', 'open_date': '1995-07-06', 'road_address': '전남광주통합특별시 영광군 영광읍 중앙로 165'}, {'id': 'PHMD119963820050084000001', 'name': '건우약국', 'sido': '경기', 'sigungu': '의정부시', 'open_date': '1996-08-10', 'road_address': '경기도 의정부시 호동로 52, 101호 (호원동, 가든아파트상가)'}, {'id': 'PHMD119974040023084000001', 'name': '순리원약국', 'sido': '경기', 'sigungu': '하남시', 'open_date': '1997-01-15', 'road_address': '경기도 하남시 신장1로 24 (신장동)'}, {'id': 'PHMD120014810029084000008', 'name': '공한약국', 'sido': '전남광주통합특별시', 'sigungu': '여수시', 'open_date': '2001-06-14', 'road_address': '전남광주통합특별시 여수시 충무5길 14 (충무동)'}]"
+      ]
+    },
     {
       "id": "29227549258",
       "status": "success",
@@ -1170,45 +1209,6 @@
       },
       "errors": [
         "2026-06-14 04:38:48 [WARNING]   Active pharmacies without HIRA ykiho: 68; samples=[{'id': 'PHMD119733020033084000002', 'name': '김상돈약국', 'sido': '서울', 'sigungu': '용산구', 'open_date': '1973-05-03', 'road_address': '서울특별시 용산구 한남1동 263-15'}, {'id': 'PHMD119954970018084000001', 'name': '명신약국', 'sido': '전남', 'sigungu': '영광군', 'open_date': '1995-07-06', 'road_address': '전라남도 영광군 영광읍 중앙로 165'}, {'id': 'PHMD119974040023084000001', 'name': '순리원약국', 'sido': '경기', 'sigungu': '하남시', 'open_date': '1997-01-15', 'road_address': '경기도 하남시 신장1로 24 (신장동)'}, {'id': 'PHMD120014810029084000008', 'name': '공한약국', 'sido': '전남', 'sigungu': '여수시', 'open_date': '2001-06-14', 'road_address': '전라남도 여수시 충무5길 14 (충무동)'}, {'id': 'PHMD120013860050084000005', 'name': '동이약국', 'sido': '경기', 'sigungu': '부천소사구', 'open_date': '2001-08-01', 'road_address': '경기도 부천시 소사구 경인로29번길 13 (송내동, 동신아파트)'}]"
-      ]
-    },
-    {
-      "id": "27456530687",
-      "status": "success",
-      "started_at": "2026-06-13 04:28:12",
-      "finished_at": "2026-06-13T04:38:22.658114+00:00",
-      "github_run_id": "27456530687",
-      "github_run_number": "41",
-      "github_sha": "01d092b84cdb7401f8e6c54d541e3d9d9c18b0d6",
-      "github_ref": "main",
-      "github_actor": "caffeine-prn",
-      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/27456530687",
-      "exit_code": 0,
-      "markers_generated_at": "2026-06-13T04:38:22.373144+00:00",
-      "marker_count": 25816,
-      "source_counts": {
-        "localdata_pharmacies": 25821,
-        "localdata_animal_pharmacies": 13419,
-        "hira_pharmacies": 25737,
-        "hira_opclo_events": 194,
-        "hira_opclo_opened": 191,
-        "hira_opclo_closed": 3,
-        "hira_opclo_suspended": 0,
-        "hira_staff_lookup_candidates": 5,
-        "hira_staff_lookup_pharmacies": 5,
-        "hira_staff_lookup_rows": 5,
-        "hira_staff_lookup_errors": 0,
-        "nmc_pharmacies": 25226,
-        "matched_hira": 25753,
-        "unmatched_hira": 68,
-        "matched_animal": 10364,
-        "unmatched_animal": 2621,
-        "new_pharmacies": 8,
-        "closed_pharmacies": 1,
-        "changed_pharmacies": 4318
-      },
-      "errors": [
-        "2026-06-13 04:33:55 [WARNING]   Active pharmacies without HIRA ykiho: 68; samples=[{'id': 'PHMD119733020033084000002', 'name': '김상돈약국', 'sido': '서울', 'sigungu': '용산구', 'open_date': '1973-05-03', 'road_address': '서울특별시 용산구 한남1동 263-15'}, {'id': 'PHMD119954970018084000001', 'name': '명신약국', 'sido': '전남', 'sigungu': '영광군', 'open_date': '1995-07-06', 'road_address': '전라남도 영광군 영광읍 중앙로 165'}, {'id': 'PHMD119974040023084000001', 'name': '순리원약국', 'sido': '경기', 'sigungu': '하남시', 'open_date': '1997-01-15', 'road_address': '경기도 하남시 신장1로 24 (신장동)'}, {'id': 'PHMD120014810029084000008', 'name': '공한약국', 'sido': '전남', 'sigungu': '여수시', 'open_date': '2001-06-14', 'road_address': '전라남도 여수시 충무5길 14 (충무동)'}, {'id': 'PHMD120013860050084000005', 'name': '동이약국', 'sido': '경기', 'sigungu': '부천소사구', 'open_date': '2001-08-01', 'road_address': '경기도 부천시 소사구 경인로29번길 13 (송내동, 동신아파트)'}]"
       ]
     }
   ]
