@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "updated_at": "2026-08-18T03:48:25.249532+00:00",
+  "updated_at": "2026-08-19T03:50:50.645093+00:00",
   "latest": {
-    "id": "32095910176",
+    "id": "32212697325",
     "status": "failed",
-    "started_at": "2026-08-18 03:33:40",
-    "finished_at": "2026-08-18T03:48:25.249532+00:00",
-    "github_run_id": "32095910176",
-    "github_run_number": "107",
-    "github_sha": "3e62fc05fcb22d29619530067ae9fa28ddd6f635",
+    "started_at": "2026-08-19 03:35:49",
+    "finished_at": "2026-08-19T03:50:50.645093+00:00",
+    "github_run_id": "32212697325",
+    "github_run_number": "108",
+    "github_sha": "01605f7a9a24a518410daee9358d4b89b471e70b",
     "github_ref": "main",
     "github_actor": "caffeine-prn",
-    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/32095910176",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/32212697325",
     "exit_code": 1,
     "markers_generated_at": "2026-08-16T04:40:21.036507+00:00",
     "marker_count": 25831,
@@ -37,11 +37,51 @@
       "changed_pharmacies": null
     },
     "errors": [
-      "2026-08-18 03:39:50 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fea0b3d0750>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+      "2026-08-19 03:41:59 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fdd66bd0fd0>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
       "[WARNING] missing ykiho audit failed with status 1"
     ]
   },
   "events": [
+    {
+      "id": "32212697325",
+      "status": "failed",
+      "started_at": "2026-08-19 03:35:49",
+      "finished_at": "2026-08-19T03:50:50.645093+00:00",
+      "github_run_id": "32212697325",
+      "github_run_number": "108",
+      "github_sha": "01605f7a9a24a518410daee9358d4b89b471e70b",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/32212697325",
+      "exit_code": 1,
+      "markers_generated_at": "2026-08-16T04:40:21.036507+00:00",
+      "marker_count": 25831,
+      "source_counts": {
+        "localdata_pharmacies": null,
+        "localdata_animal_pharmacies": null,
+        "hira_pharmacies": null,
+        "hira_opclo_events": null,
+        "hira_opclo_opened": null,
+        "hira_opclo_closed": null,
+        "hira_opclo_suspended": null,
+        "hira_staff_lookup_candidates": null,
+        "hira_staff_lookup_pharmacies": null,
+        "hira_staff_lookup_rows": null,
+        "hira_staff_lookup_errors": null,
+        "nmc_pharmacies": null,
+        "matched_hira": null,
+        "unmatched_hira": null,
+        "matched_animal": null,
+        "unmatched_animal": null,
+        "new_pharmacies": null,
+        "closed_pharmacies": null,
+        "changed_pharmacies": null
+      },
+      "errors": [
+        "2026-08-19 03:41:59 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fdd66bd0fd0>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "[WARNING] missing ykiho audit failed with status 1"
+      ]
+    },
     {
       "id": "32095910176",
       "status": "failed",
@@ -1248,45 +1288,6 @@
       },
       "errors": [
         "2026-07-20 06:11:19 [WARNING]   Active pharmacies without HIRA ykiho: 308; samples=[{'id': 'PHMD119633070034084000001', 'name': '동그라미약국', 'sido': '서울', 'sigungu': '성북구', 'open_date': '1963-10-19', 'road_address': '서울특별시 성북구 아리랑로 117-7 (정릉동)'}, {'id': 'PHMD119723200033084000005', 'name': '새시민약국', 'sido': '서울', 'sigungu': '관악구', 'open_date': '1972-10-16', 'road_address': '서울특별시 관악구 난우길 4 (신림동)'}, {'id': 'PHMD119733020033084000002', 'name': '김상돈약국', 'sido': '서울', 'sigungu': '용산구', 'open_date': '1973-05-03', 'road_address': '서울특별시 용산구 한남1동 263-15'}, {'id': 'PHMD119933090033084000010', 'name': '손온누리약국', 'sido': '서울', 'sigungu': '도봉구', 'open_date': '1993-07-28', 'road_address': '서울특별시 도봉구 도봉로 626 (창동)'}, {'id': 'PHMD119953040033084000002', 'name': '자양건강약국', 'sido': '서울', 'sigungu': '광진구', 'open_date': '1995-04-19', 'road_address': '서울특별시 광진구 뚝섬로56길 46, 근정빌딩 1층 (자양동)'}]"
-      ]
-    },
-    {
-      "id": "29675188904",
-      "status": "success",
-      "started_at": "2026-07-19 05:39:50",
-      "finished_at": "2026-07-19T06:37:10.810390+00:00",
-      "github_run_id": "29675188904",
-      "github_run_number": "77",
-      "github_sha": "b6d606b9a184a6b7942c5fe89ac550be8a49d323",
-      "github_ref": "main",
-      "github_actor": "caffeine-prn",
-      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/29675188904",
-      "exit_code": 0,
-      "markers_generated_at": "2026-07-19T06:37:10.231781+00:00",
-      "marker_count": 25784,
-      "source_counts": {
-        "localdata_pharmacies": 25825,
-        "localdata_animal_pharmacies": 13528,
-        "hira_pharmacies": 25744,
-        "hira_opclo_events": 0,
-        "hira_opclo_opened": 0,
-        "hira_opclo_closed": 0,
-        "hira_opclo_suspended": 0,
-        "hira_staff_lookup_candidates": 0,
-        "hira_staff_lookup_pharmacies": 0,
-        "hira_staff_lookup_rows": 0,
-        "hira_staff_lookup_errors": 0,
-        "nmc_pharmacies": 25237,
-        "matched_hira": 24634,
-        "unmatched_hira": 1191,
-        "matched_animal": 8920,
-        "unmatched_animal": 4222,
-        "new_pharmacies": 2,
-        "closed_pharmacies": 0,
-        "changed_pharmacies": 7465
-      },
-      "errors": [
-        "2026-07-19 05:54:36 [WARNING]   Active pharmacies without HIRA ykiho: 1191; samples=[{'id': 'PHMD119614700020084000001', 'name': '위생약국', 'sido': '전북', 'sigungu': '남원시', 'open_date': '1961-04-25', 'road_address': '전북특별자치도 남원시 광한서로 57 (금동)'}, {'id': 'PHMD119625340030084000001', 'name': '천일약국', 'sido': '경남', 'sigungu': '사천시', 'open_date': '1962-09-08', 'road_address': '경상남도 사천시 건어시장길 28 (동금동)'}, {'id': 'PHMD119665570012084000001', 'name': '일신약국', 'sido': '충북', 'sigungu': '증평군', 'open_date': '1966-01-25', 'road_address': '충청북도 증평군 증평읍 윗장뜰길 35'}, {'id': 'PHMD119735320022084000004', 'name': '남방약국', 'sido': '경남', 'sigungu': '창원진해구', 'open_date': '1966-05-03', 'road_address': '경상남도 창원시 진해구  충장로329번길  23-1 (경화동)'}, {'id': 'PHMD119675050041084000001', 'name': '영화약국', 'sido': '경북', 'sigungu': '경주시', 'open_date': '1967-02-28', 'road_address': '경상북도 경주시 동성로 95 (노동동)'}]"
       ]
     }
   ]
