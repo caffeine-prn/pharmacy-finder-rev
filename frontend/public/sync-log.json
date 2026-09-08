@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "updated_at": "2026-09-07T07:50:50.117503+00:00",
+  "updated_at": "2026-09-08T07:43:27.439284+00:00",
   "latest": {
-    "id": "34096263285",
+    "id": "34199520650",
     "status": "failed",
-    "started_at": "2026-09-07 07:36:20",
-    "finished_at": "2026-09-07T07:50:50.117503+00:00",
-    "github_run_id": "34096263285",
-    "github_run_number": "127",
-    "github_sha": "f3fd213a17449abba331b23db489fb1f5d80c702",
+    "started_at": "2026-09-08 07:28:57",
+    "finished_at": "2026-09-08T07:43:27.439284+00:00",
+    "github_run_id": "34199520650",
+    "github_run_number": "128",
+    "github_sha": "8eedaf470e33abd57962d68adb215f2281c26f7c",
     "github_ref": "main",
     "github_actor": "caffeine-prn",
-    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/34096263285",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/34199520650",
     "exit_code": 1,
     "markers_generated_at": "2026-09-05T07:37:25.017027+00:00",
     "marker_count": 25844,
@@ -37,11 +37,51 @@
       "changed_pharmacies": null
     },
     "errors": [
-      "2026-09-07 07:42:30 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fa883ad0fd0>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+      "2026-09-08 07:35:07 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fc2fbdd0f50>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
       "[WARNING] missing ykiho audit failed with status 1"
     ]
   },
   "events": [
+    {
+      "id": "34199520650",
+      "status": "failed",
+      "started_at": "2026-09-08 07:28:57",
+      "finished_at": "2026-09-08T07:43:27.439284+00:00",
+      "github_run_id": "34199520650",
+      "github_run_number": "128",
+      "github_sha": "8eedaf470e33abd57962d68adb215f2281c26f7c",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/34199520650",
+      "exit_code": 1,
+      "markers_generated_at": "2026-09-05T07:37:25.017027+00:00",
+      "marker_count": 25844,
+      "source_counts": {
+        "localdata_pharmacies": null,
+        "localdata_animal_pharmacies": null,
+        "hira_pharmacies": null,
+        "hira_opclo_events": null,
+        "hira_opclo_opened": null,
+        "hira_opclo_closed": null,
+        "hira_opclo_suspended": null,
+        "hira_staff_lookup_candidates": null,
+        "hira_staff_lookup_pharmacies": null,
+        "hira_staff_lookup_rows": null,
+        "hira_staff_lookup_errors": null,
+        "nmc_pharmacies": null,
+        "matched_hira": null,
+        "unmatched_hira": null,
+        "matched_animal": null,
+        "unmatched_animal": null,
+        "new_pharmacies": null,
+        "closed_pharmacies": null,
+        "changed_pharmacies": null
+      },
+      "errors": [
+        "2026-09-08 07:35:07 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fc2fbdd0f50>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "[WARNING] missing ykiho audit failed with status 1"
+      ]
+    },
     {
       "id": "34096263285",
       "status": "failed",
@@ -1287,54 +1327,6 @@
       "errors": [
         "2026-08-08 04:07:35 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7ff2d209d210>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
-      ]
-    },
-    {
-      "id": "31148378679",
-      "status": "failed",
-      "started_at": "2026-08-07 04:45:05",
-      "finished_at": "2026-08-07T05:47:10.575353+00:00",
-      "github_run_id": "31148378679",
-      "github_run_number": "96",
-      "github_sha": "90ee778b9837491183983bc031996fe8910b0595",
-      "github_ref": "main",
-      "github_actor": "caffeine-prn",
-      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/31148378679",
-      "exit_code": 1,
-      "markers_generated_at": "2026-08-07T05:47:10.236765+00:00",
-      "marker_count": 25825,
-      "source_counts": {
-        "localdata_pharmacies": 25837,
-        "localdata_animal_pharmacies": 13573,
-        "hira_pharmacies": 25771,
-        "hira_opclo_events": 104,
-        "hira_opclo_opened": 104,
-        "hira_opclo_closed": 0,
-        "hira_opclo_suspended": 0,
-        "hira_staff_lookup_candidates": 244,
-        "hira_staff_lookup_pharmacies": null,
-        "hira_staff_lookup_rows": null,
-        "hira_staff_lookup_errors": null,
-        "nmc_pharmacies": 25231,
-        "matched_hira": 25771,
-        "unmatched_hira": 66,
-        "matched_animal": 10294,
-        "unmatched_animal": 2845,
-        "new_pharmacies": 4,
-        "closed_pharmacies": 4,
-        "changed_pharmacies": 3719
-      },
-      "errors": [
-        "2026-08-07 05:45:15 [WARNING]   HIRA staff lookup failed for 우리약국 (PHMD120253120033084000008): not well-formed (invalid token): line 1, column 0",
-        "2026-08-07 05:45:30 [WARNING]   HIRA staff lookup failed for 나비약국 (PHMD120253220033084000034): not well-formed (invalid token): line 1, column 0",
-        "2026-08-07 05:45:41 [WARNING]   HIRA staff lookup failed for 해든약국 (PHMD120253240033084000044): not well-formed (invalid token): line 1, column 0",
-        "2026-08-07 05:45:53 [WARNING]   HIRA staff lookup failed for 소나무약국 (PHMD120254030022084000003): not well-formed (invalid token): line 1, column 0",
-        "2026-08-07 05:46:03 [WARNING]   HIRA staff lookup failed for 365종로온누리약국 (PHMD120253060034084000008): not well-formed (invalid token): line 1, column 0",
-        "2026-08-07 05:46:14 [WARNING]   HIRA staff lookup failed for 1층약국 (PHMD120254080023084000006): not well-formed (invalid token): line 1, column 0",
-        "2026-08-07 05:46:25 [WARNING]   HIRA staff lookup failed for 가락약국 (PHMD120253230034084000023): not well-formed (invalid token): line 1, column 0",
-        "2026-08-07 05:46:36 [WARNING]   HIRA staff lookup failed for 신평다솜약국 (PHMD120255080035084000009): not well-formed (invalid token): line 1, column 0",
-        "2026-08-07 05:46:50 [WARNING]   HIRA staff lookup failed for 열린문약국 (PHMD120255230029084000002): not well-formed (invalid token): line 1, column 0",
-        "2026-08-07 05:47:03 [WARNING]   HIRA staff lookup failed for 365매일여는약국 (PHMD120263080033084000001): not well-formed (invalid token): line 1, column 0"
       ]
     }
   ]
