@@ -1,8 +1,12 @@
 import json
 import os
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from utils.redaction import redact_secrets
 
 
 def _read_json(path: Path, fallback: dict) -> dict:
@@ -73,7 +77,7 @@ def _extract_errors(log_text: str) -> list[str]:
     errors = []
     for line in log_text.splitlines():
         if "[ERROR]" in line or "[WARNING]" in line:
-            errors.append(line.strip())
+            errors.append(redact_secrets(line.strip()))
     return errors[-10:]
 
 
@@ -129,7 +133,7 @@ def main() -> int:
         "events": events[:30],
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    output_path.write_text(redact_secrets(json.dumps(output, ensure_ascii=False, indent=2)) + "\n", encoding="utf-8")
     return 0
 
 

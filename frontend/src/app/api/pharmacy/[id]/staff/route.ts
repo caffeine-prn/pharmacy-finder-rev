@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServiceSupabase } from "@/lib/supabase/server";
 
 const HIRA_STAFF_URL =
-  "https://apis.data.go.kr/B551182/MadmDtlInfoService2.7/getEtcHstInfo2.7";
+  "https://apis.data.go.kr/B551182/MadmDtlInfoService2.8/getEtcHstInfo2.8";
 const STAFF_REFRESH_INTERVAL_MS = 24 * 60 * 60 * 1000;
 
 type HiraStaffRow = {
@@ -277,19 +277,32 @@ export async function POST(
   url.searchParams.set("numOfRows", "100");
   url.searchParams.set("ykiho", pharmacy.ykiho);
 
-  const hiraResponse = await fetch(url, { cache: "no-store" });
-  const xml = await hiraResponse.text();
+  let hiraResponse: Response;
+  let xml: string;
+  try {
+    hiraResponse = await fetch(url, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(15_000),
+    });
+    xml = await hiraResponse.text();
+  } catch (error) {
+    if (!(error instanceof Error)) throw error;
+    return NextResponse.json(
+      { error: "HIRA 인력정보 서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요." },
+      { status: 502 }
+    );
+  }
   if (!hiraResponse.ok) {
     return NextResponse.json(
-      { error: "HIRA staff lookup failed", status: hiraResponse.status, body: xml },
+      { error: "HIRA 인력정보 조회에 실패했습니다. 기존 정보는 유지됩니다.", status: hiraResponse.status },
       { status: 502 }
     );
   }
 
   const parsed = parseHiraStaffXml(xml);
-  if (parsed.resultCode && parsed.resultCode !== "00") {
+  if (parsed.resultCode !== "00") {
     return NextResponse.json(
-      { error: parsed.resultMsg || "HIRA returned an error", resultCode: parsed.resultCode },
+      { error: "HIRA 인력정보 응답을 확인할 수 없습니다. 기존 정보는 유지됩니다.", resultCode: parsed.resultCode },
       { status: 502 }
     );
   }

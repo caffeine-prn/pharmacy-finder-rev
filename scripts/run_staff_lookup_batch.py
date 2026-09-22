@@ -14,8 +14,9 @@ from load.supabase_loader import (
     update_freshness,
     upsert_staff_lookup_result,
 )
-from sources.hira_staff import fetch_staff_lookup
+from sources.hira_staff import HiraStaffAPIError, fetch_staff_lookup
 from utils.logger import setup_logger
+from utils.redaction import redact_secrets
 
 log = setup_logger("staff_lookup_batch")
 
@@ -123,6 +124,7 @@ def main() -> int:
     raw_rows = 0
     failed = 0
     errors = []
+    aborted = False
     for index, pharmacy in enumerate(candidates, start=1):
         try:
             rows, total_count = fetch_staff_lookup(api_key, pharmacy["ykiho"])
@@ -132,11 +134,18 @@ def main() -> int:
                 log.info(f"HIRA staff lookup batch progress: {index}/{len(candidates)}")
             if delay:
                 time.sleep(delay)
+        except HiraStaffAPIError as e:
+            failed += 1
+            errors.append(str(e))
+            log.warning(str(e))
+            if e.permanent:
+                aborted = True
+                break
         except Exception as e:
             failed += 1
             message = (
                 "HIRA staff lookup failed "
-                f"for {pharmacy.get('name', '')} ({pharmacy.get('id', '')}): {e}"
+                f"for {pharmacy.get('name', '')} ({pharmacy.get('id', '')}): {redact_secrets(str(e))}"
             )
             errors.append(message)
             log.warning(message)
@@ -148,13 +157,14 @@ def main() -> int:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     notes = f"limit={limit}; refresh_days={refresh_days}; failed={failed}"
     stage = stages.start("write_logs", "신선도/운영 로그 저장")
-    update_freshness(client, "hira_staff_lookup_batch", today, looked_up, notes=notes)
+    if looked_up:
+        update_freshness(client, "hira_staff_lookup_batch", today, looked_up, notes=notes)
     stages.success(stage, count=looked_up)
     log_sync(
         client,
         "hira_staff_lookup_batch",
         started_at,
-        "partial" if failed else "success",
+        "failed" if aborted or (failed and not looked_up) else "partial" if failed else "success",
         staff_count=raw_rows,
         errors=errors[:100] if errors else None,
         metadata={
@@ -162,6 +172,8 @@ def main() -> int:
             "looked_up": looked_up,
             "raw_rows": raw_rows,
             "failed": failed,
+            "aborted": aborted,
+            "unprocessed": len(candidates) - looked_up - failed,
             "limit": limit,
             "refresh_days": refresh_days,
             "delay_seconds": delay,
@@ -175,7 +187,7 @@ def main() -> int:
         "HIRA staff lookup batch completed: "
         f"{looked_up} pharmacies, {raw_rows} raw rows, {failed} errors"
     )
-    return 1 if fail_on_error and failed else 0
+    return 1 if aborted or (fail_on_error and failed) else 0
 
 
 if __name__ == "__main__":

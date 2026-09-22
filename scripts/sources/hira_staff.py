@@ -1,4 +1,5 @@
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -6,7 +7,16 @@ import xml.etree.ElementTree as ET
 import openpyxl
 
 
-STAFF_LOOKUP_URL = "https://apis.data.go.kr/B551182/MadmDtlInfoService2.7/getEtcHstInfo2.7"
+STAFF_LOOKUP_URL = "https://apis.data.go.kr/B551182/MadmDtlInfoService2.8/getEtcHstInfo2.8"
+
+
+class HiraStaffAPIError(ValueError):
+    """Safe upstream failure: never includes the authenticated URL or payload."""
+
+    def __init__(self, code: str, *, permanent: bool) -> None:
+        self.code = code
+        self.permanent = permanent
+        super().__init__(f"HIRA staff API error ({code})")
 
 
 def parse_staff_xlsx(path: str) -> dict[str, dict]:
@@ -39,11 +49,14 @@ def _text(item: ET.Element, tag: str) -> str:
 
 
 def parse_staff_lookup_xml(xml_text: str) -> tuple[list[dict], int]:
-    """Parse HIRA on-demand staff XML from getEtcHstInfo2.7."""
+    """Parse HIRA on-demand staff XML from getEtcHstInfo2.8."""
     root = ET.fromstring(xml_text)
-    result_code = root.findtext(".//resultCode", "")
-    if result_code and result_code != "00":
-        raise ValueError(f"HIRA staff API error: {root.findtext('.//resultMsg', 'unknown')}")
+    result_code = root.findtext(".//resultCode") or root.findtext(".//returnReasonCode", "")
+    if result_code != "00":
+        safe_code = result_code if result_code.isdigit() else "invalid_response"
+        raise HiraStaffAPIError(
+            safe_code, permanent=result_code in {"10", "11", "12", "20", "21", "22", "30", "31", "32"},
+        )
 
     total_count = int(root.findtext(".//totalCount", "0") or "0")
     rows = []
@@ -82,12 +95,20 @@ def fetch_staff_lookup(
             with urllib.request.urlopen(req, timeout=120) as resp:
                 xml_text = resp.read().decode("utf-8")
             return parse_staff_lookup_xml(xml_text)
-        except Exception as e:
-            if attempt < max_retries - 1:
-                time.sleep((attempt + 1) * 3)
-            else:
-                raise e
-    return [], 0
+        except urllib.error.HTTPError as error:
+            permanent = 400 <= error.code < 500 and error.code not in {408, 429}
+            failure = HiraStaffAPIError(f"HTTP_{error.code}", permanent=permanent)
+            error.close()
+            if permanent or attempt == max_retries - 1:
+                raise failure from None
+        except HiraStaffAPIError as error:
+            if error.permanent or attempt == max_retries - 1:
+                raise
+        except (urllib.error.URLError, TimeoutError, OSError, ET.ParseError, UnicodeError) as error:
+            if attempt == max_retries - 1:
+                raise HiraStaffAPIError(type(error).__name__, permanent=False) from None
+        time.sleep((attempt + 1) * 3)
+    raise HiraStaffAPIError("invalid_retry_limit", permanent=True)
 
 
 def sum_staff_count(rows: list[dict], code: str, name: str) -> int:

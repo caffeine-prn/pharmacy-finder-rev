@@ -1,7 +1,9 @@
+import json
 import os
 import re
 from datetime import date, datetime, timedelta, timezone
 from supabase import create_client
+from utils.redaction import redact_secrets
 
 
 def _chunks(items, size: int):
@@ -656,8 +658,8 @@ def log_sync(client, sync_type: str, started_at, status: str,
         "pharmacy_count": pharmacy_count,
         "animal_count": animal_count,
         "staff_count": staff_count,
-        "errors": errors,
-        "metadata": metadata,
+        "errors": json.loads(redact_secrets(json.dumps(errors))),
+        "metadata": json.loads(redact_secrets(json.dumps(metadata))),
         "new_pharmacies": new_pharmacies,
         "closed_pharmacies": closed_pharmacies,
         "changed_pharmacies": changed_pharmacies,

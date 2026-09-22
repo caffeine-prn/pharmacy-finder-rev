@@ -182,7 +182,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-19 07:41:21 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f0100068610>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-19 07:41:21 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f0100068610>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -222,7 +222,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-18 07:46:21 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fa30f766810>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-18 07:46:21 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fa30f766810>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -310,7 +310,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-16 08:04:07 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f1de365e510>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-16 08:04:07 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f1de365e510>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -446,7 +446,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-13 07:48:16 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f49e6a80450>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-13 07:48:16 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f49e6a80450>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -582,7 +582,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-10 07:39:37 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fdca81d0e90>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-10 07:39:37 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fdca81d0e90>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -622,7 +622,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-09 07:43:09 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f69904c4d50>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-09 07:43:09 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f69904c4d50>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -662,7 +662,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-08 07:35:07 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fc2fbdd0f50>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-08 07:35:07 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fc2fbdd0f50>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -702,7 +702,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-07 07:42:30 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fa883ad0fd0>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-07 07:42:30 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fa883ad0fd0>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -790,7 +790,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-04 07:33:59 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7ff8ec9c4fd0>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-04 07:33:59 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7ff8ec9c4fd0>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -878,7 +878,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-09-02 07:28:26 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7ff6704c8c50>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-09-02 07:28:26 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7ff6704c8c50>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -966,7 +966,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-08-31 09:05:20 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fe1f6ccd410>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-08-31 09:05:20 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7fe1f6ccd410>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
@@ -1131,7 +1131,7 @@
         "changed_pharmacies": null
       },
       "errors": [
-        "2026-08-27 13:19:26 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=9hfvUH%2FV4tO%2FVii2anWvGh8nsFhFydQhPeiryeEQYcoMXtLyK%2Fds48O1LWIoeFauVY3xw98hyIWRnnoDCG4ZGA%3D%3D&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f4480ec0ed0>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
+        "2026-08-27 13:19:26 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: HTTPSConnectionPool(host='apis.data.go.kr', port=443): Max retries exceeded with url: /1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=1&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01 (Caused by ConnectTimeoutError(<HTTPSConnection(host='apis.data.go.kr', port=443) at 0x7f4480ec0ed0>, 'Connection to apis.data.go.kr timed out. (connect timeout=120)'))",
         "[WARNING] missing ykiho audit failed with status 1"
       ]
     },
