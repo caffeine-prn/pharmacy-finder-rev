@@ -342,6 +342,32 @@ def _parse_timestamp(value: str | None):
     return datetime.fromisoformat(normalized)
 
 
+def _fetch_staff_lookup_fallback_timestamps(client, ykihos: set[str]) -> dict[str, datetime]:
+    """Recover actual API lookup dates when the pharmacy summary lost its date."""
+    timestamps: dict[str, datetime] = {}
+    for table, column in (("hira_staff_lookup_raw", "fetched_at"), ("pharmacy_staff", "updated_at")):
+        missing = ykihos - timestamps.keys()
+        if not missing:
+            break
+        offset = 0
+        while True:
+            query = client.table(table).select(f"ykiho,{column}")
+            if table == "pharmacy_staff":
+                query = query.eq("data_period", "on_demand")
+            rows = query.order("ykiho").order("staff_type_code").range(offset, offset + 999).execute().data or []
+            for row in rows:
+                ykiho = row.get("ykiho")
+                if ykiho not in missing:
+                    continue
+                timestamp = _parse_timestamp(row.get(column))
+                if timestamp and (ykiho not in timestamps or timestamp > timestamps[ykiho]):
+                    timestamps[ykiho] = timestamp
+            if len(rows) < 1000:
+                break
+            offset += 1000
+    return timestamps
+
+
 def fetch_staff_lookup_due_candidates(
     client,
     limit: int,
@@ -350,7 +376,7 @@ def fetch_staff_lookup_due_candidates(
     """Find active ykiho pharmacies due for rolling HIRA staff lookup.
 
     Priority is:
-    1. Never looked up
+    1. No summary, raw API cache, or on-demand staff lookup evidence
     2. Oldest lookup timestamp first
 
     This lets a daily capped batch eventually cycle through all HIRA-matched
@@ -367,6 +393,7 @@ def fetch_staff_lookup_due_candidates(
                 "hira_staff_fetched_at,business_status,mois_closed_date,has_ykiho"
             )
             .eq("has_ykiho", True)
+            .order("id")
             .range(offset, offset + 999)
             .execute()
         )
@@ -378,18 +405,23 @@ def fetch_staff_lookup_due_candidates(
                 continue
             if row.get("business_status") not in (None, "", "영업/정상", "영업중"):
                 continue
-            fetched_at = _parse_timestamp(row.get("hira_staff_fetched_at"))
-            if fetched_at and fetched_at > cutoff:
-                continue
             candidates.append(row)
         if len(rows) < 1000:
             break
         offset += 1000
 
+    fallback = _fetch_staff_lookup_fallback_timestamps(
+        client, {row["ykiho"] for row in candidates if not row.get("hira_staff_fetched_at")},
+    )
+    effective = {
+        row["id"]: _parse_timestamp(row.get("hira_staff_fetched_at")) or fallback.get(row["ykiho"])
+        for row in candidates
+    }
+    candidates = [row for row in candidates if effective[row["id"]] is None or effective[row["id"]] <= cutoff]
     candidates.sort(
         key=lambda row: (
-            row.get("hira_staff_fetched_at") is not None,
-            row.get("hira_staff_fetched_at") or "",
+            effective[row["id"]] is not None,
+            effective[row["id"]] or datetime.min.replace(tzinfo=timezone.utc),
             row.get("mois_license_date") or row.get("hira_open_date") or row.get("open_date") or "",
             row.get("id") or "",
         )
