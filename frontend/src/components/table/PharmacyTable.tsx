@@ -12,6 +12,7 @@ import {
 import { usePharmacyStore } from "@/lib/store";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 import { formatKstDate, formatKstDateTime, formatKstTime } from "@/lib/datetime";
+import { getHiraPharmacyInfoUrl } from "@/lib/hira";
 import type { PharmacyTableRow, PaginatedResponse, SortField } from "@/lib/types";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -195,6 +196,7 @@ export function PharmacyTable() {
         "HIRA 개설일",
         "최근 인력조회",
         "요양기관번호",
+        "심평원 약국찾기 URL",
         "주소",
         "전화번호",
         "시도",
@@ -212,6 +214,7 @@ export function PharmacyTable() {
         displayDate(r.hira_open_date),
         r.hira_staff_fetched_at ? formatKstDateTime(r.hira_staff_fetched_at) : "",
         r.ykiho || "",
+        getHiraPharmacyInfoUrl(r.ykiho),
         displayAddress(r),
         r.phone || "",
         r.sido || "",

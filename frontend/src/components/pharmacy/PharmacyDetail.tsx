@@ -18,6 +18,7 @@ import { LifecycleTimeline } from "./LifecycleTimeline";
 import { HiraStaffLookup } from "./HiraStaffLookup";
 import { CommunityBadgePanel } from "./CommunityBadgePanel";
 import { CommunityReportForm } from "./CommunityReportForm";
+import { getHiraPharmacyInfoUrl } from "@/lib/hira";
 
 interface PharmacyDetailProps {
   pharmacy: Pharmacy;
@@ -43,6 +44,7 @@ export function PharmacyDetail({ pharmacy, nearby, badgeAssertions }: PharmacyDe
   );
   const naverUrl = `https://map.naver.com/v5/search/${addressQuery}`;
   const kakaoUrl = `https://map.kakao.com/?q=${addressQuery}`;
+  const hiraPharmacyUrl = getHiraPharmacyInfoUrl(pharmacy.ykiho);
 
   return (
     <div className="flex-1 overflow-y-auto bg-[var(--bg-primary,#f9fafb)]">
@@ -136,6 +138,17 @@ export function PharmacyDetail({ pharmacy, nearby, badgeAssertions }: PharmacyDe
 
         {/* External links */}
         <div className="grid grid-cols-2 gap-3">
+          {hiraPharmacyUrl && (
+            <a
+              href={hiraPharmacyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="col-span-2 flex items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 py-3 text-sm font-semibold text-emerald-700 transition-colors hover:bg-emerald-100"
+            >
+              <NavigationArrow size={16} />
+              심평원 약국찾기에서 보기
+            </a>
+          )}
           <a
             href={naverUrl}
             target="_blank"

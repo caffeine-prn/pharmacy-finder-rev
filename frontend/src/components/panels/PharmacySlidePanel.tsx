@@ -23,6 +23,7 @@ import { HiraStaffLookup } from "@/components/pharmacy/HiraStaffLookup";
 import { OperatingHours } from "@/components/pharmacy/OperatingHours";
 import { CommunityBadgePanel } from "@/components/pharmacy/CommunityBadgePanel";
 import { CommunityReportForm } from "@/components/pharmacy/CommunityReportForm";
+import { getHiraPharmacyInfoUrl } from "@/lib/hira";
 
 export function PharmacySlidePanel() {
   const { selectedPharmacyId, selectedPharmacySeq, setSelectedPharmacyId } = usePharmacyStore();
@@ -86,6 +87,7 @@ export function PharmacySlidePanel() {
   const kakaoSearchUrl = pharmacy
     ? `https://map.kakao.com/?q=${encodeURIComponent(pharmacy.name + " " + (pharmacy.address || ""))}`
     : "";
+  const hiraPharmacyUrl = pharmacy ? getHiraPharmacyInfoUrl(pharmacy.ykiho) : "";
 
   return (
     <AnimatePresence>
@@ -203,12 +205,23 @@ export function PharmacySlidePanel() {
                 <HiraStaffLookup pharmacy={pharmacy} />
 
                 {/* External links */}
-                <div className="flex gap-2">
+                <div className="grid grid-cols-2 gap-2">
+                  {hiraPharmacyUrl && (
+                    <a
+                      href={hiraPharmacyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="col-span-2 flex items-center justify-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 py-2 text-sm font-semibold text-emerald-700 transition-colors hover:bg-emerald-100"
+                    >
+                      <NavigationArrow size={14} />
+                      심평원 약국찾기에서 보기
+                    </a>
+                  )}
                   <a
                     href={naverSearchUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1.5 rounded-lg border border-zinc-200 py-2 text-sm text-zinc-700 hover:bg-zinc-50 transition-colors"
+                    className="flex items-center justify-center gap-1.5 rounded-lg border border-zinc-200 py-2 text-sm text-zinc-700 hover:bg-zinc-50 transition-colors"
                   >
                     <NavigationArrow size={14} />
                     네이버에서 보기
@@ -217,7 +230,7 @@ export function PharmacySlidePanel() {
                     href={kakaoSearchUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1.5 rounded-lg border border-zinc-200 py-2 text-sm text-zinc-700 hover:bg-zinc-50 transition-colors"
+                    className="flex items-center justify-center gap-1.5 rounded-lg border border-zinc-200 py-2 text-sm text-zinc-700 hover:bg-zinc-50 transition-colors"
                   >
                     <NavigationArrow size={14} />
                     카카오에서 보기
