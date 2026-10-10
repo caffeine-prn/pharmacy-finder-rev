@@ -3,6 +3,7 @@
 import os
 import sys
 import time
+import httpx
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -128,7 +129,20 @@ def main() -> int:
     for index, pharmacy in enumerate(candidates, start=1):
         try:
             rows, total_count = fetch_staff_lookup(api_key, pharmacy["ykiho"])
-            raw_rows += upsert_staff_lookup_result(client, pharmacy, rows, total_count)
+            fetched_at = datetime.now(timezone.utc).isoformat()
+            for attempt in range(3):
+                try:
+                    raw_rows += upsert_staff_lookup_result(
+                        client, pharmacy, rows, total_count, fetched_at=fetched_at,
+                    )
+                    break
+                except httpx.TransportError:
+                    if attempt == 2:
+                        raise
+                    log.warning(f"DB transport failure for {pharmacy['id']}; reconnecting ({attempt + 1}/2)")
+                    client.postgrest.session.close()
+                    time.sleep((attempt + 1) * 3)
+                    client = get_client()
             looked_up += 1
             if index % 100 == 0 or index == len(candidates):
                 log.info(f"HIRA staff lookup batch progress: {index}/{len(candidates)}")
@@ -136,8 +150,9 @@ def main() -> int:
                 time.sleep(delay)
         except HiraStaffAPIError as e:
             failed += 1
-            errors.append(str(e))
-            log.warning(str(e))
+            message = f"{e}; pharmacy_id={pharmacy['id']}"
+            errors.append(message)
+            log.warning(message)
             if e.permanent:
                 aborted = True
                 break

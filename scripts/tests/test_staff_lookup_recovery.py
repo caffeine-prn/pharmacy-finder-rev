@@ -21,7 +21,7 @@ def test_lookup_uses_supported_endpoint(monkeypatch):
 
 def test_permanent_http_failure_is_not_retried(monkeypatch):
     # Given a retired API endpoint.
-    request = Mock(side_effect=HTTPError('https://example.test?serviceKey=secret', 400, 'bad request', {}, None))
+    request = Mock(side_effect=HTTPError('https://example.test?serviceKey=secret', 400, 'bad request', {}, BytesIO(b'<response><returnReasonCode>12</returnReasonCode></response>')))
     monkeypatch.setattr(hira_staff.urllib.request, 'urlopen', request)
     monkeypatch.setattr(hira_staff.time, 'sleep', Mock())
     # When the request fails.
@@ -45,7 +45,7 @@ def test_batch_stops_and_records_failure_when_endpoint_is_retired(monkeypatch):
     monkeypatch.setenv('STAFF_LOOKUP_FAIL_ON_ERROR', 'false')
     monkeypatch.setattr(batch, 'get_client', Mock())
     monkeypatch.setattr(batch, 'fetch_staff_lookup_due_candidates', Mock(return_value=[{'id': '1', 'ykiho': 'one'}, {'id': '2', 'ykiho': 'two'}]))
-    request = Mock(side_effect=HTTPError('https://example.test', 400, 'bad request', {}, None))
+    request = Mock(side_effect=HTTPError('https://example.test', 400, 'bad request', {}, BytesIO(b'<response><returnReasonCode>12</returnReasonCode></response>')))
     monkeypatch.setattr(hira_staff.urllib.request, 'urlopen', request)
     monkeypatch.setattr(hira_staff.time, 'sleep', Mock())
     freshness, sync = Mock(), Mock()
@@ -86,3 +86,57 @@ def test_empty_success_batch_stays_successful(monkeypatch):
     # Then no work remains a successful run.
     assert result == 0
     assert sync.call_args.args[3] == 'success'
+
+
+def test_db_connection_termination_reconnects_without_refetch(monkeypatch):
+    import httpx
+    monkeypatch.setenv('DRUG_API_KEY', 'test-key')
+    monkeypatch.setenv('STAFF_LOOKUP_FAIL_ON_ERROR', 'true')
+    clients = [Mock(), Mock()]
+    factory = Mock(side_effect=clients)
+    monkeypatch.setattr(batch, 'get_client', factory)
+    monkeypatch.setattr(batch, 'fetch_staff_lookup_due_candidates', Mock(return_value=[{'id': '1', 'ykiho': 'one'}]))
+    fetch = Mock(return_value=([], 0))
+    monkeypatch.setattr(batch, 'fetch_staff_lookup', fetch)
+    save = Mock(side_effect=[httpx.RemoteProtocolError('ConnectionTerminated'), 0])
+    monkeypatch.setattr(batch, 'upsert_staff_lookup_result', save)
+    monkeypatch.setattr(batch.time, 'sleep', Mock())
+    monkeypatch.setattr(batch, 'update_freshness', Mock())
+    sync = Mock()
+    monkeypatch.setattr(batch, 'log_sync', sync)
+    assert batch.main() == 0
+    assert fetch.call_count == 1
+    assert save.call_count == 2
+    assert save.call_args_list[0].kwargs['fetched_at'] == save.call_args_list[1].kwargs['fetched_at']
+    assert save.call_args.args[0] is clients[1]
+    assert sync.call_args.kwargs['metadata']['failed'] == 0
+
+
+def test_unknown_http_400_retries_without_aborting_batch(monkeypatch):
+    request = Mock(side_effect=lambda *a, **kw: (_ for _ in ()).throw(HTTPError('https://example.test?serviceKey=secret', 400, 'bad request', {}, BytesIO(b'unknown secret'))))
+    monkeypatch.setattr(hira_staff.urllib.request, 'urlopen', request)
+    monkeypatch.setattr(hira_staff.time, 'sleep', Mock())
+    with pytest.raises(hira_staff.HiraStaffAPIError) as caught:
+        hira_staff.fetch_staff_lookup('test-key', 'one')
+    assert request.call_count == 3
+    assert not caught.value.permanent
+    assert 'secret' not in str(caught.value)
+
+
+def test_request_failure_does_not_skip_next_pharmacy(monkeypatch):
+    monkeypatch.setenv('DRUG_API_KEY', 'test-key')
+    monkeypatch.setenv('STAFF_LOOKUP_FAIL_ON_ERROR', 'true')
+    monkeypatch.setattr(batch, 'get_client', Mock())
+    monkeypatch.setattr(batch, 'fetch_staff_lookup_due_candidates', Mock(return_value=[{'id': '1', 'ykiho': 'one'}, {'id': '2', 'ykiho': 'two'}]))
+    monkeypatch.setattr(batch, 'fetch_staff_lookup', Mock(side_effect=[hira_staff.HiraStaffAPIError('HTTP_400', permanent=False), ([], 0)]))
+    monkeypatch.setattr(batch, 'upsert_staff_lookup_result', Mock(return_value=0))
+    monkeypatch.setattr(batch.time, 'sleep', Mock())
+    monkeypatch.setattr(batch, 'update_freshness', Mock())
+    sync = Mock()
+    monkeypatch.setattr(batch, 'log_sync', sync)
+    assert batch.main() == 1
+    metadata = sync.call_args.kwargs['metadata']
+    assert metadata['looked_up'] == 1
+    assert metadata['failed'] == 1
+    assert metadata['unprocessed'] == 0
+    assert metadata['aborted'] is False

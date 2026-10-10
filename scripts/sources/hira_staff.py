@@ -55,7 +55,7 @@ def parse_staff_lookup_xml(xml_text: str) -> tuple[list[dict], int]:
     if result_code != "00":
         safe_code = result_code if result_code.isdigit() else "invalid_response"
         raise HiraStaffAPIError(
-            safe_code, permanent=result_code in {"10", "11", "12", "20", "21", "22", "30", "31", "32"},
+            safe_code, permanent=result_code in {"12", "20", "21", "22", "30", "31", "32"},
         )
 
     total_count = int(root.findtext(".//totalCount", "0") or "0")
@@ -96,10 +96,22 @@ def fetch_staff_lookup(
                 xml_text = resp.read().decode("utf-8")
             return parse_staff_lookup_xml(xml_text)
         except urllib.error.HTTPError as error:
-            permanent = 400 <= error.code < 500 and error.code not in {408, 429}
+            permanent = 400 <= error.code < 500 and error.code not in {400, 408, 429}
             failure = HiraStaffAPIError(f"HTTP_{error.code}", permanent=permanent)
-            error.close()
-            if permanent or attempt == max_retries - 1:
+            try:
+                body = error.read(65536).decode("utf-8")
+                parse_staff_lookup_xml(body)
+            except HiraStaffAPIError as detail:
+                if detail.code != "invalid_response":
+                    failure = HiraStaffAPIError(
+                        f"HTTP_{error.code}/API_{detail.code}",
+                        permanent=permanent or detail.permanent,
+                    )
+            except (ET.ParseError, UnicodeError, OSError, ValueError):
+                pass
+            finally:
+                error.close()
+            if failure.permanent or attempt == max_retries - 1:
                 raise failure from None
         except HiraStaffAPIError as error:
             if error.permanent or attempt == max_retries - 1:
