@@ -95,8 +95,8 @@ jobs:
         working-directory: frontend
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
-            echo "VERCEL_TOKEN secret is not configured; skipping Vercel deploy"
-            exit 0
+            echo "::error::VERCEL_TOKEN secret is missing; refreshed map data has NOT been deployed"
+            exit 1
           fi
           mkdir -p .vercel
           cat > .vercel/project.json <<'JSON'
