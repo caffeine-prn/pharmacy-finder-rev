@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 3 * * *'  # KST 12:00 (UTC 03:00)
   workflow_dispatch:
+    inputs:
+      deploy_only:
+        description: Deploy committed map data without repeating collection
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -24,6 +29,7 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Run daily sync
+        if: ${{ inputs.deploy_only != true }}
         id: daily_sync
         shell: bash
         run: |
@@ -45,7 +51,7 @@ jobs:
           STAFF_LOOKUP_DELAY_SECONDS: "0.15"
 
       - name: Audit active pharmacies missing HIRA ykiho
-        if: always()
+        if: ${{ always() && inputs.deploy_only != true }}
         shell: bash
         run: |
           set +e
@@ -66,7 +72,7 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
 
       - name: Write sync log
-        if: always()
+        if: ${{ always() && inputs.deploy_only != true }}
         run: python scripts/load/sync_log.py
         env:
           SYNC_EXIT_CODE: ${{ steps.daily_sync.outputs.exit_code }}
@@ -76,7 +82,7 @@ jobs:
 
       - name: Commit updated markers and sync log
         id: commit_data
-        if: always()
+        if: ${{ always() && inputs.deploy_only != true }}
         run: |
           if git diff --quiet -- frontend/public/markers.json frontend/public/sync-log.json; then
             echo "markers.json and sync-log.json are already up to date"
@@ -91,7 +97,7 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Deploy refreshed data to Vercel
-        if: ${{ always() && steps.commit_data.outputs.changed == 'true' }}
+        if: ${{ !cancelled() && (inputs.deploy_only == true || steps.commit_data.outputs.changed == 'true') }}
         working-directory: frontend
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
@@ -119,5 +125,5 @@ jobs:
           retention-days: 7
 
       - name: Fail workflow if sync failed
-        if: ${{ steps.daily_sync.outputs.exit_code != '0' }}
+        if: ${{ inputs.deploy_only != true && steps.daily_sync.outputs.exit_code != '0' }}
         run: exit 1
