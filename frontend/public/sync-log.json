@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "updated_at": "2026-11-26T11:54:47.324938+00:00",
+  "updated_at": "2026-11-27T11:50:14.278071+00:00",
   "latest": {
-    "id": "45812184146",
+    "id": "45991049559",
     "status": "failed",
-    "started_at": "2026-11-26 11:37:11",
-    "finished_at": "2026-11-26T11:54:47.324938+00:00",
-    "github_run_id": "45812184146",
-    "github_run_number": "208",
-    "github_sha": "63516c06ec07195a4dc42af73af5cdceffa5d1ad",
+    "started_at": "2026-11-27 11:30:49",
+    "finished_at": "2026-11-27T11:50:14.278071+00:00",
+    "github_run_id": "45991049559",
+    "github_run_number": "209",
+    "github_sha": "b3e49562d934c31e9fd9124d5407a42ca9c2ebfc",
     "github_ref": "main",
     "github_actor": "caffeine-prn",
-    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/45812184146",
+    "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/45991049559",
     "exit_code": 1,
     "markers_generated_at": "2026-11-26T11:54:47.093256+00:00",
     "marker_count": 25926,
@@ -37,10 +37,51 @@
       "changed_pharmacies": null
     },
     "errors": [
-      "2026-11-26 11:51:37 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: 504 Server Error: Gateway Timeout for url: https://apis.data.go.kr/1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=3&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01"
+      "2026-11-27 11:44:05 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: 504 Server Error: Gateway Timeout for url: https://apis.data.go.kr/1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=93&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01",
+      "[WARNING] missing ykiho audit failed with status 1"
     ]
   },
   "events": [
+    {
+      "id": "45991049559",
+      "status": "failed",
+      "started_at": "2026-11-27 11:30:49",
+      "finished_at": "2026-11-27T11:50:14.278071+00:00",
+      "github_run_id": "45991049559",
+      "github_run_number": "209",
+      "github_sha": "b3e49562d934c31e9fd9124d5407a42ca9c2ebfc",
+      "github_ref": "main",
+      "github_actor": "caffeine-prn",
+      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/45991049559",
+      "exit_code": 1,
+      "markers_generated_at": "2026-11-26T11:54:47.093256+00:00",
+      "marker_count": 25926,
+      "source_counts": {
+        "localdata_pharmacies": null,
+        "localdata_animal_pharmacies": null,
+        "hira_pharmacies": null,
+        "hira_opclo_events": null,
+        "hira_opclo_opened": null,
+        "hira_opclo_closed": null,
+        "hira_opclo_suspended": null,
+        "hira_staff_lookup_candidates": null,
+        "hira_staff_lookup_pharmacies": null,
+        "hira_staff_lookup_rows": null,
+        "hira_staff_lookup_errors": null,
+        "nmc_pharmacies": null,
+        "matched_hira": null,
+        "unmatched_hira": null,
+        "matched_animal": null,
+        "unmatched_animal": null,
+        "new_pharmacies": null,
+        "closed_pharmacies": null,
+        "changed_pharmacies": null
+      },
+      "errors": [
+        "2026-11-27 11:44:05 [WARNING]   MOIS APIs failed, falling back to LOCALDATA ZIPs: 504 Server Error: Gateway Timeout for url: https://apis.data.go.kr/1741000/pharmacies/info?serviceKey=[REDACTED]&pageNo=93&numOfRows=100&returnType=json&cond%5BSALS_STTS_CD%3A%3AEQ%5D=01",
+        "[WARNING] missing ykiho audit failed with status 1"
+      ]
+    },
     {
       "id": "45812184146",
       "status": "failed",
@@ -1181,45 +1222,6 @@
         "2026-10-18 07:48:12 [WARNING]   HIRA staff lookup failed for 어울림약국 (PHMD120263860384084000001): HIRA staff API error (HTTP_400/API_12)",
         "2026-10-18 07:48:13 [WARNING]   HIRA staff lookup failed for 365터미널약국 수원점 (PHMD120263740032084000002): HIRA staff API error (HTTP_400/API_12)",
         "2026-10-18 07:57:20 [WARNING]   Errors: ['HIRA staff lookup: 110 failed']"
-      ]
-    },
-    {
-      "id": "39012902137",
-      "status": "success",
-      "started_at": "2026-10-17 07:14:51",
-      "finished_at": "2026-10-17T08:17:05.367088+00:00",
-      "github_run_id": "39012902137",
-      "github_run_number": "167",
-      "github_sha": "27c5522d3db2ba08cd7bf3125d3528fffdeb3491",
-      "github_ref": "main",
-      "github_actor": "caffeine-prn",
-      "github_run_url": "https://github.com/caffeine-prn/pharmacy-finder-rev/actions/runs/39012902137",
-      "exit_code": 0,
-      "markers_generated_at": "2026-10-17T08:17:04.924897+00:00",
-      "marker_count": 25890,
-      "source_counts": {
-        "localdata_pharmacies": 25918,
-        "localdata_animal_pharmacies": 13736,
-        "hira_pharmacies": 25872,
-        "hira_opclo_events": 0,
-        "hira_opclo_opened": 0,
-        "hira_opclo_closed": 0,
-        "hira_opclo_suspended": 0,
-        "hira_staff_lookup_candidates": 10,
-        "hira_staff_lookup_pharmacies": 10,
-        "hira_staff_lookup_rows": 11,
-        "hira_staff_lookup_errors": 0,
-        "nmc_pharmacies": 25435,
-        "matched_hira": 24818,
-        "unmatched_hira": 1100,
-        "matched_animal": 9011,
-        "unmatched_animal": 4325,
-        "new_pharmacies": 9,
-        "closed_pharmacies": 5,
-        "changed_pharmacies": 8713
-      },
-      "errors": [
-        "2026-10-17 07:24:54 [WARNING]   Active pharmacies without HIRA ykiho: 1100; samples=[{'id': 'PHMD119625460011084000001', 'name': '하약국', 'sido': '경남', 'sigungu': '함양군', 'open_date': '1962-09-11', 'road_address': '경상남도 함양군 함양읍 함양로 1128'}, {'id': 'PHMD119623180034084000002', 'name': '구민약국', 'sido': '서울', 'sigungu': '영등포구', 'open_date': '1962-10-04', 'road_address': '서울특별시 영등포구 당산로 142-1 (당산동3가)'}, {'id': 'PHMD119633070034084000001', 'name': '동그라미약국', 'sido': '서울', 'sigungu': '성북구', 'open_date': '1963-10-19', 'road_address': '서울특별시 성북구 아리랑로 117-7 (정릉동)'}, {'id': 'PHMD119655020056084000003', 'name': '항도약국', 'sido': '경북', 'sigungu': '포항북구', 'open_date': '1965-08-17', 'road_address': '경상북도 포항시 북구 삼호로 123-1 (학산동)'}, {'id': 'PHMD119665460011084000001', 'name': '백세온누리약국', 'sido': '경남', 'sigungu': '함양군', 'open_date': '1966-03-07', 'road_address': '경상남도 함양군 안의면 금성길 4'}]"
       ]
     }
   ]
